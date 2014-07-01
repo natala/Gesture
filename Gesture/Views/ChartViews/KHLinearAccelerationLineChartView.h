@@ -6,7 +6,9 @@
 //  Copyright (c) 2014 Praxis. All rights reserved.
 //
 
-#import "KHSensorDataLineChartView.h"
+#import "KHSensorDataLineChartView.h"]
+
+
 
 /**
  * The class KHLinearAccelerationLineChatView is a subclass of KHSensorDataLineChartView and shows the linear

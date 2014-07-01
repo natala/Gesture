@@ -51,7 +51,7 @@
 {
 	if (self = [super init]) {
 		self.pendingInit = YES;
-		self.centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:dispatch_get_main_queue()];                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 // TODO: @Pascal check if main Q is necessary?
+		self.centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:dispatch_get_main_queue()];                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         // TODO: @Pascal check if main Q is necessary?
 
 		self.foundPeripherals = [NSMutableArray array];
 		self.connectedPeripherals = [NSMutableArray array];
@@ -225,6 +225,11 @@
 	}
 }
 
+- (void)connectPeripheral:(CBPeripheral *)peripheral
+{
+	[self.centralManager connectPeripheral:peripheral options:nil];
+}
+
 - (void)disconnectConnectedPeripherals
 {
 	for (CBPeripheral *peripheral in self.connectedPeripherals) {
@@ -275,7 +280,19 @@
 	[self.connectedPeripherals removeAllObjects];
 	[self.discoveryDelegate discoveryDidRefresh];
 
-//	[self.peripheralDelegate bleServiceDidDisconnect:self.connectedService];
+	BLEService *serviceToRemove = nil;
+
+	for (BLEService *bleService in self.connectedServices) {
+		if (bleService.peripheral == peripheral) {
+			serviceToRemove = bleService;
+		}
+	}
+
+	if (serviceToRemove) {
+		[self.connectedServices removeObject:serviceToRemove];
+	}
+
+	// [self.peripheralDelegate bleServiceDidDisconnect:self.connectedService];
 }
 
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central
@@ -283,41 +300,41 @@
 	static CBCentralManagerState previousState = -1;
 
 	switch ([self.centralManager state]) {
-		case CBCentralManagerStatePoweredOff :
-		{
-			[self clearDevices];
-			[self.discoveryDelegate discoveryDidRefresh];
+	case CBCentralManagerStatePoweredOff:
+	{
+		[self clearDevices];
+		[self.discoveryDelegate discoveryDidRefresh];
 
-			[self.discoveryDelegate discoveryStatePoweredOff];
-			break;
-		}
+		[self.discoveryDelegate discoveryStatePoweredOff];
+		break;
+	}
 
-		case CBCentralManagerStateUnauthorized : {
-			break;
-		}
+	case CBCentralManagerStateUnauthorized: {
+		break;
+	}
 
-		case CBCentralManagerStateUnknown : {
-			break;
-		}
+	case CBCentralManagerStateUnknown: {
+		break;
+	}
 
-		case CBCentralManagerStatePoweredOn : {
-			self.pendingInit = NO;
-			[self loadSavedDevices];
-			[self.centralManager retrieveConnectedPeripherals];
-			[self.discoveryDelegate discoveryDidRefresh];
-			break;
-		}
+	case CBCentralManagerStatePoweredOn: {
+		self.pendingInit = NO;
+		[self loadSavedDevices];
+		[self.centralManager retrieveConnectedPeripherals];
+		[self.discoveryDelegate discoveryDidRefresh];
+		break;
+	}
 
-		case CBCentralManagerStateResetting : {
-			[self clearDevices];
-			[self.discoveryDelegate discoveryDidRefresh];
-			[self.peripheralDelegate bleServiceDidReset];
+	case CBCentralManagerStateResetting: {
+		[self clearDevices];
+		[self.discoveryDelegate discoveryDidRefresh];
+		[self.peripheralDelegate bleServiceDidReset];
 
-			self.pendingInit = YES;
-			break;
-		}
-		default :
-			break;
+		self.pendingInit = YES;
+		break;
+	}
+	default:
+		break;
 	}
 
 	previousState = [self.centralManager state];

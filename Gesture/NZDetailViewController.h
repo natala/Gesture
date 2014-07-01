@@ -7,10 +7,34 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NZSensorDataRecordingManager.h"
+#import "KHSensorDataLineChartView.h"
+#import "KHLinearAccelerationLineChartView.h"
+#import "KHYawPitchRollLineChartView.h"
+#import "Views/RecordingSensorDataTableView/NZSensorDataTableView.h"
 
-@interface NZDetailViewController : UIViewController <UISplitViewControllerDelegate>
+@interface NZDetailViewController : UIViewController <UISplitViewControllerDelegate, NZSensorDataRecordingManagerObserver, NSFetchedResultsControllerDelegate, UITableViewDataSource, UITableViewDataSource>
 
-@property (strong, nonatomic) id detailItem;
+#pragma mark - UI Components
+@property (weak, nonatomic) IBOutlet UIButton *startRecordingButton;
+@property (weak, nonatomic) IBOutlet UIButton *stopRecordingButton;
+@property (weak, nonatomic) IBOutlet UILabel *recordingStatusLabel;
+@property (weak, nonatomic) IBOutlet UILabel *accelerationLabel;
+@property (weak, nonatomic) IBOutlet UILabel *orientationLabel;
 
-@property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
+#pragma mark - Core Data related properties
+@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property (weak, nonatomic) IBOutlet UITableView *sensorDataTableView;
+
+#pragma mark - detailed views
+
+
+#pragma mark - views
+@property (weak, nonatomic) IBOutlet KHLinearAccelerationLineChartView *linearAccelerationLineChartView;
+@property (weak, nonatomic) IBOutlet KHYawPitchRollLineChartView *yawPitchRollLineChartView;
+
+#pragma mark - IBActions
+- (IBAction)startRecordingButtonPressed:(id)sender;
+- (IBAction)stopRecordingButtonPressed:(id)sender;
+
 @end

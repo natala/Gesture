@@ -7,7 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "NZLinearAcceleration.h"
+#import "NZQuaternion.h"
+#import "NZGravity.h"
+#import "NZYawPitchRoll.h"
 
-@interface NZSensorData : NSObject
+@interface NZSensorData : NSObject <NSCopying>
+
+@property (nonatomic, retain) NZLinearAcceleration *linearAcceleration;
+@property (nonatomic, retain) NZQuaternion *quaternion;
+@property (nonatomic, retain) NZYawPitchRoll *yawPitchRoll;
+@property (nonatomic, retain) NZGravity *gravity;
 
 @end

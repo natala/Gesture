@@ -8,6 +8,8 @@
 
 #import "KHSensorDataLineChartView.h"
 
+
+
 /**
  * The class KHLinearAccelerationLineChatView is a subclass of KHSensorDataLineChartView and shows the linear
  * acceleration over time in a line chart.

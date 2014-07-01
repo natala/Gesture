@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "NZSensorDataObject.h"
+#import "NZSensorData.h"
 #import "BLE/BLEDiscovery.h"
 
 @protocol NZArduinoCommunicationManagerDelegate <NSObject>
@@ -20,7 +20,10 @@
  * @author  Pascal Fritzen
  * @param   sensorData   The converted sensor data from the arduino.
  */
-- (void)didReceiveSensorData:(NZSensorDataObject *)sensorData;
+- (void)didReceiveSensorData:(NZSensorData *)sensorData;
+
+@optional
+- (void)connectionState:(NSString *)state;
 
 @end
 
@@ -41,7 +44,7 @@
  * @author  Pascal Fritzen
  * @return  Whether the arduino communication manager is able to receive sensor data.
  */
-- (BOOL)isAbleToReceiveSensorData;
+- (void)isAbleToReceiveSensorData;
 
 /**
  * Instructs the arduino communication manager to start receiving data from the arduino.
@@ -49,7 +52,7 @@
  * @c didReceiveSensorData: method on his delegate.
  * @author  Pascal Fritzen
  */
-- (void)startReceivingSensorData;
+- (BOOL)startReceivingSensorData;
 
 /**
  * Instructs the arduino communication manager to stop receiving data from the arduino.

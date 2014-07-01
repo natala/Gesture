@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NZGravity : NSObject
+@interface NZGravity : NSObject <NSCopying>
+
+@property (nonatomic, retain) NSNumber *x;
+@property (nonatomic, retain) NSNumber *y;
+@property (nonatomic, retain) NSNumber *z;
 
 @end

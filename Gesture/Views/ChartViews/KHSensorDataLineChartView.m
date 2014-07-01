@@ -10,6 +10,8 @@
 
 @implementation KHSensorDataLineChartView
 
+@synthesize countOfSensorDataToDisplay;
+
 - (id)initWithCoder:(NSCoder *)coder
 {
 	self = [super initWithCoder:coder];
@@ -32,6 +34,7 @@
 {
 //    self.backgroundColor = [UIColor clearColor];
 	self.countOfSensorDataToDisplay = -1;
+    NSLog(@"Initializing KHSensorDataLineChartView.countOfSensorDataToDisplay: %d", self.countOfSensorDataToDisplay);
 }
 
 - (void)setSensorData:(NSArray *)sensorData
@@ -40,7 +43,8 @@
 		// filter the incoming sensor data to |countOfSensorDataToDisplay| objects to be shown in the graph
 		if (self.countOfSensorDataToDisplay == -1) {
 			// If more than 500 values are displayed the app crashes
-			self.countOfSensorDataToDisplay = 500;
+			//self.countOfSensorDataToDisplay = 500;
+            self.countOfSensorDataToDisplay = 100;
 		}
 
 		NSMutableArray *sensorDataToDisplay;

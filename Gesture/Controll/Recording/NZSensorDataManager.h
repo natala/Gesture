@@ -10,4 +10,6 @@
 
 @interface NZSensorDataManager : NSObject
 
+@property (nonatomic, strong) NSMutableArray *sensorDataSets;
+
 @end

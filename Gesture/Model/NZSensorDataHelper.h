@@ -7,7 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <math.h>
+#import <GLKit/GLKit.h>
+#import "NZSensorData.h"
 
 @interface NZSensorDataHelper : NSObject
+
++ (NZGravity *)gravityFromQuaternion:(NZQuaternion *) quaternion;
+
++ (NZLinearAcceleration *)linearAccelerationFromRawAcceleration:(GLKVector3)rawAcceleration gravity:(NZGravity *)gravity andQuaternion:(NZQuaternion *)quaternion;
+
++ (NZYawPitchRoll *)yawPitchRollFromQuaternion:(NZQuaternion *)quaternion;
 
 @end

@@ -7,44 +7,48 @@
 //
 
 #import "NZDetailViewController.h"
+#import "NZSensorData.h"
+#import "NZSensorDataSet.h"
+#import "Views/RecordingSensorDataTableView/NZSensorDataSetTableViewCell.h"
+#import "Model/CoreData/NZCoreDataManager.h"
 
 @interface NZDetailViewController ()
+
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
-- (void)configureView;
+
 @end
 
 @implementation NZDetailViewController
 
-#pragma mark - Managing the detail item
-
-- (void)setDetailItem:(id)newDetailItem
+- (void)awakeFromNib
 {
-    if (_detailItem != newDetailItem) {
-        _detailItem = newDetailItem;
-        
-        // Update the view.
-        [self configureView];
-    }
-
-    if (self.masterPopoverController != nil) {
-        [self.masterPopoverController dismissPopoverAnimated:YES];
-    }        
-}
-
-- (void)configureView
-{
-    // Update the user interface for the detail item.
-
-    if (self.detailItem) {
-        self.detailDescriptionLabel.text = [[self.detailItem valueForKey:@"timeStamp"] description];
-    }
+    [super awakeFromNib];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    [self configureView];
+    // setup tge UI
+    self.startRecordingButton.enabled = YES;
+    self.stopRecordingButton.enabled = NO;
+    self.recordingStatusLabel.text = @" - - - ";
+    
+    //setup the chart views
+    // Linear Acc
+    KHLinearAccelerationLineChartView *linearAccChartView = [[KHLinearAccelerationLineChartView alloc] initWithFrame:self.linearAccelerationLineChartView.frame];
+    linearAccChartView.tag = 1000; // I don't thing I need it, but is fancy :D
+    [self.view addSubview:linearAccChartView];
+    
+    KHYawPitchRollLineChartView *yawPitchRollChartView = [[KHYawPitchRollLineChartView alloc] initWithFrame:self.yawPitchRollLineChartView.frame];
+    yawPitchRollChartView.tag = 1001;
+    [self.view addSubview:yawPitchRollChartView];
+   //Setup the table view controller editing
+   // self.navigationItem.leftBarButtonItem = self.editButtonItem;
+     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
+    self.navigationItem.rightBarButtonItem = addButton;
+    // enable deleting the sensor data sets
+    [self.sensorDataTableView setEditing:YES animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -69,4 +73,247 @@
     self.masterPopoverController = nil;
 }
 
-@end
+#pragma mark - NZSensorDataRecordingManagerObserver
+- (void)didStartRecordingSensorData:(NZSensorDataSet *)sensorDataSet
+{
+    [self updateLinearAccelerationLineChartViewWithSession:sensorDataSet onlyShowLatest50SensorData:NO];
+    self.recordingStatusLabel.text = @"recording";
+    self.startRecordingButton.enabled = NO;
+    self.stopRecordingButton.enabled = YES;
+
+}
+
+- (void)didReceiveSensorData:(NZSensorData *)sensorData forSensorDataSer:(NZSensorDataSet *)sensorDataSet
+{
+    NSString *acc = [NSString stringWithFormat:@"acc: %@, %@, %@", [sensorData.linearAcceleration.x stringValue], [sensorData.linearAcceleration.y stringValue], [sensorData.linearAcceleration.z stringValue]];
+    NSString *yawPitchRoll = [NSString stringWithFormat:@"ypr: %@, %@, %@", [sensorData.yawPitchRoll.yaw stringValue], [sensorData.yawPitchRoll.pitch stringValue], [sensorData.yawPitchRoll.roll stringValue]];
+    
+    self.accelerationLabel.text = acc;
+    self.orientationLabel.text = yawPitchRoll;
+    
+    [self updateLinearAccelerationLineChartViewWithSession:sensorDataSet onlyShowLatest50SensorData:YES];
+}
+
+- (void)didStopRecordingSensorDataSet:(NZSensorDataSet *)sensorDataSet
+{
+    NSLog(@"Stoped receiving sensor data");
+    self.recordingStatusLabel.text = @"stopped recording";
+    self.startRecordingButton.enabled = YES;
+    self.stopRecordingButton.enabled = NO;
+}
+
+#pragma mark - IBAction
+
+- (IBAction)startRecordingButtonPressed:(id)sender
+{
+    [[NZSensorDataRecordingManager sharedManager] addRecordingObserver:self];
+    BOOL startedNewRecording = [[NZSensorDataRecordingManager sharedManager] startRecordingNewSensorDataSet];
+    
+   // if (startedNewRecording) {
+   //         }
+}
+
+- (IBAction)stopRecordingButtonPressed:(id)sender
+{
+    [[NZSensorDataRecordingManager sharedManager] stopRecordingCurrentSensorDataSet];
+}
+
+#pragma mark - TableViw
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return [[self.fetchedResultsController sections] count];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
+    return [sectionInfo numberOfObjects];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    if (!cell) {
+        cell = [[NZSensorDataSetTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+    }
+    [self configureCell:cell atIndexPath:indexPath];
+    return cell;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+- (UITableViewCellEditingStyle) tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleDelete;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        NSLog(@"Deleting a cell");
+        NSManagedObjectContext *context = [[NZCoreDataManager sharedManager] managedObjectContext];
+     //   NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
+        [context deleteObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
+        
+        NSError *error = nil;
+        if (![context save:&error]) {
+            // Replace this implementation with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            abort();
+        }
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+    NSLog(@"selected cell, to be implemented!");
+    // self.detailViewController.detailItem = object;
+}
+
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    cell.textLabel.text = [[object valueForKey:@"timeStamp"] description];
+}
+
+#pragma mark - editing the table view
+
+- (void)insertNewObject:(id)sender {
+    
+     NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
+     NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
+     NSManagedObject *newManagedObject = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
+    
+    // If appropriate, configure the new managed object.
+    // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
+     [newManagedObject setValue:[NSDate date] forKey:@"timeStamp"];
+    
+    // Save the context.
+    NSError *error = nil;
+    if (![context save:&error]) {
+        // Replace this implementation with code to handle the error appropriately.
+        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+    NSLog(@"done inserting new item");
+}
+
+#pragma mark - Fetched results controller
+
+- (NSFetchedResultsController *)fetchedResultsController
+{
+    if (_fetchedResultsController != nil) {
+        return _fetchedResultsController;
+    }
+    
+    //NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"NZSensorData"];
+    // Edit the entity name as appropriate.
+    NSManagedObjectContext *context = [[NZCoreDataManager sharedManager] managedObjectContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"NZSensorData" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    
+    // Set the batch size to a suitable number.
+    [fetchRequest setFetchBatchSize:20];
+    
+    // Edit the sort key as appropriate.
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timeStamp" ascending:NO];
+    NSArray *sortDescriptors = @[sortDescriptor];
+    
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    // Edit the section name key path and cache name if appropriate.
+    // nil for section name key path means "no sections".
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:context sectionNameKeyPath:nil cacheName:@"Master"];
+    aFetchedResultsController.delegate = self;
+    self.fetchedResultsController = aFetchedResultsController;
+    
+    NSError *error = nil;
+    if (![self.fetchedResultsController performFetch:&error]) {
+        // Replace this implementation with code to handle the error appropriately.
+        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+    
+    return _fetchedResultsController;
+}
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
+{
+    [self.sensorDataTableView beginUpdates];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
+           atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
+{
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+            [self.sensorDataTableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [self.sensorDataTableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath
+{
+    UITableView *tableView = self.sensorDataTableView;
+    
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+            [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            [self configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            break;
+            
+        case NSFetchedResultsChangeMove:
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    [self.sensorDataTableView endUpdates];
+}
+
+/*
+ // Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed.
+ 
+ - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+ {
+ // In the simplest, most efficient, case, reload the table view.
+ [self.tableView reloadData];
+ }
+ */
+
+
+#pragma mark - Helper
+
+- (void)updateLinearAccelerationLineChartViewWithSession:(NZSensorDataSet *)set onlyShowLatest50SensorData:(BOOL)onlyShowLatest50SensorData
+{
+    NSMutableArray *sensorData = [set.sensorData mutableCopy];
+    self.linearAccelerationLineChartView.sensorData = sensorData;
+    self.yawPitchRollLineChartView.sensorData = sensorData;
+
+}
+
+@end;

@@ -10,4 +10,14 @@
 
 @implementation NZYawPitchRoll
 
+- (id)copyWithZone:(NSZone *)zone
+{
+    NZYawPitchRoll *newObj = [[NZYawPitchRoll alloc] init];
+    newObj.yaw = [self.yaw copyWithZone:zone];
+    newObj.pitch = [self.pitch copyWithZone:zone];
+    newObj.roll = [self.roll copyWithZone:zone];
+    
+    return newObj;
+}
+
 @end

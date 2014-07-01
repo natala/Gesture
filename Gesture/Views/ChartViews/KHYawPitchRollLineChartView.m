@@ -7,7 +7,7 @@
 //
 
 #import "KHYawPitchRollLineChartView.h"
-#import "KHSensorData.h"
+#import "NZSensorData.h"
 
 @implementation KHYawPitchRollLineChartView
 
@@ -31,10 +31,12 @@
 
 - (void)commonInit
 {
+    [super commonInit];
 	self.minValue = -180;
 	self.maxValue = 180;
 	self.interval = 30;
-	self.numXIntervals = 10;
+	self.numXIntervals = 30;
+    //self.numYIntervals = 10;
 }
 
 - (void)setSensorData:(NSArray *)sensorData
@@ -58,10 +60,10 @@
 		NSMutableArray *xLabels = [NSMutableArray arrayWithCapacity:sensorData.count];
 
 		if (sensorData.count >= 1) {
-			NSDate *startDate = ((KHSensorData *)sensorData[0]).creationDate;
+			//NSDate *startDate = ((NZSensorData *)sensorData[0]).creationDate;
 
 			for (int i = 0; i < sensorData.count; i++) {
-				KHSensorData *singleSensorData = sensorData[i];
+				NZSensorData *singleSensorData = sensorData[i];
 
 				if (singleSensorData.yawPitchRoll) {
 					[yaw addObject:singleSensorData.yawPitchRoll.yaw];
@@ -69,7 +71,8 @@
 					[roll addObject:singleSensorData.yawPitchRoll.roll];
 				}
 
-				[xLabels addObject:[NSNumber numberWithInt:[singleSensorData.creationDate timeIntervalSinceDate:startDate]]];
+				//[xLabels addObject:[NSNumber numberWithInt:[singleSensorData.creationDate timeIntervalSinceDate:startDate]]];
+                [xLabels addObject:[NSNumber numberWithInt:i]];
 			}
 		}
 

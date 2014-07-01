@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 TUM. All rights reserved.
 //
 
-#import "NZRecordingViewControllerState.h"
+#import "NZRingRecordingState.h"
 
-@implementation NZRecordingViewControllerState
+@implementation NZRingRecordingState
 
 @end

@@ -7,8 +7,12 @@
 //
 
 #import "NZMasterMenuTVC.h"
+#import "NZDetailViewController.h"
 
 @interface NZMasterMenuTVC ()
+
+@property NSArray *items;
+@property UITableViewCell *selectedCell;
 
 @end
 
@@ -26,7 +30,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    // set the default selection to the recording
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:self.ringConnectionCell];
+    [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+    self.selectedCell = self.ringConnectionCell;
+    self.selectedCell.userInteractionEnabled = NO;
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -44,37 +52,36 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return 3;
 }
 
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
-}
-*/
 
-/*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
-    return YES;
+    return NO;
 }
-*/
+
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (self.selectedCell) {
+        self.selectedCell.userInteractionEnabled = YES;
+    }
+    
+    self.selectedCell = [tableView cellForRowAtIndexPath:indexPath];
+    self.selectedCell.userInteractionEnabled = NO;
+}
+
 
 /*
 // Override to support editing the table view.
@@ -105,15 +112,16 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    self.splitViewController.delegate = segue.destinationViewController;
+    NSLog(@"master is preparing for segue");
 }
-*/
+
+
 
 @end

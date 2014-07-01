@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NZSensorDataSet : NSObject
+@interface NZSensorDataSet : NSObject <NSCopying>
+
+@property (nonatomic, retain) NSMutableArray *sensorData;
+@property (nonatomic, retain) NSMutableDictionary *labeledSensorData;
+@property (nonatomic, retain) NSString *label;
+@property (nonatomic, retain) NSDate *timestamp;
 
 @end

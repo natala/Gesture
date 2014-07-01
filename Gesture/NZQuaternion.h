@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NZQuaternion : NSObject
+@interface NZQuaternion : NSObject <NSCopying>
+
+@property (nonatomic, retain) NSNumber *w;
+@property (nonatomic, retain) NSNumber *x;
+@property (nonatomic, retain) NSNumber *y;
+@property (nonatomic, retain) NSNumber *z;
 
 @end

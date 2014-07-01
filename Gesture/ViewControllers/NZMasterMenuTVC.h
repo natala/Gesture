@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NZMasterMenuTVC : UITableViewController
+@interface NZMasterMenuTVC : UITableViewController <UISplitViewControllerDelegate>
+
+#pragma mark - cells
+@property (weak, nonatomic) IBOutlet UITableViewCell *ringConnectionCell;
+
 
 @end

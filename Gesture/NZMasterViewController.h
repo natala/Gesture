@@ -12,11 +12,11 @@
 
 #import <CoreData/CoreData.h>
 
-@interface NZMasterViewController : UITableViewController <NSFetchedResultsControllerDelegate>
+@interface NZMasterViewController : UITableViewController //<NSFetchedResultsControllerDelegate>
 
 @property (strong, nonatomic) NZDetailViewController *detailViewController;
 
-@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+//@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+//@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end

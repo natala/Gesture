@@ -60,7 +60,7 @@
 - (void)startScanningForUUIDString:(NSString *)uuidString;
 - (void)stopScanning;
 
-// - (void)connectPeripheral:(CBPeripheral *)peripheral;
+- (void)connectPeripheral:(CBPeripheral *)peripheral;
 - (void)connectToAllFoundPeripherals;
 - (void)disconnectConnectedPeripherals;
 

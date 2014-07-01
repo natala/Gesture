@@ -10,4 +10,14 @@
 
 @implementation NZGravity
 
+- (id)copyWithZone:(NSZone *)zone
+{
+    NZGravity *newObj = [[NZGravity alloc] init];
+    newObj.x = [self.x copyWithZone:zone];
+    newObj.y = [self.y copyWithZone:zone];
+    newObj.z = [self.z copyWithZone:zone];
+    
+    return newObj;
+}
+
 @end

@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NZRecordingViewControllerState : NSObject
+@interface NZRingRecordingState : NSObject
 
 @end

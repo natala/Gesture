@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NZYawPitchRoll : NSObject
+@interface NZYawPitchRoll : NSObject <NSCopying>
+
+@property (nonatomic, retain) NSNumber *yaw;
+@property (nonatomic, retain) NSNumber *pitch;
+@property (nonatomic, retain) NSNumber *roll;
 
 @end

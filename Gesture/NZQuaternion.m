@@ -10,4 +10,15 @@
 
 @implementation NZQuaternion
 
+- (id)copyWithZone:(NSZone *)zone
+{
+    NZQuaternion *newObj = [[NZQuaternion alloc] init];
+    newObj.w = [self.w copyWithZone:zone];
+    newObj.x = [self.x copyWithZone:zone];
+    newObj.y = [self.y copyWithZone:zone];
+    newObj.z = [self.z copyWithZone:zone];
+    
+    return newObj;
+}
+
 @end

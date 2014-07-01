@@ -24,6 +24,7 @@
 @property (nonatomic, retain) NSArray *sensorData;
 @property (nonatomic, retain) NSArray *specialSensorData;
 
+//@property (nonatomic) int countOfSensorDataToDisplay;
 @property (nonatomic) int countOfSensorDataToDisplay;
 
 - (void)commonInit;

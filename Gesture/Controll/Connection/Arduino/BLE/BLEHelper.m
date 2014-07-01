@@ -49,11 +49,11 @@
 
 	for (NSUInteger currentByteIndex = 0; currentByteIndex < bytesToConvert; currentByteIndex++) {
 		switch (currentByteIndex) {
-			case 3 :
-			case 5 :
-			case 7 :
-			case 9 :[outputString appendFormat:@"%02x-", uuidBytes[currentByteIndex]]; break;
-			default :[outputString appendFormat:@"%02x", uuidBytes[currentByteIndex]];
+		case 3:
+		case 5:
+		case 7:
+		case 9:[outputString appendFormat:@"%02x-", uuidBytes[currentByteIndex]]; break;
+		default:[outputString appendFormat:@"%02x", uuidBytes[currentByteIndex]];
 		}
 	}
 

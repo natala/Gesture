@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NZLinearAcceleration : NSObject
+@interface NZLinearAcceleration : NSObject <NSCopying>
+
+@property (nonatomic, retain) NSNumber *x;
+@property (nonatomic, retain) NSNumber *y;
+@property (nonatomic, retain) NSNumber *z;
+
 
 @end

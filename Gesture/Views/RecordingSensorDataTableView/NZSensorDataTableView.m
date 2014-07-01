@@ -19,6 +19,11 @@
     return self;
 }
 
+- (id)dequeueReusableCellWithIdentifier:(NSString *)identifier forIndexPath:(NSIndexPath *)indexPath
+{
+    return [super dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
