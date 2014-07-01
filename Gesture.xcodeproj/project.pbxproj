@@ -11,7 +11,6 @@
 		8A0DF6DC195C59EF0029E5F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A0DF6DA195C59EF0029E5F3 /* Main.storyboard */; };
 		8A0DF6E1195C618A0029E5F3 /* NZSensorDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0DF6E0195C618A0029E5F3 /* NZSensorDataManager.m */; };
 		8A0DF6E4195C63770029E5F3 /* NZSensorDataRecordingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0DF6E3195C63770029E5F3 /* NZSensorDataRecordingManager.m */; };
-		8A4C5ADA1961F25E007C1794 /* NZRingRecordingState.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A4C5AD91961F25E007C1794 /* NZRingRecordingState.m */; };
 		8A6AF54C195CBAF20015B571 /* NZSensorDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6AF54B195CBAF20015B571 /* NZSensorDataHelper.m */; };
 		8A922904195C3A3800DF7743 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A922903195C3A3800DF7743 /* Foundation.framework */; };
 		8A922906195C3A3800DF7743 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A922905195C3A3800DF7743 /* CoreGraphics.framework */; };
@@ -21,7 +20,6 @@
 		8A922912195C3A3800DF7743 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A922911195C3A3800DF7743 /* main.m */; };
 		8A922916195C3A3800DF7743 /* NZAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A922915195C3A3800DF7743 /* NZAppDelegate.m */; };
 		8A92291C195C3A3800DF7743 /* Gesture.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8A92291A195C3A3800DF7743 /* Gesture.xcdatamodeld */; };
-		8A92291F195C3A3800DF7743 /* NZMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A92291E195C3A3800DF7743 /* NZMasterViewController.m */; };
 		8A922922195C3A3800DF7743 /* NZDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A922921195C3A3800DF7743 /* NZDetailViewController.m */; };
 		8A922924195C3A3800DF7743 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A922923195C3A3800DF7743 /* Images.xcassets */; };
 		8A92292B195C3A3800DF7743 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A92292A195C3A3800DF7743 /* XCTest.framework */; };
@@ -30,12 +28,6 @@
 		8A92292E195C3A3800DF7743 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A922909195C3A3800DF7743 /* CoreData.framework */; };
 		8A922936195C3A3800DF7743 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8A922934195C3A3800DF7743 /* InfoPlist.strings */; };
 		8A922938195C3A3800DF7743 /* GestureTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A922937195C3A3800DF7743 /* GestureTests.m */; };
-		8A922946195C3AD000DF7743 /* NZYawPitchRoll.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A922945195C3AD000DF7743 /* NZYawPitchRoll.m */; };
-		8A922949195C3B0E00DF7743 /* NZLinearAcceleration.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A922948195C3B0E00DF7743 /* NZLinearAcceleration.m */; };
-		8A92294C195C3B3700DF7743 /* NZGravity.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A92294B195C3B3700DF7743 /* NZGravity.m */; };
-		8A92294F195C3B4C00DF7743 /* NZQuaternion.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A92294E195C3B4C00DF7743 /* NZQuaternion.m */; };
-		8A922952195C3B6F00DF7743 /* NZSensorData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A922951195C3B6F00DF7743 /* NZSensorData.m */; };
-		8A922955195C3BF100DF7743 /* NZSensorDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A922954195C3BF100DF7743 /* NZSensorDataSet.m */; };
 		8A92295E195C3CCF00DF7743 /* BLEDiscovery.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A922959195C3CCF00DF7743 /* BLEDiscovery.m */; };
 		8A92295F195C3CCF00DF7743 /* BLEHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A92295B195C3CCF00DF7743 /* BLEHelper.m */; };
 		8A922960195C3CCF00DF7743 /* BLEService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A92295D195C3CCF00DF7743 /* BLEService.m */; };
@@ -51,6 +43,21 @@
 		8AC9D9A7196162EF00364B5A /* NZSensorDataTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC9D9A6196162EF00364B5A /* NZSensorDataTableView.m */; };
 		8AC9D9AA1961637D00364B5A /* NZSensorDataSetTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC9D9A91961637D00364B5A /* NZSensorDataSetTableViewCell.m */; };
 		8AC9D9E619619B5700364B5A /* NZCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC9D9E519619B5700364B5A /* NZCoreDataManager.m */; };
+		8ADB501A1962CD4C00DC2784 /* NSManagedObject+CoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADB50191962CD4C00DC2784 /* NSManagedObject+CoreData.m */; };
+		8ADB501D1962CE4200DC2784 /* NZSensorDataSet+CoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADB501C1962CE4200DC2784 /* NZSensorDataSet+CoreData.m */; };
+		8ADB50201962D63100DC2784 /* NZSensorDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADB501F1962D63100DC2784 /* NZSensorDataSet.m */; };
+		8ADB50231962D7BA00DC2784 /* NZSensorData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADB50221962D7BA00DC2784 /* NZSensorData.m */; };
+		8ADB50261962D96800DC2784 /* NZClassLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADB50251962D96800DC2784 /* NZClassLabel.m */; };
+		8ADB50291962DAD500DC2784 /* NZLinearAcceleration.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADB50281962DAD500DC2784 /* NZLinearAcceleration.m */; };
+		8ADB502C1962DAEB00DC2784 /* NZQuaternion.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADB502B1962DAEB00DC2784 /* NZQuaternion.m */; };
+		8ADB502F1962DAFC00DC2784 /* NZYawPitchRoll.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADB502E1962DAFC00DC2784 /* NZYawPitchRoll.m */; };
+		8ADB503A1962E1B000DC2784 /* NZClassLabel+CoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADB50311962E1B000DC2784 /* NZClassLabel+CoreData.m */; };
+		8ADB503B1962E1B000DC2784 /* NZLinearAcceleration+CoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADB50331962E1B000DC2784 /* NZLinearAcceleration+CoreData.m */; };
+		8ADB503C1962E1B000DC2784 /* NZQuaternion+CoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADB50351962E1B000DC2784 /* NZQuaternion+CoreData.m */; };
+		8ADB503D1962E1B000DC2784 /* NZYawPitchRoll+CoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADB50371962E1B000DC2784 /* NZYawPitchRoll+CoreData.m */; };
+		8ADB503E1962E1B000DC2784 /* NZSensorData+CoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADB50391962E1B000DC2784 /* NZSensorData+CoreData.m */; };
+		8ADB50471962EB1D00DC2784 /* NZGravity.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADB50461962EB1D00DC2784 /* NZGravity.m */; };
+		8ADB504B1962EBC200DC2784 /* NZGravity+CoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADB504A1962EBC200DC2784 /* NZGravity+CoreData.m */; };
 		8AEE3156195C4C1600006989 /* NZSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AEE3155195C4C1600006989 /* NZSplitViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -72,8 +79,6 @@
 		8A0DF6E0195C618A0029E5F3 /* NZSensorDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZSensorDataManager.m; path = Controll/Recording/NZSensorDataManager.m; sourceTree = "<group>"; };
 		8A0DF6E2195C63770029E5F3 /* NZSensorDataRecordingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZSensorDataRecordingManager.h; path = Controll/Recording/NZSensorDataRecordingManager.h; sourceTree = "<group>"; };
 		8A0DF6E3195C63770029E5F3 /* NZSensorDataRecordingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZSensorDataRecordingManager.m; path = Controll/Recording/NZSensorDataRecordingManager.m; sourceTree = "<group>"; };
-		8A4C5AD81961F25E007C1794 /* NZRingRecordingState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZRingRecordingState.h; path = Model/ViewControllerState/NZRingRecordingState.h; sourceTree = "<group>"; };
-		8A4C5AD91961F25E007C1794 /* NZRingRecordingState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZRingRecordingState.m; path = Model/ViewControllerState/NZRingRecordingState.m; sourceTree = "<group>"; };
 		8A6AF54A195CBAF20015B571 /* NZSensorDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZSensorDataHelper.h; path = Model/NZSensorDataHelper.h; sourceTree = "<group>"; };
 		8A6AF54B195CBAF20015B571 /* NZSensorDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZSensorDataHelper.m; path = Model/NZSensorDataHelper.m; sourceTree = "<group>"; };
 		8A922900195C3A3800DF7743 /* Gesture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gesture.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,8 +93,6 @@
 		8A922914195C3A3800DF7743 /* NZAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NZAppDelegate.h; sourceTree = "<group>"; };
 		8A922915195C3A3800DF7743 /* NZAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NZAppDelegate.m; sourceTree = "<group>"; };
 		8A92291B195C3A3800DF7743 /* Gesture.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Gesture.xcdatamodel; sourceTree = "<group>"; };
-		8A92291D195C3A3800DF7743 /* NZMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NZMasterViewController.h; sourceTree = "<group>"; };
-		8A92291E195C3A3800DF7743 /* NZMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NZMasterViewController.m; sourceTree = "<group>"; };
 		8A922920195C3A3800DF7743 /* NZDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NZDetailViewController.h; sourceTree = "<group>"; };
 		8A922921195C3A3800DF7743 /* NZDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NZDetailViewController.m; sourceTree = "<group>"; };
 		8A922923195C3A3800DF7743 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -98,18 +101,6 @@
 		8A922933195C3A3800DF7743 /* GestureTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GestureTests-Info.plist"; sourceTree = "<group>"; };
 		8A922935195C3A3800DF7743 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8A922937195C3A3800DF7743 /* GestureTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GestureTests.m; sourceTree = "<group>"; };
-		8A922944195C3AD000DF7743 /* NZYawPitchRoll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZYawPitchRoll.h; path = Model/NZYawPitchRoll.h; sourceTree = "<group>"; };
-		8A922945195C3AD000DF7743 /* NZYawPitchRoll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZYawPitchRoll.m; path = Model/NZYawPitchRoll.m; sourceTree = "<group>"; };
-		8A922947195C3B0E00DF7743 /* NZLinearAcceleration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZLinearAcceleration.h; sourceTree = "<group>"; };
-		8A922948195C3B0E00DF7743 /* NZLinearAcceleration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZLinearAcceleration.m; sourceTree = "<group>"; };
-		8A92294A195C3B3700DF7743 /* NZGravity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZGravity.h; sourceTree = "<group>"; };
-		8A92294B195C3B3700DF7743 /* NZGravity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZGravity.m; sourceTree = "<group>"; };
-		8A92294D195C3B4C00DF7743 /* NZQuaternion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZQuaternion.h; sourceTree = "<group>"; };
-		8A92294E195C3B4C00DF7743 /* NZQuaternion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZQuaternion.m; sourceTree = "<group>"; };
-		8A922950195C3B6F00DF7743 /* NZSensorData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZSensorData.h; sourceTree = "<group>"; };
-		8A922951195C3B6F00DF7743 /* NZSensorData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZSensorData.m; sourceTree = "<group>"; };
-		8A922953195C3BF100DF7743 /* NZSensorDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZSensorDataSet.h; sourceTree = "<group>"; };
-		8A922954195C3BF100DF7743 /* NZSensorDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZSensorDataSet.m; sourceTree = "<group>"; };
 		8A922957195C3CCF00DF7743 /* BLE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLE.h; sourceTree = "<group>"; };
 		8A922958195C3CCF00DF7743 /* BLEDiscovery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLEDiscovery.h; sourceTree = "<group>"; };
 		8A922959195C3CCF00DF7743 /* BLEDiscovery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLEDiscovery.m; sourceTree = "<group>"; };
@@ -142,6 +133,36 @@
 		8AC9D9A91961637D00364B5A /* NZSensorDataSetTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZSensorDataSetTableViewCell.m; path = Views/RecordingSensorDataTableView/NZSensorDataSetTableViewCell.m; sourceTree = "<group>"; };
 		8AC9D9E419619B5700364B5A /* NZCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZCoreDataManager.h; path = Model/CoreData/NZCoreDataManager.h; sourceTree = "<group>"; };
 		8AC9D9E519619B5700364B5A /* NZCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZCoreDataManager.m; path = Model/CoreData/NZCoreDataManager.m; sourceTree = "<group>"; };
+		8ADB50181962CD4C00DC2784 /* NSManagedObject+CoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSManagedObject+CoreData.h"; path = "Model/CoreData/Categories/NSManagedObject+CoreData.h"; sourceTree = "<group>"; };
+		8ADB50191962CD4C00DC2784 /* NSManagedObject+CoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObject+CoreData.m"; path = "Model/CoreData/Categories/NSManagedObject+CoreData.m"; sourceTree = "<group>"; };
+		8ADB501B1962CE4200DC2784 /* NZSensorDataSet+CoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NZSensorDataSet+CoreData.h"; path = "Model/CoreData/Categories/NZSensorDataSet+CoreData.h"; sourceTree = "<group>"; };
+		8ADB501C1962CE4200DC2784 /* NZSensorDataSet+CoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NZSensorDataSet+CoreData.m"; path = "Model/CoreData/Categories/NZSensorDataSet+CoreData.m"; sourceTree = "<group>"; };
+		8ADB501E1962D63100DC2784 /* NZSensorDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZSensorDataSet.h; path = Model/CoreData/Entity/NZSensorDataSet.h; sourceTree = "<group>"; };
+		8ADB501F1962D63100DC2784 /* NZSensorDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZSensorDataSet.m; path = Model/CoreData/Entity/NZSensorDataSet.m; sourceTree = "<group>"; };
+		8ADB50211962D7BA00DC2784 /* NZSensorData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZSensorData.h; path = Model/CoreData/Entity/NZSensorData.h; sourceTree = "<group>"; };
+		8ADB50221962D7BA00DC2784 /* NZSensorData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZSensorData.m; path = Model/CoreData/Entity/NZSensorData.m; sourceTree = "<group>"; };
+		8ADB50241962D96800DC2784 /* NZClassLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZClassLabel.h; path = Model/CoreData/Entity/NZClassLabel.h; sourceTree = "<group>"; };
+		8ADB50251962D96800DC2784 /* NZClassLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZClassLabel.m; path = Model/CoreData/Entity/NZClassLabel.m; sourceTree = "<group>"; };
+		8ADB50271962DAD500DC2784 /* NZLinearAcceleration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZLinearAcceleration.h; path = Model/CoreData/Entity/NZLinearAcceleration.h; sourceTree = "<group>"; };
+		8ADB50281962DAD500DC2784 /* NZLinearAcceleration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZLinearAcceleration.m; path = Model/CoreData/Entity/NZLinearAcceleration.m; sourceTree = "<group>"; };
+		8ADB502A1962DAEB00DC2784 /* NZQuaternion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZQuaternion.h; path = Model/CoreData/Entity/NZQuaternion.h; sourceTree = "<group>"; };
+		8ADB502B1962DAEB00DC2784 /* NZQuaternion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZQuaternion.m; path = Model/CoreData/Entity/NZQuaternion.m; sourceTree = "<group>"; };
+		8ADB502D1962DAFC00DC2784 /* NZYawPitchRoll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZYawPitchRoll.h; path = Model/CoreData/Entity/NZYawPitchRoll.h; sourceTree = "<group>"; };
+		8ADB502E1962DAFC00DC2784 /* NZYawPitchRoll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZYawPitchRoll.m; path = Model/CoreData/Entity/NZYawPitchRoll.m; sourceTree = "<group>"; };
+		8ADB50301962E1B000DC2784 /* NZClassLabel+CoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NZClassLabel+CoreData.h"; path = "Model/CoreData/Categories/NZClassLabel+CoreData.h"; sourceTree = "<group>"; };
+		8ADB50311962E1B000DC2784 /* NZClassLabel+CoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NZClassLabel+CoreData.m"; path = "Model/CoreData/Categories/NZClassLabel+CoreData.m"; sourceTree = "<group>"; };
+		8ADB50321962E1B000DC2784 /* NZLinearAcceleration+CoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NZLinearAcceleration+CoreData.h"; path = "Model/CoreData/Categories/NZLinearAcceleration+CoreData.h"; sourceTree = "<group>"; };
+		8ADB50331962E1B000DC2784 /* NZLinearAcceleration+CoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NZLinearAcceleration+CoreData.m"; path = "Model/CoreData/Categories/NZLinearAcceleration+CoreData.m"; sourceTree = "<group>"; };
+		8ADB50341962E1B000DC2784 /* NZQuaternion+CoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NZQuaternion+CoreData.h"; path = "Model/CoreData/Categories/NZQuaternion+CoreData.h"; sourceTree = "<group>"; };
+		8ADB50351962E1B000DC2784 /* NZQuaternion+CoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NZQuaternion+CoreData.m"; path = "Model/CoreData/Categories/NZQuaternion+CoreData.m"; sourceTree = "<group>"; };
+		8ADB50361962E1B000DC2784 /* NZYawPitchRoll+CoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NZYawPitchRoll+CoreData.h"; path = "Model/CoreData/Categories/NZYawPitchRoll+CoreData.h"; sourceTree = "<group>"; };
+		8ADB50371962E1B000DC2784 /* NZYawPitchRoll+CoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NZYawPitchRoll+CoreData.m"; path = "Model/CoreData/Categories/NZYawPitchRoll+CoreData.m"; sourceTree = "<group>"; };
+		8ADB50381962E1B000DC2784 /* NZSensorData+CoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NZSensorData+CoreData.h"; path = "Model/CoreData/Categories/NZSensorData+CoreData.h"; sourceTree = "<group>"; };
+		8ADB50391962E1B000DC2784 /* NZSensorData+CoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NZSensorData+CoreData.m"; path = "Model/CoreData/Categories/NZSensorData+CoreData.m"; sourceTree = "<group>"; };
+		8ADB50461962EB1D00DC2784 /* NZGravity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZGravity.m; path = Model/CoreData/Entity/NZGravity.m; sourceTree = "<group>"; };
+		8ADB50481962EB3900DC2784 /* NZGravity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NZGravity.h; path = Model/CoreData/Entity/NZGravity.h; sourceTree = "<group>"; };
+		8ADB50491962EBC200DC2784 /* NZGravity+CoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NZGravity+CoreData.h"; path = "Model/CoreData/Categories/NZGravity+CoreData.h"; sourceTree = "<group>"; };
+		8ADB504A1962EBC200DC2784 /* NZGravity+CoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NZGravity+CoreData.m"; path = "Model/CoreData/Categories/NZGravity+CoreData.m"; sourceTree = "<group>"; };
 		8AEE3154195C4C1600006989 /* NZSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZSplitViewController.h; sourceTree = "<group>"; };
 		8AEE3155195C4C1600006989 /* NZSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZSplitViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -172,13 +193,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8A0DF6DD195C5F9A0029E5F3 /* DetailedViews */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = DetailedViews;
-			sourceTree = "<group>";
-		};
 		8A0DF6DE195C61410029E5F3 /* Recording */ = {
 			isa = PBXGroup;
 			children = (
@@ -188,15 +202,6 @@
 				8A0DF6E3195C63770029E5F3 /* NZSensorDataRecordingManager.m */,
 			);
 			name = Recording;
-			sourceTree = "<group>";
-		};
-		8A4C5AD71961F235007C1794 /* ViewControllerStates */ = {
-			isa = PBXGroup;
-			children = (
-				8A4C5AD81961F25E007C1794 /* NZRingRecordingState.h */,
-				8A4C5AD91961F25E007C1794 /* NZRingRecordingState.m */,
-			);
-			name = ViewControllerStates;
 			sourceTree = "<group>";
 		};
 		8A9228F7195C3A3800DF7743 = {
@@ -235,14 +240,11 @@
 			children = (
 				8AAD80C4195D6C1B000F9805 /* Constants */,
 				8AAD80AA195D66D7000F9805 /* Views */,
-				8A0DF6DD195C5F9A0029E5F3 /* DetailedViews */,
 				8A922961195C3CD700DF7743 /* Controll */,
 				8A922942195C3AAA00DF7743 /* ViewControllers */,
 				8A922941195C3AA100DF7743 /* Model */,
 				8A922914195C3A3800DF7743 /* NZAppDelegate.h */,
 				8A922915195C3A3800DF7743 /* NZAppDelegate.m */,
-				8A92291D195C3A3800DF7743 /* NZMasterViewController.h */,
-				8A92291E195C3A3800DF7743 /* NZMasterViewController.m */,
 				8A922923195C3A3800DF7743 /* Images.xcassets */,
 				8A92291A195C3A3800DF7743 /* Gesture.xcdatamodeld */,
 				8A0DF6DA195C59EF0029E5F3 /* Main.storyboard */,
@@ -283,20 +285,7 @@
 		8A922941195C3AA100DF7743 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				8A4C5AD71961F235007C1794 /* ViewControllerStates */,
 				8AC9D9E319619B2F00364B5A /* CoreData */,
-				8A922944195C3AD000DF7743 /* NZYawPitchRoll.h */,
-				8A922945195C3AD000DF7743 /* NZYawPitchRoll.m */,
-				8A922947195C3B0E00DF7743 /* NZLinearAcceleration.h */,
-				8A922948195C3B0E00DF7743 /* NZLinearAcceleration.m */,
-				8A92294A195C3B3700DF7743 /* NZGravity.h */,
-				8A92294B195C3B3700DF7743 /* NZGravity.m */,
-				8A92294D195C3B4C00DF7743 /* NZQuaternion.h */,
-				8A92294E195C3B4C00DF7743 /* NZQuaternion.m */,
-				8A922950195C3B6F00DF7743 /* NZSensorData.h */,
-				8A922951195C3B6F00DF7743 /* NZSensorData.m */,
-				8A922953195C3BF100DF7743 /* NZSensorDataSet.h */,
-				8A922954195C3BF100DF7743 /* NZSensorDataSet.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -412,10 +401,56 @@
 		8AC9D9E319619B2F00364B5A /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				8ADB4FDF1962BACC00DC2784 /* Categories */,
+				8ADB4FDE1962BA8E00DC2784 /* Entities */,
 				8AC9D9E419619B5700364B5A /* NZCoreDataManager.h */,
 				8AC9D9E519619B5700364B5A /* NZCoreDataManager.m */,
 			);
 			name = CoreData;
+			sourceTree = "<group>";
+		};
+		8ADB4FDE1962BA8E00DC2784 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				8ADB501E1962D63100DC2784 /* NZSensorDataSet.h */,
+				8ADB501F1962D63100DC2784 /* NZSensorDataSet.m */,
+				8ADB50211962D7BA00DC2784 /* NZSensorData.h */,
+				8ADB50221962D7BA00DC2784 /* NZSensorData.m */,
+				8ADB50241962D96800DC2784 /* NZClassLabel.h */,
+				8ADB50251962D96800DC2784 /* NZClassLabel.m */,
+				8ADB50271962DAD500DC2784 /* NZLinearAcceleration.h */,
+				8ADB50281962DAD500DC2784 /* NZLinearAcceleration.m */,
+				8ADB502A1962DAEB00DC2784 /* NZQuaternion.h */,
+				8ADB502B1962DAEB00DC2784 /* NZQuaternion.m */,
+				8ADB502D1962DAFC00DC2784 /* NZYawPitchRoll.h */,
+				8ADB502E1962DAFC00DC2784 /* NZYawPitchRoll.m */,
+				8ADB50481962EB3900DC2784 /* NZGravity.h */,
+				8ADB50461962EB1D00DC2784 /* NZGravity.m */,
+			);
+			name = Entities;
+			sourceTree = "<group>";
+		};
+		8ADB4FDF1962BACC00DC2784 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				8ADB50181962CD4C00DC2784 /* NSManagedObject+CoreData.h */,
+				8ADB50191962CD4C00DC2784 /* NSManagedObject+CoreData.m */,
+				8ADB50301962E1B000DC2784 /* NZClassLabel+CoreData.h */,
+				8ADB50311962E1B000DC2784 /* NZClassLabel+CoreData.m */,
+				8ADB50321962E1B000DC2784 /* NZLinearAcceleration+CoreData.h */,
+				8ADB50331962E1B000DC2784 /* NZLinearAcceleration+CoreData.m */,
+				8ADB50341962E1B000DC2784 /* NZQuaternion+CoreData.h */,
+				8ADB50491962EBC200DC2784 /* NZGravity+CoreData.h */,
+				8ADB504A1962EBC200DC2784 /* NZGravity+CoreData.m */,
+				8ADB50351962E1B000DC2784 /* NZQuaternion+CoreData.m */,
+				8ADB50361962E1B000DC2784 /* NZYawPitchRoll+CoreData.h */,
+				8ADB50371962E1B000DC2784 /* NZYawPitchRoll+CoreData.m */,
+				8ADB50381962E1B000DC2784 /* NZSensorData+CoreData.h */,
+				8ADB50391962E1B000DC2784 /* NZSensorData+CoreData.m */,
+				8ADB501B1962CE4200DC2784 /* NZSensorDataSet+CoreData.h */,
+				8ADB501C1962CE4200DC2784 /* NZSensorDataSet+CoreData.m */,
+			);
+			name = Categories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -519,38 +554,45 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A4C5ADA1961F25E007C1794 /* NZRingRecordingState.m in Sources */,
 				8AAD80E0195DBA70000F9805 /* PCLineChartView.m in Sources */,
+				8ADB50201962D63100DC2784 /* NZSensorDataSet.m in Sources */,
+				8ADB502C1962DAEB00DC2784 /* NZQuaternion.m in Sources */,
+				8ADB50471962EB1D00DC2784 /* NZGravity.m in Sources */,
 				8A92295E195C3CCF00DF7743 /* BLEDiscovery.m in Sources */,
 				8AAD80DC195DBA70000F9805 /* KHLinearAccelerationYLineChartView.m in Sources */,
+				8ADB501A1962CD4C00DC2784 /* NSManagedObject+CoreData.m in Sources */,
+				8ADB503E1962E1B000DC2784 /* NZSensorData+CoreData.m in Sources */,
 				8AAD80DD195DBA70000F9805 /* KHSensorDataLineChartView.m in Sources */,
 				8AC9D9AA1961637D00364B5A /* NZSensorDataSetTableViewCell.m in Sources */,
 				8AAD80DB195DBA70000F9805 /* KHLinearAccelerationLineChartView.m in Sources */,
-				8A922955195C3BF100DF7743 /* NZSensorDataSet.m in Sources */,
+				8ADB503A1962E1B000DC2784 /* NZClassLabel+CoreData.m in Sources */,
 				8A922969195C3E8E00DF7743 /* NZMasterMenuTVC.m in Sources */,
 				8AAD80DF195DBA70000F9805 /* KHYawPitchRollLineChartView.m in Sources */,
 				8A922916195C3A3800DF7743 /* NZAppDelegate.m in Sources */,
-				8A922946195C3AD000DF7743 /* NZYawPitchRoll.m in Sources */,
 				8AC9D9E619619B5700364B5A /* NZCoreDataManager.m in Sources */,
 				8A92291C195C3A3800DF7743 /* Gesture.xcdatamodeld in Sources */,
 				8A6AF54C195CBAF20015B571 /* NZSensorDataHelper.m in Sources */,
 				8AC9D9A7196162EF00364B5A /* NZSensorDataTableView.m in Sources */,
 				8AAD80E1195DBA70000F9805 /* PCLineChartViewComponent+Utils.m in Sources */,
-				8A922949195C3B0E00DF7743 /* NZLinearAcceleration.m in Sources */,
 				8A0DF6E4195C63770029E5F3 /* NZSensorDataRecordingManager.m in Sources */,
 				8A922966195C3D2A00DF7743 /* NZArduinoCommunicationManager.m in Sources */,
-				8A92294C195C3B3700DF7743 /* NZGravity.m in Sources */,
-				8A92291F195C3A3800DF7743 /* NZMasterViewController.m in Sources */,
 				8A922912195C3A3800DF7743 /* main.m in Sources */,
 				8AEE3156195C4C1600006989 /* NZSplitViewController.m in Sources */,
-				8A922952195C3B6F00DF7743 /* NZSensorData.m in Sources */,
 				8AAD80DE195DBA70000F9805 /* KHShakingLineChartView.m in Sources */,
+				8ADB502F1962DAFC00DC2784 /* NZYawPitchRoll.m in Sources */,
+				8ADB504B1962EBC200DC2784 /* NZGravity+CoreData.m in Sources */,
 				8A92295F195C3CCF00DF7743 /* BLEHelper.m in Sources */,
+				8ADB503B1962E1B000DC2784 /* NZLinearAcceleration+CoreData.m in Sources */,
 				8A0DF6D9195C4DF70029E5F3 /* NZRingRecordingVC.m in Sources */,
 				8A922922195C3A3800DF7743 /* NZDetailViewController.m in Sources */,
-				8A92294F195C3B4C00DF7743 /* NZQuaternion.m in Sources */,
+				8ADB501D1962CE4200DC2784 /* NZSensorDataSet+CoreData.m in Sources */,
+				8ADB503C1962E1B000DC2784 /* NZQuaternion+CoreData.m in Sources */,
+				8ADB50291962DAD500DC2784 /* NZLinearAcceleration.m in Sources */,
+				8ADB50231962D7BA00DC2784 /* NZSensorData.m in Sources */,
 				8A0DF6E1195C618A0029E5F3 /* NZSensorDataManager.m in Sources */,
 				8A922960195C3CCF00DF7743 /* BLEService.m in Sources */,
+				8ADB50261962D96800DC2784 /* NZClassLabel.m in Sources */,
+				8ADB503D1962E1B000DC2784 /* NZYawPitchRoll+CoreData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

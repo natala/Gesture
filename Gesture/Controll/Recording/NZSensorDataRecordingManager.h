@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "NZSensorDataSet.h"
-#import "NZSensorData.h"
+#import "NZSensorDataSet+CoreData.h"
+#import "NZSensorData+CoreData.h"
 #import "NZArduinoCommunicationManager.h"
 
 @protocol NZSensorDataRecordingManagerObserver <NSObject>

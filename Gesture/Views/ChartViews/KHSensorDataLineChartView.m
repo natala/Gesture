@@ -56,7 +56,8 @@
 				[sensorDataToDisplay addObject:sensorData[i]];
 			}
 		} else {
-			sensorDataToDisplay = [sensorData mutableCopy];
+			//sensorDataToDisplay = [sensorData mutableCopy];
+            sensorDataToDisplay = [NSMutableArray arrayWithArray:sensorData];
 		}
 
 		_sensorData = sensorDataToDisplay;

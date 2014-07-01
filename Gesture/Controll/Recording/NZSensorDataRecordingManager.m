@@ -47,8 +47,7 @@
 #pragma mark - NZArduinoCommunicationManagerDelegate
 - (void)didReceiveSensorData:(NZSensorData *)sensorData
 {
-    NZSensorData *testSensorData = [sensorData copy];
-    [self.currentSet.sensorData addObject:[sensorData copy]];
+    [self.currentSet addSensorDataObject:sensorData];
     for (id<NZSensorDataRecordingManagerObserver>observer in self.sensorDataRecordingObservers){
         if ([observer respondsToSelector:@selector(didReceiveSensorData:forSensorDataSer:)]) {
             [observer didReceiveSensorData:sensorData forSensorDataSer:self.currentSet];
@@ -58,8 +57,8 @@
 
 - (BOOL)startRecordingNewSensorDataSet
 {
-    self.currentSet = [[NZSensorDataSet alloc] init];
-    self.currentSet.timestamp = [NSDate date];
+    self.currentSet = [NZSensorDataSet create];
+    self.currentSet.timeStamp = [NSDate date];
     [NZArduinoCommunicationManager sharedManager].delegate = self;
     BOOL startedReceiving = [[NZArduinoCommunicationManager sharedManager] startReceivingSensorData];
     
@@ -80,8 +79,8 @@
         return [self startRecordingNewSensorDataSet];
     }
     
-    self.currentSet = [[NZSensorDataSet alloc] init];
-    self.currentSet.timestamp = [NSDate date];
+    self.currentSet = [NZSensorDataSet create];
+    self.currentSet.timeStamp = [NSDate date];
     
     for (id<NZSensorDataRecordingManagerObserver> observer in self.sensorDataRecordingObservers) {
         if ([observer respondsToSelector:@selector(didStartRecordingSensorData:)]) {

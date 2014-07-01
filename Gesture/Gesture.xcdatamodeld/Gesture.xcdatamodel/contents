@@ -1,33 +1,57 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6172.15" systemVersion="13D65" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="NZGravity" syncable="YES"/>
-    <entity name="NZLinearAcceleration">
-        <attribute name="timeStamp" optional="YES" attributeType="Date">
-            <userInfo/>
-        </attribute>
+    <entity name="NZClassLabel" representedClassName="NZClassLabel" syncable="YES">
+        <attribute name="index" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="sensorData" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="NZSensorData" inverseName="classLabel" inverseEntity="NZSensorData" syncable="YES"/>
+    </entity>
+    <entity name="NZGravity" representedClassName="NZGravity" syncable="YES">
+        <attribute name="x" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="y" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="z" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="sensorData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NZSensorData" inverseName="gravity" inverseEntity="NZSensorData" syncable="YES"/>
+    </entity>
+    <entity name="NZLinearAcceleration" representedClassName="NZLinearAcceleration">
+        <attribute name="x" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="y" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="z" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="sensorData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NZSensorData" inverseName="linearAcceleration" inverseEntity="NZSensorData" syncable="YES"/>
         <userInfo/>
     </entity>
-    <entity name="NZQuaternion" syncable="YES"/>
-    <entity name="NZSensorData" syncable="YES">
-        <attribute name="timeStamp" optional="YES" attributeType="Date" syncable="YES"/>
-        <relationship name="linearAcceleration" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NZLinearAcceleration" syncable="YES"/>
-        <relationship name="sensorDataSet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NZSensorDataSet" inverseName="sensorData" inverseEntity="NZSensorDataSet" syncable="YES"/>
+    <entity name="NZQuaternion" representedClassName="NZQuaternion" syncable="YES">
+        <attribute name="w" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="x" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="y" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="z" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="sensorData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NZSensorData" inverseName="quaternion" inverseEntity="NZSensorData" syncable="YES"/>
     </entity>
-    <entity name="NZSensorDataSet" syncable="YES">
+    <entity name="NZSensorData" representedClassName="NZSensorData" syncable="YES">
+        <attribute name="timeStamp" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="classLabel" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NZClassLabel" inverseName="sensorData" inverseEntity="NZClassLabel" syncable="YES"/>
+        <relationship name="gravity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NZGravity" inverseName="sensorData" inverseEntity="NZGravity" syncable="YES"/>
+        <relationship name="linearAcceleration" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NZLinearAcceleration" inverseName="sensorData" inverseEntity="NZLinearAcceleration" syncable="YES"/>
+        <relationship name="quaternion" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NZQuaternion" inverseName="sensorData" inverseEntity="NZQuaternion" syncable="YES"/>
+        <relationship name="sensorDataSet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NZSensorDataSet" inverseName="sensorData" inverseEntity="NZSensorDataSet" syncable="YES"/>
+        <relationship name="yawPitchRoll" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NZYawPitchRoll" inverseName="sensorData" inverseEntity="NZYawPitchRoll" syncable="YES"/>
+    </entity>
+    <entity name="NZSensorDataSet" representedClassName="NZSensorDataSet" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="timeStamp" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="sensorData" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="NZSensorData" inverseName="sensorDataSet" inverseEntity="NZSensorData" syncable="YES"/>
     </entity>
-    <entity name="NZYawPitchRoll" syncable="YES">
+    <entity name="NZYawPitchRoll" representedClassName="NZYawPitchRoll" syncable="YES">
         <attribute name="pitch" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="roll" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="yaw" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="sensorData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NZSensorData" inverseName="yawPitchRoll" inverseEntity="NZSensorData" syncable="YES"/>
     </entity>
     <elements>
-        <element name="NZGravity" positionX="81" positionY="180" width="128" height="43"/>
-        <element name="NZLinearAcceleration" positionX="70" positionY="-180" width="128" height="60"/>
-        <element name="NZYawPitchRoll" positionX="61" positionY="-27" width="128" height="90"/>
-        <element name="NZQuaternion" positionX="72" positionY="90" width="128" height="45"/>
-        <element name="NZSensorData" positionX="270" positionY="-117" width="128" height="88"/>
-        <element name="NZSensorDataSet" positionX="592" positionY="99" width="128" height="58"/>
+        <element name="NZClassLabel" positionX="297" positionY="128" width="126" height="90"/>
+        <element name="NZGravity" positionX="169" positionY="-189" width="128" height="105"/>
+        <element name="NZLinearAcceleration" positionX="-63" positionY="-105" width="128" height="105"/>
+        <element name="NZQuaternion" positionX="-63" positionY="-27" width="128" height="120"/>
+        <element name="NZSensorData" positionX="331" positionY="-108" width="128" height="150"/>
+        <element name="NZSensorDataSet" positionX="576" positionY="-63" width="128" height="88"/>
+        <element name="NZYawPitchRoll" positionX="144" positionY="99" width="128" height="105"/>
     </elements>
 </model>

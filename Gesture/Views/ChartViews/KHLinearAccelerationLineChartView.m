@@ -7,9 +7,11 @@
 //
 
 #import "KHLinearAccelerationLineChartView.h"
-#import "NZSensorData.h"
-#import "NZSensorDataSet.h"
-//#import "KHColorConstants.h"
+#import "NZSensorData+CoreData.h"
+#import "NZSensorDataSet+CoreData.h"
+#import "NZLinearAcceleration+CoreData.h"
+#import "NZCoreDataManager.h"
+#import "NZCoreDataManager.h"
 
 
 #define UIColorFromHex(hex) [UIColor colorWithRed : ((float)((hex & 0xFF0000) >> 16)) / 255.0 green : ((float)((hex & 0xFF00) >> 8)) / 255.0 blue : ((float)(hex & 0xFF)) / 255.0 alpha : 1.0]
@@ -108,6 +110,7 @@
             //NSDate *startDate = ((NZSensorData *)sensorData[0]).creationDate;
             
             for (int i = 0; i < sensorData.count; i++) {
+                //NZSensorData *singleSensorData = [[[NZCoreDataManager sharedManager] managedObjectContext] objectRegisteredForID:sensorDataIDs[i]];
                 NZSensorData *singleSensorData = sensorData[i];
                 
                 if (singleSensorData.linearAcceleration) {
@@ -147,22 +150,23 @@
     
 }
 
-- (void)setSpecialData:(NSArray *)sensorData
-{
-	_specialData = sensorData;
-	[self updateChart];
-}
-
 - (void)updateChart
 {
 	//		NSMutableArray *accelerationXCoordinates = [NSMutableArray arrayWithCapacity:sensorData.count];
 	//		NSMutableArray *accelerationYCoordinates = [NSMutableArray arrayWithCapacity:sensorData.count];
-	NSMutableArray *accelerationZCoordinates = [NSMutableArray arrayWithCapacity:self.sensorData.count];
-	NSMutableArray *xLabels = [NSMutableArray arrayWithCapacity:self.sensorData.count];
-
+	//NSMutableArray *accelerationZCoordinates = [NSMutableArray arrayWithCapacity:self.sensorData.count];
+    NSMutableArray *accelerationZCoordinates = [NSMutableArray arrayWithCapacity:self.sensorData.count];
+	//NSMutableArray *xLabels = [NSMutableArray arrayWithCapacity:self.sensorData.count];
+    NSMutableArray *xLabels = [NSMutableArray arrayWithCapacity:self.sensorData.count];
+    
 	if (self.sensorData.count >= 1) {
 		for (int i = 0; i < self.sensorData.count; i++) {
-			NZSensorData *singleSensorData = self.sensorData[i];
+        
+            NSManagedObjectContext *context = [[NZCoreDataManager sharedManager] managedObjectContext];
+            
+			NZSensorData *singleSensorData = [self.sensorData objectAtIndex:i];
+            
+            //NZSensorData *singleSensorData = [context objectRegisteredForID:self.sensorDataIDs[i]];
 
 			if (singleSensorData.linearAcceleration) {
 				//					[accelerationXCoordinates addObject:singleSensorData.linearAcceleration.x];

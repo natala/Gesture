@@ -8,6 +8,9 @@
 
 #import "KHYawPitchRollLineChartView.h"
 #import "NZSensorData.h"
+#import "NZYawPitchRoll.h"
+
+
 
 @implementation KHYawPitchRollLineChartView
 

@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Praxis. All rights reserved.
 //
 
-#import "KHSensorDataLineChartView.h"]
+#import "KHSensorDataLineChartView.h"
 
 
 
@@ -18,6 +18,5 @@
 @interface KHLinearAccelerationLineChartView : KHSensorDataLineChartView
 
 - (void)setSensorData:(NSArray *)sensorData;
-- (void)setSpecialData:(NSArray *)sensorData;
 
 @end

@@ -22,6 +22,7 @@
  * @author  Pascal Fritzen
  */
 @property (nonatomic, retain) NSArray *sensorData;
+//@property (nonatomic, retain) NSArray *sensorDataIDs;
 @property (nonatomic, retain) NSArray *specialSensorData;
 
 //@property (nonatomic) int countOfSensorDataToDisplay;

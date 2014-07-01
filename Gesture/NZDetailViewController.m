@@ -11,6 +11,8 @@
 #import "NZSensorDataSet.h"
 #import "Views/RecordingSensorDataTableView/NZSensorDataSetTableViewCell.h"
 #import "Model/CoreData/NZCoreDataManager.h"
+#import "NZLinearAcceleration.h"
+#import "NZYawPitchRoll+CoreData.h"
 
 @interface NZDetailViewController ()
 
@@ -181,7 +183,7 @@
     cell.textLabel.text = [[object valueForKey:@"timeStamp"] description];
 }
 
-#pragma mark - editing the table view
+#pragma mark - editing the view
 
 - (void)insertNewObject:(id)sender {
     
@@ -201,6 +203,7 @@
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
+     
     NSLog(@"done inserting new item");
 }
 
@@ -213,10 +216,10 @@
     }
     
     //NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"NZSensorData"];
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"NZSensorDataSet"];
     // Edit the entity name as appropriate.
     NSManagedObjectContext *context = [[NZCoreDataManager sharedManager] managedObjectContext];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"NZSensorData" inManagedObjectContext:context];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"NZSensorDataSet" inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
     
     // Set the batch size to a suitable number.
@@ -310,7 +313,8 @@
 
 - (void)updateLinearAccelerationLineChartViewWithSession:(NZSensorDataSet *)set onlyShowLatest50SensorData:(BOOL)onlyShowLatest50SensorData
 {
-    NSMutableArray *sensorData = [set.sensorData mutableCopy];
+    NSMutableArray *sensorData = [NSMutableArray arrayWithArray:[set.sensorData allObjects]];
+    
     self.linearAccelerationLineChartView.sensorData = sensorData;
     self.yawPitchRollLineChartView.sensorData = sensorData;
 

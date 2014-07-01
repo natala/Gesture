@@ -9,11 +9,11 @@
 #import "NZArduinoCommunicationManager.h"
 #import <math.h>
 #import <GLKit/GLKit.h>
-#import "NZQuaternion.h"
-#import "NZLinearAcceleration.h"
-#import "NZSensorData.h"
-#import "NZGravity.h"
-#import "NZYawPitchRoll.h"
+#import "NZQuaternion+CoreData.h"
+#import "NZLinearAcceleration+CoreData.h"
+#import "NZSensorData+CoreData.h"
+#import "NZGravity+CoreData.h"
+#import "NZYawPitchRoll+CoreData.h"
 #import "NZSensorDataHelper.h"
 
 @implementation NZArduinoCommunicationManager
@@ -119,7 +119,8 @@
 
 - (void)didReceiveData:(uint8_t *)data length:(NSInteger)length
 {
-    NZSensorData *sensorData = [[NZSensorData alloc] init];
+    NZSensorData *sensorData = [NZSensorData create];
+    sensorData.timeStamp = [NSDate date];
     
    // sensorData = [NSDate date];
    // sensorData.sensorID = [NSNumber numberWithInt:data[14]];
@@ -146,7 +147,7 @@
     rawAcceleration.z = (short)((data[4] << 8) | data[5]);
     
     // Conversion into KneeHapp proprietary model objects
-    NZQuaternion *quaternion = [[NZQuaternion alloc] init];
+    NZQuaternion *quaternion = [NZQuaternion create];
     
     quaternion.w = [NSNumber numberWithFloat:q[0]];
     quaternion.x = [NSNumber numberWithFloat:q[1]];
