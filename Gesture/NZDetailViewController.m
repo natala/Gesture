@@ -13,6 +13,7 @@
 #import "Model/CoreData/NZCoreDataManager.h"
 #import "NZLinearAcceleration.h"
 #import "NZYawPitchRoll+CoreData.h"
+#import "NZGraphView.h"
 
 @interface NZDetailViewController ()
 
@@ -30,7 +31,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    // Do any additional setup after loading the view, typically from a nib.
     // setup tge UI
     self.startRecordingButton.enabled = YES;
     self.stopRecordingButton.enabled = NO;
@@ -38,13 +39,31 @@
     
     //setup the chart views
     // Linear Acc
-    KHLinearAccelerationLineChartView *linearAccChartView = [[KHLinearAccelerationLineChartView alloc] initWithFrame:self.linearAccelerationLineChartView.frame];
+    /*KHLinearAccelerationLineChartView *linearAccChartView = [[KHLinearAccelerationLineChartView alloc] initWithFrame:self.linearAccelerationLineChartView.frame];
     linearAccChartView.tag = 1000; // I don't thing I need it, but is fancy :D
     [self.view addSubview:linearAccChartView];
     
     KHYawPitchRollLineChartView *yawPitchRollChartView = [[KHYawPitchRollLineChartView alloc] initWithFrame:self.yawPitchRollLineChartView.frame];
     yawPitchRollChartView.tag = 1001;
-    [self.view addSubview:yawPitchRollChartView];
+    [self.view addSubview:yawPitchRollChartView];*/
+    
+    //NZGraphView *linearAccGraphView = [[NZGraphView alloc] initWithFrame:self.linearAccelerationLineChartView.frame];
+    //linearAccGraphView.tag = 1000;
+    NZGraphView *yawPitchRollGraphView = [[NZGraphView alloc] initWithFrame:self.yawPitchRollLineChartView.frame];
+    yawPitchRollGraphView.tag = 1001;
+    
+   /* linearAccGraphView.normalizeFactor = 1.0;
+    linearAccGraphView.maxAxisY = 20000.0;
+    linearAccGraphView.minAxisY = -20000.0;
+    
+    yawPitchRollGraphView.normalizeFactor = 1.0;
+    yawPitchRollGraphView.minAxisY = -180;
+    yawPitchRollGraphView.maxAxisY = 180;*/
+    
+    //self.linearAccelerationLineChartView = linearAccGraphView;
+    //[self.view addSubview:linearAccGraphView];
+    [self.view addSubview:yawPitchRollGraphView];
+    
    //Setup the table view controller editing
    // self.navigationItem.leftBarButtonItem = self.editButtonItem;
      UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
@@ -313,10 +332,18 @@
 
 - (void)updateLinearAccelerationLineChartViewWithSession:(NZSensorDataSet *)set onlyShowLatest50SensorData:(BOOL)onlyShowLatest50SensorData
 {
-    NSMutableArray *sensorData = [NSMutableArray arrayWithArray:[set.sensorData allObjects]];
+    NSMutableArray *sensorDataArray = [NSMutableArray arrayWithArray:[set.sensorData allObjects]];
+    NZSensorData *sensorData = sensorDataArray.lastObject;
     
-    self.linearAccelerationLineChartView.sensorData = sensorData;
-    self.yawPitchRollLineChartView.sensorData = sensorData;
+    if (!sensorData) {
+        return;
+    }
+    
+   // [self.linearAccelerationLineChartView addX:[sensorData.linearAcceleration.x floatValue] y:[sensorData.linearAcceleration.y floatValue] z:[sensorData.linearAcceleration.z floatValue]];
+    [self.yawPitchRollLineChartView addX:[sensorData.yawPitchRoll.yaw floatValue] y:[sensorData.yawPitchRoll.pitch floatValue] z:[sensorData.yawPitchRoll.roll floatValue]];
+    
+   // self.linearAccelerationLineChartView.sensorData = sensorData;
+   // self.yawPitchRollLineChartView.sensorData = sensorData;
 
 }
 

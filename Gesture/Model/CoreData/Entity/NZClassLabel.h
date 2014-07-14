@@ -10,6 +10,8 @@
 
 static NSString *ENTITY_NAME_CLASS_LABEL = @"NZClassLabel";
 
+@class NZSensorData;
+
 @interface NZClassLabel : NSManagedObject
 
 @property (nonatomic, strong) NSString *name;

@@ -1,0 +1,5 @@
+/*!CK:108725350!*//*1404370103,*/
+
+if (self.CavalryLogger) { CavalryLogger.start_js(["P5DaE"]); }
+
+__d("VideoCTAEndscreen",["CSS","Event","SubscriptionsHandler","VideoPlayerReason","cx"],function(a,b,c,d,e,f,g,h,i,j,k){function l(m,n){"use strict";this.$VideoCTAEndscreen0=m.cta_endscreen;this.$VideoCTAEndscreen1=m.cta_replay_element;this.$VideoCTAEndscreen2=m.video_element;this.$VideoCTAEndscreen3=new i();if(this.$VideoCTAEndscreen1!=null)this.$VideoCTAEndscreen3.addSubscriptions(h.listen(this.$VideoCTAEndscreen1,'click',function(){return n(j.USER);}));}l.prototype.$VideoCTAEndscreen4=function(){"use strict";g.addClass(this.$VideoCTAEndscreen0,"_1krt");};l.prototype.$VideoCTAEndscreen5=function(){"use strict";g.removeClass(this.$VideoCTAEndscreen0,"_1krt");};l.prototype.handleFlashEvent=function(m,n){"use strict";if(this.$VideoCTAEndscreen0==null)return;switch(m){case 'flash/beginPlayback':this.$VideoCTAEndscreen5();break;case 'flash/finishPlayback':this.$VideoCTAEndscreen4();break;}};e.exports=l;},null);

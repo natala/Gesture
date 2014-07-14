@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Gesture/NZDetailViewController.m"
-            timestampString = "425916501.91312"
+            timestampString = "426434046.62004"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "158"
-            endingLineNumber = "158"
-            landmarkName = "-tableView:commitEditingStyle:forRowAtIndexPath:"
+            startingLineNumber = "339"
+            endingLineNumber = "339"
+            landmarkName = "-updateLinearAccelerationLineChartViewWithSession:onlyShowLatest50SensorData:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Gesture/ViewControllers/NZMasterMenuTVC.m"
-            timestampString = "425847819.75721"
+            filePath = "Gesture/Views/NZGraphView/NZGraphViewSegment.m"
+            timestampString = "426434170.377286"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "122"
-            endingLineNumber = "122"
-            landmarkName = "-prepareForSegue:sender:"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
+            landmarkName = "-addX:y:z:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,45 +41,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Gesture/ViewControllers/NZMasterMenuTVC.m"
-            timestampString = "425845891.758634"
+            filePath = "Gesture/Views/NZGraphView/NZGraphView.m"
+            timestampString = "426437312.640839"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
-            landmarkName = "-viewDidLoad"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Gesture/NZDetailViewController.m"
-            timestampString = "425916501.91312"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "-splitViewController:willHideViewController:withBarButtonItem:forPopoverController:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Gesture/NZDetailViewController.m"
-            timestampString = "425916501.91312"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
-            landmarkName = "-splitViewController:willShowViewController:invalidatingBarButtonItem:"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
+            landmarkName = "-addSegment"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

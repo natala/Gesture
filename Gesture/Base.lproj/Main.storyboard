@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.21" systemVersion="13D65" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="H1p-Uh-vWS">
     <dependencies>
+        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.13"/>
     </dependencies>
     <scenes>
@@ -79,10 +80,6 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="YawPitchRollGraphView" translatesAutoresizingMaskIntoConstraints="NO" id="iGG-X0-BeQ" customClass="KHYawPitchRollLineChartView">
-                                <rect key="frame" x="12" y="582" width="678" height="166"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="QTU-xI-LnM">
                                 <rect key="frame" x="12" y="76" width="555" height="254"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -108,7 +105,11 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="LinearAccelerationGraphView" translatesAutoresizingMaskIntoConstraints="NO" id="JyT-Ar-nBV" customClass="KHLinearAccelerationLineChartView">
-                                <rect key="frame" x="10" y="389" width="680" height="166"/>
+                                <rect key="frame" x="12" y="401" width="337" height="166"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="YawPitchRollGraphView" translatesAutoresizingMaskIntoConstraints="NO" id="iGG-X0-BeQ" customClass="KHYawPitchRollLineChartView">
+                                <rect key="frame" x="357" y="401" width="326" height="166"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
@@ -119,13 +120,14 @@
                     <navigationItem key="navigationItem" title="Ring Recording" id="mOI-FS-AaM"/>
                     <connections>
                         <outlet property="accelerationLabel" destination="gaU-0X-tEe" id="Hy7-cL-PRA"/>
-                        <outlet property="linearAccelerationLineChartView" destination="JyT-Ar-nBV" id="n6C-IQ-Pe0"/>
+                        <outlet property="linearAccelerationChartView" destination="JyT-Ar-nBV" id="7Nx-85-FW0"/>
+                        <outlet property="linearAccelerationLineChartView" destination="JyT-Ar-nBV" id="Ds8-7X-UkC"/>
                         <outlet property="orientationLabel" destination="k9T-de-Sd7" id="Fb1-FL-zlP"/>
                         <outlet property="recordingStatusLabel" destination="xYL-KE-KeN" id="1yK-PI-OFV"/>
                         <outlet property="sensorDataTableView" destination="QTU-xI-LnM" id="pxd-63-749"/>
                         <outlet property="startRecordingButton" destination="qQI-rR-3YH" id="g9v-bm-1GF"/>
                         <outlet property="stopRecordingButton" destination="bOj-1q-poP" id="17o-zZ-HEP"/>
-                        <outlet property="yawPitchRollLineChartView" destination="iGG-X0-BeQ" id="3gE-dO-U8H"/>
+                        <outlet property="yawPitchRollLineChartView" destination="iGG-X0-BeQ" id="LHc-Gf-Xnq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJe-Yq-33r" sceneMemberID="firstResponder"/>

@@ -7,13 +7,6 @@
 //
 
 #import <CoreData/CoreData.h>
-/*#import "NZClassLabel.h"
-#import "NZLinearAcceleration.h"
-#import "NZSensorDataSet.h"
-#import "NZGravity.h"
-#import "NZYawPitchRoll.h"
-#import "NZQuaternion.h"
-*/
 
 @class NZClassLabel, NZLinearAcceleration, NZSensorDataSet, NZYawPitchRoll, NZGravity, NZQuaternion;
 

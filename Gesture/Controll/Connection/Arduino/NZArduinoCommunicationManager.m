@@ -146,6 +146,8 @@
     rawAcceleration.y = (short)((data[2] << 8) | data[3]);
     rawAcceleration.z = (short)((data[4] << 8) | data[5]);
     
+    NSLog(@"Raw Acceleration: %f, %f, %f", rawAcceleration.x, rawAcceleration.y, rawAcceleration.z);
+    
     // Conversion into KneeHapp proprietary model objects
     NZQuaternion *quaternion = [NZQuaternion create];
     
@@ -156,8 +158,11 @@
     
     sensorData.quaternion = quaternion;
     sensorData.gravity = [NZSensorDataHelper gravityFromQuaternion:quaternion];
+    NSLog(@"Gravity:  %@, %@, %@", sensorData.gravity.x, sensorData.gravity.y, sensorData.gravity.z);
     sensorData.yawPitchRoll = [NZSensorDataHelper yawPitchRollFromQuaternion:quaternion];
     sensorData.linearAcceleration = [NZSensorDataHelper linearAccelerationFromRawAcceleration:rawAcceleration gravity:sensorData.gravity andQuaternion:quaternion];
+    NSLog(@"Linear acceleration:  %@, %@, %@", sensorData.linearAcceleration.x, sensorData.linearAcceleration.y, sensorData.linearAcceleration.z);
+    
     
     // Notify delegate
     [self.delegate didReceiveSensorData:sensorData];}

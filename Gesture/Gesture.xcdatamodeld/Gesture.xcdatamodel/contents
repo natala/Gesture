@@ -46,7 +46,7 @@
         <relationship name="sensorData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NZSensorData" inverseName="yawPitchRoll" inverseEntity="NZSensorData" syncable="YES"/>
     </entity>
     <elements>
-        <element name="NZClassLabel" positionX="297" positionY="128" width="126" height="90"/>
+        <element name="NZClassLabel" positionX="324" positionY="128" width="126" height="90"/>
         <element name="NZGravity" positionX="169" positionY="-189" width="128" height="105"/>
         <element name="NZLinearAcceleration" positionX="-63" positionY="-105" width="128" height="105"/>
         <element name="NZQuaternion" positionX="-63" positionY="-27" width="128" height="120"/>

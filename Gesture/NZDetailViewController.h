@@ -12,6 +12,7 @@
 #import "KHLinearAccelerationLineChartView.h"
 #import "KHYawPitchRollLineChartView.h"
 #import "Views/RecordingSensorDataTableView/NZSensorDataTableView.h"
+#import "NZGraphView.h"
 
 @interface NZDetailViewController : UIViewController <UISplitViewControllerDelegate, NZSensorDataRecordingManagerObserver, NSFetchedResultsControllerDelegate, UITableViewDataSource, UITableViewDataSource>
 
@@ -30,8 +31,12 @@
 
 
 #pragma mark - views
-@property (weak, nonatomic) IBOutlet KHLinearAccelerationLineChartView *linearAccelerationLineChartView;
-@property (weak, nonatomic) IBOutlet KHYawPitchRollLineChartView *yawPitchRollLineChartView;
+//@property (weak, nonatomic) IBOutlet KHLinearAccelerationLineChartView *linearAccelerationLineChartView;
+//@property (weak, nonatomic) IBOutlet KHYawPitchRollLineChartView *yawPitchRollLineChartView;
+
+@property (weak, nonatomic) IBOutlet NZGraphView *linearAccelerationLineChartView;
+@property (weak, nonatomic) IBOutlet NZGraphView *yawPitchRollLineChartView;
+
 
 #pragma mark - IBActions
 - (IBAction)startRecordingButtonPressed:(id)sender;

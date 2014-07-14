@@ -33,10 +33,20 @@
     
     GLKVector3 linearAccelerationVector = GLKVector3Make(0, 0, 0);
     
-    linearAccelerationVector.x = rawAcceleration.x - (2 * (q.x * q.z - q.w * q.y)) * 8192;
+    /*linearAccelerationVector.x = rawAcceleration.x - (2 * (q.x * q.z - q.w * q.y)) * 8192;
     linearAccelerationVector.y = rawAcceleration.y - (2 * (q.w * q.x + q.y * q.z)) * 8192;
     linearAccelerationVector.z = rawAcceleration.z - (q.w * q.w - q.x * q.x - q.y * q.y + q.z * q.z) * 8192;
+    */
     
+   
+    
+    linearAccelerationVector.x = rawAcceleration.x - ([gravity.x floatValue] * 4096);
+    linearAccelerationVector.y = rawAcceleration.y - ([gravity.y floatValue] * 4096);
+    linearAccelerationVector.z = rawAcceleration.z - ([gravity.z floatValue] * 4096);
+    /*v -> x = vRaw -> x - gravity -> x*4096;
+    v -> y = vRaw -> y - gravity -> y*4096;
+    v -> z = vRaw -> z - gravity -> z*4096;
+    */
     NZLinearAcceleration *linearAcceleration = [NZLinearAcceleration create];
     
     linearAcceleration.x = [NSNumber numberWithFloat:linearAccelerationVector.x];
