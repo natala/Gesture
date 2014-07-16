@@ -9,6 +9,7 @@
 #import "NZGesturesVC.h"
 #import "NZGesturesVC.h"
 #import "NZGesture.h"
+#import "NZClassLabel+CoreData.h"
 #import "NZCoreDataManager.h"
 
 
@@ -18,8 +19,6 @@
 @property (nonatomic, strong) UIViewController *recordGestureVc;
 
 #pragma mark - Core Data related properties
-//@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
-//@property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NZPopupViewController *popupVc;
 @property (nonatomic, strong) NSDate *currentDate;
 
@@ -53,6 +52,7 @@
     }
     self.tableView.allowsSelectionDuringEditing = YES;
     
+    // setup VC for recording the gesture
     UIViewController *gesturesVC = [storyboard instantiateViewControllerWithIdentifier:@"SingleGestureVC"];
     if ([gesturesVC isKindOfClass:[NZGesturesVC class]]) {
         self.recordGestureVc = (UIViewController *)gesturesVC;
@@ -63,21 +63,17 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    //return [[self.fetchedResultsController sections] count];
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    //id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
-    //return [sectionInfo numberOfObjects];
     return [self.gestureSet.gestures count];
 }
 
@@ -113,8 +109,6 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         NSLog(@"Deleting a cell");
         NSManagedObjectContext *context = [[NZCoreDataManager sharedManager] managedObjectContext];
-        //   NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
-        //[context deleteObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
         [context deleteObject:[[self.gestureSet.gestures allObjects] objectAtIndex:indexPath.row]];
         NSError *error = nil;
         if (![context save:&error]) {
@@ -123,6 +117,8 @@
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
         }
+        
+        [self.tableView reloadData];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         NSLog(@"insert a cell");
     }
@@ -131,18 +127,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //self.recordGestureVc.navigationItem.title = [self.fetchedResultsController objectAtIndexPath:indexPath];
     self.recordGestureVc.navigationItem.title = [[self.gestureSet.gestures allObjects] objectAtIndex:indexPath.row];
     [[self navigationController] pushViewController:self.recordGestureVc animated:YES];
 }
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
 #warning TODO configure the cell properly
-    //NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
     NZGesture *gesture = [[self.gestureSet.gestures allObjects] objectAtIndex:indexPath.row];
-    //cell.textLabel.text = [object valueForKey:@"name"];
     NSDate *date = [gesture valueForKey:@"timeStampCreated"];
-    cell.textLabel.text = [date description];
+    cell.textLabel.text = gesture.label.name;
 }
 
 #pragma mark - methods handling editing of the rable view cells
@@ -152,121 +145,27 @@
     self.popupVc.timestampText.text = [self.currentDate description];
     self.popupVc.nameText.text = self.popupVc.timestampText.text;
 }
-/*
-#pragma mark - Fetched results controller
-- (NSFetchedResultsController *)fetchedResultsController
-{
-    if ( _fetchedResultsController != nil) {
-        return _fetchedResultsController;
-    }
-    
-    //NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:ENTITY_NAME_GESTURE];
-    // Edit the entity name as appropriate.
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"gestureSet = %@", self.gestureSet];
-    [fetchRequest setPredicate:predicate];
-    NSManagedObjectContext *context = [[NZCoreDataManager sharedManager] managedObjectContext];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:ENTITY_NAME_GESTURE inManagedObjectContext:context];
-    [fetchRequest setEntity:entity];
-    
-    // Set the batch size to a suitable number.
-    [fetchRequest setFetchBatchSize:20];
-    
-    // Edit the sort key as appropriate.
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timeStampCreated" ascending:NO];
-    NSArray *sortDescriptors = @[sortDescriptor];
-    
-    [fetchRequest setSortDescriptors:sortDescriptors];
-    
-    // Edit the section name key path and cache name if appropriate.
-    // nil for section name key path means "no sections".
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:context sectionNameKeyPath:nil cacheName:@"Master"];
-    aFetchedResultsController.delegate = self;
-    self.fetchedResultsController = aFetchedResultsController;
-    
-    NSError *error = nil;
-    if (![self.fetchedResultsController performFetch:&error]) {
-        // Replace this implementation with code to handle the error appropriately.
-        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }
-    
-    return _fetchedResultsController;
-}
-
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
-{
-    [self.tableView beginUpdates];
-}
-
-- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
-           atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
-{
-    switch(type) {
-        case NSFetchedResultsChangeInsert:
-            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-            
-        case NSFetchedResultsChangeDelete:
-            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-    }
-}
-
-- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
-       atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
-      newIndexPath:(NSIndexPath *)newIndexPath
-{
-    UITableView *tableView = self.tableView;
-    
-    switch(type) {
-        case NSFetchedResultsChangeInsert:
-            [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-            
-        case NSFetchedResultsChangeDelete:
-            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-            
-        case NSFetchedResultsChangeUpdate:
-            [self configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
-            break;
-            
-        case NSFetchedResultsChangeMove:
-            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-    }
-}
-
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-{
-    [self.tableView endUpdates];
-}
-
-*/
 
 #pragma mark - Pop Up VC Delegate methods
 - (void)didFinishFillingFormWithData:(NSDictionary *)form
 {
     [self dismissViewControllerAnimated:YES completion:nil];
     NSManagedObjectContext *context = [[NZCoreDataManager sharedManager] managedObjectContext];
-    //NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
-    //NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
-    //NSManagedObject *newManagedObject = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
     NZGesture *newGesture = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME_GESTURE inManagedObjectContext:context];
-    // If appropriate, configure the new managed object.
-    // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
-    //[newManagedObject setValue:self.currentDate forKey:@"timeStampCreated"];
+
+    
     [newGesture setValue:self.currentDate forKey:@"timeStampCreated"];
-    //[newManagedObject setValue:self.currentDate forKey:@"timeStampUpdated"];
     [newGesture setValue:self.currentDate forKey:@"timeStampUpdated"];
-   // [newManagedObject setValue:[form valueForKey:@"name"] forKey:@"name"];
     [self.gestureSet addGesturesObject:newGesture];
-    //[newManagedObject setValue:self.gestureSet forKey:@"gestureSet"];
     [newGesture setValue:self.gestureSet forKey:@"gestureSet"];
-    //[[self.fetchedResultsController managedObjectContext] refreshObject:self.gestureSet mergeChanges:YES];
+    
+    // create a new class label with the correct index
+    NZClassLabel *newClassLabel = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME_CLASS_LABEL inManagedObjectContext:context];
+    [newClassLabel setValue:[form objectForKey:@"name"]forKey:@"name"];
+    NSNumber *index = [NSNumber numberWithUnsignedInteger:[[NZClassLabel findAll]count]];
+    [newClassLabel setValue:index forKey:@"index"];
+    [newClassLabel setValue:newGesture forKey:@"gesture"];
+    [newGesture setValue:newClassLabel forKey:@"label"];
     
     // Save the context.
     NSError *error = nil;
