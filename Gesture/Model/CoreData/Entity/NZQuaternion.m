@@ -10,10 +10,13 @@
 
 @implementation NZQuaternion
 
+#pragma mark - attributes
 @dynamic w;
 @dynamic x;
 @dynamic y;
 @dynamic z;
+
+#pragma mark - relationships
 @dynamic sensorData;
 
 @end

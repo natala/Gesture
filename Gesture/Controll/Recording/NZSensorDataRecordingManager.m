@@ -58,7 +58,8 @@
 - (BOOL)startRecordingNewSensorDataSet
 {
     self.currentSet = [NZSensorDataSet create];
-    self.currentSet.timeStamp = [NSDate date];
+    self.currentSet.timeStampCreated = [NSDate date];
+    self.currentSet.timeStampUpdate = self.currentSet.timeStampCreated;
     [NZArduinoCommunicationManager sharedManager].delegate = self;
     BOOL startedReceiving = [[NZArduinoCommunicationManager sharedManager] startReceivingSensorData];
     
@@ -80,7 +81,8 @@
     }
     
     self.currentSet = [NZSensorDataSet create];
-    self.currentSet.timeStamp = [NSDate date];
+    self.currentSet.timeStampCreated = [NSDate date];
+    self.currentSet.timeStampUpdate = self.currentSet.timeStampCreated;
     
     for (id<NZSensorDataRecordingManagerObserver> observer in self.sensorDataRecordingObservers) {
         if ([observer respondsToSelector:@selector(didStartRecordingSensorData:)]) {

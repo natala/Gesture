@@ -10,9 +10,12 @@
 
 @implementation NZYawPitchRoll
 
-@dynamic yaw;
+#pragma mark - attributes
 @dynamic pitch;
 @dynamic roll;
+@dynamic yaw;
+
+#pragma mark - relationships
 @dynamic sensorData;
 
 @end

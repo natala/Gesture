@@ -15,9 +15,12 @@ static NSString *ENTITY_NAME_YAW_PITCH_ROLL = @"NZYawPitchRoll";
 
 @interface NZYawPitchRoll : NSManagedObject
 
-@property (nonatomic, strong) NSNumber *yaw;
-@property (nonatomic, strong) NSNumber *pitch;
-@property (nonatomic, strong) NSNumber *roll;
-@property (nonatomic, strong) NZSensorData *sensorData;
+#pragma mark - attributes
+@property (nonatomic, retain) NSNumber * pitch;
+@property (nonatomic, retain) NSNumber * roll;
+@property (nonatomic, retain) NSNumber * yaw;
+
+#pragma mark - relationships
+@property (nonatomic, retain) NZSensorData *sensorData;
 
 @end

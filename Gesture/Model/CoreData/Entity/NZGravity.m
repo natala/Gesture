@@ -10,9 +10,12 @@
 
 @implementation NZGravity
 
+#pragma mark - attributes
 @dynamic x;
 @dynamic y;
 @dynamic z;
+
+#pragma mark - relationships
 @dynamic sensorData;
 
 @end

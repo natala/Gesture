@@ -3,7 +3,21 @@
     <entity name="NZClassLabel" representedClassName="NZClassLabel" syncable="YES">
         <attribute name="index" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="sensorData" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="NZSensorData" inverseName="classLabel" inverseEntity="NZSensorData" syncable="YES"/>
+        <relationship name="gesture" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NZGesture" inverseName="label" inverseEntity="NZGesture" syncable="YES"/>
+    </entity>
+    <entity name="NZGesture" syncable="YES">
+        <attribute name="timeStampCreated" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="timeStampUpdated" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="gestureSet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NZGestureSet" inverseName="gestures" inverseEntity="NZGestureSet" syncable="YES"/>
+        <relationship name="label" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NZClassLabel" inverseName="gesture" inverseEntity="NZClassLabel" syncable="YES"/>
+        <relationship name="negativeSamples" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="NZSensorDataSet" inverseName="gestureNegative" inverseEntity="NZSensorDataSet" syncable="YES"/>
+        <relationship name="positiveSamples" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="NZSensorDataSet" inverseName="gesturePositive" inverseEntity="NZSensorDataSet" syncable="YES"/>
+    </entity>
+    <entity name="NZGestureSet" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="timeStampCreated" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="timeStampUpdated" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="gestures" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="NZGesture" inverseName="gestureSet" inverseEntity="NZGesture" syncable="YES"/>
     </entity>
     <entity name="NZGravity" representedClassName="NZGravity" syncable="YES">
         <attribute name="x" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
@@ -26,8 +40,7 @@
         <relationship name="sensorData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NZSensorData" inverseName="quaternion" inverseEntity="NZSensorData" syncable="YES"/>
     </entity>
     <entity name="NZSensorData" representedClassName="NZSensorData" syncable="YES">
-        <attribute name="timeStamp" optional="YES" attributeType="Date" syncable="YES"/>
-        <relationship name="classLabel" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NZClassLabel" inverseName="sensorData" inverseEntity="NZClassLabel" syncable="YES"/>
+        <attribute name="timeStampRecoded" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="gravity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NZGravity" inverseName="sensorData" inverseEntity="NZGravity" syncable="YES"/>
         <relationship name="linearAcceleration" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NZLinearAcceleration" inverseName="sensorData" inverseEntity="NZLinearAcceleration" syncable="YES"/>
         <relationship name="quaternion" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NZQuaternion" inverseName="sensorData" inverseEntity="NZQuaternion" syncable="YES"/>
@@ -36,7 +49,10 @@
     </entity>
     <entity name="NZSensorDataSet" representedClassName="NZSensorDataSet" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="timeStamp" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="timeStampCreated" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="timeStampUpdate" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="gestureNegative" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NZGesture" inverseName="negativeSamples" inverseEntity="NZGesture" syncable="YES"/>
+        <relationship name="gesturePositive" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NZGesture" inverseName="positiveSamples" inverseEntity="NZGesture" syncable="YES"/>
         <relationship name="sensorData" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="NZSensorData" inverseName="sensorDataSet" inverseEntity="NZSensorData" syncable="YES"/>
     </entity>
     <entity name="NZYawPitchRoll" representedClassName="NZYawPitchRoll" syncable="YES">
@@ -46,12 +62,14 @@
         <relationship name="sensorData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NZSensorData" inverseName="yawPitchRoll" inverseEntity="NZSensorData" syncable="YES"/>
     </entity>
     <elements>
-        <element name="NZClassLabel" positionX="324" positionY="128" width="126" height="90"/>
-        <element name="NZGravity" positionX="169" positionY="-189" width="128" height="105"/>
-        <element name="NZLinearAcceleration" positionX="-63" positionY="-105" width="128" height="105"/>
-        <element name="NZQuaternion" positionX="-63" positionY="-27" width="128" height="120"/>
-        <element name="NZSensorData" positionX="331" positionY="-108" width="128" height="150"/>
-        <element name="NZSensorDataSet" positionX="576" positionY="-63" width="128" height="88"/>
-        <element name="NZYawPitchRoll" positionX="144" positionY="99" width="128" height="105"/>
+        <element name="NZClassLabel" positionX="871" positionY="36" width="128" height="88"/>
+        <element name="NZGesture" positionX="691" positionY="-88" width="128" height="133"/>
+        <element name="NZGestureSet" positionX="846" positionY="-169" width="126" height="88"/>
+        <element name="NZGravity" positionX="-63" positionY="-193" width="128" height="103"/>
+        <element name="NZLinearAcceleration" positionX="-63" positionY="-69" width="128" height="105"/>
+        <element name="NZQuaternion" positionX="-63" positionY="51" width="128" height="120"/>
+        <element name="NZSensorData" positionX="315" positionY="-54" width="128" height="133"/>
+        <element name="NZSensorDataSet" positionX="486" positionY="-72" width="128" height="133"/>
+        <element name="NZYawPitchRoll" positionX="-63" positionY="189" width="128" height="105"/>
     </elements>
 </model>

@@ -14,7 +14,7 @@
 #import "Views/RecordingSensorDataTableView/NZSensorDataTableView.h"
 #import "NZGraphView.h"
 
-@interface NZDetailViewController : UIViewController <UISplitViewControllerDelegate, NZSensorDataRecordingManagerObserver, NSFetchedResultsControllerDelegate, UITableViewDataSource, UITableViewDataSource>
+@interface NZDetailViewController : UIViewController <UISplitViewControllerDelegate, NZSensorDataRecordingManagerObserver, NSFetchedResultsControllerDelegate, UITableViewDataSource>
 
 #pragma mark - UI Components
 @property (weak, nonatomic) IBOutlet UIButton *startRecordingButton;
@@ -31,11 +31,11 @@
 
 
 #pragma mark - views
-//@property (weak, nonatomic) IBOutlet KHLinearAccelerationLineChartView *linearAccelerationLineChartView;
-//@property (weak, nonatomic) IBOutlet KHYawPitchRollLineChartView *yawPitchRollLineChartView;
+@property (weak, nonatomic) IBOutlet KHLinearAccelerationLineChartView *linearAccelerationLineChartView;
+@property (weak, nonatomic) IBOutlet KHYawPitchRollLineChartView *yawPitchRollLineChartView;
 
-@property (weak, nonatomic) IBOutlet NZGraphView *linearAccelerationLineChartView;
-@property (weak, nonatomic) IBOutlet NZGraphView *yawPitchRollLineChartView;
+//@property (weak, nonatomic) IBOutlet NZGraphView *linearAccelerationLineChartView;
+//@property (weak, nonatomic) IBOutlet NZGraphView *yawPitchRollLineChartView;
 
 
 #pragma mark - IBActions

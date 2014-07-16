@@ -14,13 +14,16 @@ static NSString *ENTITY_NAME_SENSOR_DATA = @"NZSensorData";
 
 @interface NZSensorData : NSManagedObject
 
-@property (nonatomic, strong) NSDate *timeStamp;
-@property (nonatomic, strong) NZClassLabel *classLabel;
-@property (nonatomic, strong) NZLinearAcceleration *linearAcceleration;
-@property (nonatomic, strong) NZSensorDataSet *sensorDataSet;
-@property (nonatomic, strong) NZGravity *gravity;
-@property (nonatomic, strong) NZYawPitchRoll *yawPitchRoll;
-@property (nonatomic, strong) NZQuaternion *quaternion;
+
+#pragma mark - attributes
+@property (nonatomic, retain) NSDate * timeStampRecoded;
+
+#pragma mark - relationships
+@property (nonatomic, retain) NZGravity *gravity;
+@property (nonatomic, retain) NZLinearAcceleration *linearAcceleration;
+@property (nonatomic, retain) NZQuaternion *quaternion;
+@property (nonatomic, retain) NZSensorDataSet *sensorDataSet;
+@property (nonatomic, retain) NZYawPitchRoll *yawPitchRoll;
 
 
 @end

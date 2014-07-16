@@ -43,7 +43,7 @@
 
 - (NZSensorData *)clone
 {
-    return [super clone];
+    return (NZSensorData *)[super clone];
 }
 
 @end

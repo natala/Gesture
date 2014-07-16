@@ -39,34 +39,34 @@
     
     //setup the chart views
     // Linear Acc
-    /*KHLinearAccelerationLineChartView *linearAccChartView = [[KHLinearAccelerationLineChartView alloc] initWithFrame:self.linearAccelerationLineChartView.frame];
+    KHLinearAccelerationLineChartView *linearAccChartView = [[KHLinearAccelerationLineChartView alloc] initWithFrame:self.linearAccelerationLineChartView.frame];
     linearAccChartView.tag = 1000; // I don't thing I need it, but is fancy :D
     [self.view addSubview:linearAccChartView];
     
     KHYawPitchRollLineChartView *yawPitchRollChartView = [[KHYawPitchRollLineChartView alloc] initWithFrame:self.yawPitchRollLineChartView.frame];
     yawPitchRollChartView.tag = 1001;
-    [self.view addSubview:yawPitchRollChartView];*/
+    [self.view addSubview:yawPitchRollChartView];
     
     //NZGraphView *linearAccGraphView = [[NZGraphView alloc] initWithFrame:self.linearAccelerationLineChartView.frame];
     //linearAccGraphView.tag = 1000;
-    NZGraphView *yawPitchRollGraphView = [[NZGraphView alloc] initWithFrame:self.yawPitchRollLineChartView.frame];
-    yawPitchRollGraphView.tag = 1001;
+    //NZGraphView *yawPitchRollGraphView = [[NZGraphView alloc] initWithFrame:self.yawPitchRollLineChartView.frame];
+    //yawPitchRollGraphView.tag = 1001;
     
-   /* linearAccGraphView.normalizeFactor = 1.0;
-    linearAccGraphView.maxAxisY = 20000.0;
-    linearAccGraphView.minAxisY = -20000.0;
-    
-    yawPitchRollGraphView.normalizeFactor = 1.0;
-    yawPitchRollGraphView.minAxisY = -180;
-    yawPitchRollGraphView.maxAxisY = 180;*/
+    /* linearAccGraphView.normalizeFactor = 1.0;
+     linearAccGraphView.maxAxisY = 20000.0;
+     linearAccGraphView.minAxisY = -20000.0;
+     
+     yawPitchRollGraphView.normalizeFactor = 1.0;
+     yawPitchRollGraphView.minAxisY = -180;
+     yawPitchRollGraphView.maxAxisY = 180;*/
     
     //self.linearAccelerationLineChartView = linearAccGraphView;
     //[self.view addSubview:linearAccGraphView];
-    [self.view addSubview:yawPitchRollGraphView];
+    //[self.view addSubview:yawPitchRollGraphView];
     
-   //Setup the table view controller editing
-   // self.navigationItem.leftBarButtonItem = self.editButtonItem;
-     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
+    //Setup the table view controller editing
+    // self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
     // enable deleting the sensor data sets
     [self.sensorDataTableView setEditing:YES animated:YES];
@@ -101,7 +101,7 @@
     self.recordingStatusLabel.text = @"recording";
     self.startRecordingButton.enabled = NO;
     self.stopRecordingButton.enabled = YES;
-
+    
 }
 
 - (void)didReceiveSensorData:(NZSensorData *)sensorData forSensorDataSer:(NZSensorDataSet *)sensorDataSet
@@ -130,8 +130,8 @@
     [[NZSensorDataRecordingManager sharedManager] addRecordingObserver:self];
     BOOL startedNewRecording = [[NZSensorDataRecordingManager sharedManager] startRecordingNewSensorDataSet];
     
-   // if (startedNewRecording) {
-   //         }
+    // if (startedNewRecording) {
+    //         }
 }
 
 - (IBAction)stopRecordingButtonPressed:(id)sender
@@ -177,7 +177,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         NSLog(@"Deleting a cell");
         NSManagedObjectContext *context = [[NZCoreDataManager sharedManager] managedObjectContext];
-     //   NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
+        //   NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
         [context deleteObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
         
         NSError *error = nil;
@@ -199,20 +199,20 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = [[object valueForKey:@"timeStamp"] description];
+    cell.textLabel.text = [[object valueForKey:@"timeStampCreated"] description];
 }
 
 #pragma mark - editing the view
 
 - (void)insertNewObject:(id)sender {
     
-     NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
-     NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
-     NSManagedObject *newManagedObject = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
+    NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
+    NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
+    NSManagedObject *newManagedObject = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
     
     // If appropriate, configure the new managed object.
     // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
-     [newManagedObject setValue:[NSDate date] forKey:@"timeStamp"];
+    [newManagedObject setValue:[NSDate date] forKey:@"timeStampCreated"];
     
     // Save the context.
     NSError *error = nil;
@@ -222,7 +222,7 @@
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
-     
+    
     NSLog(@"done inserting new item");
 }
 
@@ -245,7 +245,7 @@
     [fetchRequest setFetchBatchSize:20];
     
     // Edit the sort key as appropriate.
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timeStamp" ascending:NO];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timeStampCreated" ascending:NO];
     NSArray *sortDescriptors = @[sortDescriptor];
     
     [fetchRequest setSortDescriptors:sortDescriptors];
@@ -327,6 +327,11 @@
  }
  */
 
+#pragma mark - Pop Up View Controller Delegate Methods
+- (void)didFinishFillingFormWithData:(NSDictionary *)form
+{
+}
+
 
 #pragma mark - Helper
 
@@ -339,12 +344,12 @@
         return;
     }
     
-   // [self.linearAccelerationLineChartView addX:[sensorData.linearAcceleration.x floatValue] y:[sensorData.linearAcceleration.y floatValue] z:[sensorData.linearAcceleration.z floatValue]];
-    [self.yawPitchRollLineChartView addX:[sensorData.yawPitchRoll.yaw floatValue] y:[sensorData.yawPitchRoll.pitch floatValue] z:[sensorData.yawPitchRoll.roll floatValue]];
+    // [self.linearAccelerationLineChartView addX:[sensorData.linearAcceleration.x floatValue] y:[sensorData.linearAcceleration.y floatValue] z:[sensorData.linearAcceleration.z floatValue]];
+    //[self.yawPitchRollLineChartView addX:[sensorData.yawPitchRoll.yaw floatValue] y:[sensorData.yawPitchRoll.pitch floatValue] z:[sensorData.yawPitchRoll.roll floatValue]];
     
-   // self.linearAccelerationLineChartView.sensorData = sensorData;
-   // self.yawPitchRollLineChartView.sensorData = sensorData;
-
+    self.linearAccelerationLineChartView.sensorData = sensorDataArray;
+    //self.yawPitchRollLineChartView.sensorData = sensorDataArray;
+    
 }
 
 @end;

@@ -10,12 +10,15 @@
 
 @implementation NZSensorData 
 
-@dynamic timeStamp;
-@dynamic classLabel;
-@dynamic linearAcceleration;
-@dynamic sensorDataSet;
+#pragma mark - attributes
+@dynamic timeStampRecoded;
+
+#pragma mark - relationships
 @dynamic gravity;
-@dynamic yawPitchRoll;
+@dynamic linearAcceleration;
 @dynamic quaternion;
+@dynamic sensorDataSet;
+@dynamic yawPitchRoll;
+
 
 @end

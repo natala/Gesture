@@ -14,8 +14,14 @@ static NSString *ENTITY_NAME_SENSOR_DATA_SET = @"NZSensorDataSet";
 
 @interface NZSensorDataSet : NSManagedObject
 
-@property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) NSDate *timeStamp;
+#pragma mark - attributes
+@property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSDate * timeStampCreated;
+@property (nonatomic, retain) NSDate * timeStampUpdate;
+
+#pragma mark - relationships
+@property (nonatomic, retain) NSManagedObject *gestureNegative;
+@property (nonatomic, retain) NSManagedObject *gesturePositive;
 @property (nonatomic, retain) NSSet *sensorData;
 @end
 
@@ -28,3 +34,4 @@ static NSString *ENTITY_NAME_SENSOR_DATA_SET = @"NZSensorDataSet";
 
 
 @end
+

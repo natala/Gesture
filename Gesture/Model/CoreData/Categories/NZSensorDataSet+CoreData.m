@@ -44,7 +44,7 @@
 #pragma mark - Clone
 - (NZSensorDataSet *)clone
 {
-    return [super clone];
+    return (NZSensorDataSet *)[super clone];
 }
 
 @end

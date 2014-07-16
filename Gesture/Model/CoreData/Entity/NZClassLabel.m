@@ -10,9 +10,12 @@
 
 @implementation NZClassLabel
 
+#pragma mark - attributes
 @dynamic name;
 @dynamic index;
-@dynamic sensorData;
 
+#pragma mark - relationships
+@dynamic gesture;
 
 @end
+

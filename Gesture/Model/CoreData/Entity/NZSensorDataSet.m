@@ -10,8 +10,14 @@
 
 @implementation NZSensorDataSet
 
-@dynamic sensorData;
+#pragma mark - attributes
 @dynamic name;
-@dynamic timeStamp;
+@dynamic timeStampCreated;
+@dynamic timeStampUpdate;
+
+#pragma mark - relationships
+@dynamic gestureNegative;
+@dynamic gesturePositive;
+@dynamic sensorData;
 
 @end

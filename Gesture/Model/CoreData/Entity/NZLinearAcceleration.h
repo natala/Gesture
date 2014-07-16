@@ -15,9 +15,13 @@ static NSString *ENTITY_NAME_LINEAR_ACCELERATION = @"NZLinearAcceleration";
 
 @interface NZLinearAcceleration : NSManagedObject
 
-@property (nonatomic, strong) NSNumber *x;
-@property (nonatomic, strong) NSNumber *y;
-@property (nonatomic, strong) NSNumber *z;
-@property (nonatomic, strong) NZSensorData *sensorData;
+#pragma mark - attributes
+@property (nonatomic, retain) NSNumber * x;
+@property (nonatomic, retain) NSNumber * y;
+@property (nonatomic, retain) NSNumber * z;
+
+
+#pragma mark - relationships
+@property (nonatomic, retain) NZSensorData *sensorData;
 
 @end

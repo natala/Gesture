@@ -14,17 +14,12 @@ static NSString *ENTITY_NAME_CLASS_LABEL = @"NZClassLabel";
 
 @interface NZClassLabel : NSManagedObject
 
-@property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) NSNumber *index;
+#pragma mark - attributes
+@property (nonatomic, retain) NSString *name;
+@property (nonatomic, retain) NSNumber *index;
 
-@property (nonatomic, retain) NSSet *sensorData;
-@end
-
-@interface NZClassLabel (CoreDataGeneratedAccessors)
-
-- (void)addSensorDataObject:(NZSensorData *)value;
-- (void)removeSensorDataObject:(NZSensorData *)value;
-- (void)addSensorData:(NSSet *)values;
-- (void)removeSensorData:(NSSet *)values;
+#pragma mark - relationships
+@property (nonatomic, retain) NSManagedObject *gesture;
 
 @end
+

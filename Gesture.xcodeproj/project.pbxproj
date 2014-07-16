@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		8A0DF6D9195C4DF70029E5F3 /* NZRingRecordingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0DF6D8195C4DF70029E5F3 /* NZRingRecordingVC.m */; };
-		8A0DF6DC195C59EF0029E5F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A0DF6DA195C59EF0029E5F3 /* Main.storyboard */; };
 		8A0DF6E4195C63770029E5F3 /* NZSensorDataRecordingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0DF6E3195C63770029E5F3 /* NZSensorDataRecordingManager.m */; };
 		8A6AF54C195CBAF20015B571 /* NZSensorDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6AF54B195CBAF20015B571 /* NZSensorDataHelper.m */; };
 		8A922904195C3A3800DF7743 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A922903195C3A3800DF7743 /* Foundation.framework */; };
@@ -38,6 +37,8 @@
 		8AAD80DF195DBA70000F9805 /* KHYawPitchRollLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAD80D6195DBA70000F9805 /* KHYawPitchRollLineChartView.m */; };
 		8AAD80E0195DBA70000F9805 /* PCLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAD80D8195DBA70000F9805 /* PCLineChartView.m */; };
 		8AAD80E1195DBA70000F9805 /* PCLineChartViewComponent+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAD80DA195DBA70000F9805 /* PCLineChartViewComponent+Utils.m */; };
+		8AC22B75197529170019A1A9 /* NZGestureSetsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC22B74197529170019A1A9 /* NZGestureSetsVC.m */; };
+		8AC22B78197557DA0019A1A9 /* NZPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC22B77197557DA0019A1A9 /* NZPopupViewController.m */; };
 		8AC9D9A7196162EF00364B5A /* NZSensorDataTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC9D9A6196162EF00364B5A /* NZSensorDataTableView.m */; };
 		8AC9D9AA1961637D00364B5A /* NZSensorDataSetTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC9D9A91961637D00364B5A /* NZSensorDataSetTableViewCell.m */; };
 		8AC9D9E619619B5700364B5A /* NZCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC9D9E519619B5700364B5A /* NZCoreDataManager.m */; };
@@ -56,6 +57,12 @@
 		8ADB503E1962E1B000DC2784 /* NZSensorData+CoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADB50391962E1B000DC2784 /* NZSensorData+CoreData.m */; };
 		8ADB50471962EB1D00DC2784 /* NZGravity.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADB50461962EB1D00DC2784 /* NZGravity.m */; };
 		8ADB504B1962EBC200DC2784 /* NZGravity+CoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADB504A1962EBC200DC2784 /* NZGravity+CoreData.m */; };
+		8AE3830419757B7B00824571 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8AE3830319757B7B00824571 /* Main.storyboard */; };
+		8AE3830A19758AFA00824571 /* NZGesturesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE3830919758AFA00824571 /* NZGesturesVC.m */; };
+		8AE383101976CC3E00824571 /* NZGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE3830F1976CC3E00824571 /* NZGesture.m */; };
+		8AE383131976CCCD00824571 /* NZGestureSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE383121976CCCD00824571 /* NZGestureSet.m */; };
+		8AE383161976D15000824571 /* NZGestureSet+CoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE383151976D15000824571 /* NZGestureSet+CoreData.m */; };
+		8AE3831C1976D2E800824571 /* NZGesture+CoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE3831B1976D2E800824571 /* NZGesture+CoreData.m */; };
 		8AE8CB34196AD1FA008BE33E /* NZConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE8CB2A196AD1FA008BE33E /* NZConstants.m */; };
 		8AE8CB35196AD1FA008BE33E /* NZGraphTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE8CB2B196AD1FA008BE33E /* NZGraphTextView.m */; };
 		8AE8CB36196AD1FA008BE33E /* NZGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE8CB2D196AD1FA008BE33E /* NZGraphView.m */; };
@@ -172,7 +179,6 @@
 /* Begin PBXFileReference section */
 		8A0DF6D7195C4DF70029E5F3 /* NZRingRecordingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZRingRecordingVC.h; path = ViewControllers/NZRingRecordingVC.h; sourceTree = "<group>"; };
 		8A0DF6D8195C4DF70029E5F3 /* NZRingRecordingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZRingRecordingVC.m; path = ViewControllers/NZRingRecordingVC.m; sourceTree = "<group>"; };
-		8A0DF6DB195C59EF0029E5F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8A0DF6E2195C63770029E5F3 /* NZSensorDataRecordingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZSensorDataRecordingManager.h; path = Controll/Recording/NZSensorDataRecordingManager.h; sourceTree = "<group>"; };
 		8A0DF6E3195C63770029E5F3 /* NZSensorDataRecordingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZSensorDataRecordingManager.m; path = Controll/Recording/NZSensorDataRecordingManager.m; sourceTree = "<group>"; };
 		8A6AF54A195CBAF20015B571 /* NZSensorDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZSensorDataHelper.h; path = Model/NZSensorDataHelper.h; sourceTree = "<group>"; };
@@ -221,6 +227,10 @@
 		8AAD80D9195DBA70000F9805 /* PCLineChartViewComponent+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "PCLineChartViewComponent+Utils.h"; path = "Views/ChartViews/PCLineChartViewComponent+Utils.h"; sourceTree = "<group>"; };
 		8AAD80DA195DBA70000F9805 /* PCLineChartViewComponent+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "PCLineChartViewComponent+Utils.m"; path = "Views/ChartViews/PCLineChartViewComponent+Utils.m"; sourceTree = "<group>"; };
 		8AAD80E2195DBBF8000F9805 /* KHColorConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = KHColorConstants.h; path = Constants/KHColorConstants.h; sourceTree = "<group>"; };
+		8AC22B73197529170019A1A9 /* NZGestureSetsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZGestureSetsVC.h; path = ViewControllers/NZGestureSetsVC.h; sourceTree = "<group>"; };
+		8AC22B74197529170019A1A9 /* NZGestureSetsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZGestureSetsVC.m; path = ViewControllers/NZGestureSetsVC.m; sourceTree = "<group>"; };
+		8AC22B76197557DA0019A1A9 /* NZPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZPopupViewController.h; path = ViewControllers/NZPopupViewController.h; sourceTree = "<group>"; };
+		8AC22B77197557DA0019A1A9 /* NZPopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZPopupViewController.m; path = ViewControllers/NZPopupViewController.m; sourceTree = "<group>"; };
 		8AC9D9A5196162EF00364B5A /* NZSensorDataTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZSensorDataTableView.h; path = Views/RecordingSensorDataTableView/NZSensorDataTableView.h; sourceTree = "<group>"; };
 		8AC9D9A6196162EF00364B5A /* NZSensorDataTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZSensorDataTableView.m; path = Views/RecordingSensorDataTableView/NZSensorDataTableView.m; sourceTree = "<group>"; };
 		8AC9D9A81961637D00364B5A /* NZSensorDataSetTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZSensorDataSetTableViewCell.h; path = Views/RecordingSensorDataTableView/NZSensorDataSetTableViewCell.h; sourceTree = "<group>"; };
@@ -257,6 +267,17 @@
 		8ADB50481962EB3900DC2784 /* NZGravity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NZGravity.h; path = Model/CoreData/Entity/NZGravity.h; sourceTree = "<group>"; };
 		8ADB50491962EBC200DC2784 /* NZGravity+CoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NZGravity+CoreData.h"; path = "Model/CoreData/Categories/NZGravity+CoreData.h"; sourceTree = "<group>"; };
 		8ADB504A1962EBC200DC2784 /* NZGravity+CoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NZGravity+CoreData.m"; path = "Model/CoreData/Categories/NZGravity+CoreData.m"; sourceTree = "<group>"; };
+		8AE3830319757B7B00824571 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		8AE3830819758AFA00824571 /* NZGesturesVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZGesturesVC.h; path = ViewControllers/NZGesturesVC.h; sourceTree = "<group>"; };
+		8AE3830919758AFA00824571 /* NZGesturesVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZGesturesVC.m; path = ViewControllers/NZGesturesVC.m; sourceTree = "<group>"; };
+		8AE3830E1976CC3E00824571 /* NZGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZGesture.h; path = Model/CoreData/Entity/NZGesture.h; sourceTree = "<group>"; };
+		8AE3830F1976CC3E00824571 /* NZGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZGesture.m; path = Model/CoreData/Entity/NZGesture.m; sourceTree = "<group>"; };
+		8AE383111976CCCD00824571 /* NZGestureSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZGestureSet.h; path = Model/CoreData/Entity/NZGestureSet.h; sourceTree = "<group>"; };
+		8AE383121976CCCD00824571 /* NZGestureSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZGestureSet.m; path = Model/CoreData/Entity/NZGestureSet.m; sourceTree = "<group>"; };
+		8AE383141976D15000824571 /* NZGestureSet+CoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NZGestureSet+CoreData.h"; path = "Model/CoreData/Categories/NZGestureSet+CoreData.h"; sourceTree = "<group>"; };
+		8AE383151976D15000824571 /* NZGestureSet+CoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NZGestureSet+CoreData.m"; path = "Model/CoreData/Categories/NZGestureSet+CoreData.m"; sourceTree = "<group>"; };
+		8AE3831A1976D2E800824571 /* NZGesture+CoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NZGesture+CoreData.h"; path = "Model/CoreData/Categories/NZGesture+CoreData.h"; sourceTree = "<group>"; };
+		8AE3831B1976D2E800824571 /* NZGesture+CoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NZGesture+CoreData.m"; path = "Model/CoreData/Categories/NZGesture+CoreData.m"; sourceTree = "<group>"; };
 		8AE8CB2A196AD1FA008BE33E /* NZConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZConstants.m; sourceTree = "<group>"; };
 		8AE8CB2B196AD1FA008BE33E /* NZGraphTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZGraphTextView.m; sourceTree = "<group>"; };
 		8AE8CB2C196AD1FA008BE33E /* NZGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZGraphView.h; sourceTree = "<group>"; };
@@ -654,7 +675,7 @@
 				8A922915195C3A3800DF7743 /* NZAppDelegate.m */,
 				8A922923195C3A3800DF7743 /* Images.xcassets */,
 				8A92291A195C3A3800DF7743 /* Gesture.xcdatamodeld */,
-				8A0DF6DA195C59EF0029E5F3 /* Main.storyboard */,
+				8AE3830319757B7B00824571 /* Main.storyboard */,
 				8A92290C195C3A3800DF7743 /* Supporting Files */,
 			);
 			path = Gesture;
@@ -701,6 +722,10 @@
 		8A922942195C3AAA00DF7743 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				8AE3830819758AFA00824571 /* NZGesturesVC.h */,
+				8AE3830919758AFA00824571 /* NZGesturesVC.m */,
+				8AC22B73197529170019A1A9 /* NZGestureSetsVC.h */,
+				8AC22B74197529170019A1A9 /* NZGestureSetsVC.m */,
 				8A922920195C3A3800DF7743 /* NZDetailViewController.h */,
 				8A922921195C3A3800DF7743 /* NZDetailViewController.m */,
 				8A922967195C3E8E00DF7743 /* NZMasterMenuTVC.h */,
@@ -709,6 +734,8 @@
 				8AEE3155195C4C1600006989 /* NZSplitViewController.m */,
 				8A0DF6D7195C4DF70029E5F3 /* NZRingRecordingVC.h */,
 				8A0DF6D8195C4DF70029E5F3 /* NZRingRecordingVC.m */,
+				8AC22B76197557DA0019A1A9 /* NZPopupViewController.h */,
+				8AC22B77197557DA0019A1A9 /* NZPopupViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -834,6 +861,10 @@
 				8ADB502E1962DAFC00DC2784 /* NZYawPitchRoll.m */,
 				8ADB50481962EB3900DC2784 /* NZGravity.h */,
 				8ADB50461962EB1D00DC2784 /* NZGravity.m */,
+				8AE3830E1976CC3E00824571 /* NZGesture.h */,
+				8AE3830F1976CC3E00824571 /* NZGesture.m */,
+				8AE383111976CCCD00824571 /* NZGestureSet.h */,
+				8AE383121976CCCD00824571 /* NZGestureSet.m */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -857,6 +888,10 @@
 				8ADB50391962E1B000DC2784 /* NZSensorData+CoreData.m */,
 				8ADB501B1962CE4200DC2784 /* NZSensorDataSet+CoreData.h */,
 				8ADB501C1962CE4200DC2784 /* NZSensorDataSet+CoreData.m */,
+				8AE383141976D15000824571 /* NZGestureSet+CoreData.h */,
+				8AE383151976D15000824571 /* NZGestureSet+CoreData.m */,
+				8AE3831A1976D2E800824571 /* NZGesture+CoreData.h */,
+				8AE3831B1976D2E800824571 /* NZGesture+CoreData.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -1704,7 +1739,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A0DF6DC195C59EF0029E5F3 /* Main.storyboard in Resources */,
+				8AE3830419757B7B00824571 /* Main.storyboard in Resources */,
 				8A922924195C3A3800DF7743 /* Images.xcassets in Resources */,
 				8A922910195C3A3800DF7743 /* InfoPlist.strings in Resources */,
 			);
@@ -1730,6 +1765,7 @@
 				8AF7F9B91969C89F00DB6D7C /* RBMQuantizer.cpp in Sources */,
 				8AAD80E0195DBA70000F9805 /* PCLineChartView.m in Sources */,
 				8ADB50201962D63100DC2784 /* NZSensorDataSet.m in Sources */,
+				8AC22B75197529170019A1A9 /* NZGestureSetsVC.m in Sources */,
 				8AF7F99F1969C89F00DB6D7C /* PrincipalComponentAnalysis.cpp in Sources */,
 				8AF7F9841969C89F00DB6D7C /* AdaBoost.cpp in Sources */,
 				8AE8CB35196AD1FA008BE33E /* NZGraphTextView.m in Sources */,
@@ -1765,6 +1801,7 @@
 				8AF7F9871969C89F00DB6D7C /* WeakClassifier.cpp in Sources */,
 				8AF7F9BE1969C89F00DB6D7C /* ClassLabelChangeFilter.cpp in Sources */,
 				8AAD80DD195DBA70000F9805 /* KHSensorDataLineChartView.m in Sources */,
+				8AE383101976CC3E00824571 /* NZGesture.m in Sources */,
 				8AF7F99B1969C89F00DB6D7C /* KMeans.cpp in Sources */,
 				8AF7F9D41969C89F00DB6D7C /* MatrixDouble.cpp in Sources */,
 				8AF7F9C61969C89F00DB6D7C /* LowPassFilter.cpp in Sources */,
@@ -1785,6 +1822,7 @@
 				8AF7F9A31969C89F00DB6D7C /* FeatureExtraction.cpp in Sources */,
 				8AF7F9D31969C89F00DB6D7C /* LUDecomposition.cpp in Sources */,
 				8A922969195C3E8E00DF7743 /* NZMasterMenuTVC.m in Sources */,
+				8AC22B78197557DA0019A1A9 /* NZPopupViewController.m in Sources */,
 				8AE8CB39196AD1FA008BE33E /* NZGraphViewSegment.m in Sources */,
 				8AF7F9CE1969C89F00DB6D7C /* Cholesky.cpp in Sources */,
 				8AAD80DF195DBA70000F9805 /* KHYawPitchRollLineChartView.m in Sources */,
@@ -1802,6 +1840,7 @@
 				8A6AF54C195CBAF20015B571 /* NZSensorDataHelper.m in Sources */,
 				8AC9D9A7196162EF00364B5A /* NZSensorDataTableView.m in Sources */,
 				8AF7F9C51969C89F00DB6D7C /* HighPassFilter.cpp in Sources */,
+				8AE3830A19758AFA00824571 /* NZGesturesVC.m in Sources */,
 				8AF7F9C91969C89F00DB6D7C /* MLP.cpp in Sources */,
 				8AAD80E1195DBA70000F9805 /* PCLineChartViewComponent+Utils.m in Sources */,
 				8AF7F9A21969C89F00DB6D7C /* Context.cpp in Sources */,
@@ -1820,6 +1859,7 @@
 				8AF7F9901969C89F00DB6D7C /* HMM.cpp in Sources */,
 				8AF7F98F1969C89F00DB6D7C /* HiddenMarkovModel.cpp in Sources */,
 				8A922966195C3D2A00DF7743 /* NZArduinoCommunicationManager.m in Sources */,
+				8AE383161976D15000824571 /* NZGestureSet+CoreData.m in Sources */,
 				8AF7F9B61969C89F00DB6D7C /* KMeansQuantizer.cpp in Sources */,
 				8AF7F9C31969C89F00DB6D7C /* DoubleMovingAverageFilter.cpp in Sources */,
 				8AF7F9A01969C89F00DB6D7C /* Classifier.cpp in Sources */,
@@ -1832,6 +1872,7 @@
 				8AAD80DE195DBA70000F9805 /* KHShakingLineChartView.m in Sources */,
 				8ADB502F1962DAFC00DC2784 /* NZYawPitchRoll.m in Sources */,
 				8ADB504B1962EBC200DC2784 /* NZGravity+CoreData.m in Sources */,
+				8AE3831C1976D2E800824571 /* NZGesture+CoreData.m in Sources */,
 				8AF7F9DC1969C89F00DB6D7C /* TrainingDataRecordingTimer.cpp in Sources */,
 				8AF7F9851969C89F00DB6D7C /* DecisionStump.cpp in Sources */,
 				8AF7F9C71969C89F00DB6D7C /* MovingAverageFilter.cpp in Sources */,
@@ -1860,6 +1901,7 @@
 				8AF7F9A41969C89F00DB6D7C /* GestureRecognitionPipeline.cpp in Sources */,
 				8ADB503D1962E1B000DC2784 /* NZYawPitchRoll+CoreData.m in Sources */,
 				8AF7F9DD1969C89F00DB6D7C /* TrainingLog.cpp in Sources */,
+				8AE383131976CCCD00824571 /* NZGestureSet.m in Sources */,
 				8AF7F9861969C89F00DB6D7C /* RadialBasisFunction.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1883,14 +1925,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		8A0DF6DA195C59EF0029E5F3 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8A0DF6DB195C59EF0029E5F3 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		8A92290E195C3A3800DF7743 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
