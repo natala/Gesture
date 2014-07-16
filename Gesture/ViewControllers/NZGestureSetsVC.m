@@ -129,6 +129,7 @@
 {
     self.gestureSetVC.gestureSet = [self.fetchedResultsController objectAtIndexPath:indexPath];
     self.gestureSetVC.navigationItem.title = self.gestureSetVC.gestureSet.name;
+    [self.gestureSetVC.tableView reloadData];
     [[self navigationController] pushViewController:self.gestureSetVC animated:YES];
 }
 

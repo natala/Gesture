@@ -10,7 +10,6 @@
 #import "NZGesturesVC.h"
 #import "NZGesture.h"
 #import "NZCoreDataManager.h"
-#import "NZClassLabel.h"
 
 
 @interface NZGesturesVC ()
@@ -19,7 +18,7 @@
 @property (nonatomic, strong) UIViewController *recordGestureVc;
 
 #pragma mark - Core Data related properties
-@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+//@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 //@property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NZPopupViewController *popupVc;
 @property (nonatomic, strong) NSDate *currentDate;
@@ -71,15 +70,15 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [[self.fetchedResultsController sections] count];
-    //return 1;
+    //return [[self.fetchedResultsController sections] count];
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
-    return [sectionInfo numberOfObjects];
-    //return [self.gestureSet.gestures count];
+    //id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
+    //return [sectionInfo numberOfObjects];
+    return [self.gestureSet.gestures count];
 }
 
 
@@ -115,8 +114,8 @@
         NSLog(@"Deleting a cell");
         NSManagedObjectContext *context = [[NZCoreDataManager sharedManager] managedObjectContext];
         //   NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
-        [context deleteObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
-        
+        //[context deleteObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
+        [context deleteObject:[[self.gestureSet.gestures allObjects] objectAtIndex:indexPath.row]];
         NSError *error = nil;
         if (![context save:&error]) {
             // Replace this implementation with code to handle the error appropriately.
@@ -132,7 +131,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.recordGestureVc.navigationItem.title = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    //self.recordGestureVc.navigationItem.title = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    self.recordGestureVc.navigationItem.title = [[self.gestureSet.gestures allObjects] objectAtIndex:indexPath.row];
     [[self navigationController] pushViewController:self.recordGestureVc animated:YES];
 }
 
@@ -151,9 +151,8 @@
     self.currentDate = [NSDate date];
     self.popupVc.timestampText.text = [self.currentDate description];
     self.popupVc.nameText.text = self.popupVc.timestampText.text;
-    //self.popupVc.view.frame = self.view.frame;
 }
-
+/*
 #pragma mark - Fetched results controller
 - (NSFetchedResultsController *)fetchedResultsController
 {
@@ -246,24 +245,28 @@
     [self.tableView endUpdates];
 }
 
-
+*/
 
 #pragma mark - Pop Up VC Delegate methods
 - (void)didFinishFillingFormWithData:(NSDictionary *)form
 {
     [self dismissViewControllerAnimated:YES completion:nil];
-    NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
-    NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
-    NSManagedObject *newManagedObject = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
-    
+    NSManagedObjectContext *context = [[NZCoreDataManager sharedManager] managedObjectContext];
+    //NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
+    //NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
+    //NSManagedObject *newManagedObject = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
+    NZGesture *newGesture = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME_GESTURE inManagedObjectContext:context];
     // If appropriate, configure the new managed object.
     // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
-    [newManagedObject setValue:self.currentDate forKey:@"timeStampCreated"];
-    [newManagedObject setValue:self.currentDate forKey:@"timeStampUpdated"];
+    //[newManagedObject setValue:self.currentDate forKey:@"timeStampCreated"];
+    [newGesture setValue:self.currentDate forKey:@"timeStampCreated"];
+    //[newManagedObject setValue:self.currentDate forKey:@"timeStampUpdated"];
+    [newGesture setValue:self.currentDate forKey:@"timeStampUpdated"];
    // [newManagedObject setValue:[form valueForKey:@"name"] forKey:@"name"];
-    [self.gestureSet addGesturesObject:newManagedObject];
-    [newManagedObject setValue:self.gestureSet forKey:@"gestureSet"];
-    [[self.fetchedResultsController managedObjectContext] refreshObject:self.gestureSet mergeChanges:YES];
+    [self.gestureSet addGesturesObject:newGesture];
+    //[newManagedObject setValue:self.gestureSet forKey:@"gestureSet"];
+    [newGesture setValue:self.gestureSet forKey:@"gestureSet"];
+    //[[self.fetchedResultsController managedObjectContext] refreshObject:self.gestureSet mergeChanges:YES];
     
     // Save the context.
     NSError *error = nil;
@@ -273,6 +276,8 @@
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
+    
+    [self.tableView reloadData];
     
     NSLog(@"done inserting new item");
     

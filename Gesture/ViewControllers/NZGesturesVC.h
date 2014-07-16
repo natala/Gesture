@@ -10,7 +10,7 @@
 #import "NZPopupViewController.h"
 #import "NZGestureSet.h"
 
-@interface NZGesturesVC : UITableViewController <NSFetchedResultsControllerDelegate, UIActionSheetDelegate, NZPopupViewControllerDelegate>
+@interface NZGesturesVC : UITableViewController </*NSFetchedResultsControllerDelegate,*/ NZPopupViewControllerDelegate>
 
 /**
  * the sensor data set for which the gestures will be displayed
