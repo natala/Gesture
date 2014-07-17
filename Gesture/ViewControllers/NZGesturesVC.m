@@ -11,16 +11,17 @@
 #import "NZGesture.h"
 #import "NZClassLabel+CoreData.h"
 #import "NZCoreDataManager.h"
+#import "NZGestureConfigurationVC.h"
 
 
 @interface NZGesturesVC ()
 
 #warning to be created
-@property (nonatomic, strong) UIViewController *recordGestureVc;
 
 #pragma mark - Core Data related properties
 @property (nonatomic, strong) NZPopupViewController *popupVc;
 @property (nonatomic, strong) NSDate *currentDate;
+@property (nonatomic, strong) NZGestureConfigurationVC *gestureConfigurationVc;
 
 @end
 
@@ -50,13 +51,16 @@
         self.popupVc = (NZPopupViewController *)popUpVc;
         self.popupVc.delegate = self;
     }
-    self.tableView.allowsSelectionDuringEditing = YES;
     
-    // setup VC for recording the gesture
-    UIViewController *gesturesVC = [storyboard instantiateViewControllerWithIdentifier:@"SingleGestureVC"];
-    if ([gesturesVC isKindOfClass:[NZGesturesVC class]]) {
-        self.recordGestureVc = (UIViewController *)gesturesVC;
+    // setup the next vc in the navigation hierarchy
+    UIViewController *gestureConfigurationVc = [storyboard instantiateViewControllerWithIdentifier:@"GestureConfigurationVC"];
+    if ([gestureConfigurationVc isKindOfClass:[NZGestureConfigurationVC class]]) {
+        self.gestureConfigurationVc = (NZGestureConfigurationVC *)gestureConfigurationVc;
     }
+    
+#warning Set up the editing of the table view properly - currently it is all the time in Editing mode :/
+    self.tableView.allowsSelectionDuringEditing = YES;
+
     
 }
 
@@ -127,8 +131,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.recordGestureVc.navigationItem.title = [[self.gestureSet.gestures allObjects] objectAtIndex:indexPath.row];
-    [[self navigationController] pushViewController:self.recordGestureVc animated:YES];
+    NZGesture *selectedGesture = [[self.gestureSet.gestures allObjects] objectAtIndex:indexPath.row];
+    NZClassLabel *label = selectedGesture.label;
+    self.gestureConfigurationVc.gesture = selectedGesture;
+    self.gestureConfigurationVc.navigationController.title = label.name;
+    [[self navigationController] pushViewController:self.gestureConfigurationVc animated:YES];
 }
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {

@@ -63,6 +63,7 @@
 		8AE383131976CCCD00824571 /* NZGestureSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE383121976CCCD00824571 /* NZGestureSet.m */; };
 		8AE383161976D15000824571 /* NZGestureSet+CoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE383151976D15000824571 /* NZGestureSet+CoreData.m */; };
 		8AE3831C1976D2E800824571 /* NZGesture+CoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE3831B1976D2E800824571 /* NZGesture+CoreData.m */; };
+		8AE3831F1977D54500824571 /* NZGestureConfigurationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE3831E1977D54500824571 /* NZGestureConfigurationVC.m */; };
 		8AE8CB34196AD1FA008BE33E /* NZConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE8CB2A196AD1FA008BE33E /* NZConstants.m */; };
 		8AE8CB35196AD1FA008BE33E /* NZGraphTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE8CB2B196AD1FA008BE33E /* NZGraphTextView.m */; };
 		8AE8CB36196AD1FA008BE33E /* NZGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE8CB2D196AD1FA008BE33E /* NZGraphView.m */; };
@@ -278,6 +279,8 @@
 		8AE383151976D15000824571 /* NZGestureSet+CoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NZGestureSet+CoreData.m"; path = "Model/CoreData/Categories/NZGestureSet+CoreData.m"; sourceTree = "<group>"; };
 		8AE3831A1976D2E800824571 /* NZGesture+CoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NZGesture+CoreData.h"; path = "Model/CoreData/Categories/NZGesture+CoreData.h"; sourceTree = "<group>"; };
 		8AE3831B1976D2E800824571 /* NZGesture+CoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NZGesture+CoreData.m"; path = "Model/CoreData/Categories/NZGesture+CoreData.m"; sourceTree = "<group>"; };
+		8AE3831D1977D54500824571 /* NZGestureConfigurationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZGestureConfigurationVC.h; path = ViewControllers/NZGestureConfigurationVC.h; sourceTree = "<group>"; };
+		8AE3831E1977D54500824571 /* NZGestureConfigurationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZGestureConfigurationVC.m; path = ViewControllers/NZGestureConfigurationVC.m; sourceTree = "<group>"; };
 		8AE8CB2A196AD1FA008BE33E /* NZConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZConstants.m; sourceTree = "<group>"; };
 		8AE8CB2B196AD1FA008BE33E /* NZGraphTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZGraphTextView.m; sourceTree = "<group>"; };
 		8AE8CB2C196AD1FA008BE33E /* NZGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZGraphView.h; sourceTree = "<group>"; };
@@ -722,12 +725,11 @@
 		8A922942195C3AAA00DF7743 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				8AE3831D1977D54500824571 /* NZGestureConfigurationVC.h */,
+				8AE3831E1977D54500824571 /* NZGestureConfigurationVC.m */,
 				8AE3830819758AFA00824571 /* NZGesturesVC.h */,
 				8AE3830919758AFA00824571 /* NZGesturesVC.m */,
 				8AC22B73197529170019A1A9 /* NZGestureSetsVC.h */,
-				8AC22B74197529170019A1A9 /* NZGestureSetsVC.m */,
-				8A922920195C3A3800DF7743 /* NZDetailViewController.h */,
-				8A922921195C3A3800DF7743 /* NZDetailViewController.m */,
 				8A922967195C3E8E00DF7743 /* NZMasterMenuTVC.h */,
 				8A922968195C3E8E00DF7743 /* NZMasterMenuTVC.m */,
 				8AEE3154195C4C1600006989 /* NZSplitViewController.h */,
@@ -736,6 +738,9 @@
 				8A0DF6D8195C4DF70029E5F3 /* NZRingRecordingVC.m */,
 				8AC22B76197557DA0019A1A9 /* NZPopupViewController.h */,
 				8AC22B77197557DA0019A1A9 /* NZPopupViewController.m */,
+				8AC22B74197529170019A1A9 /* NZGestureSetsVC.m */,
+				8A922920195C3A3800DF7743 /* NZDetailViewController.h */,
+				8A922921195C3A3800DF7743 /* NZDetailViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -1837,6 +1842,7 @@
 				8AC9D9E619619B5700364B5A /* NZCoreDataManager.m in Sources */,
 				8A92291C195C3A3800DF7743 /* Gesture.xcdatamodeld in Sources */,
 				8AF7F5711969C6BA00DB6D7C /* NZGestureRecognitionPipeline.mm in Sources */,
+				8AE3831F1977D54500824571 /* NZGestureConfigurationVC.m in Sources */,
 				8A6AF54C195CBAF20015B571 /* NZSensorDataHelper.m in Sources */,
 				8AC9D9A7196162EF00364B5A /* NZSensorDataTableView.m in Sources */,
 				8AF7F9C51969C89F00DB6D7C /* HighPassFilter.cpp in Sources */,
