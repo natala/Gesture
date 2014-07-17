@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8A0DF6D9195C4DF70029E5F3 /* NZRingRecordingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0DF6D8195C4DF70029E5F3 /* NZRingRecordingVC.m */; };
 		8A0DF6E4195C63770029E5F3 /* NZSensorDataRecordingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0DF6E3195C63770029E5F3 /* NZSensorDataRecordingManager.m */; };
+		8A5AB06919783369006B2FBC /* NZPipelineController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8A5AB06819783369006B2FBC /* NZPipelineController.mm */; };
 		8A6AF54C195CBAF20015B571 /* NZSensorDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6AF54B195CBAF20015B571 /* NZSensorDataHelper.m */; };
 		8A922904195C3A3800DF7743 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A922903195C3A3800DF7743 /* Foundation.framework */; };
 		8A922906195C3A3800DF7743 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A922905195C3A3800DF7743 /* CoreGraphics.framework */; };
@@ -182,6 +183,8 @@
 		8A0DF6D8195C4DF70029E5F3 /* NZRingRecordingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZRingRecordingVC.m; path = ViewControllers/NZRingRecordingVC.m; sourceTree = "<group>"; };
 		8A0DF6E2195C63770029E5F3 /* NZSensorDataRecordingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZSensorDataRecordingManager.h; path = Controll/Recording/NZSensorDataRecordingManager.h; sourceTree = "<group>"; };
 		8A0DF6E3195C63770029E5F3 /* NZSensorDataRecordingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZSensorDataRecordingManager.m; path = Controll/Recording/NZSensorDataRecordingManager.m; sourceTree = "<group>"; };
+		8A5AB06719783369006B2FBC /* NZPipelineController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZPipelineController.h; path = Controll/Pipeline/NZPipelineController.h; sourceTree = "<group>"; };
+		8A5AB06819783369006B2FBC /* NZPipelineController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = NZPipelineController.mm; path = Controll/Pipeline/NZPipelineController.mm; sourceTree = "<group>"; };
 		8A6AF54A195CBAF20015B571 /* NZSensorDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZSensorDataHelper.h; path = Model/NZSensorDataHelper.h; sourceTree = "<group>"; };
 		8A6AF54B195CBAF20015B571 /* NZSensorDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZSensorDataHelper.m; path = Model/NZSensorDataHelper.m; sourceTree = "<group>"; };
 		8A922900195C3A3800DF7743 /* Gesture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gesture.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -631,6 +634,15 @@
 			name = Recording;
 			sourceTree = "<group>";
 		};
+		8A5AB060197832B6006B2FBC /* Pipeline */ = {
+			isa = PBXGroup;
+			children = (
+				8A5AB06719783369006B2FBC /* NZPipelineController.h */,
+				8A5AB06819783369006B2FBC /* NZPipelineController.mm */,
+			);
+			name = Pipeline;
+			sourceTree = "<group>";
+		};
 		8A9228F7195C3A3800DF7743 = {
 			isa = PBXGroup;
 			children = (
@@ -763,6 +775,7 @@
 		8A922961195C3CD700DF7743 /* Controll */ = {
 			isa = PBXGroup;
 			children = (
+				8A5AB060197832B6006B2FBC /* Pipeline */,
 				8AF7F9E01969CC1300DB6D7C /* Recognition */,
 				8A0DF6DE195C61410029E5F3 /* Recording */,
 				8A922962195C3CDF00DF7743 /* Connection */,
@@ -1877,6 +1890,7 @@
 				8AF7F98D1969C89F00DB6D7C /* FiniteStateMachine.cpp in Sources */,
 				8AAD80DE195DBA70000F9805 /* KHShakingLineChartView.m in Sources */,
 				8ADB502F1962DAFC00DC2784 /* NZYawPitchRoll.m in Sources */,
+				8A5AB06919783369006B2FBC /* NZPipelineController.mm in Sources */,
 				8ADB504B1962EBC200DC2784 /* NZGravity+CoreData.m in Sources */,
 				8AE3831C1976D2E800824571 /* NZGesture+CoreData.m in Sources */,
 				8AF7F9DC1969C89F00DB6D7C /* TrainingDataRecordingTimer.cpp in Sources */,

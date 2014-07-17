@@ -9,6 +9,7 @@
 #import "NZArduinoCommunicationManager.h"
 #import "Model/CoreData/NZCoreDataManager.h"
 #import "NZMasterMenuTVC.h"
+#import "NZPipelineController.h"
 
 @implementation NZAppDelegate
 
@@ -29,6 +30,9 @@
     
     // init the BLE connection
     [NZArduinoCommunicationManager sharedManager];
+    
+    // init the pipeline
+    [NZPipelineController sharedManager];
     
 #warning TODO: for debuging purposes create a dummy dataset
     

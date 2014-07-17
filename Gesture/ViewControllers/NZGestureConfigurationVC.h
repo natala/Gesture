@@ -20,6 +20,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *startGestureButton;
 @property (weak, nonatomic) IBOutlet UIButton *stopGestureButton;
+@property (weak, nonatomic) IBOutlet UIButton *learnGestureButton;
 
 
 
@@ -35,5 +36,10 @@
  * stop recording data
  */
 - (IBAction)stopGestureTapped:(id)sender;
+
+/**
+ * let the classifier learn this gestre
+ */
+- (IBAction)learnGestureTapped:(id)sender;
 
 @end

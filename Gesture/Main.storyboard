@@ -462,15 +462,26 @@
                                     <action selector="stopGestureTapped:" destination="V2d-Mn-gQ7" eventType="touchUpInside" id="i5a-qb-1er"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3eo-BE-FkJ">
+                                <rect key="frame" x="349" y="541" width="97" height="30"/>
+                                <state key="normal" title="Learn Gesture">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="learnGestureTapped:" destination="V2d-Mn-gQ7" eventType="touchUpInside" id="2oe-gv-LK0"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="hSg-n0-5tx" secondAttribute="centerX" constant="-12.5" id="1JT-L9-w5a"/>
                             <constraint firstAttribute="centerX" secondItem="Zs3-F8-iLr" secondAttribute="centerX" constant="-13" id="Dbg-z5-Osx"/>
+                            <constraint firstAttribute="centerX" secondItem="3eo-BE-FkJ" secondAttribute="centerX" constant="-13" id="qtS-YM-LtX"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="zTA-7t-sDf"/>
                     <connections>
+                        <outlet property="learnGestureButton" destination="3eo-BE-FkJ" id="Ulx-Za-Xx6"/>
                         <outlet property="startGestureButton" destination="Zs3-F8-iLr" id="6Fq-qx-EAA"/>
                         <outlet property="stopGestureButton" destination="hSg-n0-5tx" id="CTy-sF-HgZ"/>
                     </connections>

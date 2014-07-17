@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6172.15" systemVersion="13D65" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="NZClassificationPipeline" syncable="YES">
+        <attribute name="fileName" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="NZClassLabel" representedClassName="NZClassLabel" syncable="YES">
         <attribute name="index" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -71,5 +74,6 @@
         <element name="NZSensorData" positionX="315" positionY="-54" width="128" height="133"/>
         <element name="NZSensorDataSet" positionX="486" positionY="-72" width="128" height="133"/>
         <element name="NZYawPitchRoll" positionX="-63" positionY="189" width="128" height="105"/>
+        <element name="NZClassificationPipeline" positionX="396" positionY="146" width="216" height="58"/>
     </elements>
 </model>
