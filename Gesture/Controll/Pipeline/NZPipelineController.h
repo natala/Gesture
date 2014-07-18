@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "NZGesture.h"
 
 @protocol NZPipelineControllerDelegate <NSObject>
 
@@ -23,6 +24,20 @@
 + (NZPipelineController *)sharedManager;
 
 @property (nonatomic, retain) id<NZPipelineControllerDelegate> delegate;
+
+
+/**
+ * adds a gesture and retrains the classifier for this gesture
+ * @param isPositive true if it is a positive sample and false if it is a negative sample for this class label
+ * @param sensorDataSample the sample containing the gesture recorded by the user to be added to the classification data set
+ * @param classLabel the class label of the sample
+ */
+- (void)addPositive:(BOOL)isPositive sample:(NZSensorDataSet *)sensorDataSample withLabel:(NZClassLabel *)classLabel;
+
+/**
+ * train the classifier after adding new samples
+ */
+- (BOOL)trainClassifier;
 
 
 @end

@@ -119,7 +119,6 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     self.splitViewController.delegate = segue.destinationViewController;
-    NSLog(@"master is preparing for segue");
 }
 
 

@@ -8,6 +8,7 @@
 
 #import "NZGestureConfigurationVC.h"
 #import "NZCoreDataManager.h"
+#import "NZPipelineController.h"
 
 @interface NZGestureConfigurationVC ()
 
@@ -29,6 +30,9 @@
     [super viewDidLoad];
     self.startGestureButton.enabled = true;
     self.stopGestureButton.enabled = false;
+    if (([self.gesture.positiveSamples count] > 0) || ([self.gesture.negativeSamples count] > 0)) {
+        self.learnGestureButton.enabled = true;
+    }
     self.learnGestureButton.enabled = false;
     // Do any additional setup after loading the view.
 }
@@ -65,12 +69,13 @@
     [[NZSensorDataRecordingManager sharedManager] stopRecordingCurrentSensorDataSet];
     self.stopGestureButton.enabled = false;
     self.startGestureButton.enabled = true;
-    self.learnGestureButton.enabled = false;
+    if (([self.gesture.positiveSamples count] > 0) || ([self.gesture.negativeSamples count] > 0)) {
+        self.learnGestureButton.enabled = true;
+    }
 }
 
 - (IBAction)learnGestureTapped:(id)sender {
-
-    NSLog(@"Learn Gesture Tapped not yet implemented!!!");
+    [[NZPipelineController sharedManager] trainClassifier];
 
 }
 
@@ -102,6 +107,7 @@
     // once done, correlate it with the geture as a positive sample
     [self.gesture addPositiveSamplesObject:sensorDataSet];
     
+    
     // update the database
     NSManagedObjectContext *context = [[NZCoreDataManager sharedManager] managedObjectContext];
     // Save the context.
@@ -112,6 +118,9 @@
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
+    
+    // update the classifier with the new sample
+    [[NZPipelineController sharedManager] addPositive:YES sample:sensorDataSet withLabel:self.gesture.label];
 }
 
 @end
