@@ -39,5 +39,12 @@
  */
 - (BOOL)trainClassifier;
 
+/**
+ * classifies the sensor data set
+ * @param set the data set to be classified
+ * @return the predicted class label. If failed to classify or classifier not trained returns null;
+ */
+- (int)classifySensorDataSet:(NZSensorDataSet *)set;
+
 
 @end

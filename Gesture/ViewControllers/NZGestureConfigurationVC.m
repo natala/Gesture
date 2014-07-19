@@ -104,7 +104,7 @@
 - (void)didStopRecordingSensorDataSet:(NZSensorDataSet *) sensorDataSet
 {
     NSLog(@"Sensor Data Recording Manager did stop recording");
-    // once done, correlate it with the geture as a positive sample
+    // once done, correlate it find with the geture as a positive sample
     [self.gesture addPositiveSamplesObject:sensorDataSet];
     
     

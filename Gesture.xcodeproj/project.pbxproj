@@ -43,6 +43,7 @@
 		8AC9D9A7196162EF00364B5A /* NZSensorDataTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC9D9A6196162EF00364B5A /* NZSensorDataTableView.m */; };
 		8AC9D9AA1961637D00364B5A /* NZSensorDataSetTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC9D9A91961637D00364B5A /* NZSensorDataSetTableViewCell.m */; };
 		8AC9D9E619619B5700364B5A /* NZCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC9D9E519619B5700364B5A /* NZCoreDataManager.m */; };
+		8AD0200C19795014003A09EE /* NZMainControlVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD0200B19795014003A09EE /* NZMainControlVC.m */; };
 		8ADB501A1962CD4C00DC2784 /* NSManagedObject+CoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADB50191962CD4C00DC2784 /* NSManagedObject+CoreData.m */; };
 		8ADB501D1962CE4200DC2784 /* NZSensorDataSet+CoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADB501C1962CE4200DC2784 /* NZSensorDataSet+CoreData.m */; };
 		8ADB50201962D63100DC2784 /* NZSensorDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADB501F1962D63100DC2784 /* NZSensorDataSet.m */; };
@@ -241,6 +242,8 @@
 		8AC9D9A91961637D00364B5A /* NZSensorDataSetTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZSensorDataSetTableViewCell.m; path = Views/RecordingSensorDataTableView/NZSensorDataSetTableViewCell.m; sourceTree = "<group>"; };
 		8AC9D9E419619B5700364B5A /* NZCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZCoreDataManager.h; path = Model/CoreData/NZCoreDataManager.h; sourceTree = "<group>"; };
 		8AC9D9E519619B5700364B5A /* NZCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZCoreDataManager.m; path = Model/CoreData/NZCoreDataManager.m; sourceTree = "<group>"; };
+		8AD0200A19795014003A09EE /* NZMainControlVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZMainControlVC.h; path = ViewControllers/NZMainControlVC.h; sourceTree = "<group>"; };
+		8AD0200B19795014003A09EE /* NZMainControlVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZMainControlVC.m; path = ViewControllers/NZMainControlVC.m; sourceTree = "<group>"; };
 		8ADB50181962CD4C00DC2784 /* NSManagedObject+CoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSManagedObject+CoreData.h"; path = "Model/CoreData/Categories/NSManagedObject+CoreData.h"; sourceTree = "<group>"; };
 		8ADB50191962CD4C00DC2784 /* NSManagedObject+CoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObject+CoreData.m"; path = "Model/CoreData/Categories/NSManagedObject+CoreData.m"; sourceTree = "<group>"; };
 		8ADB501B1962CE4200DC2784 /* NZSensorDataSet+CoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NZSensorDataSet+CoreData.h"; path = "Model/CoreData/Categories/NZSensorDataSet+CoreData.h"; sourceTree = "<group>"; };
@@ -753,6 +756,8 @@
 				8AC22B77197557DA0019A1A9 /* NZPopupViewController.m */,
 				8A922920195C3A3800DF7743 /* NZDetailViewController.h */,
 				8A922921195C3A3800DF7743 /* NZDetailViewController.m */,
+				8AD0200A19795014003A09EE /* NZMainControlVC.h */,
+				8AD0200B19795014003A09EE /* NZMainControlVC.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -1917,6 +1922,7 @@
 				8AF7F9991969C89F00DB6D7C /* GaussianMixtureModels.cpp in Sources */,
 				8A922960195C3CCF00DF7743 /* BLEService.m in Sources */,
 				8ADB50261962D96800DC2784 /* NZClassLabel.m in Sources */,
+				8AD0200C19795014003A09EE /* NZMainControlVC.m in Sources */,
 				8AF7F9881969C89F00DB6D7C /* ANBC.cpp in Sources */,
 				8AF7F9A41969C89F00DB6D7C /* GestureRecognitionPipeline.cpp in Sources */,
 				8ADB503D1962E1B000DC2784 /* NZYawPitchRoll+CoreData.m in Sources */,

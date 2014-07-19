@@ -32,6 +32,7 @@ NSString *const kGrtPipelineFileName = @"pipelineFile.txt";
 
 GRT::GestureRecognitionPipeline grtPipeline;
 GRT::TimeSeriesClassificationData trainingData;
+GRT::TimeSeriesClassificationData dataToBeClassified;
 
 #pragma mark - Singleton
 
@@ -99,6 +100,17 @@ GRT::TimeSeriesClassificationData trainingData;
     return res;
 }
 
+
+- (int)classifySensorDataSet:(NZSensorDataSet *)set
+{
+    NSLog(@"classify!!!!");
+    GRT::MatrixDouble dataMatrix = [NZPipelineController convertSensorDataSet:set];
+    if (! grtPipeline.predict(dataMatrix)) {
+        return -1;
+    }
+    return grtPipeline.getPredictedClassLabel();
+}
+
 #pragma mark - Init helper functions
 - (void)initTheClassificationData
 {
@@ -107,6 +119,7 @@ GRT::TimeSeriesClassificationData trainingData;
     trainingData = GRT::TimeSeriesClassificationData(7);
     trainingData.setDatasetName("TrainingSetTest");
     [self loadAllGesture];
+    dataToBeClassified = GRT::TimeSeriesClassificationData(7);
 }
 
 /**
@@ -181,6 +194,5 @@ GRT::TimeSeriesClassificationData trainingData;
    // NSLog(@"%f", sample[0]);
     return sample;
 }
-
 
 @end
