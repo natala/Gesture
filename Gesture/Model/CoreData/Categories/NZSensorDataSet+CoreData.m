@@ -7,6 +7,7 @@
 //
 
 #import "NZSensorDataSet+CoreData.h"
+#import "NZSensorData+CoreData.h"
 #import "NSManagedObject+CoreData.h"
 
 @implementation NZSensorDataSet (CoreData)
@@ -33,6 +34,9 @@
 #pragma mark - Destroy
 - (void)destroy
 {
+    for (NZSensorData *data in self.sensorData) {
+        [data destroy];
+    }
     [super destroy];
 }
 

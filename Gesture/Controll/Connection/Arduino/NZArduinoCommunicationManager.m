@@ -53,6 +53,11 @@
     return [BLEDiscovery sharedInstance].foundPeripherals.count == 1;
 }
 
+- (BOOL)isConnected
+{
+    return [[BLEDiscovery sharedInstance].connectedPeripherals count] == 1;
+}
+
 #pragma mark - BLEDiscoveryDelegate
 
 - (void)discoveryDidRefresh
@@ -165,20 +170,42 @@
     
     
     // Notify delegate
-    [self.delegate didReceiveSensorData:sensorData];}
+    [self.delegate didReceiveSensorData:sensorData];
+}
+
+- (BOOL)connect
+{
+    if (![self isConnected]) {
+        [self connectToPeripherals];
+    }
+    return [self isConnected];
+}
+
+- (BOOL)disconnect
+{
+    [self disconnectFromPeripherals];
+    return [self isConnected];
+}
 
 - (BOOL)startReceivingSensorData
 {
+    if (![self connect]) {
+        NSLog(@"arduino connection manager was unable to connect to arduini !!!");
+        return NO;
+    }
+    return YES;
+    /*
     [self connectToPeripherals];
     if ([[BLEDiscovery sharedInstance].connectedPeripherals count] > 0) {
         return YES;
     }
-    return NO;
+    return NO;*/
 }
 
 - (void)stopReceivingSensorData
 {
-    [self disconnectFromPeripherals];
+    [NZArduinoCommunicationManager sharedManager].delegate = nil;
+    //[self disconnectFromPeripherals];
 }
 
 @end

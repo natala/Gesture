@@ -55,11 +55,17 @@
     }
 }
 
+- (BOOL)prepareForRecordingSensorDataSet
+{
+    return [[NZArduinoCommunicationManager sharedManager] connect];
+}
+
 - (BOOL)startRecordingNewSensorDataSet
 {
     self.currentSet = [NZSensorDataSet create];
     self.currentSet.timeStampCreated = [NSDate date];
     self.currentSet.timeStampUpdate = self.currentSet.timeStampCreated;
+    // now the sensor data recording manager will be notified whenever the arduino connection manager receives new data
     [NZArduinoCommunicationManager sharedManager].delegate = self;
     BOOL startedReceiving = [[NZArduinoCommunicationManager sharedManager] startReceivingSensorData];
     
@@ -122,11 +128,15 @@
     }
 }
 
+- (void)disconnect
+{
+    //[self stopRecordingCurrentSensorDataSet];
+    [[NZArduinoCommunicationManager sharedManager] disconnect];
+}
+
 - (void)stopRecordingCurrentSensorDataSet
 {
     [NZArduinoCommunicationManager sharedManager].delegate = nil;
-    [[NZArduinoCommunicationManager sharedManager] stopReceivingSensorData];
-    
     for (id<NZSensorDataRecordingManagerObserver> observer in self.sensorDataRecordingObservers) {
         if ([observer respondsToSelector:@selector(didStopRecordingSensorDataSet:)]) {
             [observer didStopRecordingSensorDataSet:self.currentSet];

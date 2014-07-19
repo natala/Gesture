@@ -44,6 +44,7 @@
 		8AC9D9AA1961637D00364B5A /* NZSensorDataSetTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC9D9A91961637D00364B5A /* NZSensorDataSetTableViewCell.m */; };
 		8AC9D9E619619B5700364B5A /* NZCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC9D9E519619B5700364B5A /* NZCoreDataManager.m */; };
 		8AD0200C19795014003A09EE /* NZMainControlVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD0200B19795014003A09EE /* NZMainControlVC.m */; };
+		8AD02011197AE3B1003A09EE /* NZPipelineConfigurationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD02010197AE3B1003A09EE /* NZPipelineConfigurationVC.m */; };
 		8ADB501A1962CD4C00DC2784 /* NSManagedObject+CoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADB50191962CD4C00DC2784 /* NSManagedObject+CoreData.m */; };
 		8ADB501D1962CE4200DC2784 /* NZSensorDataSet+CoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADB501C1962CE4200DC2784 /* NZSensorDataSet+CoreData.m */; };
 		8ADB50201962D63100DC2784 /* NZSensorDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADB501F1962D63100DC2784 /* NZSensorDataSet.m */; };
@@ -244,6 +245,8 @@
 		8AC9D9E519619B5700364B5A /* NZCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZCoreDataManager.m; path = Model/CoreData/NZCoreDataManager.m; sourceTree = "<group>"; };
 		8AD0200A19795014003A09EE /* NZMainControlVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZMainControlVC.h; path = ViewControllers/NZMainControlVC.h; sourceTree = "<group>"; };
 		8AD0200B19795014003A09EE /* NZMainControlVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZMainControlVC.m; path = ViewControllers/NZMainControlVC.m; sourceTree = "<group>"; };
+		8AD0200F197AE3B1003A09EE /* NZPipelineConfigurationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZPipelineConfigurationVC.h; path = ViewControllers/NZPipelineConfigurationVC.h; sourceTree = "<group>"; };
+		8AD02010197AE3B1003A09EE /* NZPipelineConfigurationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZPipelineConfigurationVC.m; path = ViewControllers/NZPipelineConfigurationVC.m; sourceTree = "<group>"; };
 		8ADB50181962CD4C00DC2784 /* NSManagedObject+CoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSManagedObject+CoreData.h"; path = "Model/CoreData/Categories/NSManagedObject+CoreData.h"; sourceTree = "<group>"; };
 		8ADB50191962CD4C00DC2784 /* NSManagedObject+CoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObject+CoreData.m"; path = "Model/CoreData/Categories/NSManagedObject+CoreData.m"; sourceTree = "<group>"; };
 		8ADB501B1962CE4200DC2784 /* NZSensorDataSet+CoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NZSensorDataSet+CoreData.h"; path = "Model/CoreData/Categories/NZSensorDataSet+CoreData.h"; sourceTree = "<group>"; };
@@ -758,6 +761,8 @@
 				8A922921195C3A3800DF7743 /* NZDetailViewController.m */,
 				8AD0200A19795014003A09EE /* NZMainControlVC.h */,
 				8AD0200B19795014003A09EE /* NZMainControlVC.m */,
+				8AD0200F197AE3B1003A09EE /* NZPipelineConfigurationVC.h */,
+				8AD02010197AE3B1003A09EE /* NZPipelineConfigurationVC.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -1851,6 +1856,7 @@
 				8AAD80DF195DBA70000F9805 /* KHYawPitchRollLineChartView.m in Sources */,
 				8AF7F9891969C89F00DB6D7C /* ANBC_Model.cpp in Sources */,
 				8AF7F9D71969C89F00DB6D7C /* RangeTracker.cpp in Sources */,
+				8AD02011197AE3B1003A09EE /* NZPipelineConfigurationVC.m in Sources */,
 				8AF7F9DB1969C89F00DB6D7C /* TimeSeriesClassificationSampleTrimmer.cpp in Sources */,
 				8A922916195C3A3800DF7743 /* NZAppDelegate.m in Sources */,
 				8AF7F9B71969C89F00DB6D7C /* MovementIndex.cpp in Sources */,

@@ -7,6 +7,7 @@
 //
 
 #import "NZGestureSet+CoreData.h"
+#import "NZGesture+CoreData.h"
 #import "NSManagedObject+CoreData.h"
 
 @implementation NZGestureSet (CoreData)
@@ -33,6 +34,9 @@
 #pragma mark - Destroy
 - (void)destroy
 {
+    for (NZGesture *gesture in self.gestures) {
+        [gesture destroy];
+    }
     [super destroy];
 }
 

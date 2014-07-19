@@ -32,12 +32,33 @@
 @property (nonatomic, retain) NSMutableArray *sensorDataRecordingObservers;
 @property (nonatomic, retain) NZSensorDataSet *currentSet;
 
+/**
+ * Sets up the connection with the arduino (tells the arduino connection manager to connect)
+ * @return weather was able to connect
+ */
+- (BOOL)prepareForRecordingSensorDataSet;
 
+/**
+ * Informs the arduino connection manager to start recording sensor data
+ * @note Updates the creation time of the current sensor data set and informs the observer about the new state
+ * @return weather the arduino connection manager was able to start recording sensor data
+ */
 - (BOOL)startRecordingNewSensorDataSet;
+
+/**
+ * Informs the arduino connection manager to stop notifing whenever new data was received from the arduini
+ * @note the sensor data recording manager sets the delegate of the arduino connection manager to nil
+ */
+- (void)stopRecordingCurrentSensorDataSet;
+
+/**
+ * Informs the arduino connection manager to disconnect form the arduino
+ */
+- (void)disconnect;
+
 - (BOOL)restartRecordingCurrentDataSet;
 - (void)pauseRecordingOfTheCurrentSensorDataSet;
 - (void)resumeRecordingOfTheCurrentSensorDataSet;
-- (void)stopRecordingCurrentSensorDataSet;
 
 #pragma mark - manage observers
 - (void)addRecordingObserver:(id<NZSensorDataRecordingManagerObserver>) observer;

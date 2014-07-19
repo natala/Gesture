@@ -54,7 +54,7 @@ GRT::TimeSeriesClassificationData dataToBeClassified;
 {
     self = [super init];
     if (self) {
-        grtPipeline = GRT::GestureRecognitionPipeline();
+        //grtPipeline = GRT::GestureRecognitionPipeline();
         NSString *path = [[NZPipelineController documentPath] stringByAppendingPathComponent:kGrtPipelineFileName];
         
         if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
@@ -63,16 +63,23 @@ GRT::TimeSeriesClassificationData dataToBeClassified;
                 NSLog(@"Couldn't create file");
             }
         }
-        
+        BOOL init = grtPipeline.getIsInitialized();
         if ( !grtPipeline.loadPipelineFromFile([path UTF8String]) ) {
+            grtPipeline = GRT::GestureRecognitionPipeline();
+            init = grtPipeline.getIsInitialized();
             NSLog(@"Couldn't load pipeline from file. Set up a new one");
             // create a new pipeline with th DTW classifier and save
+            GRT::DTW dtw = GRT::DTW();
+            //dtw.setRejectionMode(GRT::DTW::RejectionModes::THRESHOLDS_AND_LIKELIHOODS);
+            dtw.enableNullRejection(true);
+            dtw.enableScaling(true);
             grtPipeline.setClassifier( GRT::DTW() );
             if( !grtPipeline.savePipelineToFile([path UTF8String]) ) {
                 NSLog(@"Could't initially save pipeline to file");
                 abort();
             }
         }
+        init = grtPipeline.getIsInitialized();
         [self initTheClassificationData];
     }
     return self;
@@ -91,12 +98,18 @@ GRT::TimeSeriesClassificationData dataToBeClassified;
     
 }
 
+- (int)numberOfClasses
+{
+    return grtPipeline.getNumClassesInModel();
+}
+
 - (BOOL)trainClassifier
 {
     BOOL res = grtPipeline.train(trainingData);
     if (!res) {
         NSLog(@"unable to train classifier!!!");
     }
+    [self savePipelneToFile];
     return res;
 }
 
@@ -109,6 +122,17 @@ GRT::TimeSeriesClassificationData dataToBeClassified;
         return -1;
     }
     return grtPipeline.getPredictedClassLabel();
+}
+
+- (BOOL)savePipelneToFile
+{
+    NSString *path = [[NZPipelineController documentPath] stringByAppendingPathComponent:kGrtPipelineFileName];
+    return grtPipeline.savePipelineToFile([path UTF8String]);
+}
+
+- (void)removeClassLabel:(NZClassLabel *)classLabel
+{
+    trainingData.eraseAllSamplesWithClassLabel([classLabel.index unsignedIntegerValue]);
 }
 
 #pragma mark - Init helper functions

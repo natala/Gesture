@@ -7,6 +7,8 @@
 //
 
 #import "NZGesture+CoreData.h"
+#import "NZClassLabel+CoreData.h"
+#import "NZSensorDataSet+CoreData.h"
 #import "NSManagedObject+CoreData.h"
 
 @implementation NZGesture (CoreData)
@@ -33,6 +35,14 @@
 #pragma mark - Destroy
 - (void)destroy
 {
+    // destroy all class labels
+    [self.label destroy];
+    for (NZSensorDataSet *set in self.positiveSamples) {
+        [set destroy];
+    }
+    for (NZSensorDataSet *set in self.negativeSamples) {
+        [set destroy];
+    }
     [super destroy];
 }
 

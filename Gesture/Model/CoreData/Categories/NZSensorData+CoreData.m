@@ -7,6 +7,10 @@
 //
 
 #import "NZSensorData+CoreData.h"
+#import "NZLinearAcceleration+CoreData.h"
+#import "NZGravity+CoreData.h"
+#import "NZQuaternion+CoreData.m"
+#import "NZYawPitchRoll+CoreData.h"
 #import "NSManagedObject+CoreData.h"
 
 @implementation NZSensorData (CoreData)
@@ -33,6 +37,10 @@
 #pragma mark - Destroy
 - (void)destroy
 {
+    [self.linearAcceleration destroy];
+    [self.gravity destroy];
+    [self.quaternion destroy];
+    [self.yawPitchRoll destroy];
     [super destroy];
 }
 

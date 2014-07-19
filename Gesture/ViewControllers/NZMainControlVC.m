@@ -20,7 +20,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
     }
     return self;
 }
@@ -31,6 +30,7 @@
     self.startButton.enabled = true;
     self.stopButton.enabled = false;
     [self.singleGroupSegmentControl setEnabled:false forSegmentAtIndex:1];
+    self.stopStartGestureButton.enabled = false;
     // Do any additional setup after loading the view.
 }
 
@@ -85,7 +85,7 @@
     }
     self.recognizedGestureNameLabel.text = [NSString stringWithFormat:@"%d",classLabel ];
     
-#warning TODO implement the adding as a positive sample if the user doesn't complain :P
+#warning TODO implement the adding as a positive sample if the user doesn't complain
 }
 
 
@@ -94,16 +94,27 @@
 - (IBAction)startButtonTapped:(id)sender
 {
     [[NZSensorDataRecordingManager sharedManager] addRecordingObserver:self];
-    BOOL startedNewRecording = [[NZSensorDataRecordingManager sharedManager] startRecordingNewSensorDataSet];
-    if (startedNewRecording) {
+    //BOOL startedNewRecording = [[NZSensorDataRecordingManager sharedManager] startRecordingNewSensorDataSet];
+    BOOL readyForRecording = [[NZSensorDataRecordingManager sharedManager] prepareForRecordingSensorDataSet];
+    
+    if (readyForRecording) {
         self.startButton.enabled = false;
         self.stopButton.enabled = true;
+        self.stopStartGestureButton.enabled = true;
     }
     
 }
 
 - (IBAction)stopButtonTapped:(id)sender {
-    [[NZSensorDataRecordingManager sharedManager] stopRecordingCurrentSensorDataSet];
+    [[NZSensorDataRecordingManager sharedManager] removeRecordingObserver:self];
+    self.startButton.enabled = true;
+    self.stopButton.enabled = false;
+    if (self.startButton.selected) {
+        [[NZSensorDataRecordingManager sharedManager] stopRecordingCurrentSensorDataSet];
+    }
+    [[NZSensorDataRecordingManager sharedManager] disconnect];
+    self.stopStartGestureButton.selected = false;
+    self.stopStartGestureButton.enabled = false;
 }
 
 - (IBAction)singleGroupModeChanged:(id)sender {
@@ -111,7 +122,15 @@
 
 - (IBAction)startStopGestureTapped:(id)sender
 {
-    [self.stopStartGestureButton setSelected:!self.stopStartGestureButton.selected];
+    BOOL isRecording = self.stopStartGestureButton.selected;
+    if (!isRecording) {
+        isRecording = [[NZSensorDataRecordingManager sharedManager] startRecordingNewSensorDataSet];
+    } else {
+        [[NZSensorDataRecordingManager sharedManager] stopRecordingCurrentSensorDataSet];
+        isRecording = false;
+    }
+    
+    [self.stopStartGestureButton setSelected:isRecording];
     
 }
 @end

@@ -8,6 +8,7 @@
 
 #import "NZGestureSetsVC.h"
 #import "NZGesturesVC.h"
+#import "NZGestureSet+CoreData.h"
 #import "NZCoreDataManager.h"
 
 
@@ -109,9 +110,9 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         NSLog(@"Deleting a cell");
         NSManagedObjectContext *context = [[NZCoreDataManager sharedManager] managedObjectContext];
-        //   NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
-        [context deleteObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
-        
+        //NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
+        //[context deleteObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
+        [[self.fetchedResultsController objectAtIndexPath:indexPath] destroy];
         NSError *error = nil;
         if (![context save:&error]) {
             // Replace this implementation with code to handle the error appropriately.

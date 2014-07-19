@@ -1644,7 +1644,6 @@ bool GestureRecognitionPipeline::savePipelineToFile(const string &filename){
         errorLog << "Failed to write pipeline to file as the pipeline has not been initialized yet!" << endl;
         return false;
     }
-    
     fstream file;
     
     file.open(filename.c_str(), iostream::out );
@@ -1661,7 +1660,7 @@ bool GestureRecognitionPipeline::savePipelineToFile(const string &filename){
     file << "NumFeatureExtractionModules: " << getNumFeatureExtractionModules() << endl;
     file << "NumPostprocessingModules: " << getNumPostProcessingModules() << endl;
     file << "Trained: " << getTrained() << endl;
-    
+    file << "Initialized: " << getIsInitialized() << endl;
     //Write the module datatype names
     file << "PreProcessingModuleDatatypes:";
     for(UINT i=0; i<getNumPreProcessingModules(); i++){
@@ -1829,6 +1828,15 @@ bool GestureRecognitionPipeline::loadPipelineFromFile(const string &filename){
         return false;
 	}
 	file >> trained;
+    
+    //Load if the pipeline has been initialized
+    file >> word;
+    if( word != "Initialized:" ) {
+        errorLog << "loadPipelineFromFile(string filename) - Failed to read Initialized" << endl;
+		file.close();
+        return false;
+    }
+    file >> initialized;
 	
 	//Resize the modules
 	if( numPreprocessingModules > 0 ) preProcessingModules.resize(numPreprocessingModules,NULL);

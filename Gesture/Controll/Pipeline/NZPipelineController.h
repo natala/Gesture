@@ -35,7 +35,8 @@
 - (void)addPositive:(BOOL)isPositive sample:(NZSensorDataSet *)sensorDataSample withLabel:(NZClassLabel *)classLabel;
 
 /**
- * train the classifier after adding new samples
+ * train the classifier after adding new samples. Retrains the classifier if it was already trained
+ * @note should be always called whenever new gesture has been added or modified
  */
 - (BOOL)trainClassifier;
 
@@ -46,5 +47,15 @@
  */
 - (int)classifySensorDataSet:(NZSensorDataSet *)set;
 
+/**
+ * removes the class label form data set
+ * @param classLabel the lable to be deleted
+ */
+- (void)removeClassLabel:(NZClassLabel *)classLabel;
+
+/**
+ * @return the number of classes in the pipeline
+ */
+- (int)numberOfClasses;
 
 @end

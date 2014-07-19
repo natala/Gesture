@@ -8,10 +8,11 @@
 
 #import "NZGesturesVC.h"
 #import "NZGesturesVC.h"
-#import "NZGesture.h"
+#import "NZGesture+CoreData.h"
 #import "NZClassLabel+CoreData.h"
 #import "NZCoreDataManager.h"
 #import "NZGestureConfigurationVC.h"
+#import "NZPipelineController.h"
 
 
 @interface NZGesturesVC ()
@@ -113,7 +114,13 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         NSLog(@"Deleting a cell");
         NSManagedObjectContext *context = [[NZCoreDataManager sharedManager] managedObjectContext];
-        [context deleteObject:[[self.gestureSet.gestures allObjects] objectAtIndex:indexPath.row]];
+        
+        NZGesture *gesture = [[self.gestureSet.gestures allObjects] objectAtIndex:indexPath.row];
+        [[NZPipelineController sharedManager] removeClassLabel:gesture.label];
+        [gesture destroy];
+        
+      //  [context deleteObject:[[self.gestureSet.gestures allObjects] objectAtIndex:indexPath.row]];
+        
         NSError *error = nil;
         if (![context save:&error]) {
             // Replace this implementation with code to handle the error appropriately.
@@ -167,9 +174,14 @@
     [newGesture setValue:self.gestureSet forKey:@"gestureSet"];
     
     // create a new class label with the correct index
-    NZClassLabel *newClassLabel = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME_CLASS_LABEL inManagedObjectContext:context];
+   // NZClassLabel *newClassLabel = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME_CLASS_LABEL inManagedObjectContext:context];
+    NZClassLabel *lastClassObject = [NZClassLabel findLates];
+    NSNumber *index = [NSNumber numberWithInt:1];
+    if (lastClassObject) {
+        index = [NSNumber numberWithInt:[lastClassObject.index intValue]+1 ];
+    }
+    NZClassLabel *newClassLabel = [NZClassLabel create];
     [newClassLabel setValue:[form objectForKey:@"name"]forKey:@"name"];
-    NSNumber *index = [NSNumber numberWithUnsignedInteger:[[NZClassLabel findAll]count]];
     [newClassLabel setValue:index forKey:@"index"];
     [newClassLabel setValue:newGesture forKey:@"gesture"];
     [newGesture setValue:newClassLabel forKey:@"label"];

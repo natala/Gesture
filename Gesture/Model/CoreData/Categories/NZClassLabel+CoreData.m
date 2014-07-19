@@ -25,9 +25,22 @@
 
 + (NZClassLabel *)findLates
 {
-#warning incomplete implementation
-    NSLog(@"NZSensorDataSet find lates to be implemented!!!");
-    return nil;
+    NSSortDescriptor *sortDescriptotr = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
+    
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:ENTITY_NAME_CLASS_LABEL];
+    
+	fetchRequest.sortDescriptors = @[sortDescriptotr];
+    
+	NSError *error = nil;
+	NSArray *fetchedEntities = [[NZCoreDataManager sharedManager].managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+	if (!fetchedEntities) {
+		NSLog(@"Error: %@", error);
+        abort();
+	}
+    
+    return [fetchedEntities lastObject];
+    
 }
 
 #pragma mark - Destroy

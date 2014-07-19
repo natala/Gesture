@@ -38,13 +38,33 @@
 
 @property (nonatomic, retain) id<NZArduinoCommunicationManagerDelegate> delegate;
 
+
 /**
  * Returns whether the arduino communication manager is able to receive sensor data.
  * @note    This method might be transferred into the KHArduinoCommunicationManagerDelegate protocol.
  * @author  Pascal Fritzen
  * @return  Whether the arduino communication manager is able to receive sensor data.
  */
-- (void)isAbleToReceiveSensorData;
+- (BOOL)isAbleToReceiveSensorData;
+
+/**
+ * Returns if the arduino communication manager is connected to a device
+ * @return Whether the arduino communication manager is connected to the arduino
+ */
+-  (BOOL)isConnected;
+
+/**
+ * instructs the arduino communication manager to connect to arduino
+ * @return weather the was able to connect
+ */
+- (BOOL)connect;
+
+/**
+ * instructs the arduino communication manager to disconnect from the arduino
+ * @note
+ * @return weather disconnected
+ */
+- (BOOL)disconnect;
 
 /**
  * Instructs the arduino communication manager to start receiving data from the arduino.
@@ -57,6 +77,7 @@
 /**
  * Instructs the arduino communication manager to stop receiving data from the arduino.
  * @author  Pascal Fritzen
+ * @note currently this method is not doing anything. Will most probobly be removed soon (if I don't forget :P)
  */
 - (void)stopReceivingSensorData;
 
