@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *startGestureButton;
 @property (weak, nonatomic) IBOutlet UIButton *stopGestureButton;
 @property (weak, nonatomic) IBOutlet UIButton *learnGestureButton;
+@property (weak, nonatomic) IBOutlet UILabel *numOfTrainingSamples;
 
 
 

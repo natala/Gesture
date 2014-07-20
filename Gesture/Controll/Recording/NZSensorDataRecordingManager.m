@@ -131,6 +131,7 @@
 - (void)disconnect
 {
     //[self stopRecordingCurrentSensorDataSet];
+    self.currentSet = nil;
     [[NZArduinoCommunicationManager sharedManager] disconnect];
 }
 
@@ -142,6 +143,7 @@
             [observer didStopRecordingSensorDataSet:self.currentSet];
         }
     }
+    self.currentSet = nil;
 }
 
 @end

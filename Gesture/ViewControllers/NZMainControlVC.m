@@ -60,7 +60,7 @@
 
 - (void)didPauseReordingSensorData:(NZSensorDataSet *) sensorDataSet
 {
-    NSLog(@"Sensor Data Recording Manager did stop recording");
+    NSLog(@"Sensor Data Recording Manager did pause recording");
 }
 
 - (void)didResumeRecordingSensorData:(NZSensorDataSet *) sensorDataSet

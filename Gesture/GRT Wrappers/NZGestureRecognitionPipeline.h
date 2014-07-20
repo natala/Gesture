@@ -49,4 +49,5 @@
  */
 - (BOOL)isTrained;
 
+
 @end

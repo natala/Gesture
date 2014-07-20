@@ -9,6 +9,7 @@
 #import "NZGestureConfigurationVC.h"
 #import "NZCoreDataManager.h"
 #import "NZPipelineController.h"
+#import "NZClassLabel.h"
 
 @interface NZGestureConfigurationVC ()
 
@@ -28,12 +29,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.startGestureButton.enabled = true;
-    self.stopGestureButton.enabled = false;
-    if (([self.gesture.positiveSamples count] > 0) || ([self.gesture.negativeSamples count] > 0)) {
-        self.learnGestureButton.enabled = true;
-    }
-    self.learnGestureButton.enabled = false;
+    //self.numOfTrainingSamples.text = [NSString stringWithFormat:@"%d", [[NZPipelineController sharedManager] numberOfSamplesForClassLabelIndex:self.gesture.label.index]];
     // Do any additional setup after loading the view.
 }
 
@@ -41,6 +37,40 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.startGestureButton.enabled = true;
+    self.stopGestureButton.enabled = false;
+    self.learnGestureButton.enabled = false;
+
+    self.numOfTrainingSamples.text = [NSString stringWithFormat:@"%d", [[NZPipelineController sharedManager] numberOfSamplesForClassLabelIndex:self.gesture.label.index]];
+
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    BOOL didConnect = [[NZSensorDataRecordingManager sharedManager] prepareForRecordingSensorDataSet];
+    if (didConnect) {
+        self.startGestureButton.enabled = true;
+    } else {
+        self.startGestureButton.enabled = false;
+    }
+            self.stopGestureButton.enabled = false;
+    if (([self.gesture.positiveSamples count] > 0) || ([self.gesture.negativeSamples count] > 0)) {
+        self.learnGestureButton.enabled = true;
+    }
+     [[NZSensorDataRecordingManager sharedManager] addRecordingObserver:self];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[NZSensorDataRecordingManager sharedManager] disconnect];
+    [[NZSensorDataRecordingManager sharedManager] removeRecordingObserver:self];
 }
 
 /*
@@ -57,7 +87,6 @@
 #pragma mark - IBActions
 
 - (IBAction)startGestureTapped:(id)sender {
-    [[NZSensorDataRecordingManager sharedManager] addRecordingObserver:self];
     BOOL startedNewRecording = [[NZSensorDataRecordingManager sharedManager] startRecordingNewSensorDataSet];
     if (startedNewRecording) {
         self.startGestureButton.enabled = false;
@@ -72,6 +101,8 @@
     if (([self.gesture.positiveSamples count] > 0) || ([self.gesture.negativeSamples count] > 0)) {
         self.learnGestureButton.enabled = true;
     }
+    
+    self.numOfTrainingSamples.text = [NSString stringWithFormat:@"%d", [[NZPipelineController sharedManager] numberOfSamplesForClassLabelIndex:self.gesture.label.index]];
 }
 
 - (IBAction)learnGestureTapped:(id)sender {
@@ -88,7 +119,7 @@
 
 - (void)didPauseReordingSensorData:(NZSensorDataSet *) sensorDataSet
 {
-    NSLog(@"Sensor Data Recording Manager did stop recording");
+    NSLog(@"Sensor Data Recording Manager did pasue recording");
 }
 
 - (void)didResumeRecordingSensorData:(NZSensorDataSet *) sensorDataSet

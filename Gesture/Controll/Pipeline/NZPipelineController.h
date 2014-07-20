@@ -58,4 +58,10 @@
  */
 - (int)numberOfClasses;
 
+/**
+ * @param index the index of the gestues class label
+ * @return the number of training samples for the class with the given index
+ */
+- (int)numberOfSamplesForClassLabelIndex:(NSNumber *)index;
+
 @end

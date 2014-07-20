@@ -18,6 +18,7 @@
 #import <sstream>
 #import <iostream>
 #import "GRT.h"
+#import <vector>
 
 
 NSString *const kGrtPipelineFileName = @"pipelineFile.txt";
@@ -70,9 +71,10 @@ GRT::TimeSeriesClassificationData dataToBeClassified;
             NSLog(@"Couldn't load pipeline from file. Set up a new one");
             // create a new pipeline with th DTW classifier and save
             GRT::DTW dtw = GRT::DTW();
-            //dtw.setRejectionMode(GRT::DTW::RejectionModes::THRESHOLDS_AND_LIKELIHOODS);
             dtw.enableNullRejection(true);
-            dtw.enableScaling(true);
+            dtw.setRejectionMode(GRT::DTW::RejectionModes::TEMPLATE_THRESHOLDS);
+            dtw.enableScaling(false);
+            dtw.enableZNormalization(true);
             grtPipeline.setClassifier( GRT::DTW() );
             if( !grtPipeline.savePipelineToFile([path UTF8String]) ) {
                 NSLog(@"Could't initially save pipeline to file");
@@ -89,7 +91,11 @@ GRT::TimeSeriesClassificationData dataToBeClassified;
 
 - (void)addPositive:(BOOL)isPositive sample:(NZSensorDataSet *)sensorDataSample withLabel:(NZClassLabel *)classLabel
 {
-    
+    GRT::DTW dtw = (GRT::DTW)grtPipeline.getClassifier();
+    std::vector<GRT::DTWTemplate> templates = dtw.getModels();
+    for (int i = 0; i < templates.size(); i++) {
+        GRT::MatrixDouble matrix = templates[i].timeSeries;
+    }
     GRT::MatrixDouble grtDataSample = [NZPipelineController convertSensorDataSet:sensorDataSample];
     //NSLog(@"%f", grtDataSample[0][0]);
     //!!! 0 is reserved for the null gesture, not allowed to use it when adding a sample
@@ -100,6 +106,10 @@ GRT::TimeSeriesClassificationData dataToBeClassified;
 
 - (int)numberOfClasses
 {
+   // GRT::DTW *dtw = (GRT::DTW *)grtPipeline.getClassifier();
+   // int numTemplates = dtw->getNumTemplates();
+   // int numClasses = grtPipeline.getNumClassesInModel();
+   // int numModels = dtw->getModels().size();
     return grtPipeline.getNumClassesInModel();
 }
 
@@ -217,6 +227,12 @@ GRT::TimeSeriesClassificationData dataToBeClassified;
    // NSLog(@"%lu", sample.size());
    // NSLog(@"%f", sample[0]);
     return sample;
+}
+
+- (int)numberOfSamplesForClassLabelIndex:(NSNumber *)index
+{
+    
+    return trainingData.getClassData([index intValue]).getNumSamples();
 }
 
 @end

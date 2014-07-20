@@ -615,7 +615,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zs3-F8-iLr">
-                                <rect key="frame" x="351" y="377" width="92" height="30"/>
+                                <rect key="frame" x="351" y="140" width="92" height="30"/>
                                 <state key="normal" title="Start Gesture">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -624,7 +624,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hSg-n0-5tx">
-                                <rect key="frame" x="351" y="434" width="91" height="30"/>
+                                <rect key="frame" x="351" y="197" width="91" height="30"/>
                                 <state key="normal" title="Stop Gesture">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -633,7 +633,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3eo-BE-FkJ">
-                                <rect key="frame" x="349" y="541" width="97" height="30"/>
+                                <rect key="frame" x="349" y="304" width="97" height="30"/>
                                 <state key="normal" title="Learn Gesture">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -641,17 +641,34 @@
                                     <action selector="learnGestureTapped:" destination="V2d-Mn-gQ7" eventType="touchUpInside" id="2oe-gv-LK0"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Number of training templates" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kh8-9X-91p">
+                                <rect key="frame" x="284" y="366" width="224" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="#" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WFL-xi-fHM">
+                                <rect key="frame" x="334" y="395" width="126" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="hSg-n0-5tx" secondAttribute="centerX" constant="-12.5" id="1JT-L9-w5a"/>
                             <constraint firstAttribute="centerX" secondItem="Zs3-F8-iLr" secondAttribute="centerX" constant="-13" id="Dbg-z5-Osx"/>
+                            <constraint firstAttribute="centerX" secondItem="kh8-9X-91p" secondAttribute="centerX" constant="-13" id="L9p-L9-CsH"/>
                             <constraint firstAttribute="centerX" secondItem="3eo-BE-FkJ" secondAttribute="centerX" constant="-13" id="qtS-YM-LtX"/>
+                            <constraint firstAttribute="centerX" secondItem="WFL-xi-fHM" secondAttribute="centerX" constant="-13" id="vuR-SW-RcP"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="zTA-7t-sDf"/>
                     <connections>
                         <outlet property="learnGestureButton" destination="3eo-BE-FkJ" id="Ulx-Za-Xx6"/>
+                        <outlet property="numOfTrainingSamples" destination="WFL-xi-fHM" id="KkO-wv-98z"/>
                         <outlet property="startGestureButton" destination="Zs3-F8-iLr" id="6Fq-qx-EAA"/>
                         <outlet property="stopGestureButton" destination="hSg-n0-5tx" id="CTy-sF-HgZ"/>
                     </connections>
