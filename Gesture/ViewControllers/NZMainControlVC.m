@@ -8,9 +8,12 @@
 
 #import "NZMainControlVC.h"
 #import "NZPipelineController.h"
-#import "NZClassLabel.h"
+#import "NZClassLabel+CoreData.h"
+#import "NZGesture+CoreData.h"
 
 @interface NZMainControlVC ()
+
+@property NSString *httpRequest;
 
 @end
 
@@ -31,6 +34,7 @@
     self.stopButton.enabled = false;
     [self.singleGroupSegmentControl setEnabled:false forSegmentAtIndex:1];
     self.stopStartGestureButton.enabled = false;
+    self.httpRequest = @"http://192.168.1.105/api/newdeveloper/lights/2/state";
     // Do any additional setup after loading the view.
 }
 
@@ -77,17 +81,49 @@
 {
     NSLog(@"Sensor Data Recording Manager did stop recording");
     // once done, correlate it with the geture as a positive sample
-    int classLabel = [[NZPipelineController sharedManager] classifySensorDataSet:sensorDataSet];
-    if (classLabel == -1) {
+    int classIndex = [[NZPipelineController sharedManager] classifySensorDataSet:sensorDataSet];
+    if (classIndex == -1) {
         NSLog(@"unable to recognise the given gesture");
         self.recognizedGestureNameLabel.text = @"Recognized label";
         return;
     }
-    self.recognizedGestureNameLabel.text = [NSString stringWithFormat:@"%d",classLabel ];
+    
+   // NZClassLabel *classLabel = [NZClassLabel findEntitiesWithIndex:[NSNumber numberWithInt:classIndex]];
+    NZGesture *gesture = [NZGesture findGestureWithIndex:[NSNumber numberWithInt:classIndex]];
+    if (!gesture) {
+        self.recognizedGestureNameLabel.text = [NSString stringWithFormat:@"%d",classIndex ];
+    } else {
+        self.recognizedGestureNameLabel.text = gesture.label.name;
+    }
+    
+    // perform the http request
+    if (!gesture.httpRequest) {
+        NSLog(@"no action is defined for this gesture");
+        return;
+    }
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString: self.httpRequest]];
+    NSString *jsonString = gesture.httpRequest;
+    [self sendRequest:request withJson:jsonString];
     
 #warning TODO implement the adding as a positive sample if the user doesn't complain
 }
 
+#pragma mark - HTTPP request helpers
+- (void)sendRequest:(NSMutableURLRequest *)request withJson:(NSString *)jsonString
+{
+    NSData *requestData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    [request setHTTPMethod:@"PUT"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:[NSString stringWithFormat:@"%d", [requestData length]] forHTTPHeaderField:@"Content-Length"];
+    [request setValue:[NSString stringWithFormat:@"%d", [requestData length]] forHTTPHeaderField:@"Content-Length"];
+    [request setHTTPBody:requestData];
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+    if (connection) {
+        NSLog(@"did setup connection");
+    }
+}
 
 #pragma mark - IBActions
 
@@ -102,7 +138,6 @@
         self.stopButton.enabled = true;
         self.stopStartGestureButton.enabled = true;
     }
-    
 }
 
 - (IBAction)stopButtonTapped:(id)sender {
@@ -129,7 +164,6 @@
         [[NZSensorDataRecordingManager sharedManager] stopRecordingCurrentSensorDataSet];
         isRecording = false;
     }
-    
     [self.stopStartGestureButton setSelected:isRecording];
     
 }

@@ -17,6 +17,13 @@
 
 + (NZClassLabel *)findLates;
 
+/**
+ * @note the index of the class label maches the indices of the classes in the training set of the classifier / pipeline
+ * @param index the index of the class label we want to find
+ * @return the class label with the given index
+ */
++ (NZClassLabel *)findEntitiesWithIndex:(NSNumber *)index;
+
 - (void)destroy;
 
 + (void)destroyAll;

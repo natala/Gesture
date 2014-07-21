@@ -18,6 +18,25 @@
 }
 
 #pragma mark - Find
+
++ (NZClassLabel *)findEntitiesWithIndex:(NSNumber *)index
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"index == %@", index];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:ENTITY_NAME_CLASS_LABEL];
+    request.predicate = predicate;
+    NSError *error = nil;
+    NSArray *foundEntities = [[NZCoreDataManager sharedManager].managedObjectContext executeFetchRequest:request error:&error];
+    
+    if (!foundEntities) {
+        NSLog(@"couldn't find class label entity with index == %@", index);
+        return nil;
+    }
+    if ([foundEntities count] > 1) {
+        NSLog(@"WARNING - more than one entitie with index %@ found. Will return the first found one", index);
+    }
+    return (NZClassLabel *)foundEntities.firstObject;
+}
+
 + (NSArray *)findAll
 {
     return [super findAllEntitiesWithName:ENTITY_NAME_CLASS_LABEL];

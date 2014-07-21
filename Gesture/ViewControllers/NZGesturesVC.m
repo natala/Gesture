@@ -141,7 +141,8 @@
     NZGesture *selectedGesture = [[self.gestureSet.gestures allObjects] objectAtIndex:indexPath.row];
     NZClassLabel *label = selectedGesture.label;
     self.gestureConfigurationVc.gesture = selectedGesture;
-    self.gestureConfigurationVc.navigationController.title = label.name;
+    self.gestureConfigurationVc.navigationItem.title = label.name;
+  //  self.gestureConfigurationVc.navigationController.title = label.name;
     [[self navigationController] pushViewController:self.gestureConfigurationVc animated:YES];
 }
 

@@ -17,6 +17,10 @@
 
 + (NZGesture *)findLates;
 
++ (NZGesture *)findGestureWithIndex:(NSNumber *)index;
+
++ (NZGesture *)findGestureWithLabel:(NZClassLabel *)label;
+
 - (void)destroy;
 
 + (void)destroyAll;

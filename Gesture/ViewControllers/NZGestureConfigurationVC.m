@@ -47,6 +47,8 @@
     self.learnGestureButton.enabled = false;
 
     self.numOfTrainingSamples.text = [NSString stringWithFormat:@"%d", [[NZPipelineController sharedManager] numberOfSamplesForClassLabelIndex:self.gesture.label.index]];
+    // lights/1/state";
+    self.httpRequestTextField.text = @"{\"on\":true}";
 
 }
 
@@ -107,6 +109,22 @@
 
 - (IBAction)learnGestureTapped:(id)sender {
     [[NZPipelineController sharedManager] trainClassifier];
+
+}
+
+- (IBAction)EditingHttpRequestTextFieldDidEnd:(id)sender {
+    
+    self.gesture.httpRequest = self.httpRequestTextField.text;
+    
+    // update the database
+    NSManagedObjectContext *context = [[NZCoreDataManager sharedManager] managedObjectContext];
+    NSError *error = nil;
+    if (![context save:&error]) {
+        // Replace this implementation with code to handle the error appropriately.
+        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
 
 }
 

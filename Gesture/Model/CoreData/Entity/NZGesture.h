@@ -17,6 +17,8 @@ static NSString *ENTITY_NAME_GESTURE = @"NZGesture";
 #pragma mark - attributes
 @property (nonatomic, retain) NSDate * timeStampCreated;
 @property (nonatomic, retain) NSDate * timeStampUpdated;
+@property (nonatomic, retain) NSString * httpRequest;
+
 
 #pragma mark - relationships
 @property (nonatomic, retain) NSManagedObject *gestureSet;

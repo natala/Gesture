@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *stopGestureButton;
 @property (weak, nonatomic) IBOutlet UIButton *learnGestureButton;
 @property (weak, nonatomic) IBOutlet UILabel *numOfTrainingSamples;
+@property (weak, nonatomic) IBOutlet UITextField *httpRequestTextField;
 
 
 
@@ -42,5 +43,12 @@
  * let the classifier learn this gestre
  */
 - (IBAction)learnGestureTapped:(id)sender;
+
+/**
+ * enter the http request to be executed when performing a gesture
+ */
+- (IBAction)EditingHttpRequestTextFieldDidEnd:(id)sender;
+
+
 
 @end

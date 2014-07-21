@@ -20,6 +20,30 @@
 }
 
 #pragma mark - Find
+
++ (NZGesture *)findGestureWithIndex:(NSNumber *)index
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"label.index == %@", index];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:ENTITY_NAME_GESTURE];
+    request.predicate = predicate;
+    NSError *error = nil;
+    NSArray *foundEntities = [[NZCoreDataManager sharedManager].managedObjectContext executeFetchRequest:request error:&error];
+    
+    if (!foundEntities) {
+        NSLog(@"couldn't find class label entity with index == %@", index);
+        return nil;
+    }
+    if ([foundEntities count] > 1) {
+        NSLog(@"WARNING - more than one entitie with index %@ found. Will return the first found one", index);
+    }
+    return (NZGesture *)foundEntities.firstObject;
+}
+
++ (NZGesture *)findGestureWithLabel:(NZClassLabel *)label
+{
+    return [self findGestureWithIndex:label.index];
+}
+
 + (NSArray *)findAll
 {
     return [super findAllEntitiesWithName:ENTITY_NAME_GESTURE];
