@@ -10,8 +10,11 @@
 #import "NZCoreDataManager.h"
 #import "NZPipelineController.h"
 #import "NZClassLabel.h"
+#import "NZSetupHttpRequestVC.h"
 
 @interface NZGestureConfigurationVC ()
+
+@property (nonatomic, retain) UIPopoverController *popover;
 
 @end
 
@@ -29,6 +32,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    NZSetupHttpRequestVC *httpRequestVc = [storyboard instantiateViewControllerWithIdentifier:@"HttpRequestPopoverVC"];
+    
+    self.popover = [[UIPopoverController alloc] initWithContentViewController:httpRequestVc];
+    self.popover.delegate = self;
     //self.numOfTrainingSamples.text = [NSString stringWithFormat:@"%d", [[NZPipelineController sharedManager] numberOfSamplesForClassLabelIndex:self.gesture.label.index]];
     // Do any additional setup after loading the view.
 }
@@ -47,8 +55,6 @@
     self.learnGestureButton.enabled = false;
 
     self.numOfTrainingSamples.text = [NSString stringWithFormat:@"%d", [[NZPipelineController sharedManager] numberOfSamplesForClassLabelIndex:self.gesture.label.index]];
-    // lights/1/state";
-    self.httpRequestTextField.text = @"{\"on\":true}";
 
 }
 
@@ -112,9 +118,21 @@
 
 }
 
-- (IBAction)EditingHttpRequestTextFieldDidEnd:(id)sender {
-    
-    self.gesture.httpRequest = self.httpRequestTextField.text;
+- (IBAction)setupHttpRequestButtonTapped:(id)sender {
+    NZSetupHttpRequestVC *vc
+    = (NZSetupHttpRequestVC *)self.popover.contentViewController;
+    vc.urlTextField.text = @"http://192.168.1.105/api/newdeveloper/lights/1/state";
+    vc.messageBodyTextField.text = @"{\"on\":true, \"br\":255, \"hue\":1000}";
+    UIButton *senderButton = (UIButton *)sender;
+    [self.popover presentPopoverFromRect:senderButton.bounds inView:senderButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+#pragma mark - popover controller delegate methods
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
+{
+    NZSetupHttpRequestVC *vc = (NZSetupHttpRequestVC *)popoverController.contentViewController;
+    self.gesture.httpRequestUrl = vc.urlTextField.text;
+    self.gesture.httpRequestMessageBody = vc.messageBodyTextField.text;
     
     // update the database
     NSManagedObjectContext *context = [[NZCoreDataManager sharedManager] managedObjectContext];
@@ -125,7 +143,6 @@
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
-
 }
 
 #pragma mark - Sensor Data Recording Manager Observer methods

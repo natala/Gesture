@@ -97,12 +97,12 @@
     }
     
     // perform the http request
-    if (!gesture.httpRequest) {
+    if (!gesture.httpRequestMessageBody && !gesture.httpRequestUrl) {
         NSLog(@"no action is defined for this gesture");
         return;
     }
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString: self.httpRequest]];
-    NSString *jsonString = gesture.httpRequest;
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString: gesture.httpRequestUrl]];
+    NSString *jsonString = gesture.httpRequestMessageBody;
     [self sendRequest:request withJson:jsonString];
     
 #warning TODO implement the adding as a positive sample if the user doesn't complain

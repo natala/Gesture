@@ -13,7 +13,8 @@
 #pragma mark - attributes
 @dynamic timeStampCreated;
 @dynamic timeStampUpdated;
-@dynamic httpRequest;
+@dynamic httpRequestMessageBody;
+@dynamic httpRequestUrl;
 
 #pragma mark - relationships
 @dynamic gestureSet;

@@ -9,7 +9,8 @@
         <relationship name="gesture" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NZGesture" inverseName="label" inverseEntity="NZGesture" syncable="YES"/>
     </entity>
     <entity name="NZGesture" syncable="YES">
-        <attribute name="httpRequest" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="httpRequestMessageBody" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="httpRequestUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="timeStampCreated" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="timeStampUpdated" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="gestureSet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NZGestureSet" inverseName="gestures" inverseEntity="NZGestureSet" syncable="YES"/>
@@ -66,9 +67,9 @@
         <relationship name="sensorData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NZSensorData" inverseName="yawPitchRoll" inverseEntity="NZSensorData" syncable="YES"/>
     </entity>
     <elements>
-        <element name="NZClassificationPipeline" positionX="396" positionY="146" width="216" height="58"/>
+        <element name="NZClassificationPipeline" positionX="306" positionY="180" width="216" height="58"/>
         <element name="NZClassLabel" positionX="871" positionY="36" width="128" height="88"/>
-        <element name="NZGesture" positionX="691" positionY="-88" width="128" height="148"/>
+        <element name="NZGesture" positionX="691" positionY="-88" width="128" height="163"/>
         <element name="NZGestureSet" positionX="846" positionY="-169" width="126" height="88"/>
         <element name="NZGravity" positionX="-63" positionY="-193" width="128" height="103"/>
         <element name="NZLinearAcceleration" positionX="-63" positionY="-69" width="128" height="105"/>

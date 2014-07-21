@@ -10,7 +10,7 @@
 #import "NZGesture.h"
 #import "NZSensorDataRecordingManager.h"
 
-@interface NZGestureConfigurationVC : UIViewController <NZSensorDataRecordingManagerObserver>
+@interface NZGestureConfigurationVC : UIViewController <NZSensorDataRecordingManagerObserver, UIPopoverControllerDelegate>
 
 #pragma mark - properties
 /**
@@ -22,7 +22,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *stopGestureButton;
 @property (weak, nonatomic) IBOutlet UIButton *learnGestureButton;
 @property (weak, nonatomic) IBOutlet UILabel *numOfTrainingSamples;
-@property (weak, nonatomic) IBOutlet UITextField *httpRequestTextField;
 
 
 
@@ -44,11 +43,7 @@
  */
 - (IBAction)learnGestureTapped:(id)sender;
 
-/**
- * enter the http request to be executed when performing a gesture
- */
-- (IBAction)EditingHttpRequestTextFieldDidEnd:(id)sender;
-
+- (IBAction)setupHttpRequestButtonTapped:(id)sender;
 
 
 @end
