@@ -36,6 +36,7 @@
     NZSetupHttpRequestVC *httpRequestVc = [storyboard instantiateViewControllerWithIdentifier:@"HttpRequestPopoverVC"];
     
     self.popover = [[UIPopoverController alloc] initWithContentViewController:httpRequestVc];
+    [self.popover setPopoverContentSize:CGSizeMake(700, 300)];
     self.popover.delegate = self;
     //self.numOfTrainingSamples.text = [NSString stringWithFormat:@"%d", [[NZPipelineController sharedManager] numberOfSamplesForClassLabelIndex:self.gesture.label.index]];
     // Do any additional setup after loading the view.
@@ -124,7 +125,7 @@
     vc.urlTextField.text = @"http://192.168.1.105/api/newdeveloper/lights/1/state";
     vc.messageBodyTextField.text = @"{\"on\":true, \"br\":255, \"hue\":1000}";
     UIButton *senderButton = (UIButton *)sender;
-    [self.popover presentPopoverFromRect:senderButton.bounds inView:senderButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    [self.popover presentPopoverFromRect:senderButton.bounds inView:senderButton permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
 }
 
 #pragma mark - popover controller delegate methods
