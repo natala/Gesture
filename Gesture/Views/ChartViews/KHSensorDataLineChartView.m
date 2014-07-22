@@ -44,7 +44,7 @@
 		if (self.countOfSensorDataToDisplay == -1) {
 			// If more than 500 values are displayed the app crashes
 			//self.countOfSensorDataToDisplay = 500;
-            self.countOfSensorDataToDisplay = 25;
+            self.countOfSensorDataToDisplay = 10;
 		}
 
 		NSMutableArray *sensorDataToDisplay;
@@ -62,7 +62,7 @@
 
 		_sensorData = sensorDataToDisplay;
 
-		[self updateChart];
+//		[self updateChart];
 	}
 }
 
@@ -89,7 +89,7 @@
 
 		_specialSensorData = sensorDataToDisplay;
 
-		[self updateChart];
+		//[self updateChart];
 	}
 }
 

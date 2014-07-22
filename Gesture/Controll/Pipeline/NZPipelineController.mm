@@ -104,6 +104,18 @@ GRT::TimeSeriesClassificationData dataToBeClassified;
     
 }
 
+- (void)removeAllSamplesWithLable:(NZClassLabel *)classLabel
+{
+    trainingData.eraseAllSamplesWithClassLabel([classLabel.index unsignedIntegerValue]);
+}
+
+- (void)addPositive:(BOOL)isPositive samples:(NSArray *)samples withLabel:(NZClassLabel *)classLabel
+{
+    for (NZSensorDataSet *sample in samples) {
+        [self addPositive:isPositive sample:sample withLabel:classLabel];
+    }
+}
+
 - (int)numberOfClasses
 {
    // GRT::DTW *dtw = (GRT::DTW *)grtPipeline.getClassifier();

@@ -87,7 +87,6 @@
 		[self updateChart];
 	}
  */
-    
     if (super.sensorData != sensorData) {
         super.sensorData = sensorData;
         
@@ -144,7 +143,7 @@
         
         super.components = components;
         super.xLabels = xLabels;
-        
+       //[self updateChart];
         [super setNeedsDisplay];
     }
     
@@ -162,7 +161,7 @@
 	if (self.sensorData.count >= 1) {
 		for (int i = 0; i < self.sensorData.count; i++) {
         
-            NSManagedObjectContext *context = [[NZCoreDataManager sharedManager] managedObjectContext];
+           // NSManagedObjectContext *context = [[NZCoreDataManager sharedManager] managedObjectContext];
             
 			NZSensorData *singleSensorData = [self.sensorData objectAtIndex:i];
             

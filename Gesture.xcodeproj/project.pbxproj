@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8A0DF6D9195C4DF70029E5F3 /* NZRingRecordingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0DF6D8195C4DF70029E5F3 /* NZRingRecordingVC.m */; };
 		8A0DF6E4195C63770029E5F3 /* NZSensorDataRecordingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0DF6E3195C63770029E5F3 /* NZSensorDataRecordingManager.m */; };
+		8A37E904197EAAE100CC08BB /* NZEditGestureSamplesTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A37E903197EAAE100CC08BB /* NZEditGestureSamplesTVC.m */; };
 		8A5AB06919783369006B2FBC /* NZPipelineController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8A5AB06819783369006B2FBC /* NZPipelineController.mm */; };
 		8A6AF54C195CBAF20015B571 /* NZSensorDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6AF54B195CBAF20015B571 /* NZSensorDataHelper.m */; };
 		8A922904195C3A3800DF7743 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A922903195C3A3800DF7743 /* Foundation.framework */; };
@@ -187,6 +188,8 @@
 		8A0DF6D8195C4DF70029E5F3 /* NZRingRecordingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZRingRecordingVC.m; path = ViewControllers/NZRingRecordingVC.m; sourceTree = "<group>"; };
 		8A0DF6E2195C63770029E5F3 /* NZSensorDataRecordingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZSensorDataRecordingManager.h; path = Controll/Recording/NZSensorDataRecordingManager.h; sourceTree = "<group>"; };
 		8A0DF6E3195C63770029E5F3 /* NZSensorDataRecordingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZSensorDataRecordingManager.m; path = Controll/Recording/NZSensorDataRecordingManager.m; sourceTree = "<group>"; };
+		8A37E902197EAAE100CC08BB /* NZEditGestureSamplesTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZEditGestureSamplesTVC.h; path = "ViewControllers/popover : popups/NZEditGestureSamplesTVC.h"; sourceTree = "<group>"; };
+		8A37E903197EAAE100CC08BB /* NZEditGestureSamplesTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZEditGestureSamplesTVC.m; path = "ViewControllers/popover : popups/NZEditGestureSamplesTVC.m"; sourceTree = "<group>"; };
 		8A5AB06719783369006B2FBC /* NZPipelineController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZPipelineController.h; path = Controll/Pipeline/NZPipelineController.h; sourceTree = "<group>"; };
 		8A5AB06819783369006B2FBC /* NZPipelineController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = NZPipelineController.mm; path = Controll/Pipeline/NZPipelineController.mm; sourceTree = "<group>"; };
 		8A6AF54A195CBAF20015B571 /* NZSensorDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZSensorDataHelper.h; path = Model/NZSensorDataHelper.h; sourceTree = "<group>"; };
@@ -764,6 +767,7 @@
 				8A0DF6D8195C4DF70029E5F3 /* NZRingRecordingVC.m */,
 				8AC22B76197557DA0019A1A9 /* NZPopupViewController.h */,
 				8A922921195C3A3800DF7743 /* NZDetailViewController.m */,
+				8A922920195C3A3800DF7743 /* NZDetailViewController.h */,
 				8AD0200A19795014003A09EE /* NZMainControlVC.h */,
 				8AD0200B19795014003A09EE /* NZMainControlVC.m */,
 				8AD0200F197AE3B1003A09EE /* NZPipelineConfigurationVC.h */,
@@ -881,11 +885,12 @@
 			isa = PBXGroup;
 			children = (
 				8AC22B77197557DA0019A1A9 /* NZPopupViewController.m */,
-				8A922920195C3A3800DF7743 /* NZDetailViewController.h */,
 				8AD02019197D717A003A09EE /* NZHttpRequestPopoverController.h */,
 				8AD0201A197D717A003A09EE /* NZHttpRequestPopoverController.m */,
 				8AD0201C197D7471003A09EE /* NZSetupHttpRequestVC.h */,
 				8AD0201D197D7471003A09EE /* NZSetupHttpRequestVC.m */,
+				8A37E902197EAAE100CC08BB /* NZEditGestureSamplesTVC.h */,
+				8A37E903197EAAE100CC08BB /* NZEditGestureSamplesTVC.m */,
 			);
 			name = "popovers / popups";
 			sourceTree = "<group>";
@@ -1933,6 +1938,7 @@
 				8AF7F9941969C89F00DB6D7C /* MinDistModel.cpp in Sources */,
 				8AF7F9D91969C89F00DB6D7C /* TestingLog.cpp in Sources */,
 				8A922922195C3A3800DF7743 /* NZDetailViewController.m in Sources */,
+				8A37E904197EAAE100CC08BB /* NZEditGestureSamplesTVC.m in Sources */,
 				8AD0201E197D7471003A09EE /* NZSetupHttpRequestVC.m in Sources */,
 				8ADB501D1962CE4200DC2784 /* NZSensorDataSet+CoreData.m in Sources */,
 				8AF7F98A1969C89F00DB6D7C /* BAG.cpp in Sources */,

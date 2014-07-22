@@ -69,7 +69,7 @@
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
     // enable deleting the sensor data sets
-    [self.sensorDataTableView setEditing:YES animated:YES];
+    //[self.sensorDataTableView setEditing:YES animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -138,7 +138,7 @@
 {
     [[NZSensorDataRecordingManager sharedManager] stopRecordingCurrentSensorDataSet];
 }
-
+/*
 #pragma mark - TableViw
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -201,7 +201,9 @@
     NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.textLabel.text = [[object valueForKey:@"timeStampCreated"] description];
 }
+*/
 
+/*
 #pragma mark - editing the view
 
 - (void)insertNewObject:(id)sender {
@@ -225,9 +227,10 @@
     
     NSLog(@"done inserting new item");
 }
+ */
 
 #pragma mark - Fetched results controller
-
+/*
 - (NSFetchedResultsController *)fetchedResultsController
 {
     if (_fetchedResultsController != nil) {
@@ -316,22 +319,7 @@
 {
     [self.sensorDataTableView endUpdates];
 }
-
-/*
- // Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed.
- 
- - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
- {
- // In the simplest, most efficient, case, reload the table view.
- [self.tableView reloadData];
- }
  */
-
-#pragma mark - Pop Up View Controller Delegate Methods
-- (void)didFinishFillingFormWithData:(NSDictionary *)form
-{
-}
-
 
 #pragma mark - Helper
 

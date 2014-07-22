@@ -24,8 +24,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *orientationLabel;
 
 #pragma mark - Core Data related properties
-@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
-@property (weak, nonatomic) IBOutlet UITableView *sensorDataTableView;
+// @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+// @property (weak, nonatomic) IBOutlet UITableView *sensorDataTableView;
 
 #pragma mark - detailed views
 

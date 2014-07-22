@@ -7,6 +7,7 @@
 //
 
 #import "NZSensorDataRecordingManager.h"
+#import "NZLinearAcceleration.h"
 
 @implementation NZSensorDataRecordingManager
 
@@ -57,7 +58,15 @@
 
 - (BOOL)prepareForRecordingSensorDataSet
 {
-    return [[NZArduinoCommunicationManager sharedManager] connect];
+    if ([[NZArduinoCommunicationManager sharedManager] connect]) {
+        for (id<NZSensorDataRecordingManagerObserver>observer in self.sensorDataRecordingObservers){
+            if ([observer respondsToSelector:@selector(connected)]) {
+                [observer connected];
+            }
+        }
+        return YES;
+    }
+    return NO;
 }
 
 - (BOOL)startRecordingNewSensorDataSet

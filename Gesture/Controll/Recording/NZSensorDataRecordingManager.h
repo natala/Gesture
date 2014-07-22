@@ -19,6 +19,8 @@
 - (void)didResumeRecordingSensorData:(NZSensorDataSet *) sensorDataSet;
 - (void)didReceiveSensorData:(NZSensorData *) sensorData forSensorDataSer:(NZSensorDataSet *) sensorDataSet;
 - (void)didStopRecordingSensorDataSet:(NZSensorDataSet *) sensorDataSet;
+- (void)disconnected;
+- (void)connected;
 
 @end
 

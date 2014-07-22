@@ -35,6 +35,20 @@
 - (void)addPositive:(BOOL)isPositive sample:(NZSensorDataSet *)sensorDataSample withLabel:(NZClassLabel *)classLabel;
 
 /**
+ * adds a gesture and retrains the classifier for this gesture
+ * @param isPositive true if it is a positive sample and false if it is a negative sample for this class label
+ * @param samples an array of samples, each sample containing the gesture recorded by the user to be added to the classification data set
+ * @param classLabel the class label of the sample
+ */
+- (void)addPositive:(BOOL)isPositive samples:(NSArray *)samples withLabel:(NZClassLabel *)classLabel;
+
+/**
+ * removes all samples from trainijng set
+ * @param classLabel the class label of the sample
+ */
+- (void)removeAllSamplesWithLable:(NZClassLabel *)classLabel;
+
+/**
  * train the classifier after adding new samples. Retrains the classifier if it was already trained
  * @note should be always called whenever new gesture has been added or modified
  */

@@ -11,10 +11,12 @@
 #import "NZPipelineController.h"
 #import "NZClassLabel.h"
 #import "NZSetupHttpRequestVC.h"
+#import "NZEditGestureSamplesTVC.h"
 
 @interface NZGestureConfigurationVC ()
 
 @property (nonatomic, retain) UIPopoverController *popover;
+@property (nonatomic, retain) UIPopoverController *gestureSamplesPopover;
 
 @end
 
@@ -34,10 +36,15 @@
     [super viewDidLoad];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     NZSetupHttpRequestVC *httpRequestVc = [storyboard instantiateViewControllerWithIdentifier:@"HttpRequestPopoverVC"];
-    
     self.popover = [[UIPopoverController alloc] initWithContentViewController:httpRequestVc];
     [self.popover setPopoverContentSize:CGSizeMake(700, 300)];
     self.popover.delegate = self;
+    
+    NZEditGestureSamplesTVC *samplesVC = [storyboard instantiateViewControllerWithIdentifier:@"GestureSamplesTVC"];
+    self.gestureSamplesPopover = [[UIPopoverController alloc] initWithContentViewController:samplesVC];
+    self.gestureSamplesPopover.delegate = self;
+    
+   // self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editSamplesButtonSelected:)];
     //self.numOfTrainingSamples.text = [NSString stringWithFormat:@"%d", [[NZPipelineController sharedManager] numberOfSamplesForClassLabelIndex:self.gesture.label.index]];
     // Do any additional setup after loading the view.
 }
@@ -51,9 +58,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.startGestureButton.enabled = true;
-    self.stopGestureButton.enabled = false;
-    self.learnGestureButton.enabled = false;
+    //self.samplesButton.titleLabel.text = [NSString stringWithFormat:@"%d samples", [self.gesture.positiveSamples count]];
 
     self.numOfTrainingSamples.text = [NSString stringWithFormat:@"%d", [[NZPipelineController sharedManager] numberOfSamplesForClassLabelIndex:self.gesture.label.index]];
 
@@ -64,11 +69,8 @@
     [super viewDidAppear:animated];
     BOOL didConnect = [[NZSensorDataRecordingManager sharedManager] prepareForRecordingSensorDataSet];
     if (didConnect) {
-        self.startGestureButton.enabled = true;
-    } else {
-        self.startGestureButton.enabled = false;
+        self.startStopRecordingGestureButton.enabled = true;
     }
-            self.stopGestureButton.enabled = false;
     if (([self.gesture.positiveSamples count] > 0) || ([self.gesture.negativeSamples count] > 0)) {
         self.learnGestureButton.enabled = true;
     }
@@ -95,28 +97,25 @@
 
 #pragma mark - IBActions
 
-- (IBAction)startGestureTapped:(id)sender {
+- (IBAction)learnGestureTapped:(id)sender {
+    [[NZPipelineController sharedManager] trainClassifier];
+
+}
+
+- (IBAction)startStopRecordingGestureButtonTouchDown:(id)sender {
     BOOL startedNewRecording = [[NZSensorDataRecordingManager sharedManager] startRecordingNewSensorDataSet];
     if (startedNewRecording) {
-        self.startGestureButton.enabled = false;
-        self.stopGestureButton.enabled = true;
         self.learnGestureButton.enabled = false;
     }
 }
-- (IBAction)stopGestureTapped:(id)sender {
+
+- (IBAction)startStopRecordingGestureButtonTouchUpInside:(id)sender {
     [[NZSensorDataRecordingManager sharedManager] stopRecordingCurrentSensorDataSet];
-    self.stopGestureButton.enabled = false;
-    self.startGestureButton.enabled = true;
     if (([self.gesture.positiveSamples count] > 0) || ([self.gesture.negativeSamples count] > 0)) {
         self.learnGestureButton.enabled = true;
     }
     
     self.numOfTrainingSamples.text = [NSString stringWithFormat:@"%d", [[NZPipelineController sharedManager] numberOfSamplesForClassLabelIndex:self.gesture.label.index]];
-}
-
-- (IBAction)learnGestureTapped:(id)sender {
-    [[NZPipelineController sharedManager] trainClassifier];
-
 }
 
 - (IBAction)setupHttpRequestButtonTapped:(id)sender {
@@ -125,28 +124,58 @@
     vc.urlTextField.text = @"http://192.168.1.105/api/newdeveloper/lights/1/state";
     vc.messageBodyTextField.text = @"{\"on\":true, \"br\":255, \"hue\":1000}";
     UIButton *senderButton = (UIButton *)sender;
-    [self.popover presentPopoverFromRect:senderButton.bounds inView:senderButton permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
+    [self.popover presentPopoverFromRect:senderButton.bounds inView:senderButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+- (IBAction)samplesButtonTapped:(id)sender {
+    NZEditGestureSamplesTVC *vc = (NZEditGestureSamplesTVC *)self.gestureSamplesPopover.contentViewController;
+    vc.gesture = self.gesture;
+    UIButton *senderButton = (UIButton *)sender;
+    [self.gestureSamplesPopover presentPopoverFromRect:senderButton.bounds inView:senderButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 #pragma mark - popover controller delegate methods
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
 {
-    NZSetupHttpRequestVC *vc = (NZSetupHttpRequestVC *)popoverController.contentViewController;
-    self.gesture.httpRequestUrl = vc.urlTextField.text;
-    self.gesture.httpRequestMessageBody = vc.messageBodyTextField.text;
+    if ([popoverController.contentViewController isKindOfClass:[NZSetupHttpRequestVC class]]) {
+        NZSetupHttpRequestVC *vc = (NZSetupHttpRequestVC *)popoverController.contentViewController;
+        self.gesture.httpRequestUrl = vc.urlTextField.text;
+        self.gesture.httpRequestMessageBody = vc.messageBodyTextField.text;
     
-    // update the database
-    NSManagedObjectContext *context = [[NZCoreDataManager sharedManager] managedObjectContext];
-    NSError *error = nil;
-    if (![context save:&error]) {
-        // Replace this implementation with code to handle the error appropriately.
-        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
+        // update the database
+        NSManagedObjectContext *context = [[NZCoreDataManager sharedManager] managedObjectContext];
+        NSError *error = nil;
+        if (![context save:&error]) {
+            // Replace this implementation with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            abort();
+        }
+    } else if ([popoverController.contentViewController isKindOfClass:[NZEditGestureSamplesTVC class]]) {
+        //self.samplesButton.titleLabel.text = [NSString stringWithFormat:@"%d samples", [self.gesture.positiveSamples count]];
+        
+        // relode the samples for this gesture in the pipeline controller
+        if ([self.gesture.positiveSamples count] < [[NZPipelineController sharedManager] numberOfSamplesForClassLabelIndex:self.gesture.label.index] ) {
+            [[NZPipelineController sharedManager] removeAllSamplesWithLable:self.gesture.label];
+            [[NZPipelineController sharedManager] addPositive:YES samples:[self.gesture.positiveSamples allObjects] withLabel:self.gesture.label];
+            self.numOfTrainingSamples.text = [NSString stringWithFormat:@"%d", [[NZPipelineController sharedManager] numberOfSamplesForClassLabelIndex:self.gesture.label.index]];
+        }
     }
+
 }
 
 #pragma mark - Sensor Data Recording Manager Observer methods
+
+- (void)disconnected
+{
+    NSLog(@"The ring disconnected");
+    self.startStopRecordingGestureButton.enabled = false;
+}
+
+- (void)connected
+{
+    self.startStopRecordingGestureButton.enabled = true;
+}
 
 - (void)didStartRecordingSensorData:(NZSensorDataSet *) sensorDataSet
 {
@@ -187,7 +216,9 @@
     }
     
     // update the classifier with the new sample
-    [[NZPipelineController sharedManager] addPositive:YES sample:sensorDataSet withLabel:self.gesture.label];
+    if ([sensorDataSet.sensorData count] > 0) {
+        [[NZPipelineController sharedManager] addPositive:YES sample:sensorDataSet withLabel:self.gesture.label];
+    }
 }
 
 @end

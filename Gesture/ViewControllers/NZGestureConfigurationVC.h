@@ -18,32 +18,34 @@
  */
 @property (nonatomic, strong) NZGesture *gesture;
 
-@property (weak, nonatomic) IBOutlet UIButton *startGestureButton;
-@property (weak, nonatomic) IBOutlet UIButton *stopGestureButton;
+
+#pragma UI Elements
 @property (weak, nonatomic) IBOutlet UIButton *learnGestureButton;
 @property (weak, nonatomic) IBOutlet UILabel *numOfTrainingSamples;
-
-
+@property (weak, nonatomic) IBOutlet UIButton *samplesButton;
+@property (weak, nonatomic) IBOutlet UIButton *startStopRecordingGestureButton;
 
 #pragma mark - functions
 #pragma IBActions
-/**
- * start recording sensor data
- */
-- (IBAction)startGestureTapped:(id)sender;
-
-
-/**
- * stop recording data
- */
-- (IBAction)stopGestureTapped:(id)sender;
 
 /**
  * let the classifier learn this gestre
  */
 - (IBAction)learnGestureTapped:(id)sender;
 
+/**
+ * start recording the data
+ */
+- (IBAction)startStopRecordingGestureButtonTouchDown:(id)sender;
+
+/**
+ * stop recording data
+ */
+- (IBAction)startStopRecordingGestureButtonTouchUpInside:(id)sender;
+
+
 - (IBAction)setupHttpRequestButtonTapped:(id)sender;
+- (IBAction)samplesButtonTapped:(id)sender;
 
 
 @end
