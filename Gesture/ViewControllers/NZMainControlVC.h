@@ -22,7 +22,9 @@
 - (IBAction)startButtonTapped:(id)sender;
 - (IBAction)stopButtonTapped:(id)sender;
 - (IBAction)singleGroupModeChanged:(id)sender;
-- (IBAction)startStopGestureTapped:(id)sender;
+//- (IBAction)startStopGestureTapped:(id)sender;
+- (IBAction)startStopGestureTouchDown:(id)sender;
+- (IBAction)startStopGestureTouchUpInside:(id)sender;
 
 
 @end

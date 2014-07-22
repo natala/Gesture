@@ -281,12 +281,13 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="baa-kC-Xq5">
                                 <rect key="frame" x="598" y="672" width="85" height="76"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="52"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="70"/>
                                 <state key="normal" title="✦">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="startStopGestureTapped:" destination="9t6-F5-LUv" eventType="touchUpInside" id="Mqc-pM-Wtg"/>
+                                    <action selector="startStopGestureTouchDown:" destination="9t6-F5-LUv" eventType="touchDown" id="Aji-gK-E4p"/>
+                                    <action selector="startStopGestureTouchUpInside:" destination="9t6-F5-LUv" eventType="touchUpInside" id="Me8-kV-cwz"/>
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Recognized label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d2J-xl-Wvs">

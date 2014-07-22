@@ -155,7 +155,8 @@
 - (IBAction)singleGroupModeChanged:(id)sender {
 }
 
-- (IBAction)startStopGestureTapped:(id)sender
+/*
+ - (IBAction)startStopGestureTapped:(id)sender
 {
     BOOL isRecording = self.stopStartGestureButton.selected;
     if (!isRecording) {
@@ -166,5 +167,13 @@
     }
     [self.stopStartGestureButton setSelected:isRecording];
     
+}
+*/
+- (IBAction)startStopGestureTouchDown:(id)sender {
+    [[NZSensorDataRecordingManager sharedManager] startRecordingNewSensorDataSet];
+}
+
+- (IBAction)startStopGestureTouchUpInside:(id)sender {
+    [[NZSensorDataRecordingManager sharedManager] stopRecordingCurrentSensorDataSet];
 }
 @end
