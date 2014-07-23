@@ -62,6 +62,20 @@
 - (void)pauseRecordingOfTheCurrentSensorDataSet;
 - (void)resumeRecordingOfTheCurrentSensorDataSet;
 
+/**
+ * checks if the arduino is connected
+ * @note doesn't mean that the recording sensor data recording manager is reciving data yet. For this call the isReceivingData
+ * @return weather the arduino is connected
+ */
+- (BOOL)isConnected;
+
+/**
+ * checks if the sendora data recording manager is receiving data form the arduino
+ * @note is means basically that it is the delegate of the arduino connection manager
+ * @return weather is receiving sensor data
+ */
+- (BOOL)isReceivingData;
+
 #pragma mark - manage observers
 - (void)addRecordingObserver:(id<NZSensorDataRecordingManagerObserver>) observer;
 - (void)removeRecordingObserver:(id<NZSensorDataRecordingManagerObserver>) observer;

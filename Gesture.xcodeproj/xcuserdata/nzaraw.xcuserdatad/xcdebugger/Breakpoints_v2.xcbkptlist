@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Gesture/ViewControllers/NZMainControlVC.m"
-            timestampString = "427631541.30937"
+            timestampString = "427796351.851707"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
             landmarkName = "-didStopRecordingSensorDataSet:"
             landmarkType = "5">
          </BreakpointContent>
@@ -96,6 +96,22 @@
             startingLineNumber = "157"
             endingLineNumber = "157"
             landmarkName = "-updateChart"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Gesture/Controll/Connection/Arduino/NZArduinoCommunicationManager.m"
+            timestampString = "427796499.58091"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "-bleServiceDidDisconnect:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

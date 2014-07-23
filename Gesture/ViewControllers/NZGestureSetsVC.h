@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "NZPopupViewController.h"
 
-@interface NZGestureSetsVC : UITableViewController <NSFetchedResultsControllerDelegate, UIActionSheetDelegate, NZPopupViewControllerDelegate>
+@interface NZGestureSetsVC : UITableViewController <NSFetchedResultsControllerDelegate, UIActionSheetDelegate, NZPopupViewControllerDelegate, UIPopoverControllerDelegate>
 
 @end

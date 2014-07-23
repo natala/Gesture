@@ -22,6 +22,10 @@
 @property (nonatomic, strong) NZPopupViewController *popupVc;
 @property (nonatomic, strong) NSDate *currentDate;
 
+@property (nonatomic, strong) UIBarButtonItem *addButton;
+@property (nonatomic, strong) UIBarButtonItem *editButton;
+@property (nonatomic, strong) UIBarButtonItem *doneButton;
+
 @end
 
 @implementation NZGestureSetsVC
@@ -39,9 +43,10 @@
 {
     [super viewDidLoad];
     
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewItem:)];
-    self.navigationItem.rightBarButtonItem = addButton;
-    [self.tableView setEditing:YES animated:YES];
+    self.addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewItem:)];
+    self.editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(startEditing:)];
+    self.doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneEditing:)];
+    self.navigationItem.rightBarButtonItems = @[self.editButton, self.addButton];
     
     // setup popup VC
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -50,8 +55,7 @@
         self.popupVc = (NZPopupViewController *)popUpVc;
         self.popupVc.delegate = self;
     }
-    self.tableView.allowsSelectionDuringEditing = YES;
-
+    
     UIViewController *gesturesVC = [storyboard instantiateViewControllerWithIdentifier:@"GestureSetVC"];
     if ([gesturesVC isKindOfClass:[NZGesturesVC class]]) {
         self.gestureSetVC = (NZGesturesVC *)gesturesVC;
@@ -142,11 +146,26 @@
 
 #pragma mark - methods handling editing of the rable view cells 
 - (void)insertNewItem:(id)sender {
+    UIButton *senderButton = (UIButton *)sender;
     [self presentViewController:self.popupVc animated:YES completion:nil];
     self.currentDate = [NSDate date];
     self.popupVc.timestampText.text = [self.currentDate description];
     self.popupVc.nameText.text = self.popupVc.timestampText.text;
     //self.popupVc.view.frame = self.view.frame;
+}
+
+- (void)startEditing:(id)sender
+{
+    self.navigationItem.rightBarButtonItems = @[self.doneButton, self.addButton];
+    [self.tableView setEditing:YES animated:YES];
+    self.addButton.enabled = false;
+}
+
+- (void)doneEditing:(id)sender
+{
+    self.navigationItem.rightBarButtonItems = @[self.editButton, self.addButton];
+    [self.tableView setEditing:NO animated:YES];
+    self.addButton.enabled = true;
 }
 
 #pragma mark - Fetched results controller

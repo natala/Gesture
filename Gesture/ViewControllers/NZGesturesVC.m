@@ -24,6 +24,10 @@
 @property (nonatomic, strong) NSDate *currentDate;
 @property (nonatomic, strong) NZGestureConfigurationVC *gestureConfigurationVc;
 
+@property (nonatomic, strong) UIBarButtonItem *addButton;
+@property (nonatomic, strong) UIBarButtonItem *editButton;
+@property (nonatomic, strong) UIBarButtonItem *doneButton;
+
 @end
 
 @implementation NZGesturesVC
@@ -41,9 +45,10 @@
 {
     [super viewDidLoad];
     
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewItem:)];
-    self.navigationItem.rightBarButtonItem = addButton;
-    [self.tableView setEditing:YES animated:YES];
+    self.addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewItem:)];
+    self.editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(startEditing:)];
+    self.doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneEditing:)];
+    self.navigationItem.rightBarButtonItems = @[self.editButton, self.addButton];
     
     // setup popup VC
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -58,11 +63,6 @@
     if ([gestureConfigurationVc isKindOfClass:[NZGestureConfigurationVC class]]) {
         self.gestureConfigurationVc = (NZGestureConfigurationVC *)gestureConfigurationVc;
     }
-    
-#warning Set up the editing of the table view properly - currently it is all the time in Editing mode :/
-    self.tableView.allowsSelectionDuringEditing = YES;
-
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -159,6 +159,21 @@
     self.popupVc.timestampText.text = [self.currentDate description];
     self.popupVc.nameText.text = self.popupVc.timestampText.text;
 }
+
+- (void)startEditing:(id)sender
+{
+    self.navigationItem.rightBarButtonItems = @[self.doneButton, self.addButton];
+    [self.tableView setEditing:YES animated:YES];
+    self.addButton.enabled = false;
+}
+
+- (void)doneEditing:(id)sender
+{
+    self.navigationItem.rightBarButtonItems = @[self.editButton, self.addButton];
+    [self.tableView setEditing:NO animated:YES];
+    self.addButton.enabled = true;
+}
+
 
 #pragma mark - Pop Up VC Delegate methods
 - (void)didFinishFillingFormWithData:(NSDictionary *)form

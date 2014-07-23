@@ -142,6 +142,12 @@
     //[self stopRecordingCurrentSensorDataSet];
     self.currentSet = nil;
     [[NZArduinoCommunicationManager sharedManager] disconnect];
+    
+    for (id<NZSensorDataRecordingManagerObserver> observer in self.sensorDataRecordingObservers) {
+        if ([observer respondsToSelector:@selector(disconnected)]) {
+            [observer disconnected];
+        }
+    }
 }
 
 - (void)stopRecordingCurrentSensorDataSet
@@ -153,6 +159,16 @@
         }
     }
     self.currentSet = nil;
+}
+
+- (BOOL)isConnected
+{
+    return [[NZArduinoCommunicationManager sharedManager] isConnected];
+}
+
+- (BOOL)isReceivingData
+{
+    return [[NZArduinoCommunicationManager sharedManager].delegate isEqual:self];
 }
 
 @end

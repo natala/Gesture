@@ -13,7 +13,9 @@
 
 @interface NZMainControlVC ()
 
-@property NSString *httpRequest;
+//@property NSString *httpRequest;
+@property BOOL isSingleMode;
+@property (nonatomic, retain) NSString *lastRecognizedGesture;
 
 @end
 
@@ -30,18 +32,36 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.startButton.enabled = true;
-    self.stopButton.enabled = false;
-    [self.singleGroupSegmentControl setEnabled:false forSegmentAtIndex:1];
-    self.stopStartGestureButton.enabled = false;
-    self.httpRequest = @"http://192.168.1.105/api/newdeveloper/lights/2/state";
+    //self.httpRequest = @"http://192.168.1.105/api/newdeveloper/lights/2/state";
     // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+    
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.startButton.enabled = ![[NZSensorDataRecordingManager sharedManager] isConnected];
+    self.stopButton.enabled = !self.startButton.enabled;
+    self.isSingleMode = YES;
+    if (self.isSingleMode) {
+        [self.singleGroupSegmentControl setEnabled:false forSegmentAtIndex:1];
+       // [self.singleGroupSegmentControl setEnabled:true forSegmentAtIndex:2];
+    } else {
+      //  [self.singleGroupSegmentControl setEnabled:true forSegmentAtIndex:1];
+        [self.singleGroupSegmentControl setEnabled:false forSegmentAtIndex:2];
+    }
+    self.stopStartGestureButton.enabled = !self.startButton.enabled;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
 }
 
 /*
@@ -85,6 +105,7 @@
     if (classIndex == -1) {
         NSLog(@"unable to recognise the given gesture");
         self.recognizedGestureNameLabel.text = @"Recognized label";
+        self.lastRecognizedGesture = nil;
         return;
     }
     
@@ -94,6 +115,7 @@
         self.recognizedGestureNameLabel.text = [NSString stringWithFormat:@"%d",classIndex ];
     } else {
         self.recognizedGestureNameLabel.text = gesture.label.name;
+        self.lastRecognizedGesture = gesture.label.name;
     }
     
     // perform the http request
@@ -106,6 +128,18 @@
     [self sendRequest:request withJson:jsonString];
     
 #warning TODO implement the adding as a positive sample if the user doesn't complain
+}
+
+- (void)connected
+{
+
+}
+
+- (void)disconnected
+{
+    self.startButton.enabled = true;
+    self.stopButton.enabled = false;
+    self.stopStartGestureButton.enabled = false;
 }
 
 #pragma mark - HTTPP request helpers
@@ -142,13 +176,12 @@
 
 - (IBAction)stopButtonTapped:(id)sender {
     [[NZSensorDataRecordingManager sharedManager] removeRecordingObserver:self];
-    self.startButton.enabled = true;
-    self.stopButton.enabled = false;
     if (self.startButton.selected) {
         [[NZSensorDataRecordingManager sharedManager] stopRecordingCurrentSensorDataSet];
     }
     [[NZSensorDataRecordingManager sharedManager] disconnect];
-    self.stopStartGestureButton.selected = false;
+    self.startButton.enabled = true;
+    self.stopButton.enabled = false;
     self.stopStartGestureButton.enabled = false;
 }
 

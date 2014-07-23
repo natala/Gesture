@@ -121,8 +121,16 @@
 - (IBAction)setupHttpRequestButtonTapped:(id)sender {
     NZSetupHttpRequestVC *vc
     = (NZSetupHttpRequestVC *)self.popover.contentViewController;
-    vc.urlTextField.text = @"http://192.168.1.105/api/newdeveloper/lights/1/state";
-    vc.messageBodyTextField.text = @"{\"on\":true, \"br\":255, \"hue\":1000}";
+    if (self.gesture.httpRequestUrl) {
+        vc.urlTextField.text = self.gesture.httpRequestUrl;
+    } else {
+        vc.urlTextField.text = @"http://192.168.1.105/api/newdeveloper/lights/1/state";
+    }
+    if (self.gesture.httpRequestMessageBody) {
+        vc.messageBodyTextField.text = self.gesture.httpRequestMessageBody;
+    } else {
+        vc.messageBodyTextField.text = @"{\"on\":true, \"br\":255, \"hue\":1000}";
+    }
     UIButton *senderButton = (UIButton *)sender;
     [self.popover presentPopoverFromRect:senderButton.bounds inView:senderButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
