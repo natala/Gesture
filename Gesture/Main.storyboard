@@ -85,7 +85,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="LinearAccelerationGraphView" translatesAutoresizingMaskIntoConstraints="NO" id="JyT-Ar-nBV" customClass="KHLinearAccelerationLineChartView">
-                                <rect key="frame" x="12" y="401" width="202" height="100"/>
+                                <rect key="frame" x="12" y="401" width="335" height="166"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
@@ -226,7 +226,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Master" id="Zdf-7t-Un8"/>
                     <connections>
-                        <outlet property="ringConnectionCell" destination="sXG-IX-9nQ" id="EoF-Pc-HJ7"/>
+                        <outlet property="ringConnectionCell" destination="wUy-RS-OLg" id="0LD-gy-Jsi"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
@@ -910,6 +910,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Dxz-yr-JbD"/>
+        <segue reference="3Fs-OV-gqD"/>
     </inferredMetricsTieBreakers>
 </document>

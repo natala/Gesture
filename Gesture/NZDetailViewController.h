@@ -14,7 +14,7 @@
 #import "Views/RecordingSensorDataTableView/NZSensorDataTableView.h"
 #import "NZGraphView.h"
 
-@interface NZDetailViewController : UIViewController <UISplitViewControllerDelegate, NZSensorDataRecordingManagerObserver, NSFetchedResultsControllerDelegate, UITableViewDataSource>
+@interface NZDetailViewController : UIViewController <UISplitViewControllerDelegate, NZSensorDataRecordingManagerObserver, NSFetchedResultsControllerDelegate /*, UITableViewDataSource*/>
 
 #pragma mark - UI Components
 @property (weak, nonatomic) IBOutlet UIButton *startRecordingButton;

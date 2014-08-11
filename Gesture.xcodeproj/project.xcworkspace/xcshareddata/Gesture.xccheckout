@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>445174DA-DA98-4FF2-9163-FEB05A66038A</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Gesture</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>9544DB31-C074-40EC-BB77-E854074C9922</key>
+		<string>https://github.com/nickgillian/grt.git</string>
+		<key>F252052D-5D2D-458C-ABA4-A361FC3E372A</key>
+		<string>https://github.com/natala/Gesture.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Gesture.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>9544DB31-C074-40EC-BB77-E854074C9922</key>
+		<string>../../GRT</string>
+		<key>F252052D-5D2D-458C-ABA4-A361FC3E372A</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/natala/Gesture.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>F252052D-5D2D-458C-ABA4-A361FC3E372A</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>F252052D-5D2D-458C-ABA4-A361FC3E372A</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Gesture</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>9544DB31-C074-40EC-BB77-E854074C9922</string>
+			<key>IDESourceControlWCCName</key>
+			<string>GRT</string>
+		</dict>
+	</array>
+</dict>
+</plist>

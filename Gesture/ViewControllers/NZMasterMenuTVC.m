@@ -35,6 +35,7 @@
     [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
     self.selectedCell = self.ringConnectionCell;
     self.selectedCell.userInteractionEnabled = NO;
+    self.selectedCell.highlighted = true;
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     

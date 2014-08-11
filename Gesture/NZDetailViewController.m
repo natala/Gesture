@@ -66,8 +66,8 @@
     
     //Setup the table view controller editing
     // self.navigationItem.leftBarButtonItem = self.editButtonItem;
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-    self.navigationItem.rightBarButtonItem = addButton;
+   // UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
+   // self.navigationItem.rightBarButtonItem = addButton;
     // enable deleting the sensor data sets
     //[self.sensorDataTableView setEditing:YES animated:YES];
 }

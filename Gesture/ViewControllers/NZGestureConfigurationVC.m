@@ -124,7 +124,7 @@
     if (self.gesture.httpRequestUrl) {
         vc.urlTextField.text = self.gesture.httpRequestUrl;
     } else {
-        vc.urlTextField.text = @"http://192.168.1.105/api/newdeveloper/lights/1/state";
+        vc.urlTextField.text = @"http://10.130.108.81/api/newdeveloper/lights/1/state";
     }
     if (self.gesture.httpRequestMessageBody) {
         vc.messageBodyTextField.text = self.gesture.httpRequestMessageBody;
