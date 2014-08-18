@@ -130,13 +130,23 @@
    // sensorData = [NSDate date];
    // sensorData.sensorID = [NSNumber numberWithInt:data[14]];
     
+    uint8_t header = 85;    // 85 == 01010101xb
+    uint8_t ending = 170;   // 170 == 10101010xb
+    
+    if ( (header != data[1]) && (ending != data[16]) ) {
+        NSLog(@"received package is incomaptible with the defined ring package");
+        return;
+    }
+    
+    int buttonState = data[1] / 16384;
+    
     // Quaternion
     float q[] = { 0.0f, 0.0f, 0.0f, 0.0f };
     
-    q[0] = ((data[6] << 8) | data[7]) / 16384.0f;
-    q[1] = ((data[8] << 8) | data[9]) / 16384.0f;
-    q[2] = ((data[10] << 8) | data[11]) / 16384.0f;
-    q[3] = ((data[12] << 8) | data[13]) / 16384.0f;
+    q[0] = ((data[8] << 8) | data[9]) / 16384.0f;
+    q[1] = ((data[10] << 8) | data[11]) / 16384.0f;
+    q[2] = ((data[12] << 8) | data[13]) / 16384.0f;
+    q[3] = ((data[14] << 8) | data[15]) / 16384.0f;
     
     for (int i = 0; i < 4; i++) {
         if (q[i] >= 2.0f) {
@@ -147,9 +157,9 @@
     // Raw Acceleration
     GLKVector3 rawAcceleration = GLKVector3Make(0, 0, 0);
     
-    rawAcceleration.x = (short)((data[0] << 8) | data[1]);
-    rawAcceleration.y = (short)((data[2] << 8) | data[3]);
-    rawAcceleration.z = (short)((data[4] << 8) | data[5]);
+    rawAcceleration.x = (short)((data[2] << 8) | data[3]);
+    rawAcceleration.y = (short)((data[4] << 8) | data[5]);
+    rawAcceleration.z = (short)((data[6] << 8) | data[7]);
     
   //  NSLog(@"Raw Acceleration: %f, %f, %f", rawAcceleration.x, rawAcceleration.y, rawAcceleration.z);
     

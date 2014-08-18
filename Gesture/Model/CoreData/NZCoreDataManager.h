@@ -27,7 +27,6 @@
  */
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 
-
 /**
  * Saves all changes (e.g. insertions, updates, deletions) of all core data objects since the last
  * time this method was called or since the manager was instantiated.

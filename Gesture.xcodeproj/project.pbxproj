@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A072548199CFAFD00ED7AC2 /* NZActionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A072547199CFAFD00ED7AC2 /* NZActionsVC.m */; };
+		8A07254B199CFE8A00ED7AC2 /* NZAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A07254A199CFE8A00ED7AC2 /* NZAction.m */; };
+		8A07254E199CFEF800ED7AC2 /* NZAction+CoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A07254D199CFEF800ED7AC2 /* NZAction+CoreData.m */; };
 		8A0DF6D9195C4DF70029E5F3 /* NZRingRecordingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0DF6D8195C4DF70029E5F3 /* NZRingRecordingVC.m */; };
 		8A0DF6E4195C63770029E5F3 /* NZSensorDataRecordingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0DF6E3195C63770029E5F3 /* NZSensorDataRecordingManager.m */; };
 		8A37E904197EAAE100CC08BB /* NZEditGestureSamplesTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A37E903197EAAE100CC08BB /* NZEditGestureSamplesTVC.m */; };
@@ -77,6 +80,8 @@
 		8AE8CB39196AD1FA008BE33E /* NZGraphViewSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE8CB33196AD1FA008BE33E /* NZGraphViewSegment.m */; };
 		8AE8CB48196AF587008BE33E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AE8CB47196AF587008BE33E /* QuartzCore.framework */; };
 		8AEE3156195C4C1600006989 /* NZSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AEE3155195C4C1600006989 /* NZSplitViewController.m */; };
+		8AF5319819991D8F00D10EBE /* NZGestureSetsTestingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AF5319719991D8F00D10EBE /* NZGestureSetsTestingVC.m */; };
+		8AF5319C19992D7100D10EBE /* NZMainSetTestingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AF5319B19992D7100D10EBE /* NZMainSetTestingVC.m */; };
 		8AF7F5711969C6BA00DB6D7C /* NZGestureRecognitionPipeline.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8AF7F5701969C6BA00DB6D7C /* NZGestureRecognitionPipeline.mm */; };
 		8AF7F9841969C89F00DB6D7C /* AdaBoost.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AF7F87A1969C89E00DB6D7C /* AdaBoost.cpp */; };
 		8AF7F9851969C89F00DB6D7C /* DecisionStump.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AF7F87E1969C89E00DB6D7C /* DecisionStump.cpp */; };
@@ -184,6 +189,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8A072546199CFAFD00ED7AC2 /* NZActionsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZActionsVC.h; path = ViewControllers/NZActionsVC.h; sourceTree = "<group>"; };
+		8A072547199CFAFD00ED7AC2 /* NZActionsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZActionsVC.m; path = ViewControllers/NZActionsVC.m; sourceTree = "<group>"; };
+		8A072549199CFE8A00ED7AC2 /* NZAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZAction.h; path = Model/CoreData/Entity/NZAction.h; sourceTree = "<group>"; };
+		8A07254A199CFE8A00ED7AC2 /* NZAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZAction.m; path = Model/CoreData/Entity/NZAction.m; sourceTree = "<group>"; };
+		8A07254C199CFEF800ED7AC2 /* NZAction+CoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NZAction+CoreData.h"; path = "Model/CoreData/Categories/NZAction+CoreData.h"; sourceTree = "<group>"; };
+		8A07254D199CFEF800ED7AC2 /* NZAction+CoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NZAction+CoreData.m"; path = "Model/CoreData/Categories/NZAction+CoreData.m"; sourceTree = "<group>"; };
 		8A0DF6D7195C4DF70029E5F3 /* NZRingRecordingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZRingRecordingVC.h; path = ViewControllers/NZRingRecordingVC.h; sourceTree = "<group>"; };
 		8A0DF6D8195C4DF70029E5F3 /* NZRingRecordingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZRingRecordingVC.m; path = ViewControllers/NZRingRecordingVC.m; sourceTree = "<group>"; };
 		8A0DF6E2195C63770029E5F3 /* NZSensorDataRecordingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZSensorDataRecordingManager.h; path = Controll/Recording/NZSensorDataRecordingManager.h; sourceTree = "<group>"; };
@@ -390,6 +401,10 @@
 		8AE8CBA0196B1BF0008BE33E /* NSNumberExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNumberExtensions.h; sourceTree = "<group>"; };
 		8AEE3154195C4C1600006989 /* NZSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZSplitViewController.h; sourceTree = "<group>"; };
 		8AEE3155195C4C1600006989 /* NZSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZSplitViewController.m; sourceTree = "<group>"; };
+		8AF5319619991D8F00D10EBE /* NZGestureSetsTestingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZGestureSetsTestingVC.h; path = ViewControllers/Testing/NZGestureSetsTestingVC.h; sourceTree = "<group>"; };
+		8AF5319719991D8F00D10EBE /* NZGestureSetsTestingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZGestureSetsTestingVC.m; path = ViewControllers/Testing/NZGestureSetsTestingVC.m; sourceTree = "<group>"; };
+		8AF5319A19992D7100D10EBE /* NZMainSetTestingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZMainSetTestingVC.h; path = ViewControllers/Testing/NZMainSetTestingVC.h; sourceTree = "<group>"; };
+		8AF5319B19992D7100D10EBE /* NZMainSetTestingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZMainSetTestingVC.m; path = ViewControllers/Testing/NZMainSetTestingVC.m; sourceTree = "<group>"; };
 		8AF7F56F1969C6BA00DB6D7C /* NZGestureRecognitionPipeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZGestureRecognitionPipeline.h; sourceTree = "<group>"; };
 		8AF7F5701969C6BA00DB6D7C /* NZGestureRecognitionPipeline.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NZGestureRecognitionPipeline.mm; sourceTree = "<group>"; };
 		8AF7F87A1969C89E00DB6D7C /* AdaBoost.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AdaBoost.cpp; sourceTree = "<group>"; };
@@ -752,9 +767,12 @@
 		8A922942195C3AAA00DF7743 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				8AF5319919991D9600D10EBE /* Testing */,
 				8AD02015197D6AAC003A09EE /* popovers / popups */,
 				8AE3831D1977D54500824571 /* NZGestureConfigurationVC.h */,
 				8AE3831E1977D54500824571 /* NZGestureConfigurationVC.m */,
+				8A072546199CFAFD00ED7AC2 /* NZActionsVC.h */,
+				8A072547199CFAFD00ED7AC2 /* NZActionsVC.m */,
 				8AE3830819758AFA00824571 /* NZGesturesVC.h */,
 				8AE3830919758AFA00824571 /* NZGesturesVC.m */,
 				8AC22B73197529170019A1A9 /* NZGestureSetsVC.h */,
@@ -916,6 +934,8 @@
 				8AE3830F1976CC3E00824571 /* NZGesture.m */,
 				8AE383111976CCCD00824571 /* NZGestureSet.h */,
 				8AE383121976CCCD00824571 /* NZGestureSet.m */,
+				8A072549199CFE8A00ED7AC2 /* NZAction.h */,
+				8A07254A199CFE8A00ED7AC2 /* NZAction.m */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -943,6 +963,8 @@
 				8AE383151976D15000824571 /* NZGestureSet+CoreData.m */,
 				8AE3831A1976D2E800824571 /* NZGesture+CoreData.h */,
 				8AE3831B1976D2E800824571 /* NZGesture+CoreData.m */,
+				8A07254C199CFEF800ED7AC2 /* NZAction+CoreData.h */,
+				8A07254D199CFEF800ED7AC2 /* NZAction+CoreData.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -1049,6 +1071,17 @@
 			);
 			name = CorePlotHeaders;
 			path = CorePlot_1.4/Binaries/iOS/CorePlotHeaders;
+			sourceTree = "<group>";
+		};
+		8AF5319919991D9600D10EBE /* Testing */ = {
+			isa = PBXGroup;
+			children = (
+				8AF5319619991D8F00D10EBE /* NZGestureSetsTestingVC.h */,
+				8AF5319719991D8F00D10EBE /* NZGestureSetsTestingVC.m */,
+				8AF5319A19992D7100D10EBE /* NZMainSetTestingVC.h */,
+				8AF5319B19992D7100D10EBE /* NZMainSetTestingVC.m */,
+			);
+			name = Testing;
 			sourceTree = "<group>";
 		};
 		8AF7F56E1969C6BA00DB6D7C /* GRT Wrappers */ = {
@@ -1826,6 +1859,7 @@
 				8ADB502C1962DAEB00DC2784 /* NZQuaternion.m in Sources */,
 				8AE8CB34196AD1FA008BE33E /* NZConstants.m in Sources */,
 				8AE8CB36196AD1FA008BE33E /* NZGraphView.m in Sources */,
+				8AF5319C19992D7100D10EBE /* NZMainSetTestingVC.m in Sources */,
 				8AF7F9AD1969C89F00DB6D7C /* RegressionSample.cpp in Sources */,
 				8AF7F9C21969C89F00DB6D7C /* Derivative.cpp in Sources */,
 				8ADB50471962EB1D00DC2784 /* NZGravity.m in Sources */,
@@ -1836,6 +1870,7 @@
 				8AF7F9BA1969C89F00DB6D7C /* SOMQuantizer.cpp in Sources */,
 				8AF7F9D11969C89F00DB6D7C /* ErrorLog.cpp in Sources */,
 				8AF7F98B1969C89F00DB6D7C /* DecisionTree.cpp in Sources */,
+				8A07254E199CFEF800ED7AC2 /* NZAction+CoreData.m in Sources */,
 				8AF7F9A91969C89F00DB6D7C /* Regressifier.cpp in Sources */,
 				8AF7F99E1969C89F00DB6D7C /* BernoulliRBM.cpp in Sources */,
 				8AF7F9CF1969C89F00DB6D7C /* DebugLog.cpp in Sources */,
@@ -1924,6 +1959,7 @@
 				8AF7F9D81969C89F00DB6D7C /* SVD.cpp in Sources */,
 				8AF7F98D1969C89F00DB6D7C /* FiniteStateMachine.cpp in Sources */,
 				8AAD80DE195DBA70000F9805 /* KHShakingLineChartView.m in Sources */,
+				8A072548199CFAFD00ED7AC2 /* NZActionsVC.m in Sources */,
 				8ADB502F1962DAFC00DC2784 /* NZYawPitchRoll.m in Sources */,
 				8A5AB06919783369006B2FBC /* NZPipelineController.mm in Sources */,
 				8ADB504B1962EBC200DC2784 /* NZGravity+CoreData.m in Sources */,
@@ -1932,9 +1968,11 @@
 				8AF7F9851969C89F00DB6D7C /* DecisionStump.cpp in Sources */,
 				8AF7F9C71969C89F00DB6D7C /* MovingAverageFilter.cpp in Sources */,
 				8A92295F195C3CCF00DF7743 /* BLEHelper.m in Sources */,
+				8AF5319819991D8F00D10EBE /* NZGestureSetsTestingVC.m in Sources */,
 				8AF7F9C01969C89F00DB6D7C /* ClassLabelTimeoutFilter.cpp in Sources */,
 				8ADB503B1962E1B000DC2784 /* NZLinearAcceleration+CoreData.m in Sources */,
 				8A0DF6D9195C4DF70029E5F3 /* NZRingRecordingVC.m in Sources */,
+				8A07254B199CFE8A00ED7AC2 /* NZAction.m in Sources */,
 				8AF7F9941969C89F00DB6D7C /* MinDistModel.cpp in Sources */,
 				8AF7F9D91969C89F00DB6D7C /* TestingLog.cpp in Sources */,
 				8A922922195C3A3800DF7743 /* NZDetailViewController.m in Sources */,
@@ -2077,7 +2115,6 @@
 		8A92293C195C3A3800DF7743 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2106,7 +2143,6 @@
 		8A92293D195C3A3800DF7743 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

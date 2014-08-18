@@ -152,7 +152,7 @@
     cell.textLabel.text = gesture.label.name;
 }
 
-#pragma mark - methods handling editing of the rable view cells
+#pragma mark - methods handling editing of the table view cells
 - (void)insertNewItem:(id)sender {
     [self presentViewController:self.popupVc animated:YES completion:nil];
     self.currentDate = [NSDate date];
