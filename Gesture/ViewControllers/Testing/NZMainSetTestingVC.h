@@ -19,5 +19,6 @@
 - (IBAction)partitionRecordSegmentControlChangedValue:(id)sender;
 - (IBAction)didEdidPartitionConstatntTextField:(id)sender;
 - (IBAction)testTapped:(id)sender;
+- (IBAction)saveButtonTapped:(id)sender;
 
 @end

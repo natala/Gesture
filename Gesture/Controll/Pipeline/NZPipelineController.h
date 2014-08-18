@@ -28,7 +28,10 @@
 /**
  * check whether there is a backup of the pipeline
  */
-@property BOOL isBackup;
+//@property BOOL isBackup;
+
+@property (nonatomic, retain) NSDictionary *testReport;
+//@property (nonatomic, retain) NSDictionary *classifierParameters;
 
 /**
  * adds a gesture and retrains the classifier for this gesture
@@ -101,5 +104,11 @@
  * @return the results of the testing
  */
 - (NSDictionary *)testPipeline:(int)dataPartitioningConstant;
+
+/**
+ * saves the test results and the pipeline to file with the current timestamp
+ * @note you can retrive the files via iTunes
+ */
+- (BOOL)saveTestResults;
 
 @end

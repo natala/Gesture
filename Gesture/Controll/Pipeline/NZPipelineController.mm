@@ -85,7 +85,7 @@ GRT::TimeSeriesClassificationData dataToBeClassified;
         init = grtPipeline.getIsInitialized();
         [self initTheClassificationData];
     }
-    self.isBackup = false;
+    //self.isBackup = false;
     return self;
 }
 
@@ -150,7 +150,15 @@ GRT::TimeSeriesClassificationData dataToBeClassified;
 
 - (BOOL)savePipelneToFile
 {
-    NSString *path = [[NZPipelineController documentPath] stringByAppendingPathComponent:kGrtPipelineFileName];
+    NSMutableString *fileName = [NSMutableString stringWithString:[[NSDate date] description]];
+    [fileName appendString:@" -Pipeline"];
+   // NSString *path = [[NZPipelineController documentPath] stringByAppendingPathComponent:kGrtPipelineFileName];
+    return [self savePipelineToFileWithName:fileName];
+}
+
+- (BOOL)savePipelineToFileWithName:(NSString *)name
+{
+    NSString *path = [[NZPipelineController documentPath] stringByAppendingPathComponent:name];
     return grtPipeline.savePipelineToFile([path UTF8String]);
 }
 
@@ -295,7 +303,36 @@ GRT::TimeSeriesClassificationData dataToBeClassified;
     [resultDictionary setObject:recall forKey:@"recall"];
     [resultDictionary setObject:fMeasure forKey:@"fMeasure"];
     
+    self.testReport = resultDictionary;
     return resultDictionary;
 }
+
+- (BOOL)saveTestResults
+{
+    NSDate *currentTimestamp = [NSDate date];
+    NSMutableString *pipelineFileName = [NSMutableString stringWithString:[currentTimestamp description]];
+    [pipelineFileName appendString:@" -Pipeline"];
+    NSMutableString *testResultsFileName = [NSMutableString stringWithString:[currentTimestamp description]];
+    [testResultsFileName appendString:@" -TestReport"];
+    
+    if (![self savePipelineToFileWithName:pipelineFileName]) {
+        return false;
+    }
+    
+    // save the test results
+    NSString *path = [[NZPipelineController documentPath] stringByAppendingPathComponent:testResultsFileName];
+    std::fstream file;
+    std::string nameAsString = [path UTF8String];
+    file.open(nameAsString.c_str(), std::iostream::out );
+    if (!file.is_open()) {
+        NSLog(@"failed to save test results to file %@", path);
+        return false;
+    }
+    file << [[NSString stringWithFormat:@"%@", self.testReport] UTF8String];
+    file.close();
+    return true;
+}
+
+#pragma mark - getters & setters
 
 @end

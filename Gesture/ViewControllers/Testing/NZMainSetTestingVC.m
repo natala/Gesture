@@ -177,4 +177,9 @@
     self.testReportTextView.text = resultsAsString;
 }
 
+- (IBAction)saveButtonTapped:(id)sender {
+    
+    [[NZPipelineController sharedManager] saveTestResults];
+}
+
 @end
