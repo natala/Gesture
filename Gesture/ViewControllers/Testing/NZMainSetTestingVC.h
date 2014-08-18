@@ -14,6 +14,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextField *partitionConstantTextField;
 @property (weak, nonatomic) IBOutlet UITextView *testReportTextView;
+@property (weak, nonatomic) IBOutlet UIButton *testButton;
+@property (weak, nonatomic) IBOutlet UIButton *saveButton;
 
 #pragma mark - IBActins
 - (IBAction)partitionRecordSegmentControlChangedValue:(id)sender;

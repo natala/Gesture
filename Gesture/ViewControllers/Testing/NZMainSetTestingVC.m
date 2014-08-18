@@ -175,11 +175,14 @@
     NSDictionary *testResults = [[NZPipelineController sharedManager] testPipeline:[self.partitionConstantTextField.text integerValue]];
     NSString *resultsAsString = [NSString stringWithFormat:@"%@", testResults];
     self.testReportTextView.text = resultsAsString;
+    self.saveButton.enabled = true;
 }
 
 - (IBAction)saveButtonTapped:(id)sender {
     
-    [[NZPipelineController sharedManager] saveTestResults];
+    if ([[NZPipelineController sharedManager] saveTestResults]) {
+        self.saveButton.enabled = false;
+    }
 }
 
 @end
