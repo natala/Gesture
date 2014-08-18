@@ -109,7 +109,7 @@
 			continue;
 		}
 
-		[self.centralManager retrievePeripherals:[NSArray arrayWithObject:(__bridge id)uuid]];
+		[self.centralManager retrievePeripheralsWithIdentifiers:[NSArray arrayWithObject:(__bridge id)uuid]];
 		CFRelease(uuid);
 	}
 }
@@ -320,7 +320,27 @@
 	case CBCentralManagerStatePoweredOn: {
 		self.pendingInit = NO;
 		[self loadSavedDevices];
-		[self.centralManager retrieveConnectedPeripherals];
+        
+        NSArray *storedDevices  = [[NSUserDefaults standardUserDefaults] arrayForKey:@"StoredDevices"];
+        
+        if (![storedDevices isKindOfClass:[NSArray class]]) {
+            NSLog(@"No stored array to load");
+            return;
+        }
+        
+        for (id deviceUUIDString in storedDevices) {
+            if (![deviceUUIDString isKindOfClass:[NSString class]]) {
+                continue;
+            }
+
+        CFUUIDRef uuid = CFUUIDCreateFromString(NULL, (CFStringRef)deviceUUIDString);
+        if (!uuid) {
+            continue;
+        }
+        [self.centralManager retrieveConnectedPeripheralsWithServices:[NSArray arrayWithObject:(__bridge id)uuid]];
+        CFRelease(uuid);
+        }
+		
 		[self.discoveryDelegate discoveryDidRefresh];
 		break;
 	}
