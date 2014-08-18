@@ -84,6 +84,7 @@
     return _managedObjectContext;
 }
 
+
 // Returns the managed object model for the application.
 // If the model doesn't already exist, it is created from the application's model.
 - (NSManagedObjectModel *)managedObjectModel
@@ -95,6 +96,7 @@
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     return _managedObjectModel;
 }
+
 
 // Returns the persistent store coordinator for the application.
 // If the coordinator doesn't already exist, it is created and the application's store added to it.
@@ -145,7 +147,7 @@
          *
          */
         NSLog(@"\n\n\n======================================================================\n");
-        NSLog(@"PLEASE REPORT TO @PASCAL! [DB MIGRATION WENT WRONG]");
+        NSLog(@"PLEASE REPORT TO @NATALIA ZARAWSKA! [DB MIGRATION WENT WRONG]");
         NSLog(@"Unresolved error %@, %@ \n\n\n", error, [error userInfo]);
         NSLog(@"\n======================================================================\n\n\n");
         

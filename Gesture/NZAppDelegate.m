@@ -10,6 +10,7 @@
 #import "Model/CoreData/NZCoreDataManager.h"
 #import "NZMasterMenuTVC.h"
 #import "NZPipelineController.h"
+#import "NZCoreDataManager.h"
 
 @implementation NZAppDelegate
 
@@ -33,8 +34,6 @@
     
     // init the pipeline
     [NZPipelineController sharedManager];
-    
-#warning TODO: for debuging purposes create a dummy dataset
     
     return YES;
 }
