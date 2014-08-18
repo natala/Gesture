@@ -10,6 +10,7 @@
 #import "NZCoreDataManager.h"
 #import "NZGesture+CoreData.h"
 #import "NZClassLabel+CoreData.h"
+#import "NZPipelineController.h"
 
 @interface NZMainSetTestingVC ()
 
@@ -143,14 +144,37 @@
     NZGesture *gesture = [[self.gestureSet.gestures allObjects] objectAtIndex:indexPath.row];
     NSDate *date = [gesture valueForKey:@"timeStampCreated"];
     cell.textLabel.text = gesture.label.name;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d samples", [gesture.positiveSamples count] ];
 }
+
+#pragma mark - IBActions
+
 - (IBAction)partitionRecordSegmentControlChangedValue:(id)sender {
     
     if ([self.partitionRecordSegmentControl selectedSegmentIndex] == 0) {
         self.instructionsLabel.text = self.partitionInstruction;
+        self.partitionConstantTextField.hidden = false;
     } else {
         self.instructionsLabel.text = self.recordInstruction;
+        self.partitionConstantTextField.hidden = true;
     }
+}
+
+- (IBAction)didEdidPartitionConstatntTextField:(id)sender {
+    int partitionConstant = [self.partitionConstantTextField.text integerValue];
+    if (partitionConstant > 100) {
+        partitionConstant = 100;
+        self.partitionConstantTextField.text = [NSString stringWithFormat:@"%d", partitionConstant];
+    } else if (partitionConstant < 0) {
+        partitionConstant = 0;
+        self.partitionConstantTextField.text = [NSString stringWithFormat:@"%d", partitionConstant];
+    }
+}
+
+- (IBAction)testTapped:(id)sender {
+    NSDictionary *testResults = [[NZPipelineController sharedManager] testPipeline:[self.partitionConstantTextField.text integerValue]];
+    NSString *resultsAsString = [NSString stringWithFormat:@"%@", testResults];
+    self.testReportTextView.text = resultsAsString;
 }
 
 @end

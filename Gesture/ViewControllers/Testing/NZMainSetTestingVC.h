@@ -12,6 +12,12 @@
 @interface NZMainSetTestingVC : UIViewController <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
 @property (nonatomic, strong) NZGestureSet *gestureSet;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UITextField *partitionConstantTextField;
+@property (weak, nonatomic) IBOutlet UITextView *testReportTextView;
+
+#pragma mark - IBActins
 - (IBAction)partitionRecordSegmentControlChangedValue:(id)sender;
+- (IBAction)didEdidPartitionConstatntTextField:(id)sender;
+- (IBAction)testTapped:(id)sender;
 
 @end

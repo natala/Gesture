@@ -32,6 +32,7 @@ NSString *const kGrtPipelineFileName = @"pipelineFile.txt";
 @implementation NZPipelineController
 
 GRT::GestureRecognitionPipeline grtPipeline;
+GRT::GestureRecognitionPipeline testGrtPipeline;
 GRT::TimeSeriesClassificationData trainingData;
 GRT::TimeSeriesClassificationData dataToBeClassified;
 
@@ -84,6 +85,7 @@ GRT::TimeSeriesClassificationData dataToBeClassified;
         init = grtPipeline.getIsInitialized();
         [self initTheClassificationData];
     }
+    self.isBackup = false;
     return self;
 }
 
@@ -245,6 +247,55 @@ GRT::TimeSeriesClassificationData dataToBeClassified;
 {
     
     return trainingData.getClassData([index intValue]).getNumSamples();
+}
+
+#pragma mark - methods used while testing the pipeline
+/*
+- (void)backupCurrentPipeline
+{
+    self.isBackup = true;
+    testGrtPipeline = GRT::GestureRecognitionPipeline(grtPipeline);
+}
+
+- (void)resetPipeline
+{
+    grtPipeline = GRT::GestureRecognitionPipeline(testGrtPipeline);
+}
+*/
+
+- (NSDictionary *)testPipeline:(int)dataPartitioningConstant
+{
+    if (dataPartitioningConstant > 100 || dataPartitioningConstant < 0) {
+        NSLog(@"NZPipelineController: the data partitioning constant is out of bound! Has to be between 0 and 100 percentage");
+        return nil;
+    }
+    testGrtPipeline = GRT::GestureRecognitionPipeline(grtPipeline);
+    GRT::TimeSeriesClassificationData tmpTraingData = GRT::TimeSeriesClassificationData(trainingData);
+    GRT:: TimeSeriesClassificationData testData = tmpTraingData.partition(dataPartitioningConstant, true);
+    testGrtPipeline.train(tmpTraingData);
+    testGrtPipeline.test(testData);
+    GRT::TestResult testResults = testGrtPipeline.getTestResults();
+    NSMutableArray *precision = [[NSMutableArray alloc] init];
+    NSMutableArray *recall = [[NSMutableArray alloc] init];
+    NSMutableArray *fMeasure = [[NSMutableArray alloc] init];
+    for (int i = 0; i < testResults.precision.size(); i++) {
+        [precision addObject:[[NSString alloc] initWithFormat:@"%f", testResults.precision[i]] ];
+        [recall addObject:[[NSString alloc] initWithFormat:@"%f", testResults.recall[i]]];
+        [fMeasure addObject:[[NSString alloc] initWithFormat:@"%f", testResults.fMeasure[i]]];
+    }
+    NSMutableDictionary *resultDictionary = [[NSMutableDictionary alloc] init];
+    [resultDictionary setObject:[NSNumber numberWithInt:testResults.numTrainingSamples] forKey:@"numTrainingSamples"];
+    [resultDictionary setObject:[NSNumber numberWithInt:testResults.numTestSamples] forKey:@"numTestSamples"];
+    [resultDictionary setObject:[NSNumber numberWithDouble:testResults.accuracy] forKey:@"accuracy"];
+    [resultDictionary setObject:[NSNumber numberWithDouble:testResults.rmsError] forKey:@"rmsError"];
+    [resultDictionary setObject:[NSNumber numberWithDouble:testResults.totalSquaredError] forKey:@"totalSquaredError"];
+    [resultDictionary setObject:[NSNumber numberWithDouble:testResults.rejectionPrecision] forKey:@"rejectionPrecision"];
+    [resultDictionary setObject:[NSNumber numberWithDouble:testResults.rejectionRecall] forKey:@"rejectionRecall"];
+    [resultDictionary setObject:precision forKey:@"precision"];
+    [resultDictionary setObject:recall forKey:@"recall"];
+    [resultDictionary setObject:fMeasure forKey:@"fMeasure"];
+    
+    return resultDictionary;
 }
 
 @end

@@ -25,6 +25,10 @@
 
 @property (nonatomic, retain) id<NZPipelineControllerDelegate> delegate;
 
+/**
+ * check whether there is a backup of the pipeline
+ */
+@property BOOL isBackup;
 
 /**
  * adds a gesture and retrains the classifier for this gesture
@@ -77,5 +81,25 @@
  * @return the number of training samples for the class with the given index
  */
 - (int)numberOfSamplesForClassLabelIndex:(NSNumber *)index;
+
+
+/**
+ * saves the current pipeline and enables editing the model (especially important for the trained classification model)
+ * @note should be used while testing the pipeline with different training sets. The pipeline can be rest after testig is done
+ */
+//- (void)backupCurrentPipeline;
+
+/**
+ * resets the pipeline to the last backuped pipeline
+ * @note make sure to check if there is a pipeline to reset to
+ */
+//- (void)resetPipeline;
+
+/**
+ * test the pipeline
+ * @param dataPartitioningConstant defines how to partition the available sample set into training and testing sets. The value is in percentage
+ * @return the results of the testing
+ */
+- (NSDictionary *)testPipeline:(int)dataPartitioningConstant;
 
 @end
