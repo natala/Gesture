@@ -133,13 +133,13 @@
     uint8_t header = 85;    // 85 == 01010101xb
     uint8_t ending = 170;   // 170 == 10101010xb
     
-    if ( (header != data[1]) && (ending != data[16]) ) {
+    if ( (header != data[0]) || (ending != data[16]) ) {
         NSLog(@"received package is incomaptible with the defined ring package");
         return;
     }
     
-    int buttonState = data[1] / 16384;
-    
+    int buttonState = data[1];
+    NSLog(@"button: %d", buttonState);
     // Quaternion
     float q[] = { 0.0f, 0.0f, 0.0f, 0.0f };
     

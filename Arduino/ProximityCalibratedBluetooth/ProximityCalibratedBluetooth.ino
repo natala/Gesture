@@ -54,12 +54,14 @@ uint16_t fifoCount;     // count of all bytes currently in FIFO
 uint8_t fifoBuffer[64]; // FIFO storage buffer
 
 // The button
-const int buttonPin = 2;
+const int buttonPin = 12;
+const int ledPin =  13;            // the number of the LED pin
 int buttonFinalState = 0;          // 0 - off, 1 - on
-int buttonPreviousState = 0;         // 0 - no action, 1 - button tapped once, 2 - button tapped twice
-int doublePressInterval = 100;    // the treshhold in mili seconds defining when it was a double and when a single tap
-unsigned long buttonPressPreviousMillisec = 0;
+int buttonPreviousState = HIGH;       // 0 - no action, 1 - button tapped once, 2 - button tapped twice
+int longPressInterval = 3000;     // the treshhold in mili seconds defining when it was a double and when a single tap
+unsigned long buttonPressStartMillisec = 0;
 int buttonPressCount = 0;
+bool wasSend = true;    // check if the state update was send
 
 
 // orientation/motion vars (not all are needed in this demo)
@@ -101,7 +103,6 @@ void dmpDataReady() {
 void setup() {
 
   pinMode(LED_PIN, OUTPUT);
-  digitalWrite(LED_PIN, LOW);
 
   Wire.begin();
   Serial.begin(57600);
@@ -176,7 +177,7 @@ void setup() {
   }
 
   // Set up the button
-  pinMode(buttonPin, INPUT);
+  pinMode(buttonPin, INPUT_PULLUP);
 }
 
 
@@ -188,37 +189,33 @@ void setup() {
 void loop() {
     // if programming failed, don't try to do anything
     if (!dmpReady) return;
-    
+   // digitalWrite(LED_PIN, HIGH);
     // BUTTON ACTION
-    buttonFinalState = 0;  // DUMMY
-    /*
     int buttonState = digitalRead(buttonPin);
-    unsigned long currentMillisec = millis();
-    if (buttonState != buttonPreviousState) {
-      // button was tapped
-       buttonPressCount++;
-       buttonPreviousState = buttonState;
-       if (buttonPressCount == 1) {
-         // if tapped ocnce save the time stamp
-        buttonPressPreviousMillisec = currentMillisec;
-       } else if (buttonPressCount == 2) {
-         // if tapped the second time compare if within the given interval
-        if ((buttonPressPreviousMillisec - currentMillisec) <= doublePressInterval) {  // I don't think that I need that test
-          // tapped twice
+    if (buttonState == HIGH)
+      digitalWrite(LED_PIN, HIGH);
+    if (buttonState == LOW) 
+      digitalWrite(LED_PIN, LOW);
+    
+    // if changed state
+ /*   if (buttonPreviousState != buttonState) {
+      wasSend = false;
+      // if button is pressed now
+      if (buttonState == LOW) {
+        buttonPressStartMillisec = millis();
+      } else {
+        if ( (millis() - buttonPressStartMillisec) < longPressInterval ) {
+          buttonFinalState = 1;
+        } else {
           buttonFinalState = 2;
-          buttonPressPreviousMillisec = currentMillisec;
-          buttonPressCount = 0;
         }
-       }
-    } else {
-      if ( (buttonPressCount == 1) && ((buttonPressPreviousMillisec - currentMillisec) > doublePressInterval) ) {
-        // the button was pressed only once, reset all the counters
-        buttonPressCount = 0;
-        buttonFinalState = buttonState;
       }
+    } else {
+      buttonFinalState = 0;
     }
+    buttonPreviousState = buttonState;
     */
-
+      
     // reset interrupt flag and get INT_STATUS byte
     mpuInterrupt = false;
     mpuIntStatus = mpu.getIntStatus();
@@ -268,15 +265,16 @@ void loop() {
         if(currentMillis - previousMillis > interval) {
             previousMillis = currentMillis;
             // header
-            Serial.write(0);
+            Serial.write(85);  // 85 == 01010101xb
             // button tapped
-            Serial.write(buttonFinalState);
+            Serial.write(buttonState);
+            wasSend = true;
             // acceleration
             Serial.write(accelerometerPacket, 6);
             // orientation - quaternions
             Serial.write(teapotPacket, 8);
             // end of package
-            Serial.write(0);
+            Serial.write(170);  // 170 == 10101010xb
             
           /*  VectorInt16 gyro;
             VectorInt16 aa;
@@ -313,6 +311,8 @@ void loop() {
             Serial.write(0);
         }
   }
+  
+//  buttonPreviousState = buttonState;
 }
 
 
