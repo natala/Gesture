@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *recordingStatusLabel;
 @property (weak, nonatomic) IBOutlet UILabel *accelerationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *orientationLabel;
+@property (weak, nonatomic) IBOutlet UILabel *buttonStateLabel;
 
 #pragma mark - Core Data related properties
 // @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;

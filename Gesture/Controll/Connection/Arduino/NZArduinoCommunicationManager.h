@@ -20,7 +20,7 @@
  * @author  Pascal Fritzen
  * @param   sensorData   The converted sensor data from the arduino.
  */
-- (void)didReceiveSensorData:(NZSensorData *)sensorData;
+- (void)didReceiveSensorData:(NZSensorData *)sensorData withButtonState:(int)buttonState;
 
 @optional
 - (void)connectionState:(NSString *)state;

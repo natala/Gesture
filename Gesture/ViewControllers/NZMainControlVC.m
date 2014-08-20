@@ -16,6 +16,7 @@
 //@property NSString *httpRequest;
 @property BOOL isSingleMode;
 @property (nonatomic, retain) NSString *lastRecognizedGesture;
+@property BOOL isRecordingGesture;
 
 @end
 
@@ -32,6 +33,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.isRecordingGesture = false;
     //self.httpRequest = @"http://192.168.1.105/api/newdeveloper/lights/2/state";
     // Do any additional setup after loading the view.
 }
@@ -50,13 +52,16 @@
     self.stopButton.enabled = !self.startButton.enabled;
     self.isSingleMode = YES;
     if (self.isSingleMode) {
-        [self.singleGroupSegmentControl setEnabled:false forSegmentAtIndex:1];
+        self.singleGroupSegmentControl.selectedSegmentIndex = 0;
+        //[self.singleGroupSegmentControl setEnabled:false forSegmentAtIndex:0];
        // [self.singleGroupSegmentControl setEnabled:true forSegmentAtIndex:2];
     } else {
+        self.singleGroupSegmentControl.selectedSegmentIndex = 1;
       //  [self.singleGroupSegmentControl setEnabled:true forSegmentAtIndex:1];
-        [self.singleGroupSegmentControl setEnabled:false forSegmentAtIndex:2];
+       // [self.singleGroupSegmentControl setEnabled:false forSegmentAtIndex:2];
     }
     self.stopStartGestureButton.enabled = !self.startButton.enabled;
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -92,7 +97,7 @@
     //NSLog(@"Sensor Data Recording Manager did resume recording");
 }
 
-- (void)didReceiveSensorData:(NZSensorData *) sensorData forSensorDataSer:(NZSensorDataSet *) sensorDataSet
+- (void)didReceiveSensorData:(NZSensorData *) sensorData forSensorDataSet:(NZSensorDataSet *) sensorDataSet
 {
     NSLog(@"Sensor Data Recording Manager did receive sensor data");
 }
@@ -142,6 +147,31 @@
     self.stopStartGestureButton.enabled = false;
 }
 
+- (void)buttonStateDidChangeFrom:(ButtonState)previousState to:(ButtonState)currentButtonState
+{
+    if (self.startButton.enabled) {
+        NSLog(@"cannot start recording gesture! First tap the start button!");
+        return;
+    }
+    if (self.isRecordingGesture && currentButtonState == BUTTON_SHORT_PRESS) {
+        [[NZSensorDataRecordingManager sharedManager] stopRecordingCurrentSensorDataSet];
+        self.stopStartGestureButton.highlighted = false;
+        self.isRecordingGesture = false;
+    } else if (!self.isRecordingGesture && currentButtonState == BUTTON_SHORT_PRESS) {
+        [[NZSensorDataRecordingManager sharedManager] startRecordingNewSensorDataSet];
+        self.stopStartGestureButton.highlighted = true;
+        self.isRecordingGesture = true;
+    } else if (!self.isRecordingGesture && currentButtonState == BUTTON_LONG_PRESS) {
+        self.isSingleMode = !self.isSingleMode;
+        if (self.isSingleMode) {
+            self.singleGroupSegmentControl.selectedSegmentIndex = 0;
+        } else self.singleGroupSegmentControl.selectedSegmentIndex = 1;
+        
+    } else if (self.isRecordingGesture && currentButtonState == BUTTON_LONG_PRESS) {
+        NSLog(@"First stop recording gesture before changing between single and group!");
+    }
+}
+
 #pragma mark - HTTPP request helpers
 - (void)sendRequest:(NSMutableURLRequest *)request withJson:(NSString *)jsonString
 {
@@ -149,8 +179,8 @@
     [request setHTTPMethod:@"PUT"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [request setValue:[NSString stringWithFormat:@"%d", [requestData length]] forHTTPHeaderField:@"Content-Length"];
-    [request setValue:[NSString stringWithFormat:@"%d", [requestData length]] forHTTPHeaderField:@"Content-Length"];
+    [request setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[requestData length]] forHTTPHeaderField:@"Content-Length"];
+    [request setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[requestData length]] forHTTPHeaderField:@"Content-Length"];
     [request setHTTPBody:requestData];
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     

@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *startButton;
 @property (weak, nonatomic) IBOutlet UIButton *stopButton;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *singleGroupSegmentControl;
+
 @property (weak, nonatomic) IBOutlet UIButton *stopStartGestureButton;
 @property (weak, nonatomic) IBOutlet UILabel *recognizedGestureNameLabel;
 

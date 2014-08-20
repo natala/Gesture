@@ -47,6 +47,8 @@
     yawPitchRollChartView.tag = 1001;
     [self.view addSubview:yawPitchRollChartView];
     
+    self.buttonStateLabel.text = @"";
+    
     //NZGraphView *linearAccGraphView = [[NZGraphView alloc] initWithFrame:self.linearAccelerationLineChartView.frame];
     //linearAccGraphView.tag = 1000;
     //NZGraphView *yawPitchRollGraphView = [[NZGraphView alloc] initWithFrame:self.yawPitchRollLineChartView.frame];
@@ -104,7 +106,7 @@
     
 }
 
-- (void)didReceiveSensorData:(NZSensorData *)sensorData forSensorDataSer:(NZSensorDataSet *)sensorDataSet
+- (void)didReceiveSensorData:(NZSensorData *)sensorData forSensorDataSet:(NZSensorDataSet *)sensorDataSet
 {
     NSString *acc = [NSString stringWithFormat:@"acc: %@, %@, %@", [sensorData.linearAcceleration.x stringValue], [sensorData.linearAcceleration.y stringValue], [sensorData.linearAcceleration.z stringValue]];
     NSString *yawPitchRoll = [NSString stringWithFormat:@"ypr: %@, %@, %@", [sensorData.yawPitchRoll.yaw stringValue], [sensorData.yawPitchRoll.pitch stringValue], [sensorData.yawPitchRoll.roll stringValue]];
@@ -121,6 +123,23 @@
     self.recordingStatusLabel.text = @"stopped recording";
     self.startRecordingButton.enabled = YES;
     self.stopRecordingButton.enabled = NO;
+}
+
+- (void)buttonStateDidChangeFrom:(ButtonState)previousState to:(ButtonState)currentButtonState
+{
+    switch (currentButtonState) {
+        case BUTTON_NOT_PRESSED:
+            self.buttonStateLabel.text = @"button not pressed";
+            break;
+        case BUTTON_SHORT_PRESS:
+            self.buttonStateLabel.text = @"button short press";
+            break;
+        case BUTTON_LONG_PRESS:
+            self.buttonStateLabel.text = @"button long press";
+            break;
+        default:
+            break;
+    }
 }
 
 #pragma mark - IBAction

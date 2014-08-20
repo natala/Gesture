@@ -88,6 +88,12 @@
                                 <rect key="frame" x="12" y="401" width="335" height="166"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="button state" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qO4-tl-CQg">
+                                <rect key="frame" x="575" y="332" width="93" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -96,6 +102,7 @@
                     <navigationItem key="navigationItem" title="Ring Recording" id="mOI-FS-AaM"/>
                     <connections>
                         <outlet property="accelerationLabel" destination="gaU-0X-tEe" id="Hy7-cL-PRA"/>
+                        <outlet property="buttonStateLabel" destination="qO4-tl-CQg" id="XTl-Q4-yia"/>
                         <outlet property="linearAccelerationLineChartView" destination="JyT-Ar-nBV" id="Ds8-7X-UkC"/>
                         <outlet property="orientationLabel" destination="k9T-de-Sd7" id="Fb1-FL-zlP"/>
                         <outlet property="recordingStatusLabel" destination="xYL-KE-KeN" id="1yK-PI-OFV"/>
@@ -289,16 +296,6 @@
                                     <action selector="stopButtonTapped:" destination="9t6-F5-LUv" eventType="touchUpInside" id="AgU-Dv-O1u"/>
                                 </connections>
                             </button>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="jjE-S7-T4P">
-                                <rect key="frame" x="193" y="213" width="302" height="29"/>
-                                <segments>
-                                    <segment title="Single" width="150"/>
-                                    <segment title="Group" width="150"/>
-                                </segments>
-                                <connections>
-                                    <action selector="singleGroupModeChanged:" destination="9t6-F5-LUv" eventType="valueChanged" id="jeL-9T-9vC"/>
-                                </connections>
-                            </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="baa-kC-Xq5">
                                 <rect key="frame" x="598" y="672" width="85" height="76"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="70"/>
@@ -316,6 +313,16 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="highlightedColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="jjE-S7-T4P">
+                                <rect key="frame" x="193" y="213" width="302" height="29"/>
+                                <segments>
+                                    <segment title="Single" width="150"/>
+                                    <segment title="Group" width="150"/>
+                                </segments>
+                                <connections>
+                                    <action selector="singleGroupModeChanged:" destination="9t6-F5-LUv" eventType="valueChanged" id="jeL-9T-9vC"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -882,7 +889,6 @@
         <!--Main Set TestingVC-->
         <scene sceneID="hN9-rV-rxg">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="jDl-Xx-L7y" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="MainSetTestingVc" id="kdm-UD-dO8" customClass="NZMainSetTestingVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="syz-vL-wkk"/>
@@ -1000,6 +1006,7 @@
                         <outlet property="testReportTextView" destination="26K-yR-iiz" id="qz9-v8-4cm"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jDl-Xx-L7y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2745" y="888"/>
         </scene>

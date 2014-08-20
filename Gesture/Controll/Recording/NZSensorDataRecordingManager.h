@@ -13,14 +13,24 @@
 
 @protocol NZSensorDataRecordingManagerObserver <NSObject>
 
+typedef enum buttonState {
+    BUTTON_NOT_PRESSED,
+    BUTTON_SHORT_PRESS,
+    BUTTON_LONG_PRESS
+} ButtonState;
+
 @optional
 - (void)didStartRecordingSensorData:(NZSensorDataSet *) sensorDataSet;
 - (void)didPauseReordingSensorData:(NZSensorDataSet *) sensorDataSet;
 - (void)didResumeRecordingSensorData:(NZSensorDataSet *) sensorDataSet;
-- (void)didReceiveSensorData:(NZSensorData *) sensorData forSensorDataSer:(NZSensorDataSet *) sensorDataSet;
+- (void)didReceiveSensorData:(NZSensorData *) sensorData forSensorDataSet:(NZSensorDataSet *) sensorDataSet;
 - (void)didStopRecordingSensorDataSet:(NZSensorDataSet *) sensorDataSet;
 - (void)disconnected;
 - (void)connected;
+/**
+ * Is called whenever the state of the button changes.
+ */
+- (void)buttonStateDidChangeFrom:(ButtonState)previousState to:(ButtonState)currentButtonState;
 
 @end
 

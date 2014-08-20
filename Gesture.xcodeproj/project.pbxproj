@@ -10,6 +10,7 @@
 		8A072548199CFAFD00ED7AC2 /* NZActionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A072547199CFAFD00ED7AC2 /* NZActionsVC.m */; };
 		8A07254B199CFE8A00ED7AC2 /* NZAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A07254A199CFE8A00ED7AC2 /* NZAction.m */; };
 		8A07254E199CFEF800ED7AC2 /* NZAction+CoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A07254D199CFEF800ED7AC2 /* NZAction+CoreData.m */; };
+		8A07255019A3AA4100ED7AC2 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A07254F19A3AA4100ED7AC2 /* CoreBluetooth.framework */; };
 		8A0DF6D9195C4DF70029E5F3 /* NZRingRecordingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0DF6D8195C4DF70029E5F3 /* NZRingRecordingVC.m */; };
 		8A0DF6E4195C63770029E5F3 /* NZSensorDataRecordingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0DF6E3195C63770029E5F3 /* NZSensorDataRecordingManager.m */; };
 		8A37E904197EAAE100CC08BB /* NZEditGestureSamplesTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A37E903197EAAE100CC08BB /* NZEditGestureSamplesTVC.m */; };
@@ -195,6 +196,7 @@
 		8A07254A199CFE8A00ED7AC2 /* NZAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZAction.m; path = Model/CoreData/Entity/NZAction.m; sourceTree = "<group>"; };
 		8A07254C199CFEF800ED7AC2 /* NZAction+CoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NZAction+CoreData.h"; path = "Model/CoreData/Categories/NZAction+CoreData.h"; sourceTree = "<group>"; };
 		8A07254D199CFEF800ED7AC2 /* NZAction+CoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NZAction+CoreData.m"; path = "Model/CoreData/Categories/NZAction+CoreData.m"; sourceTree = "<group>"; };
+		8A07254F19A3AA4100ED7AC2 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		8A0DF6D7195C4DF70029E5F3 /* NZRingRecordingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZRingRecordingVC.h; path = ViewControllers/NZRingRecordingVC.h; sourceTree = "<group>"; };
 		8A0DF6D8195C4DF70029E5F3 /* NZRingRecordingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZRingRecordingVC.m; path = ViewControllers/NZRingRecordingVC.m; sourceTree = "<group>"; };
 		8A0DF6E2195C63770029E5F3 /* NZSensorDataRecordingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZSensorDataRecordingManager.h; path = Controll/Recording/NZSensorDataRecordingManager.h; sourceTree = "<group>"; };
@@ -633,6 +635,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A07255019A3AA4100ED7AC2 /* CoreBluetooth.framework in Frameworks */,
 				8AE8CB48196AF587008BE33E /* QuartzCore.framework in Frameworks */,
 				8A922906195C3A3800DF7743 /* CoreGraphics.framework in Frameworks */,
 				8A92290A195C3A3800DF7743 /* CoreData.framework in Frameworks */,
@@ -695,6 +698,7 @@
 		8A922902195C3A3800DF7743 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8A07254F19A3AA4100ED7AC2 /* CoreBluetooth.framework */,
 				8AE8CB52196B1BF0008BE33E /* CorePlotHeaders */,
 				8AE8CB47196AF587008BE33E /* QuartzCore.framework */,
 				8AF7F8771969C89E00DB6D7C /* GRT */,

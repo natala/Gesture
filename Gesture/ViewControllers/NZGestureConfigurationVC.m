@@ -17,6 +17,7 @@
 
 @property (nonatomic, retain) UIPopoverController *popover;
 @property (nonatomic, retain) UIPopoverController *gestureSamplesPopover;
+@property BOOL isRecordingGesture;
 
 @end
 
@@ -43,6 +44,8 @@
     NZEditGestureSamplesTVC *samplesVC = [storyboard instantiateViewControllerWithIdentifier:@"GestureSamplesTVC"];
     self.gestureSamplesPopover = [[UIPopoverController alloc] initWithContentViewController:samplesVC];
     self.gestureSamplesPopover.delegate = self;
+    
+    self.isRecordingGesture = false;
     
    // self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editSamplesButtonSelected:)];
     //self.numOfTrainingSamples.text = [NSString stringWithFormat:@"%d", [[NZPipelineController sharedManager] numberOfSamplesForClassLabelIndex:self.gesture.label.index]];
@@ -200,7 +203,7 @@
     //NSLog(@"Sensor Data Recording Manager did resume recording");
 }
 
-- (void)didReceiveSensorData:(NZSensorData *) sensorData forSensorDataSer:(NZSensorDataSet *) sensorDataSet
+- (void)didReceiveSensorData:(NZSensorData *) sensorData forSensorDataSet:(NZSensorDataSet *) sensorDataSet
 {
     NSLog(@"Sensor Data Recording Manager did receive sensor data");
 }
@@ -226,6 +229,33 @@
     // update the classifier with the new sample
     if ([sensorDataSet.sensorData count] > 0) {
         [[NZPipelineController sharedManager] addPositive:YES sample:sensorDataSet withLabel:self.gesture.label];
+    }
+}
+
+- (void)buttonStateDidChangeFrom:(ButtonState)previousState to:(ButtonState)currentButtonState
+{
+    if (self.isRecordingGesture && currentButtonState == BUTTON_SHORT_PRESS) {
+        // stop recording the gesture
+        [[NZSensorDataRecordingManager sharedManager] stopRecordingCurrentSensorDataSet];
+        if (([self.gesture.positiveSamples count] > 0) || ([self.gesture.negativeSamples count] > 0)) {
+            self.learnGestureButton.enabled = true;
+        }
+        
+        self.numOfTrainingSamples.text = [NSString stringWithFormat:@"%d", [[NZPipelineController sharedManager] numberOfSamplesForClassLabelIndex:self.gesture.label.index]];
+        self.isRecordingGesture = false;
+        self.startStopRecordingGestureButton.highlighted = false;
+        
+    } else if (!self.isRecordingGesture && currentButtonState == BUTTON_SHORT_PRESS){
+        // start recording the gesture
+        BOOL startedNewRecording = [[NZSensorDataRecordingManager sharedManager] startRecordingNewSensorDataSet];
+        if (startedNewRecording) {
+            self.learnGestureButton.enabled = false;
+            self.isRecordingGesture = true;
+            self.startStopRecordingGestureButton.highlighted = true;
+        }
+    } else if (!self.isRecordingGesture && currentButtonState == BUTTON_LONG_PRESS) {
+        // switch between single and group
+        // do I really want to do it here? don't think so.
     }
 }
 

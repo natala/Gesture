@@ -9,6 +9,15 @@
 #import "NZSensorDataRecordingManager.h"
 #import "NZLinearAcceleration.h"
 
+@interface NZSensorDataRecordingManager ()
+
+@property ButtonState previousButtonState;
+@property ButtonState currentButtonState;
+@property int buttonPressedCounter;
+@property BOOL isRecordingData;
+
+@end
+
 @implementation NZSensorDataRecordingManager
 
 #pragma mark - singleton
@@ -30,6 +39,9 @@
     self = [super init];
     if (self) {
         self.sensorDataRecordingObservers = [NSMutableArray array];
+        self.buttonPressedCounter = 0;
+        self.previousButtonState = BUTTON_NOT_PRESSED;
+        self.currentButtonState = BUTTON_NOT_PRESSED;
     }
     return self;
 }
@@ -46,12 +58,42 @@
 }
 
 #pragma mark - NZArduinoCommunicationManagerDelegate
-- (void)didReceiveSensorData:(NZSensorData *)sensorData
+- (void)didReceiveSensorData:(NZSensorData *)sensorData withButtonState:(int)buttonState
 {
-    [self.currentSet addSensorDataObject:sensorData];
-    for (id<NZSensorDataRecordingManagerObserver>observer in self.sensorDataRecordingObservers){
-        if ([observer respondsToSelector:@selector(didReceiveSensorData:forSensorDataSer:)]) {
-            [observer didReceiveSensorData:sensorData forSensorDataSer:self.currentSet];
+    if (self.isRecordingData) {
+        [self.currentSet addSensorDataObject:sensorData];
+        for (id<NZSensorDataRecordingManagerObserver>observer in self.sensorDataRecordingObservers){
+            if ([observer respondsToSelector:@selector(didReceiveSensorData:forSensorDataSet:)]) {
+                [observer didReceiveSensorData:sensorData forSensorDataSet:self.currentSet];
+            }
+        }
+    }
+    
+    self.previousButtonState = self.currentButtonState;
+    switch (buttonState) {
+        // button is pressed
+        case 1:
+            if (self.buttonPressedCounter <= 20 && self.buttonPressedCounter > 0) {
+                self.currentButtonState = BUTTON_SHORT_PRESS;
+            } else self.currentButtonState = BUTTON_NOT_PRESSED;
+            self.buttonPressedCounter = 0;
+            break;
+        // button is not pressed
+        case 0:
+            self.buttonPressedCounter++;
+            if (self.buttonPressedCounter > 20) {
+                self.currentButtonState = BUTTON_LONG_PRESS;
+            }
+            break;
+        default:
+            break;
+    }
+    
+    if (self.currentButtonState != self.previousButtonState) {
+        for (id<NZSensorDataRecordingManagerObserver>observer in self.sensorDataRecordingObservers) {
+            if ([observer respondsToSelector:@selector(buttonStateDidChangeFrom:to:)]) {
+                [observer buttonStateDidChangeFrom:self.previousButtonState to:self.currentButtonState];
+            }
         }
     }
 }
@@ -64,6 +106,8 @@
                 [observer connected];
             }
         }
+        [NZArduinoCommunicationManager sharedManager].delegate = self;
+        self.isRecordingData = false;
         return YES;
     }
     return NO;
@@ -75,10 +119,11 @@
     self.currentSet.timeStampCreated = [NSDate date];
     self.currentSet.timeStampUpdate = self.currentSet.timeStampCreated;
     // now the sensor data recording manager will be notified whenever the arduino connection manager receives new data
-    [NZArduinoCommunicationManager sharedManager].delegate = self;
+   // [NZArduinoCommunicationManager sharedManager].delegate = self;
     BOOL startedReceiving = [[NZArduinoCommunicationManager sharedManager] startReceivingSensorData];
     
     if (startedReceiving) {
+        self.isRecordingData = true;
         for (id<NZSensorDataRecordingManagerObserver>observer in self.sensorDataRecordingObservers){
             if ([observer respondsToSelector:@selector(didStartRecordingSensorData:)]) {
                 [observer didStartRecordingSensorData:self.currentSet];
@@ -152,7 +197,8 @@
 
 - (void)stopRecordingCurrentSensorDataSet
 {
-    [NZArduinoCommunicationManager sharedManager].delegate = nil;
+    self.isRecordingData = false;
+    // [NZArduinoCommunicationManager sharedManager].delegate = nil;
     for (id<NZSensorDataRecordingManagerObserver> observer in self.sensorDataRecordingObservers) {
         if ([observer respondsToSelector:@selector(didStopRecordingSensorDataSet:)]) {
             [observer didStopRecordingSensorDataSet:self.currentSet];
@@ -168,7 +214,8 @@
 
 - (BOOL)isReceivingData
 {
-    return [[NZArduinoCommunicationManager sharedManager].delegate isEqual:self];
+    return self.isRecordingData;
+    //return [[NZArduinoCommunicationManager sharedManager].delegate isEqual:self];
 }
 
 @end

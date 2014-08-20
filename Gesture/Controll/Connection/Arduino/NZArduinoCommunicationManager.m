@@ -180,7 +180,7 @@
     
     
     // Notify delegate
-    [self.delegate didReceiveSensorData:sensorData];
+    [self.delegate didReceiveSensorData:sensorData withButtonState:buttonState];
 }
 
 - (BOOL)connect
