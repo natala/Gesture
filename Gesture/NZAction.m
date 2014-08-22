@@ -1,8 +1,8 @@
 //
-//  Action.m
+//  NZAction.m
 //  Gesture
 //
-//  Created by Natalia Zarawska on 8/14/14.
+//  Created by Natalia Zarawska on 8/22/14.
 //  Copyright (c) 2014 TUM. All rights reserved.
 //
 
@@ -11,6 +11,5 @@
 
 @implementation NZAction
 
-@dynamic id;
 
 @end

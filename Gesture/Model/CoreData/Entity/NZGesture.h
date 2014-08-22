@@ -9,6 +9,8 @@
 #import <CoreData/CoreData.h>
 @class NZClassLabel;
 @class NZSensorDataSet;
+@class NZSingleAction;
+@class NZActionComposite;
 
 static NSString *ENTITY_NAME_GESTURE = @"NZGesture";
 
@@ -25,6 +27,8 @@ static NSString *ENTITY_NAME_GESTURE = @"NZGesture";
 @property (nonatomic, retain) NZClassLabel *label;
 @property (nonatomic, retain) NSSet *negativeSamples;
 @property (nonatomic, retain) NSSet *positiveSamples;
+@property (nonatomic, retain) NZSingleAction *singleAction;
+@property (nonatomic, retain) NZActionComposite *actionComposite;
 @end
 
 @interface NZGesture (CoreDataGeneratedAccessors)

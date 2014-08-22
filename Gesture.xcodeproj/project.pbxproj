@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		8A072548199CFAFD00ED7AC2 /* NZActionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A072547199CFAFD00ED7AC2 /* NZActionsVC.m */; };
-		8A07254B199CFE8A00ED7AC2 /* NZAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A07254A199CFE8A00ED7AC2 /* NZAction.m */; };
-		8A07254E199CFEF800ED7AC2 /* NZAction+CoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A07254D199CFEF800ED7AC2 /* NZAction+CoreData.m */; };
 		8A07255019A3AA4100ED7AC2 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A07254F19A3AA4100ED7AC2 /* CoreBluetooth.framework */; };
 		8A0DF6D9195C4DF70029E5F3 /* NZRingRecordingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0DF6D8195C4DF70029E5F3 /* NZRingRecordingVC.m */; };
 		8A0DF6E4195C63770029E5F3 /* NZSensorDataRecordingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0DF6E3195C63770029E5F3 /* NZSensorDataRecordingManager.m */; };
@@ -81,6 +79,18 @@
 		8AE8CB39196AD1FA008BE33E /* NZGraphViewSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE8CB33196AD1FA008BE33E /* NZGraphViewSegment.m */; };
 		8AE8CB48196AF587008BE33E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AE8CB47196AF587008BE33E /* QuartzCore.framework */; };
 		8AEE3156195C4C1600006989 /* NZSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AEE3155195C4C1600006989 /* NZSplitViewController.m */; };
+		8AF0F3E119A781EE001645A2 /* NZActionComposite.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AF0F3E019A781EE001645A2 /* NZActionComposite.m */; };
+		8AF0F3E419A7821D001645A2 /* NZHttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AF0F3E319A7821D001645A2 /* NZHttpRequest.m */; };
+		8AF0F3E719A7821D001645A2 /* NZSingleAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AF0F3E619A7821D001645A2 /* NZSingleAction.m */; };
+		8AF0F3EA19A7821D001645A2 /* NZUrlSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AF0F3E919A7821D001645A2 /* NZUrlSession.m */; };
+		8AF0F3ED19A783ED001645A2 /* NZSingleAction+CoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AF0F3EC19A783ED001645A2 /* NZSingleAction+CoreData.m */; };
+		8AF0F3F019A7840D001645A2 /* NZActionComposite+CoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AF0F3EF19A7840D001645A2 /* NZActionComposite+CoreData.m */; };
+		8AF0F3F319A78429001645A2 /* NZHttpRequest+CoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AF0F3F219A78429001645A2 /* NZHttpRequest+CoreData.m */; };
+		8AF0F3F619A7843E001645A2 /* NZUrlSession+CoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AF0F3F519A7843E001645A2 /* NZUrlSession+CoreData.m */; };
+		8AF0F3F919A78D2A001645A2 /* NZActionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AF0F3F819A78D2A001645A2 /* NZActionController.m */; };
+		8AF0F3FC19A78D6F001645A2 /* NZAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AF0F3FB19A78D6F001645A2 /* NZAction.m */; };
+		8AF0F3FF19A79CEC001645A2 /* NZAction+Execute.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AF0F3FE19A79CEC001645A2 /* NZAction+Execute.m */; };
+		8AF0F40219A79DAD001645A2 /* NZSingleAction+Execute.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AF0F40119A79DAD001645A2 /* NZSingleAction+Execute.m */; };
 		8AF5319819991D8F00D10EBE /* NZGestureSetsTestingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AF5319719991D8F00D10EBE /* NZGestureSetsTestingVC.m */; };
 		8AF5319C19992D7100D10EBE /* NZMainSetTestingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AF5319B19992D7100D10EBE /* NZMainSetTestingVC.m */; };
 		8AF7F5711969C6BA00DB6D7C /* NZGestureRecognitionPipeline.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8AF7F5701969C6BA00DB6D7C /* NZGestureRecognitionPipeline.mm */; };
@@ -192,10 +202,6 @@
 /* Begin PBXFileReference section */
 		8A072546199CFAFD00ED7AC2 /* NZActionsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZActionsVC.h; path = ViewControllers/NZActionsVC.h; sourceTree = "<group>"; };
 		8A072547199CFAFD00ED7AC2 /* NZActionsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZActionsVC.m; path = ViewControllers/NZActionsVC.m; sourceTree = "<group>"; };
-		8A072549199CFE8A00ED7AC2 /* NZAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZAction.h; path = Model/CoreData/Entity/NZAction.h; sourceTree = "<group>"; };
-		8A07254A199CFE8A00ED7AC2 /* NZAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZAction.m; path = Model/CoreData/Entity/NZAction.m; sourceTree = "<group>"; };
-		8A07254C199CFEF800ED7AC2 /* NZAction+CoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NZAction+CoreData.h"; path = "Model/CoreData/Categories/NZAction+CoreData.h"; sourceTree = "<group>"; };
-		8A07254D199CFEF800ED7AC2 /* NZAction+CoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NZAction+CoreData.m"; path = "Model/CoreData/Categories/NZAction+CoreData.m"; sourceTree = "<group>"; };
 		8A07254F19A3AA4100ED7AC2 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		8A0DF6D7195C4DF70029E5F3 /* NZRingRecordingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZRingRecordingVC.h; path = ViewControllers/NZRingRecordingVC.h; sourceTree = "<group>"; };
 		8A0DF6D8195C4DF70029E5F3 /* NZRingRecordingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZRingRecordingVC.m; path = ViewControllers/NZRingRecordingVC.m; sourceTree = "<group>"; };
@@ -403,6 +409,30 @@
 		8AE8CBA0196B1BF0008BE33E /* NSNumberExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNumberExtensions.h; sourceTree = "<group>"; };
 		8AEE3154195C4C1600006989 /* NZSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZSplitViewController.h; sourceTree = "<group>"; };
 		8AEE3155195C4C1600006989 /* NZSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZSplitViewController.m; sourceTree = "<group>"; };
+		8AF0F3DF19A781EE001645A2 /* NZActionComposite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZActionComposite.h; sourceTree = "<group>"; };
+		8AF0F3E019A781EE001645A2 /* NZActionComposite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZActionComposite.m; sourceTree = "<group>"; };
+		8AF0F3E219A7821D001645A2 /* NZHttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZHttpRequest.h; sourceTree = "<group>"; };
+		8AF0F3E319A7821D001645A2 /* NZHttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZHttpRequest.m; sourceTree = "<group>"; };
+		8AF0F3E519A7821D001645A2 /* NZSingleAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZSingleAction.h; sourceTree = "<group>"; };
+		8AF0F3E619A7821D001645A2 /* NZSingleAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZSingleAction.m; sourceTree = "<group>"; };
+		8AF0F3E819A7821D001645A2 /* NZUrlSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZUrlSession.h; sourceTree = "<group>"; };
+		8AF0F3E919A7821D001645A2 /* NZUrlSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZUrlSession.m; sourceTree = "<group>"; };
+		8AF0F3EB19A783E3001645A2 /* NZSingleAction+CoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NZSingleAction+CoreData.h"; sourceTree = "<group>"; };
+		8AF0F3EC19A783ED001645A2 /* NZSingleAction+CoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NZSingleAction+CoreData.m"; sourceTree = "<group>"; };
+		8AF0F3EE19A78407001645A2 /* NZActionComposite+CoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NZActionComposite+CoreData.h"; sourceTree = "<group>"; };
+		8AF0F3EF19A7840D001645A2 /* NZActionComposite+CoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NZActionComposite+CoreData.m"; sourceTree = "<group>"; };
+		8AF0F3F119A78423001645A2 /* NZHttpRequest+CoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NZHttpRequest+CoreData.h"; sourceTree = "<group>"; };
+		8AF0F3F219A78429001645A2 /* NZHttpRequest+CoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NZHttpRequest+CoreData.m"; sourceTree = "<group>"; };
+		8AF0F3F419A78438001645A2 /* NZUrlSession+CoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NZUrlSession+CoreData.h"; sourceTree = "<group>"; };
+		8AF0F3F519A7843E001645A2 /* NZUrlSession+CoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NZUrlSession+CoreData.m"; sourceTree = "<group>"; };
+		8AF0F3F719A78D2A001645A2 /* NZActionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZActionController.h; sourceTree = "<group>"; };
+		8AF0F3F819A78D2A001645A2 /* NZActionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZActionController.m; sourceTree = "<group>"; };
+		8AF0F3FA19A78D6F001645A2 /* NZAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZAction.h; sourceTree = "<group>"; };
+		8AF0F3FB19A78D6F001645A2 /* NZAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZAction.m; sourceTree = "<group>"; };
+		8AF0F3FD19A79CEC001645A2 /* NZAction+Execute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NZAction+Execute.h"; path = "Model/CoreData/Categories/NZAction+Execute.h"; sourceTree = "<group>"; };
+		8AF0F3FE19A79CEC001645A2 /* NZAction+Execute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NZAction+Execute.m"; path = "Model/CoreData/Categories/NZAction+Execute.m"; sourceTree = "<group>"; };
+		8AF0F40019A79DAD001645A2 /* NZSingleAction+Execute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NZSingleAction+Execute.h"; path = "Model/CoreData/Categories/NZSingleAction+Execute.h"; sourceTree = "<group>"; };
+		8AF0F40119A79DAD001645A2 /* NZSingleAction+Execute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NZSingleAction+Execute.m"; path = "Model/CoreData/Categories/NZSingleAction+Execute.m"; sourceTree = "<group>"; };
 		8AF5319619991D8F00D10EBE /* NZGestureSetsTestingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZGestureSetsTestingVC.h; path = ViewControllers/Testing/NZGestureSetsTestingVC.h; sourceTree = "<group>"; };
 		8AF5319719991D8F00D10EBE /* NZGestureSetsTestingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZGestureSetsTestingVC.m; path = ViewControllers/Testing/NZGestureSetsTestingVC.m; sourceTree = "<group>"; };
 		8AF5319A19992D7100D10EBE /* NZMainSetTestingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZMainSetTestingVC.h; path = ViewControllers/Testing/NZMainSetTestingVC.h; sourceTree = "<group>"; };
@@ -820,6 +850,8 @@
 				8AF7F9E01969CC1300DB6D7C /* Recognition */,
 				8A0DF6DE195C61410029E5F3 /* Recording */,
 				8A922962195C3CDF00DF7743 /* Connection */,
+				8AF0F3F719A78D2A001645A2 /* NZActionController.h */,
+				8AF0F3F819A78D2A001645A2 /* NZActionController.m */,
 			);
 			name = Controll;
 			sourceTree = "<group>";
@@ -938,8 +970,16 @@
 				8AE3830F1976CC3E00824571 /* NZGesture.m */,
 				8AE383111976CCCD00824571 /* NZGestureSet.h */,
 				8AE383121976CCCD00824571 /* NZGestureSet.m */,
-				8A072549199CFE8A00ED7AC2 /* NZAction.h */,
-				8A07254A199CFE8A00ED7AC2 /* NZAction.m */,
+				8AF0F3DF19A781EE001645A2 /* NZActionComposite.h */,
+				8AF0F3E019A781EE001645A2 /* NZActionComposite.m */,
+				8AF0F3E819A7821D001645A2 /* NZUrlSession.h */,
+				8AF0F3E919A7821D001645A2 /* NZUrlSession.m */,
+				8AF0F3E519A7821D001645A2 /* NZSingleAction.h */,
+				8AF0F3E619A7821D001645A2 /* NZSingleAction.m */,
+				8AF0F3E219A7821D001645A2 /* NZHttpRequest.h */,
+				8AF0F3E319A7821D001645A2 /* NZHttpRequest.m */,
+				8AF0F3FA19A78D6F001645A2 /* NZAction.h */,
+				8AF0F3FB19A78D6F001645A2 /* NZAction.m */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -967,8 +1007,18 @@
 				8AE383151976D15000824571 /* NZGestureSet+CoreData.m */,
 				8AE3831A1976D2E800824571 /* NZGesture+CoreData.h */,
 				8AE3831B1976D2E800824571 /* NZGesture+CoreData.m */,
-				8A07254C199CFEF800ED7AC2 /* NZAction+CoreData.h */,
-				8A07254D199CFEF800ED7AC2 /* NZAction+CoreData.m */,
+				8AF0F3EB19A783E3001645A2 /* NZSingleAction+CoreData.h */,
+				8AF0F3EC19A783ED001645A2 /* NZSingleAction+CoreData.m */,
+				8AF0F3EE19A78407001645A2 /* NZActionComposite+CoreData.h */,
+				8AF0F3EF19A7840D001645A2 /* NZActionComposite+CoreData.m */,
+				8AF0F3F119A78423001645A2 /* NZHttpRequest+CoreData.h */,
+				8AF0F3F219A78429001645A2 /* NZHttpRequest+CoreData.m */,
+				8AF0F3F419A78438001645A2 /* NZUrlSession+CoreData.h */,
+				8AF0F3F519A7843E001645A2 /* NZUrlSession+CoreData.m */,
+				8AF0F3FD19A79CEC001645A2 /* NZAction+Execute.h */,
+				8AF0F3FE19A79CEC001645A2 /* NZAction+Execute.m */,
+				8AF0F40019A79DAD001645A2 /* NZSingleAction+Execute.h */,
+				8AF0F40119A79DAD001645A2 /* NZSingleAction+Execute.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -1849,6 +1899,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8AF7F9DF1969C89F00DB6D7C /* WarningLog.cpp in Sources */,
+				8AF0F3FF19A79CEC001645A2 /* NZAction+Execute.m in Sources */,
 				8AF7F9961969C89F00DB6D7C /* Softmax.cpp in Sources */,
 				8AF7F9B91969C89F00DB6D7C /* RBMQuantizer.cpp in Sources */,
 				8AAD80E0195DBA70000F9805 /* PCLineChartView.m in Sources */,
@@ -1865,6 +1916,7 @@
 				8AE8CB36196AD1FA008BE33E /* NZGraphView.m in Sources */,
 				8AF5319C19992D7100D10EBE /* NZMainSetTestingVC.m in Sources */,
 				8AF7F9AD1969C89F00DB6D7C /* RegressionSample.cpp in Sources */,
+				8AF0F40219A79DAD001645A2 /* NZSingleAction+Execute.m in Sources */,
 				8AF7F9C21969C89F00DB6D7C /* Derivative.cpp in Sources */,
 				8ADB50471962EB1D00DC2784 /* NZGravity.m in Sources */,
 				8AE8CB38196AD1FA008BE33E /* NZGraphViewHelper.m in Sources */,
@@ -1874,16 +1926,18 @@
 				8AF7F9BA1969C89F00DB6D7C /* SOMQuantizer.cpp in Sources */,
 				8AF7F9D11969C89F00DB6D7C /* ErrorLog.cpp in Sources */,
 				8AF7F98B1969C89F00DB6D7C /* DecisionTree.cpp in Sources */,
-				8A07254E199CFEF800ED7AC2 /* NZAction+CoreData.m in Sources */,
+				8AF0F3F319A78429001645A2 /* NZHttpRequest+CoreData.m in Sources */,
 				8AF7F9A91969C89F00DB6D7C /* Regressifier.cpp in Sources */,
 				8AF7F99E1969C89F00DB6D7C /* BernoulliRBM.cpp in Sources */,
 				8AF7F9CF1969C89F00DB6D7C /* DebugLog.cpp in Sources */,
 				8A92295E195C3CCF00DF7743 /* BLEDiscovery.m in Sources */,
+				8AF0F3E419A7821D001645A2 /* NZHttpRequest.m in Sources */,
 				8ADB501A1962CD4C00DC2784 /* NSManagedObject+CoreData.m in Sources */,
 				8AF7F9AC1969C89F00DB6D7C /* RegressionData.cpp in Sources */,
 				8ADB503E1962E1B000DC2784 /* NZSensorData+CoreData.m in Sources */,
 				8AF7F9D61969C89F00DB6D7C /* PeakDetection.cpp in Sources */,
 				8AF7F9971969C89F00DB6D7C /* libsvm.cpp in Sources */,
+				8AF0F3F919A78D2A001645A2 /* NZActionController.m in Sources */,
 				8AF7F9E31969CC4700DB6D7C /* NZGrtController.mm in Sources */,
 				8AF7F9C81969C89F00DB6D7C /* SavitzkyGolayFilter.cpp in Sources */,
 				8AF7F9DE1969C89F00DB6D7C /* Util.cpp in Sources */,
@@ -1898,6 +1952,7 @@
 				8AF7F9931969C89F00DB6D7C /* MinDist.cpp in Sources */,
 				8AF7F9B11969C89F00DB6D7C /* UnlabelledData.cpp in Sources */,
 				8AF7F9D51969C89F00DB6D7C /* Node.cpp in Sources */,
+				8AF0F3FC19A78D6F001645A2 /* NZAction.m in Sources */,
 				8AF7F9B01969C89F00DB6D7C /* TimeSeriesClassificationSample.cpp in Sources */,
 				8AF7F9C11969C89F00DB6D7C /* DeadZone.cpp in Sources */,
 				8AF7F9A61969C89F00DB6D7C /* MLBase.cpp in Sources */,
@@ -1909,6 +1964,7 @@
 				8AF7F9CA1969C89F00DB6D7C /* Neuron.cpp in Sources */,
 				8ADB503A1962E1B000DC2784 /* NZClassLabel+CoreData.m in Sources */,
 				8AF7F99D1969C89F00DB6D7C /* Gate.cpp in Sources */,
+				8AF0F3E119A781EE001645A2 /* NZActionComposite.m in Sources */,
 				8AF7F9A31969C89F00DB6D7C /* FeatureExtraction.cpp in Sources */,
 				8AF7F9D31969C89F00DB6D7C /* LUDecomposition.cpp in Sources */,
 				8A922969195C3E8E00DF7743 /* NZMasterMenuTVC.m in Sources */,
@@ -1940,6 +1996,8 @@
 				8AF7F9AB1969C89F00DB6D7C /* ClassificationSample.cpp in Sources */,
 				8A0DF6E4195C63770029E5F3 /* NZSensorDataRecordingManager.m in Sources */,
 				8AF7F9911969C89F00DB6D7C /* KNN.cpp in Sources */,
+				8AF0F3F019A7840D001645A2 /* NZActionComposite+CoreData.m in Sources */,
+				8AF0F3EA19A7821D001645A2 /* NZUrlSession.m in Sources */,
 				8AF7F98E1969C89F00DB6D7C /* GMM.cpp in Sources */,
 				8AF7F9AF1969C89F00DB6D7C /* TimeSeriesClassificationDataStream.cpp in Sources */,
 				8AF7F9BF1969C89F00DB6D7C /* ClassLabelFilter.cpp in Sources */,
@@ -1951,6 +2009,7 @@
 				8AF7F9BD1969C89F00DB6D7C /* ZeroCrossingCounter.cpp in Sources */,
 				8AF7F9901969C89F00DB6D7C /* HMM.cpp in Sources */,
 				8AF7F98F1969C89F00DB6D7C /* HiddenMarkovModel.cpp in Sources */,
+				8AF0F3ED19A783ED001645A2 /* NZSingleAction+CoreData.m in Sources */,
 				8A922966195C3D2A00DF7743 /* NZArduinoCommunicationManager.m in Sources */,
 				8AE383161976D15000824571 /* NZGestureSet+CoreData.m in Sources */,
 				8AF7F9B61969C89F00DB6D7C /* KMeansQuantizer.cpp in Sources */,
@@ -1965,6 +2024,7 @@
 				8AAD80DE195DBA70000F9805 /* KHShakingLineChartView.m in Sources */,
 				8A072548199CFAFD00ED7AC2 /* NZActionsVC.m in Sources */,
 				8ADB502F1962DAFC00DC2784 /* NZYawPitchRoll.m in Sources */,
+				8AF0F3E719A7821D001645A2 /* NZSingleAction.m in Sources */,
 				8A5AB06919783369006B2FBC /* NZPipelineController.mm in Sources */,
 				8ADB504B1962EBC200DC2784 /* NZGravity+CoreData.m in Sources */,
 				8AE3831C1976D2E800824571 /* NZGesture+CoreData.m in Sources */,
@@ -1976,7 +2036,6 @@
 				8AF7F9C01969C89F00DB6D7C /* ClassLabelTimeoutFilter.cpp in Sources */,
 				8ADB503B1962E1B000DC2784 /* NZLinearAcceleration+CoreData.m in Sources */,
 				8A0DF6D9195C4DF70029E5F3 /* NZRingRecordingVC.m in Sources */,
-				8A07254B199CFE8A00ED7AC2 /* NZAction.m in Sources */,
 				8AF7F9941969C89F00DB6D7C /* MinDistModel.cpp in Sources */,
 				8AF7F9D91969C89F00DB6D7C /* TestingLog.cpp in Sources */,
 				8A922922195C3A3800DF7743 /* NZDetailViewController.m in Sources */,
@@ -1991,6 +2050,7 @@
 				8AF7F9C41969C89F00DB6D7C /* FIRFilter.cpp in Sources */,
 				8ADB50231962D7BA00DC2784 /* NZSensorData.m in Sources */,
 				8AF7F9DA1969C89F00DB6D7C /* ThresholdCrossingDetector.cpp in Sources */,
+				8AF0F3F619A7843E001645A2 /* NZUrlSession+CoreData.m in Sources */,
 				8AF7F9CD1969C89F00DB6D7C /* MultidimensionalRegression.cpp in Sources */,
 				8AF7F9981969C89F00DB6D7C /* SVM.cpp in Sources */,
 				8AF7F9991969C89F00DB6D7C /* GaussianMixtureModels.cpp in Sources */,
