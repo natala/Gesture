@@ -51,6 +51,7 @@ GRT::TimeSeriesClassificationData dataToBeClassified;
     return sharedManager;
 }
 
+// tests
 
 - (id)init
 {
@@ -66,8 +67,8 @@ GRT::TimeSeriesClassificationData dataToBeClassified;
             }
         }
         BOOL init = grtPipeline.getIsInitialized();
-        //if ( !grtPipeline.loadPipelineFromFile([path UTF8String]) ) {
-        if ( true ) {
+        if ( !grtPipeline.loadPipelineFromFile([path UTF8String]) ) {
+        //if ( true ) {
             grtPipeline = GRT::GestureRecognitionPipeline();
             init = grtPipeline.getIsInitialized();
             NSLog(@"Couldn't load pipeline from file. Set up a new one");
