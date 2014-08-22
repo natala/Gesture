@@ -66,17 +66,40 @@ GRT::TimeSeriesClassificationData dataToBeClassified;
             }
         }
         BOOL init = grtPipeline.getIsInitialized();
-        if ( !grtPipeline.loadPipelineFromFile([path UTF8String]) ) {
+        //if ( !grtPipeline.loadPipelineFromFile([path UTF8String]) ) {
+        if ( true ) {
             grtPipeline = GRT::GestureRecognitionPipeline();
             init = grtPipeline.getIsInitialized();
             NSLog(@"Couldn't load pipeline from file. Set up a new one");
             // create a new pipeline with th DTW classifier and save
-            GRT::DTW dtw = GRT::DTW();
-            dtw.enableNullRejection(true);
-            dtw.setRejectionMode(GRT::DTW::RejectionModes::TEMPLATE_THRESHOLDS);
-            dtw.enableScaling(false);
-            dtw.enableZNormalization(true);
-            grtPipeline.setClassifier( GRT::DTW() );
+            
+            /**************************/
+            // set up the classifier  //
+            /**************************/
+            bool useScaling = true;                                // default is false
+            bool useNullRejection = true;                          // default is false
+            double nullRejectionCoeff = 3.0;                        // default is 3.0
+            uint rejectionMode = GRT::DTW::TEMPLATE_THRESHOLDS
+            ;     // default is TEMPLATE_THRESHOLD
+            bool dtwConstrain = false;                               // default is true
+            double radius = 5.0;                                    // default is 0.2
+            bool offsetUsingFirstSample = false;                    // default is false
+            bool useSmooting = false;                               // default is false
+            uint smoothingFactor = 2;                               // default is 5
+            
+            bool useZNomralization = false;                          // default is false
+            bool constrainZNormalization = false;                    // default is true
+            
+            bool trimTrainingData = false;                          // default is false
+            double trimThreshold = 0.4;                             // no default value ?
+            double maxTrimPercentage = 50;                          // no default value ?
+            
+            
+            GRT::DTW dtw = GRT::DTW(useScaling, useNullRejection, nullRejectionCoeff, rejectionMode, dtwConstrain, radius, offsetUsingFirstSample, useSmooting, smoothingFactor);
+            dtw.enableZNormalization(useZNomralization,constrainZNormalization);
+            dtw.enableTrimTrainingData(trimTrainingData, trimThreshold, maxTrimPercentage);
+            
+            grtPipeline.setClassifier( dtw );
             if( !grtPipeline.savePipelineToFile([path UTF8String]) ) {
                 NSLog(@"Could't initially save pipeline to file");
                 abort();

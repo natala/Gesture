@@ -147,6 +147,8 @@
 - (IBAction)startRecordingButtonPressed:(id)sender
 {
     [[NZSensorDataRecordingManager sharedManager] addRecordingObserver:self];
+    [[NZSensorDataRecordingManager sharedManager] prepareForRecordingSensorDataSet];
+  //  [[NZSensorDataRecordingManager sharedManager] startRecordingNewSensorDataSet];
     BOOL startedNewRecording = [[NZSensorDataRecordingManager sharedManager] startRecordingNewSensorDataSet];
     
     // if (startedNewRecording) {
