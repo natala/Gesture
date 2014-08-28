@@ -18,6 +18,8 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *stopStartGestureButton;
 @property (weak, nonatomic) IBOutlet UILabel *recognizedGestureNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *executedActionLabel;
+
 
 #pragma mark - IBActions
 - (IBAction)startButtonTapped:(id)sender;

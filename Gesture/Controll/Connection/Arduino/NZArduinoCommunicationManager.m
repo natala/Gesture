@@ -49,7 +49,7 @@
 
 - (BOOL)isAbleToReceiveSensorData
 {
-    NSLog(@"Found Peripherals: %d", [BLEDiscovery sharedInstance].foundPeripherals.count);
+    NSLog(@"Found Peripherals: %lu", (unsigned long)[[BLEDiscovery sharedInstance].foundPeripherals count]);
     return [BLEDiscovery sharedInstance].foundPeripherals.count == 1;
 }
 

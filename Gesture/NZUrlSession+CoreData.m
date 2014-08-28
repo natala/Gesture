@@ -23,6 +23,12 @@
     return [super findAllEntitiesWithName:ENTITY_NAME_URL_SESSION];
 }
 
++ (NSArray *)findAllSortedByName
+{
+    NSSortDescriptor *actionSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+    return [[NZUrlSession findAll] sortedArrayUsingDescriptors:@[actionSortDescriptor]];
+}
+
 + (NZUrlSession *)findLates
 {
 #warning incomplete implementation

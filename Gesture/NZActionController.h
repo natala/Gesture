@@ -42,14 +42,4 @@ typedef enum executionMode {
  */
 - (void)executeGesture:(NZGesture *)gesture withMode:(ExecutionMode)mode;
 
-/**
- * returns all the composite actions there are
- */
-- (NSArray *)allCompositeActions;
-
-/**
- * returns all single actions there are
- */
-- (NSArray *)allSingleActions;
-
 @end

@@ -14,6 +14,8 @@
 
 + (NSArray *)findAll;
 
++ (NSArray *)findAllSortedByName;
+
 + (NZActionComposite *)findLates;
 
 - (void)destroy;

@@ -23,6 +23,12 @@
     return [super findAllEntitiesWithName:ENTITY_NAME_SINGLE_ACTION];
 }
 
++ (NSArray *)findAllSortedByName
+{
+    NSSortDescriptor *actionSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+    return [[NZSingleAction findAll] sortedArrayUsingDescriptors:@[actionSortDescriptor]];
+}
+
 + (NZSingleAction *)findLates
 {
 #warning incomplete implementation

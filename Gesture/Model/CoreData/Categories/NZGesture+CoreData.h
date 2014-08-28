@@ -15,6 +15,8 @@
 
 + (NSArray *)findAll;
 
++ (NSArray *)findAllSortetByLabel;
+
 + (NZGesture *)findLates;
 
 + (NZGesture *)findGestureWithIndex:(NSNumber *)index;

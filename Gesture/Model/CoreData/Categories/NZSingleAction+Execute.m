@@ -7,10 +7,12 @@
 //
 
 #import "NZSingleAction+Execute.h"
-#import "NZAction+Execute.h"
 
 @implementation NZSingleAction (Execute)
 
 - (void)execute
+{
+    NSLog(@"The execute class method has to be implemented by the subclasses of the NZSingleAction!");
+}
 
 @end

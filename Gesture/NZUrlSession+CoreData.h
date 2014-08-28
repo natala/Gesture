@@ -15,6 +15,8 @@
 
 + (NSArray *)findAll;
 
++ (NSArray *)findAllSortedByName;
+
 + (NZUrlSession *)findLates;
 
 - (void)destroy;

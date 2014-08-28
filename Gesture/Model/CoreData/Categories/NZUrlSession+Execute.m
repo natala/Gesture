@@ -8,6 +8,18 @@
 
 #import "NZUrlSession+Execute.h"
 
-@implementation NZUrlSession_Execute
+@implementation NZUrlSession (Execute)
+
+- (void)execute
+{
+    NSLog(@"NZUrlSession - execute()");
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:self.url] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSLog(@"play music request send");
+        [dataTask cancel];
+        
+    }];
+    [dataTask resume];
+}
 
 @end

@@ -10,6 +10,8 @@
 #import <CoreData/CoreData.h>
 #import "NZAction.h"
 
+static NSString *ENTITY_NAME_SINGLE_ACTION = @"NZSingleAction";
+
 @class NZGesture;
 
 @interface NZSingleAction : NZAction

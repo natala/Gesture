@@ -7,7 +7,22 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "NZAction.h"
 
-@interface NZAction_CoreData : NSObject
+
+@interface NZAction (CoreData)
+
++ (NZAction *)create;
+
++ (NSArray *)findAll;
+
++ (NSArray *)findAllSortedByName;
+
++ (NZAction *)findLates;
+
+- (void)destroy;
+
++ (void)destroyAll;
+
 
 @end

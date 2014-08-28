@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "NZHttpRequest.h"
+#import "NZSingleAction+Execute.h"
 
-@interface NZHttpRequest_Execute : NSObject
+@interface NZHttpRequest (Execute)
 
 @end

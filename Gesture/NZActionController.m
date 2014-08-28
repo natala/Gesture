@@ -7,8 +7,8 @@
 //
 
 #import "NZActionController.h"
-#import "NZActionComposite+CoreData.h"
-#import "NZSingleAction+CoreData.h"
+#import "NZSingleAction+Execute.h"
+#import "NZActionComposite+Execute.h"
 
 @implementation NZActionController
 
@@ -51,27 +51,15 @@
 
 -(void)executeGesture:(NZGesture *)gesture withMode:(ExecutionMode)mode
 {
-#warning implement the method execute() for the actions
-    
     switch (mode) {
         case SINGLE_MODE:
-            
+            [gesture.singleAction execute];
             break;
         case GROUP_MODE:
             break;
         default:
             break;
     }
-}
-
-- (NSArray *)allCompositeActions
-{
-    return [NZActionComposite findAll];
-}
-
-- (NSArray *)allSingleActions
-{
-    return [NZSingleAction findAll];
 }
 
 @end

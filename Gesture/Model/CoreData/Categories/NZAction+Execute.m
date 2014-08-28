@@ -8,6 +8,12 @@
 
 #import "NZAction+Execute.h"
 
-@implementation NZAction_Execute
+@implementation NZAction (Execute)
+
+- (void)execute
+{
+    // NZAction is an abstract class
+    NSLog(@"NZAction is an abstract class. The method execute() should be implemented by all the subclasses!");
+}
 
 @end

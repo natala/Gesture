@@ -7,7 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "NZAction.h"
 
-@interface NZAction_Execute : NSObject
+@interface NZAction (Execute)
+
+/**
+ * executes the action
+ * @note NZAction is an abstract class, all the subclasses have to override this method
+ */
+- (void)execute;
 
 @end

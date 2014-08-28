@@ -23,6 +23,12 @@
     return [super findAllEntitiesWithName:ENTITY_NAME_HTTP_REQUEST];
 }
 
++ (NSArray *)findAllSortedByName
+{
+    NSSortDescriptor *actionSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+    return [[NZHttpRequest findAll] sortedArrayUsingDescriptors:@[actionSortDescriptor]];
+}
+
 + (NZHttpRequest *)findLates
 {
 #warning incomplete implementation

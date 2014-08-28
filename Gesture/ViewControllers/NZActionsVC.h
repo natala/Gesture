@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NZActionsVC : UITableViewController <NSFetchedResultsControllerDelegate>
+@interface NZActionsVC : UIViewController </*NSFetchedResultsControllerDelegate, */UITableViewDataSource, UITableViewDelegate>
 
 @end

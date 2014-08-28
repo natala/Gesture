@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "NZSingleAction.h"
 
 static NSString *ENTITY_NAME_HTTP_REQUEST = @"NZHttpRequest";
 
-@interface NZHttpRequest : NSManagedObject
+@interface NZHttpRequest : NZSingleAction
 
 @property (nonatomic, retain) NSString * url;
 @property (nonatomic, retain) NSString * message;

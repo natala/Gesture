@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NZGesture2ActionsMappingVC : UITableViewController
+@interface NZGesture2ActionsMappingVC : UITableViewController <UIPickerViewDataSource, UIPickerViewDelegate, UIPopoverControllerDelegate>
 
 @end

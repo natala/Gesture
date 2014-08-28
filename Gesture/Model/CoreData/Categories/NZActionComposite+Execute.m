@@ -8,6 +8,14 @@
 
 #import "NZActionComposite+Execute.h"
 
-@implementation NZActionComposite_Execute
+@implementation NZActionComposite (Execute)
+
+- (void)execute
+{
+    NSLog(@"NZActionComposite - execute()");
+    for (NZAction *action in self.actions) {
+        [action execute];
+    }
+}
 
 @end

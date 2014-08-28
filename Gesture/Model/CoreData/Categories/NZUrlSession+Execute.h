@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "NZUrlSession.h"
+#import "NZSingleAction+Execute.h"
 
-@interface NZUrlSession_Execute : NSObject
+@interface NZUrlSession (Execute)
 
 @end

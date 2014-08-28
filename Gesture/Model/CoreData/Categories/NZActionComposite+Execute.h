@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "NZActionComposite.h"
+#import "NZAction+Execute.h"
 
-@interface NZActionComposite_Execute : NSObject
+@interface NZActionComposite (Execute)
 
 @end

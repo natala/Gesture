@@ -10,7 +10,9 @@
 #import <CoreData/CoreData.h>
 #import "NZAction.h"
 
-@class NZAction, NZGesture;
+static NSString *ENTITY_NAME_ACTION_COMPOSITE = @"NZActionComposite";
+
+@class NZGesture;
 
 @interface NZActionComposite : NZAction
 
