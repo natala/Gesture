@@ -1,5 +1,5 @@
 //
-//  NZAction+Execute.h
+//  NZUrlSession+Execute.h
 //  Gesture
 //
 //  Created by Natalia Zarawska on 8/25/14.
@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NZAction_Execute : NSObject
+@interface NZUrlSession_Execute : NSObject
 
 @end

@@ -1,13 +1,13 @@
 //
-//  NZAction+Execute.h
+//  NZAction+CoreData.m
 //  Gesture
 //
 //  Created by Natalia Zarawska on 8/25/14.
 //  Copyright (c) 2014 TUM. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "NZAction+CoreData.h"
 
-@interface NZAction_Execute : NSObject
+@implementation NZAction_CoreData
 
 @end

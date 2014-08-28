@@ -1,5 +1,5 @@
 //
-//  NZAction+Execute.h
+//  NZAction+CoreData.h
 //  Gesture
 //
 //  Created by Natalia Zarawska on 8/25/14.
@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NZAction_Execute : NSObject
+@interface NZAction_CoreData : NSObject
 
 @end

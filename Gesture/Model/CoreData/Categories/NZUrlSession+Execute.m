@@ -1,13 +1,13 @@
 //
-//  NZAction+Execute.h
+//  NZUrlSession+Execute.m
 //  Gesture
 //
 //  Created by Natalia Zarawska on 8/25/14.
 //  Copyright (c) 2014 TUM. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "NZUrlSession+Execute.h"
 
-@interface NZAction_Execute : NSObject
+@implementation NZUrlSession_Execute
 
 @end
