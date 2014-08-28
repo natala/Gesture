@@ -13,7 +13,7 @@
 - (void)execute
 {
     NSLog(@"NZActionComposite - execute()");
-    for (NZAction *action in self.actions) {
+    for (NZAction *action in self.childActions) {
         [action execute];
     }
 }

@@ -277,35 +277,28 @@
     NZGesture *gesture = [self.gestures objectAtIndex:self.selectedIndexPath.section];
     NZActionComposite *composit = gesture.actionComposite;
     NZSingleAction *single = gesture.singleAction;
-   // UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:self.selectedIndexPath];
+   
   if ([popoverController isEqual:self.singleActionPopoverController]) {
         NSUInteger selectedAction = [self.singleActionPicker selectedRowInComponent:0];
-        if (selectedAction == [self.singleActions count]) {
-            [gesture.singleAction removeGestureObject:gesture];
-          //  gesture.singleAction = nil;
-          //  cell.detailTextLabel.text = @"no action";
-        } else {
+        [single removeGestureObject:gesture];
+        /*if (selectedAction == [self.singleActions count]) {
+            [single removeGestureObject:gesture];
+        }*/
+      if (selectedAction < [self.singleActions count]) {
             NZSingleAction *action = [self.singleActions objectAtIndex:selectedAction];
-            gesture.singleAction = action;
             [action addGestureObject:gesture];
-          //  cell.detailTextLabel.text = gesture.singleAction.name;
         }
-      gesture.actionComposite = composit;
     } else if ([popoverController isEqual:self.compositeActionPopoverController]) {
         NSUInteger selectedAction = [self.compositeActionPicker selectedRowInComponent:0];
-        if (selectedAction == [self.compositeActions count]) {
-            [gesture.actionComposite removeGestureObject:gesture];
-           // gesture.actionComposite = nil;
-          //  cell.detailTextLabel.text = @"no action";
-        } else {
-            gesture.actionComposite = [self.compositeActions objectAtIndex:selectedAction];
-            [[self.compositeActions objectAtIndex:selectedAction] addGestureObject:gesture];
-          //  cell.detailTextLabel.text = gesture.actionComposite.name;
+        [composit removeGestureObject:gesture];
+        /*if (selectedAction == [self.compositeActions count]) {
+            [composit removeGestureObject:gesture];
+        } */
+        if (selectedAction < [self.compositeActions count]) {
+            NZActionComposite *action = [self.compositeActions objectAtIndex:selectedAction];
+            [action addGestureObject:gesture];
         }
-        gesture.singleAction = single;
     }
-    
-    [self.tableView reloadData];
     
     /*NZClassLabel *label = [NZClassLabel create];
     label.name = @"$$$$$$$$$$$$$";
@@ -322,8 +315,8 @@
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
-    
     self.selectedIndexPath = nil;
+    [self.tableView reloadData];
 }
 
 #pragma mark - getters and setters

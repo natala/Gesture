@@ -10,9 +10,10 @@
 #import "NZAction.h"
 #import "NZGesture.h"
 
+
 @implementation NZActionComposite
 
-@dynamic actions;
+@dynamic childActions;
 @dynamic gesture;
 
 @end

@@ -12,20 +12,20 @@
 
 static NSString *ENTITY_NAME_ACTION_COMPOSITE = @"NZActionComposite";
 
-@class NZGesture;
+@class NZAction, NZGesture;
 
 @interface NZActionComposite : NZAction
 
-@property (nonatomic, retain) NSSet *actions;
+@property (nonatomic, retain) NSSet *childActions;
 @property (nonatomic, retain) NSSet *gesture;
 @end
 
 @interface NZActionComposite (CoreDataGeneratedAccessors)
 
-- (void)addActionsObject:(NZAction *)value;
-- (void)removeActionsObject:(NZAction *)value;
-- (void)addActions:(NSSet *)values;
-- (void)removeActions:(NSSet *)values;
+- (void)addChildActionsObject:(NZAction *)value;
+- (void)removeChildActionsObject:(NZAction *)value;
+- (void)addChildActions:(NSSet *)values;
+- (void)removeChildActions:(NSSet *)values;
 
 - (void)addGestureObject:(NZGesture *)value;
 - (void)removeGestureObject:(NZGesture *)value;

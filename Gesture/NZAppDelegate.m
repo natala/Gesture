@@ -79,15 +79,15 @@
     // coposites
     NZActionComposite *morning = [NZActionComposite create];
     morning.name = @"Morning";
-    morning.actions = [[NSSet alloc] initWithObjects:hueOn01, hueOff02, hueOff03, nil];
+    morning.childActions = [[NSSet alloc] initWithObjects:hueOn01, hueOff02, hueOff03, nil];
     
     NZActionComposite *afternoonr = [NZActionComposite create];
     afternoonr.name = @"Afternoon";
-    afternoonr.actions = [[NSSet alloc] initWithObjects:hueOn01, hueOff02, hueOn03, nil];
+    afternoonr.childActions = [[NSSet alloc] initWithObjects:hueOn01, hueOff02, hueOn03, nil];
     
     NZActionComposite *evening = [NZActionComposite create];
     evening.name = @"Evening";
-    evening.actions = [[NSSet alloc] initWithObjects:hueOn01, hueOn02, hueOn03, nil];
+    evening.childActions = [[NSSet alloc] initWithObjects:hueOn01, hueOn02, hueOn03, nil];
 
     
     return YES;
