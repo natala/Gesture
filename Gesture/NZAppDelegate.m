@@ -12,6 +12,10 @@
 #import "NZPipelineController.h"
 #import "NZCoreDataManager.h"
 
+#import "NZHttpRequest+CoreData.h"
+#import "NZUrlSession+CoreData.h"
+#import "NZActionComposite+CoreData.h"
+
 @implementation NZAppDelegate
 
 //@synthesize managedObjectContext = _managedObjectContext;
@@ -25,15 +29,66 @@
     UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
     splitViewController.delegate = (id)navigationController.topViewController;
 
-    UINavigationController *masterNavigationController = splitViewController.viewControllers[0];
-    NZMasterMenuTVC *controller = (NZMasterMenuTVC *)masterNavigationController.topViewController;
-   // controller.managedObjectContext = self.managedObjectContext;
-    
     // init the BLE connection
     [NZArduinoCommunicationManager sharedManager];
     
     // init the pipeline
     [NZPipelineController sharedManager];
+    
+    // hardcode the actions and action groups
+    // controll the lights
+    [NZHttpRequest destroyAll];
+    [NZActionComposite destroyAll];
+    
+    NZHttpRequest *hueOff01 = [NZHttpRequest create];
+    hueOff01.name = @"hue 1 off";
+    hueOff01.url = @"http://192.168.1.105/api/newdeveloper/lights/1/state";
+    hueOff01.httpMethod = @"PUT";
+    hueOff01.message = @"{\"on\":false}";
+    
+    NZHttpRequest *hueOff02 = [NZHttpRequest create];
+    hueOff02.name = @"hue 2 off";
+    hueOff02.url = @"http://192.168.1.105/api/newdeveloper/lights/2/state";
+    hueOff02.httpMethod = @"PUT";
+    hueOff02.message = @"{\"on\":false}";
+    
+    NZHttpRequest *hueOff03 = [NZHttpRequest create];
+    hueOff03.name = @"hue 3 off";
+    hueOff03.url = @"http://192.168.1.105/api/newdeveloper/lights/3/state";
+    hueOff03.httpMethod = @"PUT";
+    hueOff03.message = @"{\"on\":false}";
+    
+    NZHttpRequest *hueOn01 = [NZHttpRequest create];
+    hueOn01.name = @"hue 1 on";
+    hueOn01.url = @"http://192.168.1.105/api/newdeveloper/lights/2/state";
+    hueOn01.httpMethod = @"PUT";
+    hueOn01.message = @"{\"on\":true}";
+    
+    NZHttpRequest *hueOn02 = [NZHttpRequest create];
+    hueOn02.name = @"hue 2 on";
+    hueOn02.url = @"http://192.168.1.105/api/newdeveloper/lights/2/state";
+    hueOn02.httpMethod = @"PUT";
+    hueOn02.message = @"{\"on\":true}";
+    
+    NZHttpRequest *hueOn03 = [NZHttpRequest create];
+    hueOn03.name = @"hue 3 on";
+    hueOn03.url = @"http://192.168.1.105/api/newdeveloper/lights/3/state";
+    hueOn03.httpMethod = @"PUT";
+    hueOn03.message = @"{\"on\":true}";
+    
+    // coposites
+    NZActionComposite *morning = [NZActionComposite create];
+    morning.name = @"Morning";
+    morning.childActions = [[NSSet alloc] initWithObjects:hueOn01, hueOff02, hueOff03, nil];
+    
+    NZActionComposite *afternoonr = [NZActionComposite create];
+    afternoonr.name = @"Afternoon";
+    afternoonr.childActions = [[NSSet alloc] initWithObjects:hueOn01, hueOff02, hueOn03, nil];
+    
+    NZActionComposite *evening = [NZActionComposite create];
+    evening.name = @"Evening";
+    evening.childActions = [[NSSet alloc] initWithObjects:hueOn01, hueOn02, hueOn03, nil];
+
     
     return YES;
 }

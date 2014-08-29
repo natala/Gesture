@@ -49,6 +49,12 @@
     return [super findAllEntitiesWithName:ENTITY_NAME_GESTURE];
 }
 
++ (NSArray *)findAllSortetByLabel
+{
+    NSSortDescriptor *gestureSortDescripor = [[NSSortDescriptor alloc] initWithKey:@"label.name" ascending:YES];
+    return [[NZGesture findAll]sortedArrayUsingDescriptors:@[gestureSortDescripor]];
+}
+
 + (NZGesture *)findLates
 {
 #warning incomplete implementation

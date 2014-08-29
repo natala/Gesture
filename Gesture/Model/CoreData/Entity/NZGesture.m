@@ -21,5 +21,7 @@
 @dynamic label;
 @dynamic negativeSamples;
 @dynamic positiveSamples;
+@dynamic singleAction;
+@dynamic actionComposite;
 
 @end

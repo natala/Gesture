@@ -1,35 +1,35 @@
 //
-//  NZAction+CoreData.m
+//  NZUrlSession+CoreData.m
 //  Gesture
 //
-//  Created by Natalia Zarawska on 8/25/14.
+//  Created by Natalia Zarawska on 7/1/14.
 //  Copyright (c) 2014 TUM. All rights reserved.
 //
 
-#import "NZAction+CoreData.h"
+#import "NZUrlSession+CoreData.h"
 #import "NSManagedObject+CoreData.h"
 
-@implementation NZAction (CoreData)
+@implementation NZUrlSession (CoreData)
 
 #pragma mark - Create
-+(NZAction *)create
++(NZUrlSession *)create
 {
-    return (NZAction *)[super createEntityWithName:ENTITY_NAME_ACTION];
+    return (NZUrlSession *)[super createEntityWithName:ENTITY_NAME_URL_SESSION];
 }
 
 #pragma mark - Find
 + (NSArray *)findAll
 {
-    return [super findAllEntitiesWithName:ENTITY_NAME_ACTION];
+    return [super findAllEntitiesWithName:ENTITY_NAME_URL_SESSION];
 }
 
 + (NSArray *)findAllSortedByName
 {
     NSSortDescriptor *actionSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
-    return [[NZAction findAll] sortedArrayUsingDescriptors:@[actionSortDescriptor]];
+    return [[NZUrlSession findAll] sortedArrayUsingDescriptors:@[actionSortDescriptor]];
 }
 
-+ (NZAction *)findLates
++ (NZUrlSession *)findLates
 {
 #warning incomplete implementation
     NSLog(@"NZUrlSession find lates to be implemented!!!");
@@ -44,8 +44,7 @@
 
 + (void)destroyAll
 {
-    [super destroyAllEntitiesWithName:ENTITY_NAME_ACTION];
+    [super destroyAllEntitiesWithName:ENTITY_NAME_URL_SESSION];
 }
-
 
 @end

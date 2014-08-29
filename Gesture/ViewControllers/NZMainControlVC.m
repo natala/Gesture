@@ -10,6 +10,9 @@
 #import "NZPipelineController.h"
 #import "NZClassLabel+CoreData.h"
 #import "NZGesture+CoreData.h"
+#import "NZSingleAction.h"
+#import "NZActionComposite.h"
+#import "NZActionController.h"
 
 @interface NZMainControlVC ()
 
@@ -110,6 +113,7 @@
     if (classIndex == -1) {
         NSLog(@"unable to recognise the given gesture");
         self.recognizedGestureNameLabel.text = @"Recognized label";
+        self.executedActionLabel.text = @"Executed action";
         self.lastRecognizedGesture = nil;
         return;
     }
@@ -118,11 +122,16 @@
     NZGesture *gesture = [NZGesture findGestureWithIndex:[NSNumber numberWithInt:classIndex]];
     if (!gesture) {
         self.recognizedGestureNameLabel.text = [NSString stringWithFormat:@"%d",classIndex ];
+        if (self.isSingleMode) {
+            self.executedActionLabel.text = gesture.singleAction.name;
+        } else self.executedActionLabel.text = gesture.actionComposite.name;
+
     } else {
         self.recognizedGestureNameLabel.text = gesture.label.name;
         self.lastRecognizedGesture = gesture.label.name;
     }
     
+    /*
     // perform the http request
     if (!gesture.httpRequestMessageBody && !gesture.httpRequestUrl) {
         NSLog(@"no action is defined for this gesture");
@@ -131,6 +140,10 @@
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString: gesture.httpRequestUrl]];
     NSString *jsonString = gesture.httpRequestMessageBody;
     [self sendRequest:request withJson:jsonString];
+     */
+    if (self.isSingleMode) {
+        [[NZActionController sharedManager] executeGesture:gesture withMode:SINGLE_MODE];
+    } else [[NZActionController sharedManager] executeGesture:gesture withMode:GROUP_MODE];
     
 #warning TODO implement the adding as a positive sample if the user doesn't complain
 }
