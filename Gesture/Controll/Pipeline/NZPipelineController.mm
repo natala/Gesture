@@ -22,6 +22,7 @@
 
 
 NSString *const kGrtPipelineFileName = @"pipelineFile.txt";
+NSString *const kDataSamplesDefaultFileName = @"dataSamples";
 
 @interface NZPipelineController ()
 
@@ -220,14 +221,6 @@ GRT::TimeSeriesClassificationData dataToBeClassified;
     }
 }
 
-#pragma mark - Helpers
-
-+ (NSString *)documentPath
-{
-    NSArray *searchPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    return [searchPath objectAtIndex:0];
-}
-
 #pragma mark - GRT helper function
 
 + (GRT::MatrixDouble)convertSensorDataSet:(NZSensorDataSet *)set
@@ -333,14 +326,24 @@ GRT::TimeSeriesClassificationData dataToBeClassified;
 
 - (BOOL)saveTestResults
 {
+    BOOL res = true;
+    
     NSDate *currentTimestamp = [NSDate date];
     NSMutableString *pipelineFileName = [NSMutableString stringWithString:[currentTimestamp description]];
     [pipelineFileName appendString:@" -Pipeline"];
     NSMutableString *testResultsFileName = [NSMutableString stringWithString:[currentTimestamp description]];
     [testResultsFileName appendString:@" -TestReport"];
+    NSMutableString *dataSamplesFileName = [NSMutableString stringWithString:[currentTimestamp description]];
+    [dataSamplesFileName appendString:@" -DataSamples"];
     
     if (![self savePipelineToFileWithName:pipelineFileName]) {
-        return false;
+        NSLog(@"failed to save pipeline to file %@", pipelineFileName);
+        res = false;;
+    }
+    
+    if (![self saveDataSamplesToFile:dataSamplesFileName]) {
+        NSLog(@"failed to save data samples to file %@", dataSamplesFileName);
+        res = false;
     }
     
     // save the test results
@@ -350,13 +353,36 @@ GRT::TimeSeriesClassificationData dataToBeClassified;
     file.open(nameAsString.c_str(), std::iostream::out );
     if (!file.is_open()) {
         NSLog(@"failed to save test results to file %@", path);
-        return false;
+        res = false;
     }
     file << [[NSString stringWithFormat:@"%@", self.testReport] UTF8String];
     file.close();
-    return true;
+    
+    return res;
+}
+
+#pragma mark - saving to file
+- (BOOL)saveDataSamplesToFile
+{
+    return [self saveDataSamplesToFile:kDataSamplesDefaultFileName];
+}
+
+- (BOOL)saveDataSamplesToFile:(NSString *)name
+{
+    NSMutableString *nameWithExtension = [NSMutableString stringWithString:name];
+    [nameWithExtension appendString:@".xls"];
+    NSString *path = [[NZPipelineController documentPath] stringByAppendingPathComponent:nameWithExtension];
+    return trainingData.saveDatasetToFile([path UTF8String]);
 }
 
 #pragma mark - getters & setters
+
+#pragma mark - Helpers
+
++ (NSString *)documentPath
+{
+    NSArray *searchPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    return [searchPath objectAtIndex:0];
+}
 
 @end

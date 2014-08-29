@@ -106,9 +106,22 @@
 - (NSDictionary *)testPipeline:(int)dataPartitioningConstant;
 
 /**
- * saves the test results and the pipeline to file with the current timestamp
- * @note you can retrive the files via iTunes
+ * saves the test results and the pipeline to file with the current timestamp. If saving of one of the files failes (pipeline, data samples or test report) the method returns false
+ * @note you can retrive the files via iTunes.
  */
 - (BOOL)saveTestResults;
+
+
+/**
+ * saves the data samples added to the pipeline to a file with a given name
+ * @param name name of the file where the samples should be saved to
+ * @note it should not contain an extension of the file
+ */
+- (BOOL)saveDataSamplesToFile:(NSString *)name;
+
+/**
+ * saves the data samples added to the pipeline to a file with a default name
+ */
+- (BOOL)saveDataSamplesToFile;
 
 @end
