@@ -370,7 +370,7 @@ GRT::TimeSeriesClassificationData dataToBeClassified;
 - (BOOL)saveDataSamplesToFile:(NSString *)name
 {
     NSMutableString *nameWithExtension = [NSMutableString stringWithString:name];
-    [nameWithExtension appendString:@".csv i"];
+    [nameWithExtension appendString:@".xls"];
     NSString *path = [[NZPipelineController documentPath] stringByAppendingPathComponent:nameWithExtension];
     return trainingData.saveDatasetToFile([path UTF8String]);
 }
