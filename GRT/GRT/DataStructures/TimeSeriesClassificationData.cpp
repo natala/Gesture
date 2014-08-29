@@ -303,10 +303,10 @@ bool TimeSeriesClassificationData::scale(const vector<MinMax> &ranges,const doub
     return true;
 }
 
-bool TimeSeriesClassificationData::saveDatasetToFile(const string fileName) const{
+bool TimeSeriesClassificationData::saveDatasetToFile(const string &fileName) const{
 
 	std::fstream file;
-	file.open(fileName.c_str(), std::ios::out);
+	file.open(fileName.c_str(), iostream::out/*std::ios::out*/);
 
 	if( !file.is_open() ){
         errorLog << "saveDatasetToFile(string fileName) -  Failed to open file!" << endl;
