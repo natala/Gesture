@@ -2,33 +2,29 @@
 //  NZGesture.h
 //  Gesture
 //
-//  Created by Natalia Zarawska on 7/16/14.
+//  Created by Natalia Zarawska on 9/1/14.
 //  Copyright (c) 2014 TUM. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-@class NZClassLabel;
-@class NZSensorDataSet;
-@class NZSingleAction;
-@class NZActionComposite;
 
 static NSString *ENTITY_NAME_GESTURE = @"NZGesture";
 
+@class NZAction, NZClassLabel, NZGestureSet, NZSensorDataSet;
+
 @interface NZGesture : NSManagedObject
 
-#pragma mark - attributes
-@property (nonatomic, retain) NSDate * timeStampCreated;
-@property (nonatomic, retain) NSDate * timeStampUpdated;
 @property (nonatomic, retain) NSString * httpRequestMessageBody;
 @property (nonatomic, retain) NSString * httpRequestUrl;
-
-#pragma mark - relationships
-@property (nonatomic, retain) NSManagedObject *gestureSet;
+@property (nonatomic, retain) NSDate * timeStampCreated;
+@property (nonatomic, retain) NSDate * timeStampUpdated;
+@property (nonatomic, retain) NZAction *actionComposite;
+@property (nonatomic, retain) NZGestureSet *gestureSet;
 @property (nonatomic, retain) NZClassLabel *label;
 @property (nonatomic, retain) NSSet *negativeSamples;
 @property (nonatomic, retain) NSSet *positiveSamples;
-@property (nonatomic, retain) NZSingleAction *singleAction;
-@property (nonatomic, retain) NZActionComposite *actionComposite;
+@property (nonatomic, retain) NZAction *singleAction;
 @end
 
 @interface NZGesture (CoreDataGeneratedAccessors)

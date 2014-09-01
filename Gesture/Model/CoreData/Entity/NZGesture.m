@@ -2,26 +2,28 @@
 //  NZGesture.m
 //  Gesture
 //
-//  Created by Natalia Zarawska on 7/16/14.
+//  Created by Natalia Zarawska on 9/1/14.
 //  Copyright (c) 2014 TUM. All rights reserved.
 //
 
 #import "NZGesture.h"
+#import "NZAction.h"
+#import "NZClassLabel.h"
+#import "NZGestureSet.h"
+#import "NZSensorDataSet.h"
+
 
 @implementation NZGesture
 
-#pragma mark - attributes
-@dynamic timeStampCreated;
-@dynamic timeStampUpdated;
 @dynamic httpRequestMessageBody;
 @dynamic httpRequestUrl;
-
-#pragma mark - relationships
+@dynamic timeStampCreated;
+@dynamic timeStampUpdated;
+@dynamic actionComposite;
 @dynamic gestureSet;
 @dynamic label;
 @dynamic negativeSamples;
 @dynamic positiveSamples;
 @dynamic singleAction;
-@dynamic actionComposite;
 
 @end

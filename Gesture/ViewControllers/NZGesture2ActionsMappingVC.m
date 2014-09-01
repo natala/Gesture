@@ -275,28 +275,20 @@
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
 {
     NZGesture *gesture = [self.gestures objectAtIndex:self.selectedIndexPath.section];
-    NZActionComposite *composit = gesture.actionComposite;
-    NZSingleAction *single = gesture.singleAction;
-   
+    
   if ([popoverController isEqual:self.singleActionPopoverController]) {
         NSUInteger selectedAction = [self.singleActionPicker selectedRowInComponent:0];
-        [single removeGestureObject:gesture];
-        /*if (selectedAction == [self.singleActions count]) {
-            [single removeGestureObject:gesture];
-        }*/
+      gesture.singleAction = nil;
       if (selectedAction < [self.singleActions count]) {
-            NZSingleAction *action = [self.singleActions objectAtIndex:selectedAction];
-            [action addGestureObject:gesture];
+            NZAction *action = [self.singleActions objectAtIndex:selectedAction];
+          gesture.singleAction = action;
         }
     } else if ([popoverController isEqual:self.compositeActionPopoverController]) {
         NSUInteger selectedAction = [self.compositeActionPicker selectedRowInComponent:0];
-        [composit removeGestureObject:gesture];
-        /*if (selectedAction == [self.compositeActions count]) {
-            [composit removeGestureObject:gesture];
-        } */
+        gesture.actionComposite = nil;
         if (selectedAction < [self.compositeActions count]) {
-            NZActionComposite *action = [self.compositeActions objectAtIndex:selectedAction];
-            [action addGestureObject:gesture];
+            NZAction *action = [self.compositeActions objectAtIndex:selectedAction];
+            gesture.actionComposite = action;
         }
     }
     

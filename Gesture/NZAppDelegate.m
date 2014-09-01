@@ -37,7 +37,7 @@
     
     // hardcode the actions and action groups
     // controll the lights
-    [NZHttpRequest destroyAll];
+  /*  [NZHttpRequest destroyAll];
     [NZActionComposite destroyAll];
     
     NZHttpRequest *hueOff01 = [NZHttpRequest create];
@@ -88,8 +88,7 @@
     NZActionComposite *evening = [NZActionComposite create];
     evening.name = @"Evening";
     evening.childActions = [[NSSet alloc] initWithObjects:hueOn01, hueOn02, hueOn03, nil];
-
-    
+   */
     return YES;
 }
 							
