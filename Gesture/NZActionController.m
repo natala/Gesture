@@ -56,6 +56,7 @@
             [gesture.singleAction execute];
             break;
         case GROUP_MODE:
+            [gesture.actionComposite execute];
             break;
         default:
             break;

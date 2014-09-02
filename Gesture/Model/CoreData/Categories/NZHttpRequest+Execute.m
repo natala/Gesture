@@ -28,4 +28,10 @@
     }
 }
 
+#pragma mark - URLConnectionDelegate 
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    NSLog(@"connectio failed with error: %@", error);
+}
+
 @end

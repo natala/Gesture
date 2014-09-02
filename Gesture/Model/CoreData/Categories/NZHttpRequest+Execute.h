@@ -10,6 +10,6 @@
 #import "NZHttpRequest.h"
 #import "NZSingleAction+Execute.h"
 
-@interface NZHttpRequest (Execute)
+@interface NZHttpRequest (Execute) <NSURLConnectionDelegate>
 
 @end
