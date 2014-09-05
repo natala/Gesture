@@ -19,6 +19,8 @@
 #import <Protocol/CMD07_ServerRespondDeviceStatus.h>
 #import <Protocol/CMD08_ControlDevice.h>
 #import <Protocol/CMD09_ServerControlResult.h>
+#import <Protocol/DeviceStatus.h>
+#import <Protocol/Device.h>
 
 
 @implementation NZWiFiPlugAction (Execute)
@@ -26,6 +28,52 @@
 - (void)execute
 {
     NSLog(@"NZWiFiPlugAction - execute()");
+}
+
+- (void)prepareForExecution:(SEL)selector
+{
+    NSLog(@"preparing for execution");
+    [self connect];
+    
+}
+
+- (void)connect
+{
+    CMDHelper *helper = [CMDHelper shareInstance];
+    helper.delegate = self;
+        [CMDHelper setupConnectionWithIp:self.hostName Port:self.portNumber];
+    CMD00_ConnectRequet *cmd00 = [[CMD00_ConnectRequet alloc] init];
+    [helper sendCMD:cmd00];
+
+}
+
+- (void)login
+{
+    CMD02_Login *cmd02 = [[CMD02_Login alloc] initWithUser:self.username Pass:self.password Offset:0 appid:0];
+    [[CMDHelper shareInstance] sendCMD:cmd02];
+}
+
+- (void)switchPlug
+{
+    CMD04_GetAllDeviceList *cmd04 = [[CMD04_GetAllDeviceList alloc] init];
+    [[CMDHelper shareInstance] sendCMD:cmd04];
+}
+
+- (void)receivedDeviceList:(NSArray *)devices
+{
+    for (Device *dev in devices) {
+        DeviceStatus *device = (DeviceStatus *)dev;
+        if (device.name == self.plugName) {
+            if (device.po) {
+                <#statements#>
+            }
+        }
+    }
+}
+
+- (void)switchPlug:(BOOL)on
+{
+    CMD04_GetAllDeviceList *cmd04 = alloc
 }
 
 #pragma mark - CMD Helper Delegate methods
@@ -37,10 +85,11 @@
     } else if (cmd->CommandNo == [CMD03_ServerLoginRespond commandConst]) {
         NSLog(@"result: %d", ((CMD03_ServerLoginRespond *)cmd).result);
         NSLog(@"User Info: %@", ((CMD03_ServerLoginRespond *)cmd).info);
-       // BOOL res = ((CMD03_ServerLoginRespond *)cmd).result;
-        // if (res) {
-        // [self getAllDevices];
-        // }
+        BOOL res = ((CMD03_ServerLoginRespond *)cmd).result;
+         if (res) {
+             NSLog(@"plug did connect");
+             //[self getAllDevices];
+         }
     } else if (cmd->CommandNo == [CMD05_ServerRespondAllDeviceList commandConst]) {
        // self.deviceList = ((CMD05_ServerRespondAllDeviceList *)cmd).deviceList;
        // [self didReceiveDevices];
@@ -57,7 +106,7 @@
 -(void)socketConnected
 {
     NSLog(@"socket connected:%hhd", [[CMDHelper shareInstance] isConnected]);
-    //[self login];
+    [self login];
 }
 
 -(void)socketClosed
@@ -65,6 +114,7 @@
     NSLog(@"socked closed");
     // reconnect
     NSLog(@"try to reconnect");
+    [self connect];
     //[CMDHelper setupConnectionWithIp:@"ec2-54-217-214-117.eu-west-1.compute.amazonaws.com" Port:227];
     
 }

@@ -16,4 +16,10 @@
     NSLog(@"NZAction is an abstract class. The method execute() should be implemented by all the subclasses!");
 }
 
+- (void)prepareForExecution:(id)sender
+{
+    // NZAction is an abstract class
+    NSLog(@"NZAction is an abstract class. The method prepareForExecution() should be implemented by all the subclasses!");
+}
+
 @end

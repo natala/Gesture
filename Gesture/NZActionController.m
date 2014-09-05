@@ -9,6 +9,8 @@
 #import "NZActionController.h"
 #import "NZSingleAction+Execute.h"
 #import "NZActionComposite+Execute.h"
+#import "NZAction+CoreData.h"
+#import "NZAction+Execute.h"
 
 @implementation NZActionController
 
@@ -36,6 +38,7 @@
 - (id)init
 {
     self = [super init];
+    self.observers = [NSMutableArray array];
     return self;
 }
 
@@ -62,5 +65,38 @@
             break;
     }
 }
+
+- (void)prepareAllActionsForExecution
+{
+#warning implement the method
+    BOOL allActionsReady = true;
+    NSArray *allActions = [NZAction findAll];
+    for (NZAction *action in allActions) {
+        [action prepareForExecution];
+    }
+    
+    if (allActionsReady) {
+        for (id<NZActionControllerObserver>observer in self.observers){
+            if ([observer respondsToSelector:@selector(didPrepareAllActionsForExecution)]) {
+                [observer didPrepareAllActionsForExecution];
+            }
+        }
+    }
+}
+
+- (void)disconnectActions
+{}
+
+#pragma mark - mnage observers
+- (void)addObserver:(id<NZActionControllerObserver>)observer
+{
+    [self.observers addObject:observer];
+}
+
+- (void)removeObserver:(id<NZActionControllerObserver>)observer
+{
+    [self.observers removeObject:observer];
+}
+
 
 @end
