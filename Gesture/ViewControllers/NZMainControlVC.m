@@ -75,6 +75,7 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    [[NZActionController sharedManager] removeObserver:self];
 }
 
 - (void)readyToControl
@@ -219,10 +220,15 @@
 
 - (IBAction)startButtonTapped:(id)sender
 {
-    [[NZActionController sharedManager] addObserver:self];
+    
+    if (![[NZActionController sharedManager].observers containsObject:self]) {
+        [[NZActionController sharedManager] addObserver:self];
+    }
+    if (![[NZSensorDataRecordingManager sharedManager].sensorDataRecordingObservers containsObject:self]) {
+        [[NZSensorDataRecordingManager sharedManager] addRecordingObserver:self];
+    }
     [[NZActionController sharedManager] prepareAllActionsForExecution];
     
-    [[NZSensorDataRecordingManager sharedManager] addRecordingObserver:self];
     //BOOL startedNewRecording = [[NZSensorDataRecordingManager sharedManager] startRecordingNewSensorDataSet];
     
     BOOL readyForRecording = [[NZSensorDataRecordingManager sharedManager] prepareForRecordingSensorDataSet];

@@ -42,6 +42,8 @@
 		8AA4188219B885AD0027FDED /* NZWiFiPlugAction+Execute.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AA4188119B885AD0027FDED /* NZWiFiPlugAction+Execute.m */; };
 		8AA4188419B88AA00027FDED /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA4188319B88AA00027FDED /* CFNetwork.framework */; };
 		8AA4188619B88AC30027FDED /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA4188519B88AC30027FDED /* libz.1.2.5.dylib */; };
+		8AA4188A19B9B15B0027FDED /* NZActionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AA4188919B9B15B0027FDED /* NZActionHandler.m */; };
+		8AA4188D19B9B75C0027FDED /* NZWiFiPlugActionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AA4188C19B9B75C0027FDED /* NZWiFiPlugActionHandler.m */; };
 		8AAD80DB195DBA70000F9805 /* KHLinearAccelerationLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAD80CE195DBA70000F9805 /* KHLinearAccelerationLineChartView.m */; };
 		8AAD80DD195DBA70000F9805 /* KHSensorDataLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAD80D2195DBA70000F9805 /* KHSensorDataLineChartView.m */; };
 		8AAD80DE195DBA70000F9805 /* KHShakingLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAD80D4195DBA70000F9805 /* KHShakingLineChartView.m */; };
@@ -266,6 +268,10 @@
 		8AA4188119B885AD0027FDED /* NZWiFiPlugAction+Execute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NZWiFiPlugAction+Execute.m"; path = "Model/CoreData/Categories/NZWiFiPlugAction+Execute.m"; sourceTree = "<group>"; };
 		8AA4188319B88AA00027FDED /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		8AA4188519B88AC30027FDED /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
+		8AA4188819B9B15B0027FDED /* NZActionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZActionHandler.h; path = Controll/NZActionHandler.h; sourceTree = "<group>"; };
+		8AA4188919B9B15B0027FDED /* NZActionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZActionHandler.m; path = Controll/NZActionHandler.m; sourceTree = "<group>"; };
+		8AA4188B19B9B75C0027FDED /* NZWiFiPlugActionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZWiFiPlugActionHandler.h; path = Controll/NZWiFiPlugActionHandler.h; sourceTree = "<group>"; };
+		8AA4188C19B9B75C0027FDED /* NZWiFiPlugActionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZWiFiPlugActionHandler.m; path = Controll/NZWiFiPlugActionHandler.m; sourceTree = "<group>"; };
 		8AAD80CD195DBA70000F9805 /* KHLinearAccelerationLineChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KHLinearAccelerationLineChartView.h; path = Views/ChartViews/KHLinearAccelerationLineChartView.h; sourceTree = "<group>"; };
 		8AAD80CE195DBA70000F9805 /* KHLinearAccelerationLineChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KHLinearAccelerationLineChartView.m; path = Views/ChartViews/KHLinearAccelerationLineChartView.m; sourceTree = "<group>"; };
 		8AAD80D1195DBA70000F9805 /* KHSensorDataLineChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KHSensorDataLineChartView.h; path = Views/ChartViews/KHSensorDataLineChartView.h; sourceTree = "<group>"; };
@@ -882,12 +888,11 @@
 		8A922961195C3CD700DF7743 /* Controll */ = {
 			isa = PBXGroup;
 			children = (
+				8AA4188719B9B12F0027FDED /* Actions */,
 				8A5AB060197832B6006B2FBC /* Pipeline */,
 				8AF7F9E01969CC1300DB6D7C /* Recognition */,
 				8A0DF6DE195C61410029E5F3 /* Recording */,
 				8A922962195C3CDF00DF7743 /* Connection */,
-				8AF0F3F719A78D2A001645A2 /* NZActionController.h */,
-				8AF0F3F819A78D2A001645A2 /* NZActionController.m */,
 			);
 			name = Controll;
 			sourceTree = "<group>";
@@ -963,6 +968,19 @@
 				8AF0F41619AB640B001645A2 /* NZAction+CoreData.m */,
 			);
 			name = "Core Data Categories";
+			sourceTree = "<group>";
+		};
+		8AA4188719B9B12F0027FDED /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				8AF0F3F719A78D2A001645A2 /* NZActionController.h */,
+				8AF0F3F819A78D2A001645A2 /* NZActionController.m */,
+				8AA4188819B9B15B0027FDED /* NZActionHandler.h */,
+				8AA4188919B9B15B0027FDED /* NZActionHandler.m */,
+				8AA4188B19B9B75C0027FDED /* NZWiFiPlugActionHandler.h */,
+				8AA4188C19B9B75C0027FDED /* NZWiFiPlugActionHandler.m */,
+			);
+			name = Actions;
 			sourceTree = "<group>";
 		};
 		8AAD80AA195D66D7000F9805 /* Views */ = {
@@ -2020,6 +2038,7 @@
 				8AF7F9CB1969C89F00DB6D7C /* LinearRegression.cpp in Sources */,
 				8ADB502C1962DAEB00DC2784 /* NZQuaternion.m in Sources */,
 				8AE8CB34196AD1FA008BE33E /* NZConstants.m in Sources */,
+				8AA4188A19B9B15B0027FDED /* NZActionHandler.m in Sources */,
 				8AE8CB36196AD1FA008BE33E /* NZGraphView.m in Sources */,
 				8AF5319C19992D7100D10EBE /* NZMainSetTestingVC.m in Sources */,
 				8AF7F9AD1969C89F00DB6D7C /* RegressionSample.cpp in Sources */,
@@ -2100,6 +2119,7 @@
 				8AD0201B197D717A003A09EE /* NZHttpRequestPopoverController.m in Sources */,
 				8AE3831F1977D54500824571 /* NZGestureConfigurationVC.m in Sources */,
 				8A6AF54C195CBAF20015B571 /* NZSensorDataHelper.m in Sources */,
+				8AA4188D19B9B75C0027FDED /* NZWiFiPlugActionHandler.m in Sources */,
 				8AC9D9A7196162EF00364B5A /* NZSensorDataTableView.m in Sources */,
 				8AF7F9C51969C89F00DB6D7C /* HighPassFilter.cpp in Sources */,
 				8AE3830A19758AFA00824571 /* NZGesturesVC.m in Sources */,

@@ -7,7 +7,11 @@
 //
 
 #import "NZActionHandler.h"
+#import <Protocol/CMDHelper.h>
+#import "NZWiFiPlugAction+Execute.h"
 
-@interface NZWiFiPlugActionHandler : NZActionHandler
+@interface NZWiFiPlugActionHandler : NZActionHandler <CMDHelperDelegate>
+
+- (id)initWithAction:(NZWiFiPlugAction *)action;
 
 @end

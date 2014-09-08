@@ -10,8 +10,6 @@
 #import "NZWiFiPlugAction.h"
 #import "NZSingleAction+Execute.h"
 
-#import <Protocol/CMDHelper.h>
-
-@interface NZWiFiPlugAction (Execute) <CMDHelperDelegate>
+@interface NZWiFiPlugAction (Execute)
 
 @end

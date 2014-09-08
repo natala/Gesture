@@ -10,6 +10,7 @@
 #import "NZAction.h"
 #import "NZGesture+CoreData.h"
 #import "NZGestureSet.h"
+#import "NZActionHandler.h"
 
 typedef enum executionMode {
     SINGLE_MODE,
@@ -47,7 +48,7 @@ typedef enum executionMode {
 
 @end
 
-@interface NZActionController : NSObject
+@interface NZActionController : NSObject <NZActionHandlerObserver>
 
 /**
  * Create and return the singleton instance of the action controller
@@ -84,6 +85,7 @@ typedef enum executionMode {
  * disconnects all the connections
  * @note for example the WiFiPlug connections
  */
+
 - (void)disconnectActions;
 
 #pragma mark - manage observers

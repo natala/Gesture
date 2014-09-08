@@ -10,6 +10,7 @@
 #import <CoreData/CoreData.h>
 #import "NZSingleAction.h"
 
+static NSString *ENTITY_NAME_WIFIPLUG_ACTION = @"NZWiFiPlugAction";
 
 @interface NZWiFiPlugAction : NZSingleAction
 

@@ -14,7 +14,9 @@
 
 #import "NZHttpRequest+CoreData.h"
 #import "NZUrlSession+CoreData.h"
+#import "NZWiFiPlugAction+CoreData.h"
 #import "NZActionComposite+CoreData.h"
+#import "NZAction+CoreData.h"
 
 @implementation NZAppDelegate
 
@@ -37,45 +39,69 @@
     
     // hardcode the actions and action groups
     // controll the lights
-  /*  [NZHttpRequest destroyAll];
-    [NZActionComposite destroyAll];
+  
+    [NZAction destroyAll];
+  /*
     
     NZHttpRequest *hueOff01 = [NZHttpRequest create];
     hueOff01.name = @"hue 1 off";
     hueOff01.url = @"http://10.130.108.79/api/newdeveloper/lights/1/state";
     hueOff01.httpMethod = @"PUT";
     hueOff01.message = @"{\"on\":false}";
+    hueOff01.httpHeaderContentType = @"application/json";
+    hueOff01.httpHeaderAccept = @"application/json";
     
     NZHttpRequest *hueOff02 = [NZHttpRequest create];
     hueOff02.name = @"hue 2 off";
     hueOff02.url = @"http://10.130.108.79/api/newdeveloper/lights/2/state";
     hueOff02.httpMethod = @"PUT";
     hueOff02.message = @"{\"on\":false}";
+    hueOff02.httpHeaderContentType = @"application/json";
+    hueOff02.httpHeaderAccept = @"application/json";
     
     NZHttpRequest *hueOff03 = [NZHttpRequest create];
     hueOff03.name = @"hue 3 off";
     hueOff03.url = @"http://10.130.108.79/api/newdeveloper/lights/3/state";
     hueOff03.httpMethod = @"PUT";
     hueOff03.message = @"{\"on\":false}";
+    hueOff03.httpHeaderContentType = @"application/json";
+    hueOff03.httpHeaderAccept = @"application/json";
     
     NZHttpRequest *hueOn01 = [NZHttpRequest create];
     hueOn01.name = @"hue 1 on";
     hueOn01.url = @"http://10.130.108.79/api/newdeveloper/lights/2/state";
     hueOn01.httpMethod = @"PUT";
     hueOn01.message = @"{\"on\":true}";
+    hueOn01.httpHeaderContentType = @"application/json";
+    hueOn01.httpHeaderAccept = @"application/json";
     
     NZHttpRequest *hueOn02 = [NZHttpRequest create];
     hueOn02.name = @"hue 2 on";
     hueOn02.url = @"http://10.130.108.79/api/newdeveloper/lights/2/state";
     hueOn02.httpMethod = @"PUT";
     hueOn02.message = @"{\"on\":true}";
+    hueOn02.httpHeaderContentType = @"application/json";
+    hueOn02.httpHeaderAccept = @"application/json";
     
     NZHttpRequest *hueOn03 = [NZHttpRequest create];
     hueOn03.name = @"hue 3 on";
     hueOn03.url = @"http://10.130.108.79/api/newdeveloper/lights/3/state";
     hueOn03.httpMethod = @"PUT";
     hueOn03.message = @"{\"on\":true}";
-    
+    hueOn03.httpHeaderContentType = @"application/json";
+    hueOn03.httpHeaderAccept = @"application/json";
+   */
+    // wifi plug
+    /*NZWiFiPlugAction *wifiPlug = [NZWiFiPlugAction create];
+    wifiPlug.name = @"wifi plug";
+    wifiPlug.hostName = @"ec2-54-217-214-117.eu-west-1.compute.amazonaws.com";
+    wifiPlug.portNumber = [NSNumber numberWithInt:227];
+    wifiPlug.plugId = @"0000250905C248";
+    wifiPlug.plugName = @"nat";
+    wifiPlug.username = @"nzarawska@sapient.com";
+    wifiPlug.password = @"3048";
+    */
+   /*
     // coposites
     NZActionComposite *morning = [NZActionComposite create];
     morning.name = @"Morning";
@@ -88,7 +114,111 @@
     NZActionComposite *evening = [NZActionComposite create];
     evening.name = @"Evening";
     evening.childActions = [[NSSet alloc] initWithObjects:hueOn01, hueOn02, hueOn03, nil];
-*/
+    */
+    
+    // *********** //
+    // TUM ACTIONS //
+    // *********** //
+    
+    // SMART LAB //
+    // lights
+    NZHttpRequest *labLighWindowOn = [NZHttpRequest create];
+    labLighWindowOn.name = @"LAB light window on";
+    labLighWindowOn.url = @"http://ios14cmu-bruegge.in.tum.de:8080/rest/items/EO_SL_Light_B";
+    labLighWindowOn.httpMethod = @"POST";
+    labLighWindowOn.message = @"ON";
+    labLighWindowOn.httpHeaderContentType = @"text/plain";
+    
+    NZHttpRequest *labLighWindowOff = [NZHttpRequest create];
+    labLighWindowOff.name = @"LAB light window off";
+    labLighWindowOff.url = @"http://ios14cmu-bruegge.in.tum.de:8080/rest/items/EO_SL_Light_B";
+    labLighWindowOff.httpMethod = @"POST";
+    labLighWindowOff.message = @"OFF";
+    labLighWindowOff.httpHeaderContentType = @"text/plain";
+    
+    NZHttpRequest *labLighDoorOn = [NZHttpRequest create];
+    labLighDoorOn.name = @"LAB light door on";
+    labLighDoorOn.url = @"http://ios14cmu-bruegge.in.tum.de:8080/rest/items/EO_SL_Light_A";
+    labLighDoorOn.httpMethod = @"POST";
+    labLighDoorOn.message = @"ON";
+    labLighDoorOn.httpHeaderContentType = @"text/plain";
+    
+    NZHttpRequest *labLighDoorOff = [NZHttpRequest create];
+    labLighDoorOff.name = @"LAB light door off";
+    labLighDoorOff.url = @"http://ios14cmu-bruegge.in.tum.de:8080/rest/items/EO_SL_Light_A";
+    labLighDoorOff.httpMethod = @"POST";
+    labLighDoorOff.message = @"OFF";
+    labLighDoorOff.httpHeaderContentType = @"text/plain";
+    
+    //blinds
+    NZHttpRequest *labBlindsOn = [NZHttpRequest create];
+    labBlindsOn.name = @"CR blinds on";
+    labBlindsOn.url = @"http://ios14cmu-bruegge.in.tum.de:8080/rest/items/EO_SL_Blinds_B";
+    labBlindsOn.httpMethod = @"POST";
+    labBlindsOn.message = @"ON";
+    labBlindsOn.httpHeaderContentType = @"text/plain";
+    
+    NZHttpRequest *labBlindsOff = [NZHttpRequest create];
+    labBlindsOff.name = @"LAB blinds off";
+    labBlindsOff.url = @"http://ios14cmu-bruegge.in.tum.de:8080/rest/items/EO_SL_Blinds_B";
+    labBlindsOff.httpMethod = @"POST";
+    labBlindsOff.message = @"OFF";
+    labBlindsOff.httpHeaderContentType = @"text/plain";
+    
+    // CONFERENCE ROOM //
+    //blinds
+    NZHttpRequest *crBlindsBOn = [NZHttpRequest create];
+    crBlindsBOn.name = @"CR blinds B on";
+    crBlindsBOn.url = @"http://ios14cmu-bruegge.in.tum.de:8080/rest/items/EO_CR_Blinds_B";
+    crBlindsBOn.httpMethod = @"POST";
+    crBlindsBOn.message = @"ON";
+    crBlindsBOn.httpHeaderContentType = @"text/plain";
+    
+    NZHttpRequest *crBlindsBOff = [NZHttpRequest create];
+    crBlindsBOff.name = @"CR blinds B off";
+    crBlindsBOff.url = @"http://ios14cmu-bruegge.in.tum.de:8080/rest/items/EO_CR_Blinds_B";
+    crBlindsBOff.httpMethod = @"POST";
+    crBlindsBOff.message = @"OFF";
+    crBlindsBOff.httpHeaderContentType = @"text/plain";
+    
+    //lights
+    NZHttpRequest *crLightsAOn = [NZHttpRequest create];
+    crLightsAOn.name = @"CR lights door on";
+    crLightsAOn.url = @"http://ios14cmu-bruegge.in.tum.de:8080/rest/items/EO_CR_Light_A";
+    crLightsAOn.httpMethod = @"POST";
+    crLightsAOn.message = @"ON";
+    crLightsAOn.httpHeaderContentType = @"text/plain";
+    
+    NZHttpRequest *crLightsAOff = [NZHttpRequest create];
+    crLightsAOff.name = @"CR lights door off";
+    crLightsAOff.url = @"http://ios14cmu-bruegge.in.tum.de:8080/rest/items/EO_CR_Light_A";
+    crLightsAOff.httpMethod = @"POST";
+    crLightsAOff.message = @"OFF";
+    crLightsAOff.httpHeaderContentType = @"text/plain";
+
+    NZHttpRequest *crLightsBOn = [NZHttpRequest create];
+    crLightsBOn.name = @"CR lights window on";
+    crLightsBOn.url = @"http://ios14cmu-bruegge.in.tum.de:8080/rest/items/EO_CR_Light_B";
+    crLightsBOn.httpMethod = @"POST";
+    crLightsBOn.message = @"ON";
+    crLightsBOn.httpHeaderContentType = @"text/plain";
+    
+    NZHttpRequest *crLightsBOff = [NZHttpRequest create];
+    crLightsBOff.name = @"CR lights window off";
+    crLightsBOff.url = @"http://ios14cmu-bruegge.in.tum.de:8080/rest/items/EO_CR_Light_B";
+    crLightsBOff.httpMethod = @"POST";
+    crLightsBOff.message = @"OFF";
+    crLightsBOff.httpHeaderContentType = @"text/plain";
+    
+    //composits
+    NZActionComposite *lightsOn = [NZActionComposite create];
+    lightsOn.name = @"CR Lights On";
+    lightsOn.childActions = [[NSSet alloc] initWithObjects:crLightsAOn, crLightsBOn, nil];
+
+    NZActionComposite *lightsOff = [NZActionComposite create];
+    lightsOff.name = @"CR Lights Off";
+    lightsOff.childActions = [[NSSet alloc] initWithObjects:crLightsAOff, crLightsBOff, nil];
+
     return YES;
 }
 							
