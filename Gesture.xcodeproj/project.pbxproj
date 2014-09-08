@@ -36,6 +36,14 @@
 		8A922960195C3CCF00DF7743 /* BLEService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A92295D195C3CCF00DF7743 /* BLEService.m */; };
 		8A922966195C3D2A00DF7743 /* NZArduinoCommunicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A922965195C3D2A00DF7743 /* NZArduinoCommunicationManager.m */; };
 		8A922969195C3E8E00DF7743 /* NZMasterMenuTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A922968195C3E8E00DF7743 /* NZMasterMenuTVC.m */; };
+		8AA4187619B881990027FDED /* Protocol.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA4187519B881990027FDED /* Protocol.framework */; };
+		8AA4187919B884140027FDED /* NZWiFiPlugAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AA4187819B884140027FDED /* NZWiFiPlugAction.m */; };
+		8AA4187F19B8851C0027FDED /* NZWiFiPlugAction+CoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AA4187E19B8851C0027FDED /* NZWiFiPlugAction+CoreData.m */; };
+		8AA4188219B885AD0027FDED /* NZWiFiPlugAction+Execute.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AA4188119B885AD0027FDED /* NZWiFiPlugAction+Execute.m */; };
+		8AA4188419B88AA00027FDED /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA4188319B88AA00027FDED /* CFNetwork.framework */; };
+		8AA4188619B88AC30027FDED /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA4188519B88AC30027FDED /* libz.1.2.5.dylib */; };
+		8AA4188A19B9B15B0027FDED /* NZActionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AA4188919B9B15B0027FDED /* NZActionHandler.m */; };
+		8AA4188D19B9B75C0027FDED /* NZWiFiPlugActionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AA4188C19B9B75C0027FDED /* NZWiFiPlugActionHandler.m */; };
 		8AAD80DB195DBA70000F9805 /* KHLinearAccelerationLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAD80CE195DBA70000F9805 /* KHLinearAccelerationLineChartView.m */; };
 		8AAD80DD195DBA70000F9805 /* KHSensorDataLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAD80D2195DBA70000F9805 /* KHSensorDataLineChartView.m */; };
 		8AAD80DE195DBA70000F9805 /* KHShakingLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAD80D4195DBA70000F9805 /* KHShakingLineChartView.m */; };
@@ -251,6 +259,19 @@
 		8A922965195C3D2A00DF7743 /* NZArduinoCommunicationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZArduinoCommunicationManager.m; path = Controll/Connection/Arduino/NZArduinoCommunicationManager.m; sourceTree = "<group>"; };
 		8A922967195C3E8E00DF7743 /* NZMasterMenuTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZMasterMenuTVC.h; path = ViewControllers/NZMasterMenuTVC.h; sourceTree = "<group>"; };
 		8A922968195C3E8E00DF7743 /* NZMasterMenuTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZMasterMenuTVC.m; path = ViewControllers/NZMasterMenuTVC.m; sourceTree = "<group>"; };
+		8AA4187519B881990027FDED /* Protocol.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Protocol.framework; path = ../WiFiPlug_Test/Protocol.framework; sourceTree = "<group>"; };
+		8AA4187719B884140027FDED /* NZWiFiPlugAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZWiFiPlugAction.h; sourceTree = "<group>"; };
+		8AA4187819B884140027FDED /* NZWiFiPlugAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZWiFiPlugAction.m; sourceTree = "<group>"; };
+		8AA4187D19B8851C0027FDED /* NZWiFiPlugAction+CoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NZWiFiPlugAction+CoreData.h"; sourceTree = "<group>"; };
+		8AA4187E19B8851C0027FDED /* NZWiFiPlugAction+CoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NZWiFiPlugAction+CoreData.m"; sourceTree = "<group>"; };
+		8AA4188019B885AD0027FDED /* NZWiFiPlugAction+Execute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NZWiFiPlugAction+Execute.h"; path = "Model/CoreData/Categories/NZWiFiPlugAction+Execute.h"; sourceTree = "<group>"; };
+		8AA4188119B885AD0027FDED /* NZWiFiPlugAction+Execute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NZWiFiPlugAction+Execute.m"; path = "Model/CoreData/Categories/NZWiFiPlugAction+Execute.m"; sourceTree = "<group>"; };
+		8AA4188319B88AA00027FDED /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		8AA4188519B88AC30027FDED /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
+		8AA4188819B9B15B0027FDED /* NZActionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZActionHandler.h; path = Controll/NZActionHandler.h; sourceTree = "<group>"; };
+		8AA4188919B9B15B0027FDED /* NZActionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZActionHandler.m; path = Controll/NZActionHandler.m; sourceTree = "<group>"; };
+		8AA4188B19B9B75C0027FDED /* NZWiFiPlugActionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZWiFiPlugActionHandler.h; path = Controll/NZWiFiPlugActionHandler.h; sourceTree = "<group>"; };
+		8AA4188C19B9B75C0027FDED /* NZWiFiPlugActionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZWiFiPlugActionHandler.m; path = Controll/NZWiFiPlugActionHandler.m; sourceTree = "<group>"; };
 		8AAD80CD195DBA70000F9805 /* KHLinearAccelerationLineChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KHLinearAccelerationLineChartView.h; path = Views/ChartViews/KHLinearAccelerationLineChartView.h; sourceTree = "<group>"; };
 		8AAD80CE195DBA70000F9805 /* KHLinearAccelerationLineChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KHLinearAccelerationLineChartView.m; path = Views/ChartViews/KHLinearAccelerationLineChartView.m; sourceTree = "<group>"; };
 		8AAD80D1195DBA70000F9805 /* KHSensorDataLineChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KHSensorDataLineChartView.h; path = Views/ChartViews/KHSensorDataLineChartView.h; sourceTree = "<group>"; };
@@ -680,6 +701,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8AA4188619B88AC30027FDED /* libz.1.2.5.dylib in Frameworks */,
+				8AA4188419B88AA00027FDED /* CFNetwork.framework in Frameworks */,
+				8AA4187619B881990027FDED /* Protocol.framework in Frameworks */,
 				8A07255019A3AA4100ED7AC2 /* CoreBluetooth.framework in Frameworks */,
 				8AE8CB48196AF587008BE33E /* QuartzCore.framework in Frameworks */,
 				8A922906195C3A3800DF7743 /* CoreGraphics.framework in Frameworks */,
@@ -743,6 +767,9 @@
 		8A922902195C3A3800DF7743 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8AA4188519B88AC30027FDED /* libz.1.2.5.dylib */,
+				8AA4188319B88AA00027FDED /* CFNetwork.framework */,
+				8AA4187519B881990027FDED /* Protocol.framework */,
 				8A07254F19A3AA4100ED7AC2 /* CoreBluetooth.framework */,
 				8AE8CB52196B1BF0008BE33E /* CorePlotHeaders */,
 				8AE8CB47196AF587008BE33E /* QuartzCore.framework */,
@@ -861,12 +888,11 @@
 		8A922961195C3CD700DF7743 /* Controll */ = {
 			isa = PBXGroup;
 			children = (
+				8AA4188719B9B12F0027FDED /* Actions */,
 				8A5AB060197832B6006B2FBC /* Pipeline */,
 				8AF7F9E01969CC1300DB6D7C /* Recognition */,
 				8A0DF6DE195C61410029E5F3 /* Recording */,
 				8A922962195C3CDF00DF7743 /* Connection */,
-				8AF0F3F719A78D2A001645A2 /* NZActionController.h */,
-				8AF0F3F819A78D2A001645A2 /* NZActionController.m */,
 			);
 			name = Controll;
 			sourceTree = "<group>";
@@ -889,6 +915,72 @@
 				8A922956195C3CCF00DF7743 /* BLE */,
 			);
 			name = Arduino;
+			sourceTree = "<group>";
+		};
+		8AA4187A19B884240027FDED /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				8AA4187719B884140027FDED /* NZWiFiPlugAction.h */,
+				8AA4187819B884140027FDED /* NZWiFiPlugAction.m */,
+				8AEFC68219AF1B5A00E25943 /* NZActionComposite.h */,
+				8AEFC68319AF1B5A00E25943 /* NZActionComposite.m */,
+				8AF0F3E819A7821D001645A2 /* NZUrlSession.h */,
+				8AF0F3E919A7821D001645A2 /* NZUrlSession.m */,
+				8AF0F3E219A7821D001645A2 /* NZHttpRequest.h */,
+				8AF0F3E319A7821D001645A2 /* NZHttpRequest.m */,
+				8AF0F3FA19A78D6F001645A2 /* NZAction.h */,
+				8AF0F3FB19A78D6F001645A2 /* NZAction.m */,
+				8A4390B319B480D000B1372F /* NZSingleAction.h */,
+				8A4390B419B480D000B1372F /* NZSingleAction.m */,
+			);
+			name = Actions;
+			sourceTree = "<group>";
+		};
+		8AA4187B19B884480027FDED /* Sensor Data */ = {
+			isa = PBXGroup;
+			children = (
+				8ADB50271962DAD500DC2784 /* NZLinearAcceleration.h */,
+				8ADB50281962DAD500DC2784 /* NZLinearAcceleration.m */,
+				8ADB502A1962DAEB00DC2784 /* NZQuaternion.h */,
+				8ADB502B1962DAEB00DC2784 /* NZQuaternion.m */,
+				8ADB502D1962DAFC00DC2784 /* NZYawPitchRoll.h */,
+				8ADB502E1962DAFC00DC2784 /* NZYawPitchRoll.m */,
+				8ADB50481962EB3900DC2784 /* NZGravity.h */,
+				8ADB50461962EB1D00DC2784 /* NZGravity.m */,
+			);
+			name = "Sensor Data";
+			sourceTree = "<group>";
+		};
+		8AA4187C19B8848F0027FDED /* Core Data Categories */ = {
+			isa = PBXGroup;
+			children = (
+				8AF0F3EB19A783E3001645A2 /* NZSingleAction+CoreData.h */,
+				8AF0F3EC19A783ED001645A2 /* NZSingleAction+CoreData.m */,
+				8AF0F3EE19A78407001645A2 /* NZActionComposite+CoreData.h */,
+				8AF0F3EF19A7840D001645A2 /* NZActionComposite+CoreData.m */,
+				8AF0F3F119A78423001645A2 /* NZHttpRequest+CoreData.h */,
+				8AF0F3F219A78429001645A2 /* NZHttpRequest+CoreData.m */,
+				8AF0F3F419A78438001645A2 /* NZUrlSession+CoreData.h */,
+				8AA4187D19B8851C0027FDED /* NZWiFiPlugAction+CoreData.h */,
+				8AA4187E19B8851C0027FDED /* NZWiFiPlugAction+CoreData.m */,
+				8AF0F3F519A7843E001645A2 /* NZUrlSession+CoreData.m */,
+				8AF0F41519AB640B001645A2 /* NZAction+CoreData.h */,
+				8AF0F41619AB640B001645A2 /* NZAction+CoreData.m */,
+			);
+			name = "Core Data Categories";
+			sourceTree = "<group>";
+		};
+		8AA4188719B9B12F0027FDED /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				8AF0F3F719A78D2A001645A2 /* NZActionController.h */,
+				8AF0F3F819A78D2A001645A2 /* NZActionController.m */,
+				8AA4188819B9B15B0027FDED /* NZActionHandler.h */,
+				8AA4188919B9B15B0027FDED /* NZActionHandler.m */,
+				8AA4188B19B9B75C0027FDED /* NZWiFiPlugActionHandler.h */,
+				8AA4188C19B9B75C0027FDED /* NZWiFiPlugActionHandler.m */,
+			);
+			name = Actions;
 			sourceTree = "<group>";
 		};
 		8AAD80AA195D66D7000F9805 /* Views */ = {
@@ -968,34 +1060,18 @@
 		8ADB4FDE1962BA8E00DC2784 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				8AEFC68219AF1B5A00E25943 /* NZActionComposite.h */,
-				8AEFC68319AF1B5A00E25943 /* NZActionComposite.m */,
+				8AA4187B19B884480027FDED /* Sensor Data */,
+				8AA4187A19B884240027FDED /* Actions */,
 				8ADB501E1962D63100DC2784 /* NZSensorDataSet.h */,
 				8ADB501F1962D63100DC2784 /* NZSensorDataSet.m */,
 				8ADB50211962D7BA00DC2784 /* NZSensorData.h */,
 				8ADB50221962D7BA00DC2784 /* NZSensorData.m */,
 				8ADB50241962D96800DC2784 /* NZClassLabel.h */,
 				8ADB50251962D96800DC2784 /* NZClassLabel.m */,
-				8ADB50271962DAD500DC2784 /* NZLinearAcceleration.h */,
-				8ADB50281962DAD500DC2784 /* NZLinearAcceleration.m */,
-				8ADB502A1962DAEB00DC2784 /* NZQuaternion.h */,
-				8ADB502B1962DAEB00DC2784 /* NZQuaternion.m */,
-				8ADB502D1962DAFC00DC2784 /* NZYawPitchRoll.h */,
-				8ADB502E1962DAFC00DC2784 /* NZYawPitchRoll.m */,
-				8ADB50481962EB3900DC2784 /* NZGravity.h */,
-				8ADB50461962EB1D00DC2784 /* NZGravity.m */,
 				8AE3830E1976CC3E00824571 /* NZGesture.h */,
 				8AE3830F1976CC3E00824571 /* NZGesture.m */,
 				8AE383111976CCCD00824571 /* NZGestureSet.h */,
 				8AE383121976CCCD00824571 /* NZGestureSet.m */,
-				8AF0F3E819A7821D001645A2 /* NZUrlSession.h */,
-				8AF0F3E919A7821D001645A2 /* NZUrlSession.m */,
-				8AF0F3E219A7821D001645A2 /* NZHttpRequest.h */,
-				8AF0F3E319A7821D001645A2 /* NZHttpRequest.m */,
-				8AF0F3FA19A78D6F001645A2 /* NZAction.h */,
-				8AF0F3FB19A78D6F001645A2 /* NZAction.m */,
-				8A4390B319B480D000B1372F /* NZSingleAction.h */,
-				8A4390B419B480D000B1372F /* NZSingleAction.m */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -1128,18 +1204,11 @@
 		8AF0F40319AB3A7B001645A2 /* Actions */ = {
 			isa = PBXGroup;
 			children = (
-				8AF0F3EB19A783E3001645A2 /* NZSingleAction+CoreData.h */,
-				8AF0F3EC19A783ED001645A2 /* NZSingleAction+CoreData.m */,
-				8AF0F3EE19A78407001645A2 /* NZActionComposite+CoreData.h */,
-				8AF0F3EF19A7840D001645A2 /* NZActionComposite+CoreData.m */,
-				8AF0F3F119A78423001645A2 /* NZHttpRequest+CoreData.h */,
-				8AF0F3F219A78429001645A2 /* NZHttpRequest+CoreData.m */,
-				8AF0F3F419A78438001645A2 /* NZUrlSession+CoreData.h */,
-				8AF0F3F519A7843E001645A2 /* NZUrlSession+CoreData.m */,
-				8AF0F41519AB640B001645A2 /* NZAction+CoreData.h */,
-				8AF0F41619AB640B001645A2 /* NZAction+CoreData.m */,
+				8AA4187C19B8848F0027FDED /* Core Data Categories */,
 				8AF0F40F19AB45B5001645A2 /* NZActionComposite+Execute.h */,
 				8AF0F41019AB45B5001645A2 /* NZActionComposite+Execute.m */,
+				8AA4188019B885AD0027FDED /* NZWiFiPlugAction+Execute.h */,
+				8AA4188119B885AD0027FDED /* NZWiFiPlugAction+Execute.m */,
 				8AF0F40919AB3F17001645A2 /* NZUrlSession+Execute.h */,
 				8AF0F40A19AB3F17001645A2 /* NZUrlSession+Execute.m */,
 				8AF0F40019A79DAD001645A2 /* NZSingleAction+Execute.h */,
@@ -1969,6 +2038,7 @@
 				8AF7F9CB1969C89F00DB6D7C /* LinearRegression.cpp in Sources */,
 				8ADB502C1962DAEB00DC2784 /* NZQuaternion.m in Sources */,
 				8AE8CB34196AD1FA008BE33E /* NZConstants.m in Sources */,
+				8AA4188A19B9B15B0027FDED /* NZActionHandler.m in Sources */,
 				8AE8CB36196AD1FA008BE33E /* NZGraphView.m in Sources */,
 				8AF5319C19992D7100D10EBE /* NZMainSetTestingVC.m in Sources */,
 				8AF7F9AD1969C89F00DB6D7C /* RegressionSample.cpp in Sources */,
@@ -2016,8 +2086,10 @@
 				8AF7F9C11969C89F00DB6D7C /* DeadZone.cpp in Sources */,
 				8AF7F9A61969C89F00DB6D7C /* MLBase.cpp in Sources */,
 				8AF7F9B51969C89F00DB6D7C /* KMeansFeatures.cpp in Sources */,
+				8AA4187F19B8851C0027FDED /* NZWiFiPlugAction+CoreData.m in Sources */,
 				8AF7F9A51969C89F00DB6D7C /* GRTBase.cpp in Sources */,
 				8AC9D9AA1961637D00364B5A /* NZSensorDataSetTableViewCell.m in Sources */,
+				8AA4187919B884140027FDED /* NZWiFiPlugAction.m in Sources */,
 				8AF7F9CC1969C89F00DB6D7C /* LogisticRegression.cpp in Sources */,
 				8AAD80DB195DBA70000F9805 /* KHLinearAccelerationLineChartView.m in Sources */,
 				8AF7F9CA1969C89F00DB6D7C /* Neuron.cpp in Sources */,
@@ -2047,6 +2119,7 @@
 				8AD0201B197D717A003A09EE /* NZHttpRequestPopoverController.m in Sources */,
 				8AE3831F1977D54500824571 /* NZGestureConfigurationVC.m in Sources */,
 				8A6AF54C195CBAF20015B571 /* NZSensorDataHelper.m in Sources */,
+				8AA4188D19B9B75C0027FDED /* NZWiFiPlugActionHandler.m in Sources */,
 				8AC9D9A7196162EF00364B5A /* NZSensorDataTableView.m in Sources */,
 				8AF7F9C51969C89F00DB6D7C /* HighPassFilter.cpp in Sources */,
 				8AE3830A19758AFA00824571 /* NZGesturesVC.m in Sources */,
@@ -2120,6 +2193,7 @@
 				8ADB50261962D96800DC2784 /* NZClassLabel.m in Sources */,
 				8AD0200C19795014003A09EE /* NZMainControlVC.m in Sources */,
 				8AF7F9881969C89F00DB6D7C /* ANBC.cpp in Sources */,
+				8AA4188219B885AD0027FDED /* NZWiFiPlugAction+Execute.m in Sources */,
 				8AF7F9A41969C89F00DB6D7C /* GestureRecognitionPipeline.cpp in Sources */,
 				8ADB503D1962E1B000DC2784 /* NZYawPitchRoll+CoreData.m in Sources */,
 				8AF7F9DD1969C89F00DB6D7C /* TrainingLog.cpp in Sources */,
@@ -2243,6 +2317,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/nzaraw/WiFiPlug_Test,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Gesture/Gesture-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -2271,6 +2349,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/nzaraw/WiFiPlug_Test,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Gesture/Gesture-Prefix.pch";
 				HEADER_SEARCH_PATHS = (

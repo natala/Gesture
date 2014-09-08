@@ -21,6 +21,9 @@
 @property (nonatomic, retain) NSString *lastRecognizedGesture;
 @property BOOL isRecordingGesture;
 
+@property (nonatomic)  BOOL recordingManagerIsConnected;
+@property (nonatomic)  BOOL actionManagerIsReady;
+
 @end
 
 @implementation NZMainControlVC
@@ -37,6 +40,8 @@
 {
     [super viewDidLoad];
     self.isRecordingGesture = false;
+    self.actionManagerIsReady = false;
+    self.recordingManagerIsConnected = false;
     //self.httpRequest = @"http://192.168.1.105/api/newdeveloper/lights/2/state";
     // Do any additional setup after loading the view.
 }
@@ -70,6 +75,14 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    [[NZActionController sharedManager] removeObserver:self];
+}
+
+- (void)readyToControl
+{
+    self.startButton.enabled = false;
+    self.stopButton.enabled = true;
+    self.stopStartGestureButton.enabled = true;
 }
 
 /*
@@ -150,11 +163,12 @@
 
 - (void)connected
 {
-
+    self.recordingManagerIsConnected = true;
 }
 
 - (void)disconnected
 {
+    self.recordingManagerIsConnected = false;
     self.startButton.enabled = true;
     self.stopButton.enabled = false;
     self.stopStartGestureButton.enabled = false;
@@ -206,15 +220,18 @@
 
 - (IBAction)startButtonTapped:(id)sender
 {
-    [[NZSensorDataRecordingManager sharedManager] addRecordingObserver:self];
-    //BOOL startedNewRecording = [[NZSensorDataRecordingManager sharedManager] startRecordingNewSensorDataSet];
-    BOOL readyForRecording = [[NZSensorDataRecordingManager sharedManager] prepareForRecordingSensorDataSet];
     
-    if (readyForRecording) {
-        self.startButton.enabled = false;
-        self.stopButton.enabled = true;
-        self.stopStartGestureButton.enabled = true;
+    if (![[NZActionController sharedManager].observers containsObject:self]) {
+        [[NZActionController sharedManager] addObserver:self];
     }
+    if (![[NZSensorDataRecordingManager sharedManager].sensorDataRecordingObservers containsObject:self]) {
+        [[NZSensorDataRecordingManager sharedManager] addRecordingObserver:self];
+    }
+    [[NZActionController sharedManager] prepareAllActionsForExecution];
+    
+    //BOOL startedNewRecording = [[NZSensorDataRecordingManager sharedManager] startRecordingNewSensorDataSet];
+    
+    BOOL readyForRecording = [[NZSensorDataRecordingManager sharedManager] prepareForRecordingSensorDataSet];
 }
 
 - (IBAction)stopButtonTapped:(id)sender {
@@ -226,6 +243,9 @@
     self.startButton.enabled = true;
     self.stopButton.enabled = false;
     self.stopStartGestureButton.enabled = false;
+    
+    [[NZActionController sharedManager] disconnectActions];
+    [[NZActionController sharedManager] removeObserver:self];
 }
 
 - (IBAction)singleGroupModeChanged:(id)sender {
@@ -252,4 +272,47 @@
 - (IBAction)startStopGestureTouchUpInside:(id)sender {
     [[NZSensorDataRecordingManager sharedManager] stopRecordingCurrentSensorDataSet];
 }
+
+#pragma mark - NZActionConntroller Observer methods
+- (void)didPrepareAllActionsForExecution
+{
+    self.actionManagerIsReady = true;
+}
+
+- (void)didExecuteAction:(NZAction *)action
+{
+     self.debugMessageLabel.text = [NSString stringWithFormat: @"%@ executed: %@",action.name];
+    NSLog(@"did execute action %@", action.name);
+}
+
+- (void)didFailToExecuteAction:(NZAction *)action withErrorMessage:(NSString *)errorMessage
+{
+    self.debugMessageLabel.text = [NSString stringWithFormat: @"%@ failed with error: %@",action.name, errorMessage];
+    NSLog(@"did fail to execute action %@ with error message: %@",action.name, errorMessage);
+}
+
+- (void)didLooseConnectionForAction:(NZAction *)action
+{
+     self.debugMessageLabel.text = [NSString stringWithFormat: @"%@ lost connection",action.name];
+    NSLog(@"action %@ lost connection", action.name);
+   // self.actionManagerIsReady = false;
+}
+
+#pragma mark - setters & getters
+- (void)setRecordingManagerIsConnected:(BOOL)recordingManagerIsConnected
+{
+    _recordingManagerIsConnected = recordingManagerIsConnected;
+    if (self.actionManagerIsReady && self.recordingManagerIsConnected) {
+        [self readyToControl];
+    }
+}
+
+- (void)setActionManagerIsReady:(BOOL)actionManagerIsReady
+{
+    _actionManagerIsReady = actionManagerIsReady;
+    if (self.actionManagerIsReady && self.recordingManagerIsConnected) {
+        [self readyToControl];
+    }
+}
+
 @end

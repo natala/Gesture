@@ -17,4 +17,9 @@
  */
 - (void)execute;
 
+/**
+ * is called to prepare for executionm, i.e. setup required connection and login
+ */
+- (void)connect;
+
 @end

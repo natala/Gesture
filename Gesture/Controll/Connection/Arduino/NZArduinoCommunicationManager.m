@@ -139,7 +139,7 @@
     }
     
     int buttonState = data[1];
-    NSLog(@"button: %d", buttonState);
+    //NSLog(@"button: %d", buttonState);
     // Quaternion
     float q[] = { 0.0f, 0.0f, 0.0f, 0.0f };
     

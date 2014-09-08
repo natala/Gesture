@@ -42,6 +42,8 @@
         <relationship name="sensorData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NZSensorData" inverseName="gravity" inverseEntity="NZSensorData" syncable="YES"/>
     </entity>
     <entity name="NZHttpRequest" representedClassName="NZHttpRequest" parentEntity="NZSingleAction" syncable="YES">
+        <attribute name="httpHeaderAccept" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="httpHeaderContentType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="httpMethod" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="message" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
@@ -80,6 +82,14 @@
     <entity name="NZUrlSession" representedClassName="NZUrlSession" parentEntity="NZSingleAction" syncable="YES">
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="NZWiFiPlugAction" representedClassName="NZWiFiPlugAction" parentEntity="NZSingleAction" syncable="YES">
+        <attribute name="hostName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="plugId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="plugName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="portNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="NZYawPitchRoll" representedClassName="NZYawPitchRoll" syncable="YES">
         <attribute name="pitch" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="roll" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
@@ -95,13 +105,14 @@
         <element name="NZGesture" positionX="718" positionY="-441" width="128" height="195"/>
         <element name="NZGestureSet" positionX="891" positionY="-180" width="126" height="103"/>
         <element name="NZGravity" positionX="-63" positionY="-193" width="128" height="103"/>
-        <element name="NZHttpRequest" positionX="333" positionY="-369" width="128" height="88"/>
+        <element name="NZHttpRequest" positionX="333" positionY="-369" width="128" height="120"/>
         <element name="NZLinearAcceleration" positionX="-63" positionY="-69" width="128" height="105"/>
         <element name="NZQuaternion" positionX="-63" positionY="51" width="128" height="120"/>
         <element name="NZSensorData" positionX="315" positionY="-54" width="128" height="133"/>
         <element name="NZSensorDataSet" positionX="486" positionY="-72" width="128" height="133"/>
         <element name="NZSingleAction" positionX="423" positionY="-466" width="128" height="45"/>
         <element name="NZUrlSession" positionX="486" positionY="-369" width="128" height="58"/>
+        <element name="NZWiFiPlugAction" positionX="171" positionY="-405" width="128" height="133"/>
         <element name="NZYawPitchRoll" positionX="-63" positionY="189" width="128" height="105"/>
     </elements>
 </model>

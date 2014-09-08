@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "NZSensorDataRecordingManager.h"
+#import "NZActionController.h"
 
-@interface NZMainControlVC : UIViewController <NZSensorDataRecordingManagerObserver>
+@interface NZMainControlVC : UIViewController <NZSensorDataRecordingManagerObserver, NZActionControllerObserver>
 
 #pragma mark - UI Elements
 @property (weak, nonatomic) IBOutlet UIButton *startButton;
@@ -19,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *stopStartGestureButton;
 @property (weak, nonatomic) IBOutlet UILabel *recognizedGestureNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *executedActionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *debugMessageLabel;
 
 
 #pragma mark - IBActions
