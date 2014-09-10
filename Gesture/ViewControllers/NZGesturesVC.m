@@ -13,6 +13,7 @@
 #import "NZCoreDataManager.h"
 #import "NZGestureConfigurationVC.h"
 #import "NZPipelineController.h"
+#import "NZGestureSetHandler.h"
 
 
 @interface NZGesturesVC ()
@@ -63,6 +64,8 @@
     if ([gestureConfigurationVc isKindOfClass:[NZGestureConfigurationVC class]]) {
         self.gestureConfigurationVc = (NZGestureConfigurationVC *)gestureConfigurationVc;
     }
+    
+    self.gestureSet = [NZGestureSetHandler sharedManager].selectedGestureSet;
 }
 
 - (void)didReceiveMemoryWarning
