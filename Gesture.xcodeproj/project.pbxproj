@@ -60,6 +60,7 @@
 		8AD0201B197D717A003A09EE /* NZHttpRequestPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD0201A197D717A003A09EE /* NZHttpRequestPopoverController.m */; };
 		8AD0201E197D7471003A09EE /* NZSetupHttpRequestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD0201D197D7471003A09EE /* NZSetupHttpRequestVC.m */; };
 		8AD846AD19C0558A0005D90D /* NZStartScreenVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD846AC19C0558A0005D90D /* NZStartScreenVC.m */; };
+		8AD846B119C072300005D90D /* NZGestureSetHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD846B019C072300005D90D /* NZGestureSetHandler.m */; };
 		8ADB501A1962CD4C00DC2784 /* NSManagedObject+CoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADB50191962CD4C00DC2784 /* NSManagedObject+CoreData.m */; };
 		8ADB501D1962CE4200DC2784 /* NZSensorDataSet+CoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADB501C1962CE4200DC2784 /* NZSensorDataSet+CoreData.m */; };
 		8ADB50201962D63100DC2784 /* NZSensorDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADB501F1962D63100DC2784 /* NZSensorDataSet.m */; };
@@ -305,6 +306,8 @@
 		8AD0201D197D7471003A09EE /* NZSetupHttpRequestVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZSetupHttpRequestVC.m; path = "ViewControllers/popover : popups/NZSetupHttpRequestVC.m"; sourceTree = "<group>"; };
 		8AD846AB19C0558A0005D90D /* NZStartScreenVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZStartScreenVC.h; path = ViewControllers/NZStartScreenVC.h; sourceTree = "<group>"; };
 		8AD846AC19C0558A0005D90D /* NZStartScreenVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZStartScreenVC.m; path = ViewControllers/NZStartScreenVC.m; sourceTree = "<group>"; };
+		8AD846AF19C072300005D90D /* NZGestureSetHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZGestureSetHandler.h; path = Controll/NZGestureSetHandler.h; sourceTree = "<group>"; };
+		8AD846B019C072300005D90D /* NZGestureSetHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZGestureSetHandler.m; path = Controll/NZGestureSetHandler.m; sourceTree = "<group>"; };
 		8ADB50181962CD4C00DC2784 /* NSManagedObject+CoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSManagedObject+CoreData.h"; path = "Model/CoreData/Categories/NSManagedObject+CoreData.h"; sourceTree = "<group>"; };
 		8ADB50191962CD4C00DC2784 /* NSManagedObject+CoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObject+CoreData.m"; path = "Model/CoreData/Categories/NSManagedObject+CoreData.m"; sourceTree = "<group>"; };
 		8ADB501B1962CE4200DC2784 /* NZSensorDataSet+CoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NZSensorDataSet+CoreData.h"; path = "Model/CoreData/Categories/NZSensorDataSet+CoreData.h"; sourceTree = "<group>"; };
@@ -890,6 +893,7 @@
 		8A922961195C3CD700DF7743 /* Controll */ = {
 			isa = PBXGroup;
 			children = (
+				8AD846AE19C071E50005D90D /* Gesture Set */,
 				8AA4188719B9B12F0027FDED /* Actions */,
 				8A5AB060197832B6006B2FBC /* Pipeline */,
 				8A0DF6DE195C61410029E5F3 /* Recording */,
@@ -1056,6 +1060,15 @@
 				8A37E903197EAAE100CC08BB /* NZEditGestureSamplesTVC.m */,
 			);
 			name = "popovers / popups";
+			sourceTree = "<group>";
+		};
+		8AD846AE19C071E50005D90D /* Gesture Set */ = {
+			isa = PBXGroup;
+			children = (
+				8AD846AF19C072300005D90D /* NZGestureSetHandler.h */,
+				8AD846B019C072300005D90D /* NZGestureSetHandler.m */,
+			);
+			name = "Gesture Set";
 			sourceTree = "<group>";
 		};
 		8ADB4FDE1962BA8E00DC2784 /* Entities */ = {
@@ -2097,6 +2110,7 @@
 				8AAD80DF195DBA70000F9805 /* KHYawPitchRollLineChartView.m in Sources */,
 				8AF7F9891969C89F00DB6D7C /* ANBC_Model.cpp in Sources */,
 				8AF7F9D71969C89F00DB6D7C /* RangeTracker.cpp in Sources */,
+				8AD846B119C072300005D90D /* NZGestureSetHandler.m in Sources */,
 				8AD02011197AE3B1003A09EE /* NZPipelineConfigurationVC.m in Sources */,
 				8AF7F9DB1969C89F00DB6D7C /* TimeSeriesClassificationSampleTrimmer.cpp in Sources */,
 				8A922916195C3A3800DF7743 /* NZAppDelegate.m in Sources */,

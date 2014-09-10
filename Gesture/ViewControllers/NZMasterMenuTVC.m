@@ -8,6 +8,7 @@
 
 #import "NZMasterMenuTVC.h"
 #import "NZDetailViewController.h"
+#import "NZGestureSetHandler.h"
 
 @interface NZMasterMenuTVC ()
 
@@ -68,7 +69,7 @@
     UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     NZStartScreenVC *startScreen = (NZStartScreenVC *)[mainStoryBoard instantiateViewControllerWithIdentifier:@"StartScreenVC"];
     self.startScreenVc = startScreen;
-    
+    self.startScreenVc.delegate = self;
     [self presentViewController:self.startScreenVc animated:NO completion:nil];
     
     // set the default selection to the recording
@@ -167,6 +168,8 @@
 - (void)startScreen:(NZStartScreenVC *)startScreen didSelectGestureSet:(NSString *)gestureSetName
 {
     NSLog(@"selected set: %@", gestureSetName);
+    [[NZGestureSetHandler sharedManager] loadGestureSetWithName:gestureSetName];
+    
 }
 
 

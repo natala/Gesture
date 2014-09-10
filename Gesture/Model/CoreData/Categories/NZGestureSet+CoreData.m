@@ -37,6 +37,24 @@
     return [[NZGestureSet findAll]sortedArrayUsingDescriptors:@[gestureSortDescripor]];
 }
 
++ (NZGestureSet *)findWithName:(NSString *)name
+{
+    
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:ENTITY_NAME_GESTURE_SET];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@", name];
+	fetchRequest.predicate = predicate;
+	fetchRequest.sortDescriptors = @[];
+    
+	NSError *error = nil;
+	NSArray *fetchedEntities = [[NZCoreDataManager sharedManager].managedObjectContext executeFetchRequest:fetchRequest
+																									 error:&error];
+	if (!fetchedEntities) {
+		NSLog(@"Error: %@", error);
+	}
+    
+	return [fetchedEntities objectAtIndex:0];
+}
+
 
 #pragma mark - Destroy
 - (void)destroy

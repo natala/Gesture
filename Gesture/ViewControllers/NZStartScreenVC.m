@@ -78,16 +78,16 @@ static NSString *kPickerRowNewName = @"new";
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    self.selectedSetName = [self pickerView:pickerView titleForRow:row forComponent:component];
-    if ([self.selectedSetName isEqualToString:kPickerRowNewName]) {
-        self.selectedSetName = nil;
-    }
 }
 
 - (IBAction)goButtonTapped:(UIButton *)sender {
     
     if (self.delegate) {
         if ([self.delegate respondsToSelector:@selector(startScreen:didSelectGestureSet:)]) {
+            self.selectedSetName = [self pickerView:self.pickerView titleForRow:[self.pickerView selectedRowInComponent:0] forComponent:0];
+            if ([self.selectedSetName isEqualToString:kPickerRowNewName]) {
+                self.selectedSetName = nil;
+            }
             [self.delegate startScreen:self didSelectGestureSet:self.selectedSetName];
         }
     }
