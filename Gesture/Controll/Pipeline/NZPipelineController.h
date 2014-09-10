@@ -33,6 +33,13 @@
 @property (nonatomic, retain) NSDictionary *testReport;
 //@property (nonatomic, retain) NSDictionary *classifierParameters;
 
+
+/**
+ * loads the pipeline for the given gesture set
+ * if no pipeline can be found a new will be created
+ */
+- (void)loadPipelineForGestureSet:(NSString *)setName;
+
 /**
  * adds a gesture and retrains the classifier for this gesture
  * @param isPositive true if it is a positive sample and false if it is a negative sample for this class label

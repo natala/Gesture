@@ -32,10 +32,7 @@
     UISplitViewController *splitViewController = (UISplitViewController *)[mainStorryBoard instantiateViewControllerWithIdentifier:@"SplitViewController"];
     UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
     splitViewController.delegate = (id)navigationController.topViewController;
-    // NZStartScreenVC *startScreen = (NZStartScreenVC *)[mainStorryBoard instantiateViewControllerWithIdentifier:@"StartScreenVC"];
-   // NZMasterMenuTVC *masterVc = (NZMasterMenuTVC *)[mainStorryBoard instantiateViewControllerWithIdentifier:@"MasterMenuTVC"];
-   // masterVc.startScreenVc = startScreen;
-
+    
     // init the BLE connection
     [NZArduinoCommunicationManager sharedManager];
     
