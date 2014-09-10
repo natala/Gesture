@@ -22,14 +22,55 @@
 {
     self = [super initWithStyle:style];
     if (self) {
+        [self commonInit];
         // Custom initialization
     }
     return self;
 }
 
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self commonInit];
+    }
+    return self;
+}
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        [self commonInit];
+    }
+    return self;
+}
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        [self commonInit];
+    }
+    return  self;
+}
+
+- (void)commonInit
+{
+   // UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+   //  NZStartScreenVC *startScreen = (NZStartScreenVC *)[mainStoryBoard instantiateViewControllerWithIdentifier:@"StartScreenVC"];
+   // self.startScreenVc = startScreen;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    NZStartScreenVC *startScreen = (NZStartScreenVC *)[mainStoryBoard instantiateViewControllerWithIdentifier:@"StartScreenVC"];
+    self.startScreenVc = startScreen;
+    
+    [self presentViewController:self.startScreenVc animated:NO completion:nil];
+    
     // set the default selection to the recording
     NSIndexPath *indexPath = [self.tableView indexPathForCell:self.ringConnectionCell];
     [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
@@ -122,6 +163,11 @@
     self.splitViewController.delegate = segue.destinationViewController;
 }
 
+#pragma mark - NZ Start Screen VC delegate
+- (void)startScreen:(NZStartScreenVC *)startScreen didSelectGestureSet:(NSString *)gestureSetName
+{
+    NSLog(@"selected set: %@", gestureSetName);
+}
 
 
 @end

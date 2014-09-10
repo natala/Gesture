@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NZStartScreenVC.h"
+#import "NZStartScreenVC.h"
 
-@interface NZMasterMenuTVC : UITableViewController <UISplitViewControllerDelegate>
+@interface NZMasterMenuTVC : UITableViewController <UISplitViewControllerDelegate, NZStartScreenVCDelegate>
+
+@property (nonatomic, weak) NZStartScreenVC *startScreenVc;
 
 #pragma mark - cells
 @property (weak, nonatomic) IBOutlet UITableViewCell *ringConnectionCell;

@@ -17,6 +17,7 @@
 #import "NZWiFiPlugAction+CoreData.h"
 #import "NZActionComposite+CoreData.h"
 #import "NZAction+CoreData.h"
+#import "NZStartScreenVC.h"
 
 @implementation NZAppDelegate
 
@@ -27,9 +28,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
+    UIStoryboard *mainStorryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UISplitViewController *splitViewController = (UISplitViewController *)[mainStorryBoard instantiateViewControllerWithIdentifier:@"SplitViewController"];
     UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
     splitViewController.delegate = (id)navigationController.topViewController;
+    // NZStartScreenVC *startScreen = (NZStartScreenVC *)[mainStorryBoard instantiateViewControllerWithIdentifier:@"StartScreenVC"];
+   // NZMasterMenuTVC *masterVc = (NZMasterMenuTVC *)[mainStorryBoard instantiateViewControllerWithIdentifier:@"MasterMenuTVC"];
+   // masterVc.startScreenVc = startScreen;
 
     // init the BLE connection
     [NZArduinoCommunicationManager sharedManager];
@@ -40,7 +45,7 @@
     // hardcode the actions and action groups
     // controll the lights
   
-    [NZAction destroyAll];
+  //  [NZAction destroyAll];
   /*
     
     NZHttpRequest *hueOff01 = [NZHttpRequest create];
@@ -122,7 +127,7 @@
     
     // SMART LAB //
     // lights
-    NZHttpRequest *labLighWindowOn = [NZHttpRequest create];
+ /*   NZHttpRequest *labLighWindowOn = [NZHttpRequest create];
     labLighWindowOn.name = @"LAB light window on";
     labLighWindowOn.url = @"http://ios14cmu-bruegge.in.tum.de:8080/rest/items/EO_SL_Light_B";
     labLighWindowOn.httpMethod = @"POST";
@@ -209,7 +214,7 @@
     crLightsBOff.httpMethod = @"POST";
     crLightsBOff.message = @"OFF";
     crLightsBOff.httpHeaderContentType = @"text/plain";
-    
+
     //composits
     NZActionComposite *lightsOn = [NZActionComposite create];
     lightsOn.name = @"CR Lights On";
@@ -218,7 +223,11 @@
     NZActionComposite *lightsOff = [NZActionComposite create];
     lightsOff.name = @"CR Lights Off";
     lightsOff.childActions = [[NSSet alloc] initWithObjects:crLightsAOff, crLightsBOff, nil];
-
+*/
+    
+    // Load the Start Screen VC
+    
+    
     return YES;
 }
 							

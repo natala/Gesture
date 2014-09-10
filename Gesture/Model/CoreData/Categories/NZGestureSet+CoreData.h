@@ -16,6 +16,8 @@
 
 + (NZGestureSet *)findLates;
 
++ (NSArray *)findAllSortetByLabel;
+
 - (void)destroy;
 
 + (void)destroyAll;

@@ -31,6 +31,13 @@
     return nil;
 }
 
++ (NSArray *)findAllSortetByLabel
+{
+    NSSortDescriptor *gestureSortDescripor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+    return [[NZGestureSet findAll]sortedArrayUsingDescriptors:@[gestureSortDescripor]];
+}
+
+
 #pragma mark - Destroy
 - (void)destroy
 {

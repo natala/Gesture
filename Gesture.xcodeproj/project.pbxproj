@@ -59,6 +59,7 @@
 		8AD02011197AE3B1003A09EE /* NZPipelineConfigurationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD02010197AE3B1003A09EE /* NZPipelineConfigurationVC.m */; };
 		8AD0201B197D717A003A09EE /* NZHttpRequestPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD0201A197D717A003A09EE /* NZHttpRequestPopoverController.m */; };
 		8AD0201E197D7471003A09EE /* NZSetupHttpRequestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD0201D197D7471003A09EE /* NZSetupHttpRequestVC.m */; };
+		8AD846AD19C0558A0005D90D /* NZStartScreenVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD846AC19C0558A0005D90D /* NZStartScreenVC.m */; };
 		8ADB501A1962CD4C00DC2784 /* NSManagedObject+CoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADB50191962CD4C00DC2784 /* NSManagedObject+CoreData.m */; };
 		8ADB501D1962CE4200DC2784 /* NZSensorDataSet+CoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADB501C1962CE4200DC2784 /* NZSensorDataSet+CoreData.m */; };
 		8ADB50201962D63100DC2784 /* NZSensorDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADB501F1962D63100DC2784 /* NZSensorDataSet.m */; };
@@ -199,7 +200,6 @@
 		8AF7F9DD1969C89F00DB6D7C /* TrainingLog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AF7F97D1969C89F00DB6D7C /* TrainingLog.cpp */; };
 		8AF7F9DE1969C89F00DB6D7C /* Util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AF7F9801969C89F00DB6D7C /* Util.cpp */; };
 		8AF7F9DF1969C89F00DB6D7C /* WarningLog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AF7F9821969C89F00DB6D7C /* WarningLog.cpp */; };
-		8AF7F9E31969CC4700DB6D7C /* NZGrtController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8AF7F9E21969CC4700DB6D7C /* NZGrtController.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -303,6 +303,8 @@
 		8AD0201A197D717A003A09EE /* NZHttpRequestPopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZHttpRequestPopoverController.m; path = "ViewControllers/popover : popups/NZHttpRequestPopoverController.m"; sourceTree = "<group>"; };
 		8AD0201C197D7471003A09EE /* NZSetupHttpRequestVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZSetupHttpRequestVC.h; path = "ViewControllers/popover : popups/NZSetupHttpRequestVC.h"; sourceTree = "<group>"; };
 		8AD0201D197D7471003A09EE /* NZSetupHttpRequestVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZSetupHttpRequestVC.m; path = "ViewControllers/popover : popups/NZSetupHttpRequestVC.m"; sourceTree = "<group>"; };
+		8AD846AB19C0558A0005D90D /* NZStartScreenVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZStartScreenVC.h; path = ViewControllers/NZStartScreenVC.h; sourceTree = "<group>"; };
+		8AD846AC19C0558A0005D90D /* NZStartScreenVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZStartScreenVC.m; path = ViewControllers/NZStartScreenVC.m; sourceTree = "<group>"; };
 		8ADB50181962CD4C00DC2784 /* NSManagedObject+CoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSManagedObject+CoreData.h"; path = "Model/CoreData/Categories/NSManagedObject+CoreData.h"; sourceTree = "<group>"; };
 		8ADB50191962CD4C00DC2784 /* NSManagedObject+CoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObject+CoreData.m"; path = "Model/CoreData/Categories/NSManagedObject+CoreData.m"; sourceTree = "<group>"; };
 		8ADB501B1962CE4200DC2784 /* NZSensorDataSet+CoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NZSensorDataSet+CoreData.h"; path = "Model/CoreData/Categories/NZSensorDataSet+CoreData.h"; sourceTree = "<group>"; };
@@ -692,8 +694,6 @@
 		8AF7F9811969C89F00DB6D7C /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
 		8AF7F9821969C89F00DB6D7C /* WarningLog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WarningLog.cpp; sourceTree = "<group>"; };
 		8AF7F9831969C89F00DB6D7C /* WarningLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WarningLog.h; sourceTree = "<group>"; };
-		8AF7F9E11969CC4700DB6D7C /* NZGrtController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZGrtController.h; path = Controll/recognition/NZGrtController.h; sourceTree = "<group>"; };
-		8AF7F9E21969CC4700DB6D7C /* NZGrtController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = NZGrtController.mm; path = Controll/recognition/NZGrtController.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -866,6 +866,8 @@
 				8AD0200B19795014003A09EE /* NZMainControlVC.m */,
 				8AD0200F197AE3B1003A09EE /* NZPipelineConfigurationVC.h */,
 				8AD02010197AE3B1003A09EE /* NZPipelineConfigurationVC.m */,
+				8AD846AB19C0558A0005D90D /* NZStartScreenVC.h */,
+				8AD846AC19C0558A0005D90D /* NZStartScreenVC.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -890,7 +892,6 @@
 			children = (
 				8AA4188719B9B12F0027FDED /* Actions */,
 				8A5AB060197832B6006B2FBC /* Pipeline */,
-				8AF7F9E01969CC1300DB6D7C /* Recognition */,
 				8A0DF6DE195C61410029E5F3 /* Recording */,
 				8A922962195C3CDF00DF7743 /* Connection */,
 			);
@@ -1906,15 +1907,6 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
-		8AF7F9E01969CC1300DB6D7C /* Recognition */ = {
-			isa = PBXGroup;
-			children = (
-				8AF7F9E11969CC4700DB6D7C /* NZGrtController.h */,
-				8AF7F9E21969CC4700DB6D7C /* NZGrtController.mm */,
-			);
-			name = Recognition;
-			sourceTree = "<group>";
-		};
 		8AF7F9E41969D29600DB6D7C /* GRT Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -2051,6 +2043,7 @@
 				8AF7F9D01969C89F00DB6D7C /* EigenvalueDecomposition.cpp in Sources */,
 				8AF7F9B21969C89F00DB6D7C /* FastFourierTransform.cpp in Sources */,
 				8AEFC68419AF1B5A00E25943 /* NZActionComposite.m in Sources */,
+				8AD846AD19C0558A0005D90D /* NZStartScreenVC.m in Sources */,
 				8AF7F9BA1969C89F00DB6D7C /* SOMQuantizer.cpp in Sources */,
 				8AF7F9D11969C89F00DB6D7C /* ErrorLog.cpp in Sources */,
 				8AF7F98B1969C89F00DB6D7C /* DecisionTree.cpp in Sources */,
@@ -2066,7 +2059,6 @@
 				8AF7F9D61969C89F00DB6D7C /* PeakDetection.cpp in Sources */,
 				8AF7F9971969C89F00DB6D7C /* libsvm.cpp in Sources */,
 				8AF0F3F919A78D2A001645A2 /* NZActionController.m in Sources */,
-				8AF7F9E31969CC4700DB6D7C /* NZGrtController.mm in Sources */,
 				8AF7F9C81969C89F00DB6D7C /* SavitzkyGolayFilter.cpp in Sources */,
 				8AF7F9DE1969C89F00DB6D7C /* Util.cpp in Sources */,
 				8AF7F9D21969C89F00DB6D7C /* InfoLog.cpp in Sources */,

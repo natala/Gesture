@@ -119,7 +119,6 @@
         [gesture destroy];
         
       //  [context deleteObject:[[self.gestureSet.gestures allObjects] objectAtIndex:indexPath.row]];
-        
         NSError *error = nil;
         if (![context save:&error]) {
             // Replace this implementation with code to handle the error appropriately.

@@ -111,6 +111,7 @@
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         NSLog(@"Deleting a cell");
         NSManagedObjectContext *context = [[NZCoreDataManager sharedManager] managedObjectContext];
