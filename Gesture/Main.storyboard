@@ -145,12 +145,37 @@
                                     <action selector="goButtonTapped:" destination="0Ga-9n-g5T" eventType="touchUpInside" id="akA-fd-RfK"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FFr-9L-47X">
+                                <rect key="frame" x="288" y="689" width="57" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Rename">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="renameButtonTapped:" destination="0Ga-9n-g5T" eventType="touchUpInside" id="TiW-aa-tte"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dLC-l6-bhn">
+                                <rect key="frame" x="424" y="689" width="44" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Delete">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="deleteButtonTapped:" destination="0Ga-9n-g5T" eventType="touchUpInside" id="9Oy-az-sd2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="dLC-l6-bhn" firstAttribute="leading" secondItem="MxP-dJ-mbx" secondAttribute="trailing" constant="8" id="1VD-35-3gv"/>
+                            <constraint firstItem="FFr-9L-47X" firstAttribute="top" secondItem="MxP-dJ-mbx" secondAttribute="bottom" constant="-2" id="EMb-JV-6LL"/>
                             <constraint firstAttribute="centerY" secondItem="xZZ-c6-BJX" secondAttribute="centerY" id="TMP-TX-ZwR"/>
+                            <constraint firstAttribute="centerX" secondItem="dLC-l6-bhn" secondAttribute="centerX" constant="-62" id="Xbe-72-kOF"/>
                             <constraint firstAttribute="centerX" secondItem="xZZ-c6-BJX" secondAttribute="centerX" id="n3Z-gG-fiJ"/>
+                            <constraint firstAttribute="centerX" secondItem="FFr-9L-47X" secondAttribute="centerX" constant="67.5" id="qcO-9D-6ed"/>
                             <constraint firstItem="xZZ-c6-BJX" firstAttribute="centerX" secondItem="MxP-dJ-mbx" secondAttribute="centerX" id="sVg-gX-h8r"/>
+                            <constraint firstItem="MxP-dJ-mbx" firstAttribute="top" secondItem="xZZ-c6-BJX" secondAttribute="bottom" constant="8" id="tKk-1D-Qv6"/>
                             <constraint firstAttribute="centerX" secondItem="MxP-dJ-mbx" secondAttribute="centerX" id="xr3-hf-7o5"/>
                         </constraints>
                     </view>
@@ -282,7 +307,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="Actions" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nvw-ut-b9p">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="Leave" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nvw-ut-b9p">
                                                     <rect key="frame" x="15" y="0.0" width="290" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
@@ -292,9 +317,6 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <connections>
-                                            <segue destination="Yb7-cc-JLs" kind="replace" splitViewControllerTargetIndex="1" id="9mr-ko-2NK"/>
-                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -306,7 +328,8 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Master" id="Zdf-7t-Un8"/>
                     <connections>
-                        <outlet property="ringConnectionCell" destination="wUy-RS-OLg" id="0LD-gy-Jsi"/>
+                        <outlet property="configureCell" destination="wUy-RS-OLg" id="GgZ-C5-xTH"/>
+                        <outlet property="leaveCell" destination="W4K-4i-AZl" id="kew-A4-pnP"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
@@ -928,52 +951,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GE2-hc-qm7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1844" y="928"/>
-        </scene>
-        <!--ActionsVC - Actions-->
-        <scene sceneID="G9Q-8c-nf5">
-            <objects>
-                <tableViewController id="FJl-W4-w98" customClass="NZActionsVC" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="SOM-Oa-Ich">
-                        <rect key="frame" x="0.0" y="0.0" width="703" height="768"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ActionCell" id="z36-1P-EoG">
-                                <rect key="frame" x="0.0" y="86" width="703" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="z36-1P-EoG" id="Pq2-pn-2As">
-                                    <rect key="frame" x="0.0" y="0.0" width="703" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="FJl-W4-w98" id="f3b-jo-VMq"/>
-                            <outlet property="delegate" destination="FJl-W4-w98" id="jYY-SN-hSp"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Actions" id="EZD-Fq-PfJ"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="FYH-y8-29v" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1876" y="1936"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="dQh-6P-cLX">
-            <objects>
-                <navigationController id="Yb7-cc-JLs" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Eqv-Zg-7f5">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="FJl-W4-w98" kind="relationship" relationship="rootViewController" id="ly3-h0-UI6"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fr3-0J-AlJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="990" y="1936"/>
         </scene>
         <!--Main Set TestingVC-->
         <scene sceneID="hN9-rV-rxg">

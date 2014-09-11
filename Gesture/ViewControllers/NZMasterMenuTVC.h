@@ -15,7 +15,8 @@
 @property (nonatomic, weak) NZStartScreenVC *startScreenVc;
 
 #pragma mark - cells
-@property (weak, nonatomic) IBOutlet UITableViewCell *ringConnectionCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *configureCell;
 
+@property (weak, nonatomic) IBOutlet UITableViewCell *leaveCell;
 
 @end

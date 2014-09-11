@@ -66,17 +66,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    NZStartScreenVC *startScreen = (NZStartScreenVC *)[mainStoryBoard instantiateViewControllerWithIdentifier:@"StartScreenVC"];
-    self.startScreenVc = startScreen;
-    self.startScreenVc.delegate = self;
-    [self presentViewController:self.startScreenVc animated:NO completion:nil];
+    
+    [self presentStartScreenAnimated:NO];
     
     // set the default selection to the recording
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:self.ringConnectionCell];
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:self.configureCell];
     [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
-    self.selectedCell = self.ringConnectionCell;
-    self.selectedCell.userInteractionEnabled = NO;
+    self.selectedCell = self.configureCell;
+   // self.selectedCell.userInteractionEnabled = NO;
     self.selectedCell.highlighted = true;
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -89,6 +86,15 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)presentStartScreenAnimated:(BOOL)animated
+{
+    UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    NZStartScreenVC *startScreen = (NZStartScreenVC *)[mainStoryBoard instantiateViewControllerWithIdentifier:@"StartScreenVC"];
+    self.startScreenVc = startScreen;
+    self.startScreenVc.delegate = self;
+    [self presentViewController:self.startScreenVc animated:animated completion:nil];
 }
 
 #pragma mark - Table view data source
@@ -118,11 +124,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.selectedCell) {
-        self.selectedCell.userInteractionEnabled = YES;
+        self.selectedCell.highlighted = NO;
     }
-    
-    self.selectedCell = [tableView cellForRowAtIndexPath:indexPath];
-    self.selectedCell.userInteractionEnabled = NO;
+    if ([[tableView cellForRowAtIndexPath:indexPath] isEqual:self.leaveCell]) {
+        [self presentStartScreenAnimated:YES];
+    } else self.selectedCell = [tableView cellForRowAtIndexPath:indexPath];
 }
 
 
@@ -169,7 +175,14 @@
 {
     NSLog(@"selected set: %@", gestureSetName);
     [[NZGestureSetHandler sharedManager] loadGestureSetWithName:gestureSetName];
+    self.startScreenVc.delegate = nil;
     
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:self.configureCell];
+    [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+    self.selectedCell = self.configureCell;
+   // self.selectedCell.userInteractionEnabled = NO;
+    self.selectedCell.highlighted = true;
+
 }
 
 @end

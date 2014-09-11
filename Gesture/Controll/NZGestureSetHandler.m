@@ -8,6 +8,7 @@
 
 #import "NZGestureSetHandler.h"
 #import "NZPipelineController.h"
+#import "NZCoreDataManager.h"
 
 @implementation NZGestureSetHandler
 
@@ -52,8 +53,13 @@
     
     if (!self.selectedGestureSet) {
         NSLog(@"gesture set with name: %@ not found! Creating a new set", gestureSetName);
+        // create a new gestire set with that name
+        self.selectedGestureSet = [NZGestureSet create];
+        self.selectedGestureSet.name = gestureSetName;
+        self.selectedGestureSet.timeStampCreated = [NSDate date];
+        self.selectedGestureSet.timeStampCreated = self.selectedGestureSet.timeStampUpdated;
     }
-    
+    [[NZCoreDataManager sharedManager] save];
     [[NZPipelineController sharedManager] loadPipelineForGestureSet:gestureSetName];
 }
 

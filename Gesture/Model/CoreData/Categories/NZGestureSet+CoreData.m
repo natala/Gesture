@@ -48,10 +48,13 @@
 	NSError *error = nil;
 	NSArray *fetchedEntities = [[NZCoreDataManager sharedManager].managedObjectContext executeFetchRequest:fetchRequest
 																									 error:&error];
-	if (!fetchedEntities) {
-		NSLog(@"Error: %@", error);
+	if (error) {
+        NSLog(@"Error: %@", error);
+        return nil;
+    }
+    if (fetchedEntities &&  [fetchedEntities count] == 0) {
+        return nil;
 	}
-    
 	return [fetchedEntities objectAtIndex:0];
 }
 
