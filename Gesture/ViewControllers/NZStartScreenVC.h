@@ -10,7 +10,7 @@
 
 @class NZStartScreenVC;
 
-@protocol NZStartScreenVCDelegate <NSObject>
+@protocol NZStartScreenVCDelegate <NSObject, UIAlertViewDelegate>
 
 @required
 - (void)startScreen:(NZStartScreenVC *)startScreen didSelectGestureSet:(NSString *)gestureSetName;
@@ -26,5 +26,7 @@
 
 #pragma mark - IB Actions
 - (IBAction)goButtonTapped:(UIButton *)sender;
+- (IBAction)renameButtonTapped:(UIButton *)sender;
+- (IBAction)deleteButtonTapped:(UIButton *)sender;
 
 @end

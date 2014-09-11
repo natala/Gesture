@@ -12,6 +12,7 @@
 #import "NZSingleAction+CoreData.h"
 #import "NZActionComposite+CoreData.h"
 #import "NZCoreDataManager.h"
+#import "NZGestureSetHandler.h"
 
 @interface NZGesture2ActionsMappingVC ()
 
@@ -49,7 +50,9 @@
     
     self.singleActions = [NZSingleAction findAllSortedByName];
     self.compositeActions = [NZActionComposite findAllSortedByName];
-    self.gestures = [NZGesture findAllSortetByLabel];
+    NSArray *unsortedGestures = [[NZGestureSetHandler sharedManager].selectedGestureSet.gestures allObjects];
+    NSSortDescriptor *gestureSortDescripor = [[NSSortDescriptor alloc] initWithKey:@"label.name" ascending:YES];
+    self.gestures = [unsortedGestures sortedArrayUsingDescriptors:@[gestureSortDescripor]];
     
     UIViewController *popoverContent = [[UIViewController alloc] init];
     UIView *popoverView = [[UIView alloc] init];

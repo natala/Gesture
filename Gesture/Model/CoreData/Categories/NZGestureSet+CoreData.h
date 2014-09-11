@@ -18,6 +18,8 @@
 
 + (NSArray *)findAllSortetByLabel;
 
++ (NZGestureSet *)findWithName:(NSString *)name;
+
 - (void)destroy;
 
 + (void)destroyAll;
