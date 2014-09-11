@@ -187,7 +187,8 @@ GRT::TimeSeriesClassificationData dataToBeClassified;
 
 - (BOOL)savePipelneToFile
 {
-    NSMutableString *fileName = [NSMutableString stringWithString:[[NSDate date] description]];
+    NSMutableString *fileName = [NSMutableString stringWithString:self.currentGestureSet];
+    [fileName appendString:[[NSDate date] description]];
     [fileName appendString:@" -Pipeline"];
    // NSString *path = [[NZPipelineController documentPath] stringByAppendingPathComponent:kGrtPipelineFileName];
     return [self savePipelineToFileWithName:fileName];
@@ -343,11 +344,16 @@ GRT::TimeSeriesClassificationData dataToBeClassified;
     BOOL res = true;
     
     NSDate *currentTimestamp = [NSDate date];
-    NSMutableString *pipelineFileName = [NSMutableString stringWithString:[currentTimestamp description]];
+    NSMutableString *pipelineFileName = [NSMutableString stringWithString:self.currentGestureSet];
+    [pipelineFileName appendString:[currentTimestamp description]];
     [pipelineFileName appendString:@" -Pipeline"];
-    NSMutableString *testResultsFileName = [NSMutableString stringWithString:[currentTimestamp description]];
+    
+    NSMutableString *testResultsFileName = [NSMutableString stringWithString:self.currentGestureSet];
+    [testResultsFileName appendString:[currentTimestamp description]];
     [testResultsFileName appendString:@" -TestReport"];
-    NSMutableString *dataSamplesFileName = [NSMutableString stringWithString:[currentTimestamp description]];
+    
+    NSMutableString *dataSamplesFileName = [NSMutableString stringWithString:self.currentGestureSet];
+    [dataSamplesFileName appendString:[currentTimestamp description]];
     [dataSamplesFileName appendString:@" -DataSamples"];
     
     if (![self savePipelineToFileWithName:pipelineFileName]) {
