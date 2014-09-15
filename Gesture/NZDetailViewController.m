@@ -137,6 +137,8 @@
         case BUTTON_LONG_PRESS:
             self.buttonStateLabel.text = @"button long press";
             break;
+        case BUTTON_DOUBLE_PRESS:
+            self.buttonStateLabel.text = @"button double press";
         default:
             break;
     }

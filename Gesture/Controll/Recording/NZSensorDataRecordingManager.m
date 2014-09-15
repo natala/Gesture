@@ -9,11 +9,16 @@
 #import "NZSensorDataRecordingManager.h"
 #import "NZLinearAcceleration.h"
 
+static int kDoublePressThreshold = 5;
+static int kLongPressThreshold = 20;
+
 @interface NZSensorDataRecordingManager ()
 
 @property ButtonState previousButtonState;
 @property ButtonState currentButtonState;
 @property int buttonPressedCounter;
+@property int doublePressCounter;
+@property BOOL waitingForSecondPress;
 @property BOOL isRecordingData;
 
 @end
@@ -40,6 +45,8 @@
     if (self) {
         self.sensorDataRecordingObservers = [NSMutableArray array];
         self.buttonPressedCounter = 0;
+        self.doublePressCounter = 0;
+        self.waitingForSecondPress = false;
         self.previousButtonState = BUTTON_NOT_PRESSED;
         self.currentButtonState = BUTTON_NOT_PRESSED;
     }
@@ -71,18 +78,33 @@
     
     self.previousButtonState = self.currentButtonState;
     switch (buttonState) {
-        // button is pressed
+        // button is not pressed
         case 1:
-            if (self.buttonPressedCounter <= 20 && self.buttonPressedCounter > 0) {
-                self.currentButtonState = BUTTON_SHORT_PRESS;
+            if (self.waitingForSecondPress) {
+                self.doublePressCounter++;
+                if (self.doublePressCounter > kDoublePressThreshold) {
+                    self.currentButtonState = BUTTON_SHORT_PRESS;
+                    self.waitingForSecondPress = false;
+                    self.doublePressCounter = 0;
+                }
             } else self.currentButtonState = BUTTON_NOT_PRESSED;
+            if (self.buttonPressedCounter <= kLongPressThreshold && self.buttonPressedCounter > 0) {
+                if (self.doublePressCounter > 0 && self.doublePressCounter < kDoublePressThreshold && self.waitingForSecondPress) {
+                    self.currentButtonState = BUTTON_DOUBLE_PRESS;
+                    self.waitingForSecondPress = false;
+                    self.doublePressCounter = 0;
+                } else if (self.doublePressCounter == 0) {
+                    self.waitingForSecondPress = true;
+                }
+            }
             self.buttonPressedCounter = 0;
             break;
-        // button is not pressed
+        // button is pressed
         case 0:
             self.buttonPressedCounter++;
-            if (self.buttonPressedCounter > 20) {
+            if (self.buttonPressedCounter > kLongPressThreshold) {
                 self.currentButtonState = BUTTON_LONG_PRESS;
+                self.doublePressCounter = 0;
             }
             break;
         default:
@@ -90,6 +112,7 @@
     }
     
     if (self.currentButtonState != self.previousButtonState) {
+      //   NSLog(@"button state: %u", self.currentButtonState);
         for (id<NZSensorDataRecordingManagerObserver>observer in self.sensorDataRecordingObservers) {
             if ([observer respondsToSelector:@selector(buttonStateDidChangeFrom:to:)]) {
                 [observer buttonStateDidChangeFrom:self.previousButtonState to:self.currentButtonState];

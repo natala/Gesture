@@ -254,8 +254,9 @@
             self.startStopRecordingGestureButton.highlighted = true;
         }
     } else if (!self.isRecordingGesture && currentButtonState == BUTTON_LONG_PRESS) {
-        // switch between single and group
-        // do I really want to do it here? don't think so.
+        ;
+    } else if (!self.isRecordingGesture && currentButtonState == BUTTON_DOUBLE_PRESS) {
+        ;
     }
 }
 

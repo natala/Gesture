@@ -131,7 +131,7 @@
             }
             break;
         case 1:
-            cell.textLabel.text = @"group";
+            cell.textLabel.text = @"scene";
             if (gesture.actionComposite) {
                 cell.detailTextLabel.text = gesture.actionComposite.name;
             } else {
@@ -156,7 +156,7 @@
     if ([sender isKindOfClass:[UIButton class]]) {
         UIButton *button = (UIButton *)sender;
         NSInteger row;
-        NSLog(@"%d", button.tag);
+        NSLog(@"%ld", (long)button.tag);
         if (button.tag%10 == 0) {
             row = 0;
             [self.singleActionPopoverController presentPopoverFromRect:button.bounds inView:button permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
@@ -241,7 +241,7 @@
         return [self.singleActions count]+1;
     }
     if ([pickerView isEqual:self.compositeActionPicker]) {
-        return [self.compositeActions count]+1;
+        return [self.compositeActions count] + [self.singleActions count] +1;
     }
     return 0;
 }
@@ -264,11 +264,18 @@
         return action.name;
     }
     if ([pickerView isEqual:self.compositeActionPicker]) {
-        if (row == [self.compositeActions count]) {
+        if (row == ([self.compositeActions count] + [self.singleActions count])) {
             return @"none";
         }
-        NZActionComposite *action = [self.compositeActions objectAtIndex:row];
-        return action.name;
+        if (row < [self.compositeActions count]) {
+            NZActionComposite *action = [self.compositeActions objectAtIndex:row];
+            return action.name;
+        }
+        if (row >= [self.compositeActions count]) {
+            NZSingleAction *action = [self.singleActions objectAtIndex:(row - [self.compositeActions count])];
+            return action.name;
+        }
+        
     }
     return nil;
 }
@@ -289,10 +296,14 @@
     } else if ([popoverController isEqual:self.compositeActionPopoverController]) {
         NSUInteger selectedAction = [self.compositeActionPicker selectedRowInComponent:0];
         gesture.actionComposite = nil;
+        NZAction *action;
         if (selectedAction < [self.compositeActions count]) {
-            NZAction *action = [self.compositeActions objectAtIndex:selectedAction];
-            gesture.actionComposite = action;
+            action = [self.compositeActions objectAtIndex:selectedAction];
+            
+        } else if (selectedAction >= [self.compositeActions count]) {
+            action = [self.singleActions objectAtIndex:(selectedAction-[self.compositeActions count])];
         }
+        gesture.actionComposite = action;
     }
     
     /*NZClassLabel *label = [NZClassLabel create];

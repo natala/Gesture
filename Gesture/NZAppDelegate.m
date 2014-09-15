@@ -42,9 +42,9 @@
     // hardcode the actions and action groups
     // controll the lights
   
-  //  [NZAction destroyAll];
-  /*
-    
+    //[NZAction destroyAll];
+  
+    /*
     NZHttpRequest *hueOff01 = [NZHttpRequest create];
     hueOff01.name = @"hue 1 off";
     hueOff01.url = @"http://10.130.108.79/api/newdeveloper/lights/1/state";
@@ -63,7 +63,7 @@
     
     NZHttpRequest *hueOff03 = [NZHttpRequest create];
     hueOff03.name = @"hue 3 off";
-    hueOff03.url = @"http://10.130.108.79/api/newdeveloper/lights/3/state";
+    hueOff03.url = @"http://    ";
     hueOff03.httpMethod = @"PUT";
     hueOff03.message = @"{\"on\":false}";
     hueOff03.httpHeaderContentType = @"application/json";
@@ -93,6 +93,28 @@
     hueOn03.httpHeaderContentType = @"application/json";
     hueOn03.httpHeaderAccept = @"application/json";
    */
+    // herbi radio
+    /*
+    NZUrlSession *play = [NZUrlSession create];
+    play.name = @"Music play";
+    play.url = @"http://10.130.108.114/music/mpd/mpdcontrol.php?action=Play";
+    
+    NZUrlSession *pause = [NZUrlSession create];
+    pause.name = @"Music pause";
+    pause.url = @"http://10.130.108.114/music/mpd/mpdcontrol.php?action=Pause";
+    
+    NZUrlSession *next = [NZUrlSession create];
+    next.name = @"Next song";
+    next.url = @"http://10.130.108.114/music/mpd/mpdcontrol.php?action=Next";
+    
+    NZUrlSession *volumeDonw = [NZUrlSession create];
+    volumeDonw.name = @"Volume donw";
+    volumeDonw.url = @"http://10.130.108.114/music/mpd/mpdcontrol.php?action=VolumeDown";
+    
+    NZUrlSession *volumeUp = [NZUrlSession create];
+    volumeUp.name = @"Volume up";
+    volumeUp.url = @"http://10.130.108.114/music/mpd/mpdcontrol.php?action=VolumeUp";
+    */
     // wifi plug
     /*NZWiFiPlugAction *wifiPlug = [NZWiFiPlugAction create];
     wifiPlug.name = @"wifi plug";
@@ -103,8 +125,8 @@
     wifiPlug.username = @"nzarawska@sapient.com";
     wifiPlug.password = @"3048";
     */
-   /*
-    // coposites
+   
+  /*  // coposites
     NZActionComposite *morning = [NZActionComposite create];
     morning.name = @"Morning";
     morning.childActions = [[NSSet alloc] initWithObjects:hueOn01, hueOff02, hueOff03, nil];
@@ -116,7 +138,7 @@
     NZActionComposite *evening = [NZActionComposite create];
     evening.name = @"Evening";
     evening.childActions = [[NSSet alloc] initWithObjects:hueOn01, hueOn02, hueOn03, nil];
-    */
+*/ 
     
     // *********** //
     // TUM ACTIONS //

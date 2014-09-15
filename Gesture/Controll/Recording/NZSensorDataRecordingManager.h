@@ -16,7 +16,8 @@
 typedef enum buttonState {
     BUTTON_NOT_PRESSED,
     BUTTON_SHORT_PRESS,
-    BUTTON_LONG_PRESS
+    BUTTON_LONG_PRESS,
+    BUTTON_DOUBLE_PRESS
 } ButtonState;
 
 @optional

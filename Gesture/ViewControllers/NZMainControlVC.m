@@ -188,13 +188,15 @@
         [[NZSensorDataRecordingManager sharedManager] startRecordingNewSensorDataSet];
         self.stopStartGestureButton.highlighted = true;
         self.isRecordingGesture = true;
-    } else if (!self.isRecordingGesture && currentButtonState == BUTTON_LONG_PRESS) {
+    } else if (!self.isRecordingGesture && currentButtonState == BUTTON_DOUBLE_PRESS) {
         self.isSingleMode = !self.isSingleMode;
         if (self.isSingleMode) {
             self.singleGroupSegmentControl.selectedSegmentIndex = 0;
         } else self.singleGroupSegmentControl.selectedSegmentIndex = 1;
         
-    } else if (self.isRecordingGesture && currentButtonState == BUTTON_LONG_PRESS) {
+    } else if (!self.isRecordingGesture && currentButtonState == BUTTON_LONG_PRESS) {
+        NSLog(@"undo to be implemented");
+    }else if (self.isRecordingGesture && currentButtonState == BUTTON_LONG_PRESS) {
         NSLog(@"First stop recording gesture before changing between single and group!");
     }
 }
