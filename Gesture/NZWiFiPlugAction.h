@@ -20,5 +20,6 @@ static NSString *ENTITY_NAME_WIFIPLUG_ACTION = @"NZWiFiPlugAction";
 @property (nonatomic, retain) NSString * plugName;
 @property (nonatomic, retain) NSString * password;
 @property (nonatomic, retain) NSString * username;
+@property (nonatomic, retain) NSString * command;
 
 @end

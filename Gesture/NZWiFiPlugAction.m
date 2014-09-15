@@ -17,5 +17,6 @@
 @dynamic plugName;
 @dynamic password;
 @dynamic username;
+@dynamic command;
 
 @end

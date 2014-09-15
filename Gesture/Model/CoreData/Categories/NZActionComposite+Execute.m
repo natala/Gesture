@@ -17,4 +17,13 @@
         [action execute];
     }
 }
+
+- (void)undo
+{
+    NSLog(@"NZActionComposite - undo()");
+    for (NZAction *action in self.childActions) {
+        [action undo];
+    }
+}
+
 @end

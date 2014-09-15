@@ -42,9 +42,9 @@
     // hardcode the actions and action groups
     // controll the lights
   
-    //[NZAction destroyAll];
+    [NZAction destroyAll];
   
-    /*
+    
     NZHttpRequest *hueOff01 = [NZHttpRequest create];
     hueOff01.name = @"hue 1 off";
     hueOff01.url = @"http://10.130.108.79/api/newdeveloper/lights/1/state";
@@ -52,6 +52,7 @@
     hueOff01.message = @"{\"on\":false}";
     hueOff01.httpHeaderContentType = @"application/json";
     hueOff01.httpHeaderAccept = @"application/json";
+    hueOff01.undoCommand = @"{\"on\":true}";
     
     NZHttpRequest *hueOff02 = [NZHttpRequest create];
     hueOff02.name = @"hue 2 off";
@@ -60,6 +61,7 @@
     hueOff02.message = @"{\"on\":false}";
     hueOff02.httpHeaderContentType = @"application/json";
     hueOff02.httpHeaderAccept = @"application/json";
+    hueOff02.undoCommand = @"{\"on\":true}";
     
     NZHttpRequest *hueOff03 = [NZHttpRequest create];
     hueOff03.name = @"hue 3 off";
@@ -68,6 +70,7 @@
     hueOff03.message = @"{\"on\":false}";
     hueOff03.httpHeaderContentType = @"application/json";
     hueOff03.httpHeaderAccept = @"application/json";
+    hueOff03.undoCommand = @"{\"on\":true}";
     
     NZHttpRequest *hueOn01 = [NZHttpRequest create];
     hueOn01.name = @"hue 1 on";
@@ -76,6 +79,7 @@
     hueOn01.message = @"{\"on\":true}";
     hueOn01.httpHeaderContentType = @"application/json";
     hueOn01.httpHeaderAccept = @"application/json";
+    hueOn01.undoCommand = @"{\"on\":false}";
     
     NZHttpRequest *hueOn02 = [NZHttpRequest create];
     hueOn02.name = @"hue 2 on";
@@ -84,6 +88,7 @@
     hueOn02.message = @"{\"on\":true}";
     hueOn02.httpHeaderContentType = @"application/json";
     hueOn02.httpHeaderAccept = @"application/json";
+    hueOn02.undoCommand = @"{\"on\":false}";
     
     NZHttpRequest *hueOn03 = [NZHttpRequest create];
     hueOn03.name = @"hue 3 on";
@@ -92,41 +97,59 @@
     hueOn03.message = @"{\"on\":true}";
     hueOn03.httpHeaderContentType = @"application/json";
     hueOn03.httpHeaderAccept = @"application/json";
-   */
+    hueOn03.undoCommand = @"{\"on\":false}";
+   
     // herbi radio
-    /*
+    
     NZUrlSession *play = [NZUrlSession create];
     play.name = @"Music play";
     play.url = @"http://10.130.108.114/music/mpd/mpdcontrol.php?action=Play";
+    play.undoCommand = @"http://10.130.108.114/music/mpd/mpdcontrol.php?action=Pause";
     
     NZUrlSession *pause = [NZUrlSession create];
     pause.name = @"Music pause";
     pause.url = @"http://10.130.108.114/music/mpd/mpdcontrol.php?action=Pause";
+    pause.undoCommand = @"http://10.130.108.114/music/mpd/mpdcontrol.php?action=Play";
     
     NZUrlSession *next = [NZUrlSession create];
     next.name = @"Next song";
     next.url = @"http://10.130.108.114/music/mpd/mpdcontrol.php?action=Next";
+    // no undo possibility
     
-    NZUrlSession *volumeDonw = [NZUrlSession create];
-    volumeDonw.name = @"Volume donw";
-    volumeDonw.url = @"http://10.130.108.114/music/mpd/mpdcontrol.php?action=VolumeDown";
+    NZUrlSession *volumeDown = [NZUrlSession create];
+    volumeDown.name = @"Volume donw";
+    volumeDown.url = @"http://10.130.108.114/music/mpd/mpdcontrol.php?action=VolumeDown";
+    volumeDown.undoCommand = @"http://10.130.108.114/music/mpd/mpdcontrol.php?action=VolumeUp";
     
     NZUrlSession *volumeUp = [NZUrlSession create];
     volumeUp.name = @"Volume up";
     volumeUp.url = @"http://10.130.108.114/music/mpd/mpdcontrol.php?action=VolumeUp";
-    */
+    volumeUp.undoCommand = @"http://10.130.108.114/music/mpd/mpdcontrol.php?action=VolumeDown";
+    
     // wifi plug
-    /*NZWiFiPlugAction *wifiPlug = [NZWiFiPlugAction create];
-    wifiPlug.name = @"wifi plug";
+    NZWiFiPlugAction *wifiPlug = [NZWiFiPlugAction create];
+    wifiPlug.name = @"plug on";
     wifiPlug.hostName = @"ec2-54-217-214-117.eu-west-1.compute.amazonaws.com";
     wifiPlug.portNumber = [NSNumber numberWithInt:227];
     wifiPlug.plugId = @"0000250905C248";
     wifiPlug.plugName = @"nat";
     wifiPlug.username = @"nzarawska@sapient.com";
     wifiPlug.password = @"3048";
-    */
+    wifiPlug.command = @"on";
+    wifiPlug.undoCommand = @"off";
+     
+    NZWiFiPlugAction *wifiPlug2 = [NZWiFiPlugAction create];
+    wifiPlug2.name = @"plug off";
+    wifiPlug2.hostName = @"ec2-54-217-214-117.eu-west-1.compute.amazonaws.com";
+    wifiPlug2.portNumber = [NSNumber numberWithInt:227];
+    wifiPlug2.plugId = @"0000250905C248";
+    wifiPlug2.plugName = @"nat";
+    wifiPlug2.username = @"nzarawska@sapient.com";
+    wifiPlug2.password = @"3048";
+    wifiPlug2.command = @"off";
+    wifiPlug2.undoCommand = @"on";
    
-  /*  // coposites
+    // composites
     NZActionComposite *morning = [NZActionComposite create];
     morning.name = @"Morning";
     morning.childActions = [[NSSet alloc] initWithObjects:hueOn01, hueOff02, hueOff03, nil];
@@ -138,15 +161,15 @@
     NZActionComposite *evening = [NZActionComposite create];
     evening.name = @"Evening";
     evening.childActions = [[NSSet alloc] initWithObjects:hueOn01, hueOn02, hueOn03, nil];
-*/ 
+
     
     // *********** //
     // TUM ACTIONS //
     // *********** //
-    
+/*
     // SMART LAB //
     // lights
- /*   NZHttpRequest *labLighWindowOn = [NZHttpRequest create];
+    NZHttpRequest *labLighWindowOn = [NZHttpRequest create];
     labLighWindowOn.name = @"LAB light window on";
     labLighWindowOn.url = @"http://ios14cmu-bruegge.in.tum.de:8080/rest/items/EO_SL_Light_B";
     labLighWindowOn.httpMethod = @"POST";
@@ -242,10 +265,10 @@
     NZActionComposite *lightsOff = [NZActionComposite create];
     lightsOff.name = @"CR Lights Off";
     lightsOff.childActions = [[NSSet alloc] initWithObjects:crLightsAOff, crLightsBOff, nil];
-*/
     
-    // Load the Start Screen VC
-    
+ */
+ // Load the Start Screen VC
+ 
     
     return YES;
 }

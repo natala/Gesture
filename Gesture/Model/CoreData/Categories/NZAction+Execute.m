@@ -19,7 +19,13 @@
 - (void)connect
 {
     // NZAction is an abstract class
-    NSLog(@"NZAction is an abstract class. The method prepareForExecution() should be implemented by all the subclasses!");
+    NSLog(@"NZAction is an abstract class. The method connect() should be implemented by all the subclasses!");
+}
+
+- (void)undo
+{
+    // NZAction is an abstract class
+    NSLog(@"NZAction is an abstract class. The method undo() should be implemented by all the subclasses!");
 }
 
 @end

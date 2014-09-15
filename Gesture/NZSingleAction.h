@@ -15,5 +15,6 @@ static NSString *ENTITY_NAME_SINGLE_ACTION = @"NZSingleAction";
 
 @interface NZSingleAction : NZAction
 
+@property (nonatomic, retain) NSString * undoCommand;
 
 @end

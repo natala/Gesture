@@ -22,4 +22,9 @@
  */
 - (void)connect;
 
+/**
+ * calls the command set in the undoCommand property
+ */
+- (void)undo;
+
 @end

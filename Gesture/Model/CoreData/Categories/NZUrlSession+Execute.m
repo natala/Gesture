@@ -13,9 +13,18 @@
 - (void)execute
 {
     NSLog(@"NZUrlSession - execute()");
+    [self executeWithCommand:self.url];
+}
+
+- (void)undo
+{
+    [self executeWithCommand:self.undoCommand];
+}
+
+- (void)executeWithCommand:(NSString *)command
+{
     NSURLSession *session = [NSURLSession sharedSession];
-    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:self.url] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        NSLog(@"play music request send");
+    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:command] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {NSLog(@"url session command send");
         [dataTask cancel];
         
     }];

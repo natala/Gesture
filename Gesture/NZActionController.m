@@ -19,6 +19,7 @@
 
 @property (nonatomic, retain) NSMutableArray *actionHandlers;
 @property (nonatomic, retain) NSMutableDictionary *actionHandlersWithNames;
+@property (nonatomic, retain) NZActionHandler *lastExecutedAction;
 
 @end
 
@@ -109,10 +110,17 @@ int responceCount = 0;
     if (mode == SINGLE_MODE) {
         NZActionHandler *handler = [self.actionHandlersWithNames objectForKey:gesture.singleAction.name];
         [handler execute];
+        self.lastExecutedAction = handler;
     } else if (mode == GROUP_MODE) {
         NZActionHandler *handler = [self.actionHandlersWithNames objectForKey:gesture.actionComposite.name];
         [handler execute];
+        self.lastExecutedAction = handler;
     }
+}
+
+- (void)undoLastExecution
+{
+    [self.lastExecutedAction undo];
 }
 
 - (void)prepareAllActionsForExecution

@@ -135,13 +135,12 @@
     NZGesture *gesture = [NZGesture findGestureWithIndex:[NSNumber numberWithInt:classIndex]];
     if (!gesture) {
         self.recognizedGestureNameLabel.text = [NSString stringWithFormat:@"%d",classIndex ];
-        if (self.isSingleMode) {
-            self.executedActionLabel.text = gesture.singleAction.name;
-        } else self.executedActionLabel.text = gesture.actionComposite.name;
-
     } else {
         self.recognizedGestureNameLabel.text = gesture.label.name;
         self.lastRecognizedGesture = gesture.label.name;
+        if (self.isSingleMode) {
+            self.executedActionLabel.text = gesture.singleAction.name;
+        } else self.executedActionLabel.text = gesture.actionComposite.name;
     }
     
     /*
@@ -195,8 +194,9 @@
         } else self.singleGroupSegmentControl.selectedSegmentIndex = 1;
         
     } else if (!self.isRecordingGesture && currentButtonState == BUTTON_LONG_PRESS) {
-        NSLog(@"undo to be implemented");
-    }else if (self.isRecordingGesture && currentButtonState == BUTTON_LONG_PRESS) {
+        [[NZActionController sharedManager] undoLastExecution];
+        self.debugMessageLabel.text = @"undo";
+    } else if (self.isRecordingGesture && currentButtonState == BUTTON_LONG_PRESS) {
         NSLog(@"First stop recording gesture before changing between single and group!");
     }
 }

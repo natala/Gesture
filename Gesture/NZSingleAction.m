@@ -11,5 +11,6 @@
 
 @implementation NZSingleAction
 
+@dynamic undoCommand;
 
 @end

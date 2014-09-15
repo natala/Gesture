@@ -39,6 +39,11 @@
     [self.action execute];
 }
 
+- (void)undo
+{
+    [self.action undo];
+}
+
 - (void)connect
 {
     NSLog(@"nothing to do...");

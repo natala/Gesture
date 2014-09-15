@@ -28,6 +28,7 @@
 #pragma mark - manage action
 - (void)connect;
 - (void)execute;
+- (void)undo;
 
 #pragma mark - managing observers
 - (void)addObserver:(id<NZActionHandlerObserver>) observer;

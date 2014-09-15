@@ -13,11 +13,22 @@
 - (void)execute
 {
     NSLog(@"NZHttpRequest - execute()");
+    
+    [self executeWithCommand:self.message];
+}
+
+- (void)undo
+{
+    [self executeWithCommand:self.undoCommand];
+}
+
+- (void)executeWithCommand:(NSString *)command
+{
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:self.url]];
-    NSData *requestData = [self.message dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *requestData = [command dataUsingEncoding:NSUTF8StringEncoding];
     [request setHTTPMethod:self.httpMethod];
     if (self.httpHeaderContentType) {
-            [request setValue:self.httpHeaderContentType forHTTPHeaderField:@"Content-Type"];
+        [request setValue:self.httpHeaderContentType forHTTPHeaderField:@"Content-Type"];
     }
     if (self.httpHeaderAccept) {
         [request setValue:self.httpHeaderAccept forHTTPHeaderField:@"Accept"];

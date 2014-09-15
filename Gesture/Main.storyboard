@@ -898,6 +898,10 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="icon_42373" translatesAutoresizingMaskIntoConstraints="NO" id="wpL-zJ-vwY">
+                                <rect key="frame" x="-200" y="-97" width="1200" height="1200"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -1203,6 +1207,9 @@
             <point key="canvasLocation" x="1714" y="-115"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icon_42373" width="1200" height="1200"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

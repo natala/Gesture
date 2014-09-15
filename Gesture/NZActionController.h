@@ -77,6 +77,12 @@ typedef enum executionMode {
 - (void)executeGesture:(NZGesture *)gesture withMode:(ExecutionMode)mode;
 
 /**
+ * undo the execution of the last gesture. 
+ * @note executes the last action with its defined undoCommand. If not defined, nothing happens
+ */
+- (void)undoLastExecution;
+
+/**
  * sets up all required connections and logins
  */
 - (void)prepareAllActionsForExecution;
