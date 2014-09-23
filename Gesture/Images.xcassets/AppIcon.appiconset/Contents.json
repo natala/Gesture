@@ -3,36 +3,37 @@
     {
       "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "iPad 29 1x-1.png",
+      "filename" : "ring29.png",
       "scale" : "1x"
     },
     {
       "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "iPad 29 2x-1.png",
+      "filename" : "ring56.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "iPad 40 1x-1.png",
+      "filename" : "ring40.png",
       "scale" : "1x"
     },
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "iPad 40 1x-2.png",
+      "filename" : "ring80.png",
       "scale" : "2x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "ring 02.png",
+      "filename" : "ring76.png",
       "scale" : "1x"
     },
     {
-      "idiom" : "ipad",
       "size" : "76x76",
+      "idiom" : "ipad",
+      "filename" : "ring152.png",
       "scale" : "2x"
     }
   ],

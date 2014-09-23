@@ -40,7 +40,6 @@
 		8AA4187919B884140027FDED /* NZWiFiPlugAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AA4187819B884140027FDED /* NZWiFiPlugAction.m */; };
 		8AA4187F19B8851C0027FDED /* NZWiFiPlugAction+CoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AA4187E19B8851C0027FDED /* NZWiFiPlugAction+CoreData.m */; };
 		8AA4188219B885AD0027FDED /* NZWiFiPlugAction+Execute.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AA4188119B885AD0027FDED /* NZWiFiPlugAction+Execute.m */; };
-		8AA4188419B88AA00027FDED /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA4188319B88AA00027FDED /* CFNetwork.framework */; };
 		8AA4188619B88AC30027FDED /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA4188519B88AC30027FDED /* libz.1.2.5.dylib */; };
 		8AA4188A19B9B15B0027FDED /* NZActionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AA4188919B9B15B0027FDED /* NZActionHandler.m */; };
 		8AA4188D19B9B75C0027FDED /* NZWiFiPlugActionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AA4188C19B9B75C0027FDED /* NZWiFiPlugActionHandler.m */; };
@@ -705,7 +704,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8AA4188619B88AC30027FDED /* libz.1.2.5.dylib in Frameworks */,
-				8AA4188419B88AA00027FDED /* CFNetwork.framework in Frameworks */,
 				8AA4187619B881990027FDED /* Protocol.framework in Frameworks */,
 				8A07255019A3AA4100ED7AC2 /* CoreBluetooth.framework in Frameworks */,
 				8AE8CB48196AF587008BE33E /* QuartzCore.framework in Frameworks */,
@@ -2321,6 +2319,7 @@
 		8A92293C195C3A3800DF7743 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2353,6 +2352,7 @@
 		8A92293D195C3A3800DF7743 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
