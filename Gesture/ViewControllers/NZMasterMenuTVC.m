@@ -14,6 +14,7 @@
 
 @property NSArray *items;
 @property UITableViewCell *selectedCell;
+@property BOOL hideStartScreen;
 
 @end
 
@@ -58,6 +59,7 @@
 
 - (void)commonInit
 {
+    self.hideStartScreen = false;
    // UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
    //  NZStartScreenVC *startScreen = (NZStartScreenVC *)[mainStoryBoard instantiateViewControllerWithIdentifier:@"StartScreenVC"];
    // self.startScreenVc = startScreen;
@@ -67,19 +69,23 @@
 {
     [super viewDidLoad];
     
-    [self presentStartScreenAnimated:NO];
-    
     // set the default selection to the recording
     NSIndexPath *indexPath = [self.tableView indexPathForCell:self.configureCell];
     [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
     self.selectedCell = self.configureCell;
    // self.selectedCell.userInteractionEnabled = NO;
-    self.selectedCell.highlighted = true;
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    [self presentStartScreenAnimated:NO];
+    self.selectedCell.highlighted = true;
 }
 
 - (void)didReceiveMemoryWarning
@@ -90,6 +96,9 @@
 
 - (void)presentStartScreenAnimated:(BOOL)animated
 {
+    if (self.hideStartScreen) {
+        return;
+    }
     UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     NZStartScreenVC *startScreen = (NZStartScreenVC *)[mainStoryBoard instantiateViewControllerWithIdentifier:@"StartScreenVC"];
     self.startScreenVc = startScreen;
@@ -127,6 +136,7 @@
         self.selectedCell.highlighted = NO;
     }
     if ([[tableView cellForRowAtIndexPath:indexPath] isEqual:self.leaveCell]) {
+        self.hideStartScreen = false;
         [self presentStartScreenAnimated:YES];
     } else self.selectedCell = [tableView cellForRowAtIndexPath:indexPath];
 }
@@ -173,6 +183,7 @@
 #pragma mark - NZ Start Screen VC delegate
 - (void)startScreen:(NZStartScreenVC *)startScreen didSelectGestureSet:(NSString *)gestureSetName
 {
+    self.hideStartScreen = true;
     NSLog(@"selected set: %@", gestureSetName);
     [[NZGestureSetHandler sharedManager] loadGestureSetWithName:gestureSetName];
     self.startScreenVc.delegate = nil;

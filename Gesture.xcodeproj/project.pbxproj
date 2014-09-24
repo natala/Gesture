@@ -2334,7 +2334,7 @@
 					"\"${PROJECT_DIR}/core-plot/framework/\"/**",
 				);
 				INFOPLIST_FILE = "Gesture/Gesture-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/CorePlot_1.4/Binaries/iOS",
@@ -2367,7 +2367,7 @@
 					"\"${PROJECT_DIR}/core-plot/framework/\"/**",
 				);
 				INFOPLIST_FILE = "Gesture/Gesture-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/CorePlot_1.4/Binaries/iOS",

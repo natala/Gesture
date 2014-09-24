@@ -30,6 +30,8 @@
     // Override point for customization after application launch.
     UIStoryboard *mainStorryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UISplitViewController *splitViewController = (UISplitViewController *)[mainStorryBoard instantiateViewControllerWithIdentifier:@"SplitViewController"];
+   // NSLog(@"... %f",[splitViewController primaryColumnWidth]);
+    //[splitViewController setPreferredPrimaryColumnWidthFraction:0.0666f];
     UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
     splitViewController.delegate = (id)navigationController.topViewController;
     

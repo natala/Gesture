@@ -42,7 +42,7 @@
         [BLEDiscovery sharedInstance].discoveryDelegate = self;
         [BLEDiscovery sharedInstance].peripheralDelegate = self;
         
-        [[BLEDiscovery sharedInstance] startScanningForSupportedUUIDs];
+    //    [[BLEDiscovery sharedInstance] startScanningForSupportedUUIDs];
     }
     return self;
 }

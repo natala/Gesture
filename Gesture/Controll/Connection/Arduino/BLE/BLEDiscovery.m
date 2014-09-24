@@ -303,6 +303,7 @@
 	switch ([self.centralManager state]) {
 	case CBCentralManagerStatePoweredOff:
 	{
+        NSLog(@"CoreBluetooth BLE hardware is powered off");
 		[self clearDevices];
 		[self.discoveryDelegate discoveryDidRefresh];
 
@@ -311,14 +312,18 @@
 	}
 
 	case CBCentralManagerStateUnauthorized: {
+        NSLog(@"CoreBluetooth BLE state is unauthorized");
 		break;
 	}
 
 	case CBCentralManagerStateUnknown: {
+        NSLog(@"CoreBluetooth BLE state is unknown");
 		break;
 	}
 
 	case CBCentralManagerStatePoweredOn: {
+        NSLog(@"CoreBluetooth BLE hardware is powered on and ready");
+        [self startScanningForSupportedUUIDs];
 		self.pendingInit = NO;
 		[self loadSavedDevices];
         
@@ -354,6 +359,9 @@
 		self.pendingInit = YES;
 		break;
 	}
+    case CBCentralManagerStateUnsupported:
+            NSLog(@"CoreBluetooth BLE hardware is unsupported on this platform");
+            break;
 	default:
 		break;
 	}

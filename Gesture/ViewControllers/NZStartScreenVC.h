@@ -10,7 +10,7 @@
 
 @class NZStartScreenVC;
 
-@protocol NZStartScreenVCDelegate <NSObject, UIAlertViewDelegate>
+@protocol NZStartScreenVCDelegate <NSObject, UIAlertViewDelegate, UIGestureRecognizerDelegate>
 
 @required
 - (void)startScreen:(NZStartScreenVC *)startScreen didSelectGestureSet:(NSString *)gestureSetName;

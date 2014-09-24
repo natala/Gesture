@@ -3,12 +3,12 @@
     {
       "idiom" : "ipad",
       "scale" : "1x",
-      "filename" : "enter@1x black.png"
+      "filename" : "main_control@1x black.png"
     },
     {
       "idiom" : "ipad",
       "scale" : "2x",
-      "filename" : "enter@2x black.png"
+      "filename" : "main_control@2x black.png"
     }
   ],
   "info" : {

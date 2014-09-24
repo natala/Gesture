@@ -35,6 +35,7 @@ static NSString *kPickerRowNewName = @"new";
     [super viewDidLoad];
     self.pickerView.delegate = self;
     self.pickerView.dataSource = self;
+    
     // Do any additional setup after loading the view.
 }
 

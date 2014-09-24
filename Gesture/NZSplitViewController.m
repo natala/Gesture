@@ -8,6 +8,8 @@
 
 #import "NZSplitViewController.h"
 
+const CGFloat MASTER_VIEW_WIDTH = 153.0f;
+
 @interface NZSplitViewController ()
 
 @end
@@ -33,6 +35,29 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewDidLayoutSubviews
+{
+    UIViewController *masterViewController = self.viewControllers[0];
+    UIViewController *detailViewController = self.viewControllers[1];
+    
+    if (detailViewController.view.frame.origin.x > 0.0f) {
+        // Adjust the width of the master view
+        CGRect masterViewFrame = masterViewController.view.frame;
+        CGFloat deltaX = masterViewFrame.size.width - MASTER_VIEW_WIDTH;
+        masterViewFrame.size.width -= deltaX;
+        masterViewController.view.frame = masterViewFrame;
+        
+        // Adjust the width of the detail view
+        CGRect detailViewFrame = detailViewController.view.frame;
+        detailViewFrame.origin.x -= deltaX;
+        detailViewFrame.size.width += deltaX;
+        detailViewController.view.frame = detailViewFrame;
+        
+        [masterViewController.view setNeedsLayout];
+        [detailViewController.view setNeedsLayout];
+    }
 }
 
 /*
