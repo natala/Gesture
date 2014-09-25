@@ -15,6 +15,7 @@
 		8A4390B519B480D000B1372F /* NZSingleAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A4390B419B480D000B1372F /* NZSingleAction.m */; };
 		8A5AB06919783369006B2FBC /* NZPipelineController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8A5AB06819783369006B2FBC /* NZPipelineController.mm */; };
 		8A6AF54C195CBAF20015B571 /* NZSensorDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6AF54B195CBAF20015B571 /* NZSensorDataHelper.m */; };
+		8A6F24A919D441950048CE8C /* NZMainGestureConfigurationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6F24A819D441950048CE8C /* NZMainGestureConfigurationVC.m */; };
 		8A922904195C3A3800DF7743 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A922903195C3A3800DF7743 /* Foundation.framework */; };
 		8A922906195C3A3800DF7743 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A922905195C3A3800DF7743 /* CoreGraphics.framework */; };
 		8A922908195C3A3800DF7743 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A922907195C3A3800DF7743 /* UIKit.framework */; };
@@ -228,6 +229,8 @@
 		8A5AB06819783369006B2FBC /* NZPipelineController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = NZPipelineController.mm; path = Controll/Pipeline/NZPipelineController.mm; sourceTree = "<group>"; };
 		8A6AF54A195CBAF20015B571 /* NZSensorDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZSensorDataHelper.h; path = Model/NZSensorDataHelper.h; sourceTree = "<group>"; };
 		8A6AF54B195CBAF20015B571 /* NZSensorDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZSensorDataHelper.m; path = Model/NZSensorDataHelper.m; sourceTree = "<group>"; };
+		8A6F24A719D441950048CE8C /* NZMainGestureConfigurationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZMainGestureConfigurationVC.h; path = ViewControllers/NZMainGestureConfigurationVC.h; sourceTree = "<group>"; };
+		8A6F24A819D441950048CE8C /* NZMainGestureConfigurationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZMainGestureConfigurationVC.m; path = ViewControllers/NZMainGestureConfigurationVC.m; sourceTree = "<group>"; };
 		8A922900195C3A3800DF7743 /* Gesture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gesture.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A922903195C3A3800DF7743 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8A922905195C3A3800DF7743 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -746,6 +749,32 @@
 			name = Pipeline;
 			sourceTree = "<group>";
 		};
+		8A6F24A419D440A60048CE8C /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				8A6F24A619D440C00048CE8C /* Actions */,
+				8A6F24A519D440B40048CE8C /* Gesture */,
+			);
+			name = Configuration;
+			sourceTree = "<group>";
+		};
+		8A6F24A519D440B40048CE8C /* Gesture */ = {
+			isa = PBXGroup;
+			children = (
+				8A6F24A719D441950048CE8C /* NZMainGestureConfigurationVC.h */,
+				8A6F24A819D441950048CE8C /* NZMainGestureConfigurationVC.m */,
+			);
+			name = Gesture;
+			sourceTree = "<group>";
+		};
+		8A6F24A619D440C00048CE8C /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				8AEFC62F19ACC81A00E25943 /* Gesture 2 Action Mapping */,
+			);
+			name = Actions;
+			sourceTree = "<group>";
+		};
 		8A9228F7195C3A3800DF7743 = {
 			isa = PBXGroup;
 			children = (
@@ -843,11 +872,11 @@
 		8A922942195C3AAA00DF7743 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				8A6F24A419D440A60048CE8C /* Configuration */,
 				8AF5319919991D9600D10EBE /* Testing */,
 				8AD02015197D6AAC003A09EE /* popovers / popups */,
 				8AE3831D1977D54500824571 /* NZGestureConfigurationVC.h */,
 				8AE3831E1977D54500824571 /* NZGestureConfigurationVC.m */,
-				8AEFC62F19ACC81A00E25943 /* Gesture 2 Action Mapping */,
 				8A072546199CFAFD00ED7AC2 /* NZActionsVC.h */,
 				8A072547199CFAFD00ED7AC2 /* NZActionsVC.m */,
 				8AE3830819758AFA00824571 /* NZGesturesVC.h */,
@@ -2076,6 +2105,7 @@
 				8AF7F9871969C89F00DB6D7C /* WeakClassifier.cpp in Sources */,
 				8AF7F9BE1969C89F00DB6D7C /* ClassLabelChangeFilter.cpp in Sources */,
 				8AAD80DD195DBA70000F9805 /* KHSensorDataLineChartView.m in Sources */,
+				8A6F24A919D441950048CE8C /* NZMainGestureConfigurationVC.m in Sources */,
 				8AE383101976CC3E00824571 /* NZGesture.m in Sources */,
 				8AF7F99B1969C89F00DB6D7C /* KMeans.cpp in Sources */,
 				8AF7F9D41969C89F00DB6D7C /* MatrixDouble.cpp in Sources */,
