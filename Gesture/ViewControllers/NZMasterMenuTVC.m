@@ -188,9 +188,9 @@
     [[NZGestureSetHandler sharedManager] loadGestureSetWithName:gestureSetName];
     self.startScreenVc.delegate = nil;
     
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:self.configureCell];
-    [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
-    self.selectedCell = self.configureCell;
+   // NSIndexPath *indexPath = [self.tableView indexPathForCell:self.configureCell];
+    //[self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+    //self.selectedCell = self.configureCell;
    // self.selectedCell.userInteractionEnabled = NO;
     self.selectedCell.highlighted = true;
 
