@@ -22,6 +22,8 @@
  */
 - (void)didReceiveSensorData:(NZSensorData *)sensorData withButtonState:(int)buttonState;
 
+- (void)didDisconnect;
+
 @optional
 - (void)connectionState:(NSString *)state;
 

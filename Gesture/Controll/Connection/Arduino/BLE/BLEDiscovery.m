@@ -278,8 +278,8 @@
 
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
+    [self.discoveryDelegate discoveryDidRefresh];
 	[self.connectedPeripherals removeAllObjects];
-	[self.discoveryDelegate discoveryDidRefresh];
 
 	BLEService *serviceToRemove = nil;
 

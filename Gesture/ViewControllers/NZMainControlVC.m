@@ -24,6 +24,10 @@
 @property (nonatomic)  BOOL recordingManagerIsConnected;
 @property (nonatomic)  BOOL actionManagerIsReady;
 
+@property (nonatomic, retain) UIAlertController *alertController;
+@property (nonatomic, retain) UIAlertController *disconnectedAllertController;
+@property BOOL ringDisconnected;
+
 @end
 
 @implementation NZMainControlVC
@@ -44,6 +48,21 @@
     self.recordingManagerIsConnected = false;
     //self.httpRequest = @"http://192.168.1.105/api/newdeveloper/lights/2/state";
     // Do any additional setup after loading the view.
+    self.alertController = [UIAlertController alertControllerWithTitle:@"Connect to the PowerRing" message:@"Make sure the PowerRing is turned on" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"Connect" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self startButtonTapped:self.startButton];
+        NSLog(@"trying to connect");
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self.alertController dismissViewControllerAnimated:YES completion:nil];
+    }];
+    [self.alertController addAction:action];
+    [self.alertController addAction:cancelAction];
+    
+    self.disconnectedAllertController = [UIAlertController alertControllerWithTitle:@"PowerRing disconnected" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+    [self.disconnectedAllertController addAction:okAction];
+    self.ringDisconnected = false;
 }
 
 - (void)didReceiveMemoryWarning
@@ -56,8 +75,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.startButton.enabled = ![[NZSensorDataRecordingManager sharedManager] isConnected];
-    self.stopButton.enabled = !self.startButton.enabled;
+  //  self.startButton.enabled = ![[NZSensorDataRecordingManager sharedManager] isConnected];
+  //  self.stopButton.enabled = !self.startButton.enabled;
     self.isSingleMode = YES;
     if (self.isSingleMode) {
         self.singleGroupSegmentControl.selectedSegmentIndex = 0;
@@ -69,20 +88,26 @@
        // [self.singleGroupSegmentControl setEnabled:false forSegmentAtIndex:2];
     }
     self.stopStartGestureButton.enabled = !self.startButton.enabled;
+    self.startButtonImage.hidden = self.isRecordingGesture;
+    self.stopButtonImage.hidden = !self.isRecordingGesture;
+    [self startButtonTapped:self.startButton];
     
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    [self stopButtonTapped:self.stopButton];
     [[NZActionController sharedManager] removeObserver:self];
 }
 
 - (void)readyToControl
 {
-    self.startButton.enabled = false;
-    self.stopButton.enabled = true;
+ //   self.startButton.enabled = false;
+ //   self.stopButton.enabled = true;
     self.stopStartGestureButton.enabled = true;
+    self.startButtonImage.hidden = false;
+    self.stopButtonImage.hidden = true;
 }
 
 /*
@@ -163,14 +188,22 @@
 - (void)connected
 {
     self.recordingManagerIsConnected = true;
+    [self.alertController dismissViewControllerAnimated:YES completion:nil];
+    
 }
 
 - (void)disconnected
 {
     self.recordingManagerIsConnected = false;
-    self.startButton.enabled = true;
-    self.stopButton.enabled = false;
+   // self.startButton.enabled = true;
+   // self.stopButton.enabled = false;
     self.stopStartGestureButton.enabled = false;
+    self.startButtonImage.hidden = true;
+    self.stopButtonImage.hidden = false;
+    
+    // automatically trying to reconnect
+    self.ringDisconnected = true;
+    [self startButtonTapped:self.startButton];
 }
 
 - (void)buttonStateDidChangeFrom:(ButtonState)previousState to:(ButtonState)currentButtonState
@@ -182,10 +215,14 @@
     if (self.isRecordingGesture && currentButtonState == BUTTON_SHORT_PRESS) {
         [[NZSensorDataRecordingManager sharedManager] stopRecordingCurrentSensorDataSet];
         self.stopStartGestureButton.highlighted = false;
+        self.startButtonImage.hidden = false;
+        self.stopButtonImage.hidden = true;
         self.isRecordingGesture = false;
     } else if (!self.isRecordingGesture && currentButtonState == BUTTON_SHORT_PRESS) {
         [[NZSensorDataRecordingManager sharedManager] startRecordingNewSensorDataSet];
         self.stopStartGestureButton.highlighted = true;
+        self.startButtonImage.hidden = true;
+        self.stopButtonImage.hidden = false;
         self.isRecordingGesture = true;
     } else if (!self.isRecordingGesture && currentButtonState == BUTTON_DOUBLE_PRESS) {
         self.isSingleMode = !self.isSingleMode;
@@ -222,6 +259,17 @@
 
 - (IBAction)startButtonTapped:(id)sender
 {
+    if (self.ringDisconnected) {
+        if (![self.disconnectedAllertController isBeingPresented]) {
+            [self presentViewController:self.disconnectedAllertController animated:YES completion:nil];
+        }
+    } else {
+        if (![self.alertController isBeingPresented]) {
+            [self presentViewController:self.alertController animated:YES completion:nil];
+        }
+    }
+    self.ringDisconnected = false;
+    //[self.activityIndicatorView startAnimating];
     
     if (![[NZActionController sharedManager].observers containsObject:self]) {
         [[NZActionController sharedManager] addObserver:self];
@@ -245,6 +293,8 @@
     self.startButton.enabled = true;
     self.stopButton.enabled = false;
     self.stopStartGestureButton.enabled = false;
+    self.startButtonImage.hidden = false;
+    self.stopButtonImage.hidden = true;
     
     [[NZActionController sharedManager] disconnectActions];
     [[NZActionController sharedManager] removeObserver:self];
@@ -316,5 +366,19 @@
         [self readyToControl];
     }
 }
+
+#pragma mark - UIAlert View Delegate methods
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    
+}
+
+- (void)alertViewCancel:(UIAlertView *)alertView
+{
+    [self stopButtonTapped:self.stopButton];
+}
+
+#pragma mark - connection helper methods
+
 
 @end

@@ -65,6 +65,16 @@ static int kLongPressThreshold = 20;
 }
 
 #pragma mark - NZArduinoCommunicationManagerDelegate
+
+- (void)didDisconnect
+{
+    for (id<NZSensorDataRecordingManagerObserver> observer in self.sensorDataRecordingObservers) {
+        if ([observer respondsToSelector:@selector(disconnected)]) {
+            [observer disconnected];
+        }
+    }
+}
+
 - (void)didReceiveSensorData:(NZSensorData *)sensorData withButtonState:(int)buttonState
 {
     if (self.isRecordingData) {

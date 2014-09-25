@@ -10,7 +10,7 @@
 #import "NZSensorDataRecordingManager.h"
 #import "NZActionController.h"
 
-@interface NZMainControlVC : UIViewController <NZSensorDataRecordingManagerObserver, NZActionControllerObserver>
+@interface NZMainControlVC : UIViewController <NZSensorDataRecordingManagerObserver, NZActionControllerObserver, UIAlertViewDelegate>
 
 #pragma mark - UI Elements
 @property (weak, nonatomic) IBOutlet UIButton *startButton;
@@ -22,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *executedActionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *debugMessageLabel;
 
+@property (weak, nonatomic) IBOutlet UIImageView *startButtonImage;
+@property (weak, nonatomic) IBOutlet UIImageView *stopButtonImage;
 
 #pragma mark - IBActions
 - (IBAction)startButtonTapped:(id)sender;

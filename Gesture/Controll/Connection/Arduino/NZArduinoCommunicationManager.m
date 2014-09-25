@@ -62,7 +62,14 @@
 
 - (void)discoveryDidRefresh
 {
+    // called after disconnectin
+    [[BLEDiscovery sharedInstance].connectedPeripherals removeAllObjects];
     NSLog(@"discoveryDidRefresh");
+    if (self.delegate) {
+        if ([self.delegate respondsToSelector:@selector(didDisconnect)]) {
+            [self.delegate didDisconnect];
+        }
+    }
 }
 
 - (void)peripheralDiscovered:(CBPeripheral *)peripheral
