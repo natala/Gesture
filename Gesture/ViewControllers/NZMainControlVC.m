@@ -75,22 +75,13 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-  //  self.startButton.enabled = ![[NZSensorDataRecordingManager sharedManager] isConnected];
-  //  self.stopButton.enabled = !self.startButton.enabled;
     self.isSingleMode = YES;
     if (self.isSingleMode) {
         self.singleGroupSegmentControl.selectedSegmentIndex = 0;
-        //[self.singleGroupSegmentControl setEnabled:false forSegmentAtIndex:0];
-       // [self.singleGroupSegmentControl setEnabled:true forSegmentAtIndex:2];
     } else {
         self.singleGroupSegmentControl.selectedSegmentIndex = 1;
-      //  [self.singleGroupSegmentControl setEnabled:true forSegmentAtIndex:1];
-       // [self.singleGroupSegmentControl setEnabled:false forSegmentAtIndex:2];
     }
     self.stopStartGestureButton.enabled = true;
-    //    self.stopStartGestureButton.enabled = !self.startButton.enabled;
-    self.startButtonImage.hidden = self.isRecordingGesture;
-    self.stopButtonImage.hidden = !self.isRecordingGesture;
     [self startButtonTapped:self.startButton];
     
 }
@@ -106,11 +97,7 @@
 
 - (void)readyToControl
 {
- //   self.startButton.enabled = false;
- //   self.stopButton.enabled = true;
     self.stopStartGestureButton.enabled = true;
-    self.startButtonImage.hidden = false;
-    self.stopButtonImage.hidden = true;
 }
 
 /*
@@ -159,7 +146,6 @@
         return;
     }
     
-   // NZClassLabel *classLabel = [NZClassLabel findEntitiesWithIndex:[NSNumber numberWithInt:classIndex]];
     NZGesture *gesture = [NZGesture findGestureWithIndex:[NSNumber numberWithInt:classIndex]];
     if (!gesture) {
         self.recognizedGestureNameLabel.text = [NSString stringWithFormat:@"%d",classIndex ];
@@ -200,11 +186,7 @@
 - (void)disconnected
 {
     self.recordingManagerIsConnected = false;
-   // self.startButton.enabled = true;
-   // self.stopButton.enabled = false;
     self.stopStartGestureButton.enabled = false;
-    self.startButtonImage.hidden = true;
-    self.stopButtonImage.hidden = false;
     
     // automatically trying to reconnect
     self.ringDisconnected = true;
@@ -213,21 +195,17 @@
 
 - (void)buttonStateDidChangeFrom:(ButtonState)previousState to:(ButtonState)currentButtonState
 {
-    if (/*self.startButton.enabled*/ !self.stopStartGestureButton.enabled) {
+    if (!self.stopStartGestureButton.enabled) {
         NSLog(@"cannot start recording gesture! First tap the start button!");
         return;
     }
     if (self.isRecordingGesture && currentButtonState == BUTTON_SHORT_PRESS) {
         [[NZSensorDataRecordingManager sharedManager] stopRecordingCurrentSensorDataSet];
         self.stopStartGestureButton.highlighted = false;
-        self.startButtonImage.hidden = false;
-        self.stopButtonImage.hidden = true;
         self.isRecordingGesture = false;
     } else if (!self.isRecordingGesture && currentButtonState == BUTTON_SHORT_PRESS) {
         [[NZSensorDataRecordingManager sharedManager] startRecordingNewSensorDataSet];
         self.stopStartGestureButton.highlighted = true;
-        self.startButtonImage.hidden = true;
-        self.stopButtonImage.hidden = false;
         self.isRecordingGesture = true;
     } else if (!self.isRecordingGesture && currentButtonState == BUTTON_DOUBLE_PRESS) {
         self.isSingleMode = !self.isSingleMode;
@@ -298,8 +276,6 @@
     self.startButton.enabled = true;
     self.stopButton.enabled = false;
     self.stopStartGestureButton.enabled = false;
-    self.startButtonImage.hidden = false;
-    self.stopButtonImage.hidden = true;
     
     [[NZActionController sharedManager] disconnectActions];
     [[NZActionController sharedManager] removeObserver:self];

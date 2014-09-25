@@ -378,16 +378,6 @@
                                     <action selector="stopButtonTapped:" destination="9t6-F5-LUv" eventType="touchUpInside" id="AgU-Dv-O1u"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" id="baa-kC-Xq5">
-                                <rect key="frame" x="311" y="549" width="99" height="99"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" red="0.0" green="0.47843140363693237" blue="1" alpha="1" colorSpace="deviceRGB"/>
-                                <state key="normal" title="fff"/>
-                                <connections>
-                                    <action selector="startStopGestureTouchDown:" destination="9t6-F5-LUv" eventType="touchDown" id="Aji-gK-E4p"/>
-                                    <action selector="startStopGestureTouchUpInside:" destination="9t6-F5-LUv" eventType="touchUpInside" id="Me8-kV-cwz"/>
-                                </connections>
-                            </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="jjE-S7-T4P">
                                 <rect key="frame" x="284" y="243" width="302" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -406,14 +396,6 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="start blue" id="O4E-UD-Y1e">
-                                <rect key="frame" x="176" y="350" width="148" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stop blue" id="JFz-oP-7Zs">
-                                <rect key="frame" x="170" y="431" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="knz-gU-hPo">
                                 <rect key="frame" x="214" y="137" width="152" height="52"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -478,9 +460,7 @@
                         <outlet property="recognizedGestureNameLabel" destination="d2J-xl-Wvs" id="Pi0-1C-7si"/>
                         <outlet property="singleGroupSegmentControl" destination="jjE-S7-T4P" id="6Gq-Ki-ZuU"/>
                         <outlet property="startButton" destination="knz-gU-hPo" id="5Wz-JM-mdM"/>
-                        <outlet property="startButtonImage" destination="O4E-UD-Y1e" id="Fil-lX-Vwx"/>
                         <outlet property="stopButton" destination="h13-s6-xV2" id="UKx-0i-TG4"/>
-                        <outlet property="stopButtonImage" destination="JFz-oP-7Zs" id="gXI-iu-iX4"/>
                         <outlet property="stopStartGestureButton" destination="bwO-b3-oKG" id="VR4-aI-oyB"/>
                     </connections>
                 </viewController>
