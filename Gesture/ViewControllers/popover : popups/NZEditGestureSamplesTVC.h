@@ -9,8 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "NZGesture+CoreData.h"
 
+@protocol NZEditingGestureSamplesTVCDelegare <NSObject>
+
+- (void)didDeleteSample;
+
+@end
+
 @interface NZEditGestureSamplesTVC : UITableViewController
 
 @property (nonatomic, retain) NZGesture *gesture;
+@property (nonatomic, retain) id<NZEditingGestureSamplesTVCDelegare> delegate;
 
 @end

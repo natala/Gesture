@@ -107,6 +107,13 @@
         }
         
         [self.tableView reloadData];
+        
+        if (self.delegate) {
+            if ([self.delegate respondsToSelector:@selector(didDeleteSample)]) {
+                [self.delegate didDeleteSample];
+            }
+        }
+        
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         NSLog(@"insert a cell");
     }

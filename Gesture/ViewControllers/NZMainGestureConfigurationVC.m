@@ -15,8 +15,6 @@
 #import "NZGestureSetHandler.h"
 #import "NZPipelineController.h"
 
-#import "NZEditGestureSamplesTVC.h"
-
 #import "NZCoreDataManager.h"
 
 @interface NZMainGestureConfigurationVC ()
@@ -184,6 +182,7 @@
 
 - (IBAction)samplesButtonTapped:(UIButton *)sender {
     NZEditGestureSamplesTVC *vc = (NZEditGestureSamplesTVC *)self.samplesPopoverController.contentViewController;
+    vc.delegate = self;
     vc.gesture = self.selectedGesture;
     [self.samplesPopoverController presentPopoverFromRect:sender.bounds inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
@@ -386,6 +385,13 @@
     NSMutableString *samplesButtonText = [NSMutableString stringWithFormat:@"%d",sampleNumber];
     [samplesButtonText appendString:@"\nSamples"];
     [self.samplesButton setTitle:samplesButtonText forState:UIControlStateNormal];
+}
+
+#pragma mark -  NZEditingGestureSamplesTVCDelegare
+- (void)didDeleteSample
+{
+    [self updateGestureSet];
+    [self updateSamplesButton];
 }
 
 @end
