@@ -63,11 +63,7 @@
     
     // Configure the UI elements
     //  * the samples number
-    self.samplesButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    NSUInteger sampleNumber = [[NZPipelineController sharedManager] numberOfSamplesForClassLabelIndex:self.selectedGesture.label.index];
-    NSMutableString *samplesButtonText = [NSMutableString stringWithFormat:@"%d",sampleNumber];
-    [samplesButtonText appendString:@"\nSamples"];
-    [self.samplesButton setTitle:samplesButtonText forState:UIControlStateNormal];
+    [self updateSamplesButton];
     
     // Configure the Popovers
     //  * Samples
@@ -157,6 +153,7 @@
 - (void)setSelectedGesture:(NZGesture *)selectedGesture
 {
     _selectedGesture = selectedGesture;
+    [self reloadGestureSpecificComponents];
 }
 
 
@@ -181,16 +178,15 @@
 }
 
 - (IBAction)minusButtonTapped:(UIButton *)sender {
-    
-    [[NZPipelineController sharedManager] removeClassLabel:self.selectedGesture.label];
-    [self.selectedGesture destroy];
-
-    NZCoreDataManager *manager = [NZCoreDataManager sharedManager];
-    [manager save];
-    
-    [self updateGestureSet];
-    [self.gesturePickerView reloadAllComponents];
-    
+ 
+    UIAlertController *areYouSureAlert = [UIAlertController alertControllerWithTitle:@"Are you sure you want to delete selected gesture?" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self deleteCurrentGesture];
+    }];
+    UIAlertAction *noAction = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:nil];
+    [areYouSureAlert addAction:yesAction];
+    [areYouSureAlert addAction:noAction];
+    [self presentViewController:areYouSureAlert animated:YES completion:nil];
 }
 
 
@@ -245,6 +241,18 @@
     [self updateGestureSet];
     [self.gesturePickerView reloadAllComponents];
     
+}
+
+- (void)deleteCurrentGesture
+{
+    [[NZPipelineController sharedManager] removeClassLabel:self.selectedGesture.label];
+    [self.selectedGesture destroy];
+    
+    NZCoreDataManager *manager = [NZCoreDataManager sharedManager];
+    [manager save];
+    
+    [self updateGestureSet];
+    [self.gesturePickerView reloadAllComponents];
     
 }
 
@@ -253,6 +261,20 @@
 {
     NSSortDescriptor *gestureSortDescripor = [[NSSortDescriptor alloc] initWithKey:@"label.name" ascending:YES];
     self.gesturesSorted = [[self.gestureSet.gestures allObjects] sortedArrayUsingDescriptors:@[gestureSortDescripor]];
+}
+
+- (void)reloadGestureSpecificComponents
+{
+    [self updateSamplesButton];
+}
+
+- (void)updateSamplesButton
+{
+    self.samplesButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    NSUInteger sampleNumber = [[NZPipelineController sharedManager] numberOfSamplesForClassLabelIndex:self.selectedGesture.label.index];
+    NSMutableString *samplesButtonText = [NSMutableString stringWithFormat:@"%d",sampleNumber];
+    [samplesButtonText appendString:@"\nSamples"];
+    [self.samplesButton setTitle:samplesButtonText forState:UIControlStateNormal];
 }
 
 @end
