@@ -607,11 +607,14 @@
                                     <outlet property="delegate" destination="FIR-t3-jOA" id="nO2-yC-51Z"/>
                                 </connections>
                             </pickerView>
-                            <button contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="bq5-wy-zox">
+                            <button contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" id="bq5-wy-zox">
                                 <rect key="frame" x="16" y="74" width="100" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <state key="normal" title="Samples" backgroundImage="circle thin black"/>
+                                <connections>
+                                    <action selector="samplesButtonTapped:" destination="FIR-t3-jOA" eventType="touchUpInside" id="AVi-O6-TJ7"/>
+                                </connections>
                             </button>
                             <button contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hZf-aV-StX">
                                 <rect key="frame" x="754" y="74" width="100" height="100"/>
@@ -626,11 +629,17 @@
                                 <rect key="frame" x="16" y="648" width="100" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Camera" image="Camera" backgroundImage="circle thin black"/>
+                                <connections>
+                                    <action selector="cameraButtonTapped:" destination="FIR-t3-jOA" eventType="touchUpInside" id="c2d-7m-JeI"/>
+                                </connections>
                             </button>
                             <button contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="P2F-m8-jO9">
                                 <rect key="frame" x="754" y="648" width="100" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="check" image="Check" backgroundImage="circle thin black"/>
+                                <connections>
+                                    <action selector="checkButtonTapped:" destination="FIR-t3-jOA" eventType="touchUpInside" id="Mt3-zk-Sju"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ahn-ZI-JXv">
                                 <rect key="frame" x="530" y="294" width="30" height="30"/>

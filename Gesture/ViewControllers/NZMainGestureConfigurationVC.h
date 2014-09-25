@@ -10,4 +10,10 @@
 
 @interface NZMainGestureConfigurationVC : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, UIPopoverControllerDelegate>
 
+#pragma mark - IBActions
+- (IBAction)samplesButtonTapped:(UIButton *)sender;
+- (IBAction)cameraButtonTapped:(UIButton *)sender;
+- (IBAction)checkButtonTapped:(UIButton *)sender;
+
+
 @end

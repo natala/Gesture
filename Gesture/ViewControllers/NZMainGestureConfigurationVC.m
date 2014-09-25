@@ -11,7 +11,11 @@
 #import "NZGesture.h"
 #import "NZClassLabel.h"
 #import "NZGestureSet.h"
+
 #import "NZGestureSetHandler.h"
+#import "NZPipelineController.h"
+
+#import "NZEditGestureSamplesTVC.h"
 
 @interface NZMainGestureConfigurationVC ()
 
@@ -28,7 +32,10 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *gestureRecordingButton;
 
-#pragma mark - IBActions
+#pragma mark - UI Popovers
+@property (retain, nonatomic) UIPopoverController *samplesPopoverController;
+@property (retain, nonatomic) UIPopoverController *cameraPopoverController;
+@property (retain, nonatomic) UIPopoverController *checkPopoverController;
 
 #pragma mark - Others
 @property (retain, nonatomic) NZGestureSet *gestureSet;
@@ -46,6 +53,28 @@
     self.gestureSet = [NZGestureSetHandler sharedManager].selectedGestureSet;
     NSSortDescriptor *gestureSortDescripor = [[NSSortDescriptor alloc] initWithKey:@"label.name" ascending:YES];
     self.gesturesSorted = [[self.gestureSet.gestures allObjects] sortedArrayUsingDescriptors:@[gestureSortDescripor]];
+    
+    [super viewDidLayoutSubviews];
+    // Configure the UI elements
+    //  * the samples number
+    self.samplesButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    NSUInteger sampleNumber = [[NZPipelineController sharedManager] numberOfSamplesForClassLabelIndex:self.selectedGesture.label.index];
+    NSMutableString *samplesButtonText = [NSMutableString stringWithFormat:@"%d",sampleNumber];
+    [samplesButtonText appendString:@"\nSamples"];
+    [self.samplesButton setTitle:samplesButtonText forState:UIControlStateNormal];
+    
+    // Configure the Popovers
+    //  * Samples
+     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    NZEditGestureSamplesTVC *samplesVC = [storyboard instantiateViewControllerWithIdentifier:@"GestureSamplesTVC"];
+    self.samplesPopoverController = [[UIPopoverController alloc] initWithContentViewController:samplesVC];
+    self.samplesPopoverController.delegate = self;
+    //  * Camera
+    self.cameraPopoverController = [[UIPopoverController alloc] initWithContentViewController:samplesVC];
+    self.cameraPopoverController.delegate = self;
+    //  * Check
+    self.checkPopoverController = [[UIPopoverController alloc] initWithContentViewController:samplesVC];
+    self.checkPopoverController.delegate = self;
     // Do any additional setup after loading the view.
 }
 
@@ -114,5 +143,34 @@
 }
 
 
+#pragma mark - IB Actions
+
+- (IBAction)samplesButtonTapped:(UIButton *)sender {
+    NZEditGestureSamplesTVC *vc = (NZEditGestureSamplesTVC *)self.samplesPopoverController.contentViewController;
+    vc.gesture = self.selectedGesture;
+    [self.samplesPopoverController presentPopoverFromRect:sender.bounds inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+- (IBAction)cameraButtonTapped:(UIButton *)sender {
+    [self.cameraPopoverController presentPopoverFromRect:sender.bounds inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+- (IBAction)checkButtonTapped:(UIButton *)sender {
+    [self.checkPopoverController presentPopoverFromRect:sender.bounds inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+
+#pragma mark - UI Popover Contoller Delegate
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
+{
+    if ([popoverController isEqual:self.samplesPopoverController]) {
+        // update the button sample number
+        self.samplesButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+        NSUInteger sampleNumber = [[NZPipelineController sharedManager] numberOfSamplesForClassLabelIndex:self.selectedGesture.label.index];
+        NSMutableString *samplesButtonText = [NSMutableString stringWithFormat:@"%d",sampleNumber];
+        [samplesButtonText appendString:@"\nSamples"];
+        [self.samplesButton setTitle:samplesButtonText forState:UIControlStateNormal];
+    }
+}
 
 @end
