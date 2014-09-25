@@ -237,7 +237,7 @@
 		[self.centralManager cancelPeripheralConnection:peripheral];
 	}
 
-	// [self clearDevices];
+	 [self clearDevices];
 }
 
 - (void)clearDevices

@@ -87,7 +87,8 @@
       //  [self.singleGroupSegmentControl setEnabled:true forSegmentAtIndex:1];
        // [self.singleGroupSegmentControl setEnabled:false forSegmentAtIndex:2];
     }
-    self.stopStartGestureButton.enabled = !self.startButton.enabled;
+    self.stopStartGestureButton.enabled = true;
+    //    self.stopStartGestureButton.enabled = !self.startButton.enabled;
     self.startButtonImage.hidden = self.isRecordingGesture;
     self.stopButtonImage.hidden = !self.isRecordingGesture;
     [self startButtonTapped:self.startButton];
@@ -97,7 +98,9 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    
     [self stopButtonTapped:self.stopButton];
+    
     [[NZActionController sharedManager] removeObserver:self];
 }
 
@@ -189,6 +192,8 @@
 {
     self.recordingManagerIsConnected = true;
     [self.alertController dismissViewControllerAnimated:YES completion:nil];
+    self.stopStartGestureButton.enabled = true;
+    
     
 }
 
@@ -208,7 +213,7 @@
 
 - (void)buttonStateDidChangeFrom:(ButtonState)previousState to:(ButtonState)currentButtonState
 {
-    if (self.startButton.enabled) {
+    if (/*self.startButton.enabled*/ !self.stopStartGestureButton.enabled) {
         NSLog(@"cannot start recording gesture! First tap the start button!");
         return;
     }
@@ -268,7 +273,7 @@
             [self presentViewController:self.alertController animated:YES completion:nil];
         }
     }
-    self.ringDisconnected = false;
+   // self.ringDisconnected = false;
     //[self.activityIndicatorView startAnimating];
     
     if (![[NZActionController sharedManager].observers containsObject:self]) {

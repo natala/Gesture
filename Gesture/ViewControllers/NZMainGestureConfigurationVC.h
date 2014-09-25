@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NZSensorDataRecordingManager.h"
 
-@interface NZMainGestureConfigurationVC : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, UIPopoverControllerDelegate>
+@interface NZMainGestureConfigurationVC : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, UIPopoverControllerDelegate, NZSensorDataRecordingManagerObserver>
 
 #pragma mark - IBActions
 - (IBAction)samplesButtonTapped:(UIButton *)sender;
@@ -18,6 +19,9 @@
 
 - (IBAction)plusButtonTapped:(UIButton *)sender;
 - (IBAction)minusButtonTapped:(UIButton *)sender;
+
+- (IBAction)connectButtonTapped:(UIButton *)sender;
+
 
 
 @end

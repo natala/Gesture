@@ -32,6 +32,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *cameraButton;
 @property (weak, nonatomic) IBOutlet UIButton *checkButton;
 
+@property (weak, nonatomic) IBOutlet UIButton *connectButton;
+
 @property (weak, nonatomic) IBOutlet UIButton *gestureRecordingButton;
 
 #pragma mark - UI Popovers
@@ -47,6 +49,8 @@
 @property (retain, nonatomic) NSArray *gesturesSorted;
 @property (retain, nonatomic) NZGesture *selectedGesture;
 
+@property BOOL isRecordingGesture;
+
 @end
 
 @implementation NZMainGestureConfigurationVC
@@ -58,12 +62,6 @@
     
     self.gestureSet = [NZGestureSetHandler sharedManager].selectedGestureSet;
     [self updateGestureSet];
-    
-    [super viewDidLayoutSubviews];
-    
-    // Configure the UI elements
-    //  * the samples number
-    [self updateSamplesButton];
     
     // Configure the Popovers
     //  * Samples
@@ -89,6 +87,31 @@
     [self.addGestureAlertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
         textField.placeholder = @"Enter gesture name here";
     }];
+    
+    self.isRecordingGesture = false;
+}
+
+- (void)viewDidLayoutSubviews
+{
+    if (!self.selectedGesture && [self.gesturePickerView numberOfRowsInComponent:0] > 0) {
+        [self.gesturePickerView selectRow:0 inComponent:0 animated:NO];
+        self.selectedGesture = [self.gesturesSorted objectAtIndex:0];
+    }
+    self.connectButton.hidden = false;
+    self.gestureRecordingButton.hidden = true;
+    self.gestureRecordingButton.highlighted = false;
+    [self updateSamplesButton];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[NZSensorDataRecordingManager sharedManager] disconnect];
+    [[NZSensorDataRecordingManager sharedManager] removeRecordingObserver:self];
+    self.gestureRecordingButton.hidden = true;
+    self.gestureRecordingButton.highlighted = false;
+    self.connectButton.hidden = false;
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -189,6 +212,15 @@
     [self presentViewController:areYouSureAlert animated:YES completion:nil];
 }
 
+- (IBAction)connectButtonTapped:(UIButton *)sender
+{
+    if (![[NZSensorDataRecordingManager sharedManager].sensorDataRecordingObservers containsObject:self]) {
+        [[NZSensorDataRecordingManager sharedManager] addRecordingObserver:self];
+    }
+    [[NZSensorDataRecordingManager sharedManager] prepareForRecordingSensorDataSet];
+    
+}
+
 
 #pragma mark - UI Popover Contoller Delegate
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
@@ -200,8 +232,87 @@
         NSMutableString *samplesButtonText = [NSMutableString stringWithFormat:@"%d",sampleNumber];
         [samplesButtonText appendString:@"\nSamples"];
         [self.samplesButton setTitle:samplesButtonText forState:UIControlStateNormal];
+        [[NZSensorDataRecordingManager sharedManager] addRecordingObserver:self];
     }
 }
+
+#pragma mark - NZ ensor Data Recording Manager Observer methods
+- (void)disconnected
+{
+    self.gestureRecordingButton.enabled = false;
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"PowerRing Disconnected" message:@"Check if the PowerRing is on" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+    [alert addAction:okAction];
+    [self presentViewController:alert animated:YES completion:nil];
+    self.gestureRecordingButton.hidden = true;
+    self.connectButton.hidden = false;
+}
+
+
+- (void)connected
+{
+    self.gestureRecordingButton.hidden = false;
+    self.connectButton.hidden = true;
+}
+
+- (void)didStartRecordingSensorData:(NZSensorDataSet *) sensorDataSet
+{
+    NSLog(@"Sensor Data Recording Manager did start recording");
+}
+
+- (void)didPauseReordingSensorData:(NZSensorDataSet *) sensorDataSet
+{
+    NSLog(@"Sensor Data Recording Manager did pasue recording");
+}
+
+- (void)didResumeRecordingSensorData:(NZSensorDataSet *) sensorDataSet
+{
+    //NSLog(@"Sensor Data Recording Manager did resume recording");
+}
+
+- (void)didReceiveSensorData:(NZSensorData *) sensorData forSensorDataSet:(NZSensorDataSet *) sensorDataSet
+{
+    NSLog(@"Sensor Data Recording Manager did receive sensor data");
+}
+
+- (void)didStopRecordingSensorDataSet:(NZSensorDataSet *) sensorDataSet
+{
+    NSLog(@"Sensor Data Recording Manager did stop recording");
+    // once done, correlate it find with the geture as a positive sample
+    [self.selectedGesture addPositiveSamplesObject:sensorDataSet];
+    
+    // update the database
+    [[NZCoreDataManager sharedManager] save];
+    
+    // update the classifier with the new sample
+    if ([sensorDataSet.sensorData count] > 0) {
+        [[NZPipelineController sharedManager] addPositive:YES sample:sensorDataSet withLabel:self.selectedGesture.label];
+    }
+}
+
+- (void)buttonStateDidChangeFrom:(ButtonState)previousState to:(ButtonState)currentButtonState
+{
+    if (self.isRecordingGesture && currentButtonState == BUTTON_SHORT_PRESS) {
+        // stop recording the gesture
+        
+        [self updateSamplesButton];
+        self.isRecordingGesture = false;
+        self.gestureRecordingButton.highlighted = false;
+        
+    } else if (!self.isRecordingGesture && currentButtonState == BUTTON_SHORT_PRESS){
+        // start recording the gesture
+        BOOL startedNewRecording = [[NZSensorDataRecordingManager sharedManager] startRecordingNewSensorDataSet];
+        if (startedNewRecording) {
+            self.isRecordingGesture = true;
+            self.gestureRecordingButton.highlighted = true;
+        }
+    } else if (!self.isRecordingGesture && currentButtonState == BUTTON_LONG_PRESS) {
+        ;
+    } else if (!self.isRecordingGesture && currentButtonState == BUTTON_DOUBLE_PRESS) {
+        ;
+    }
+}
+
 
 #pragma mark - managing the gestures
 - (void)addGestureFromAllertViewController
