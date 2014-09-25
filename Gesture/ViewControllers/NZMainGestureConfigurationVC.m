@@ -8,14 +8,16 @@
 
 #import "NZMainGestureConfigurationVC.h"
 
-#import "NZGesture.h"
-#import "NZClassLabel.h"
+#import "NZGesture+CoreData.h"
+#import "NZClassLabel+CoreData.h"
 #import "NZGestureSet.h"
 
 #import "NZGestureSetHandler.h"
 #import "NZPipelineController.h"
 
 #import "NZEditGestureSamplesTVC.h"
+
+#import "NZCoreDataManager.h"
 
 @interface NZMainGestureConfigurationVC ()
 
@@ -37,6 +39,9 @@
 @property (retain, nonatomic) UIPopoverController *cameraPopoverController;
 @property (retain, nonatomic) UIPopoverController *checkPopoverController;
 
+#pragma mark - UI Alert Controller
+@property (retain, nonatomic) UIAlertController *addGestureAlertController;
+
 #pragma mark - Others
 @property (retain, nonatomic) NZGestureSet *gestureSet;
 @property (retain, nonatomic) NSArray *gesturesSorted;
@@ -50,11 +55,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.gestureSet = [NZGestureSetHandler sharedManager].selectedGestureSet;
-    NSSortDescriptor *gestureSortDescripor = [[NSSortDescriptor alloc] initWithKey:@"label.name" ascending:YES];
-    self.gesturesSorted = [[self.gestureSet.gestures allObjects] sortedArrayUsingDescriptors:@[gestureSortDescripor]];
+    [self updateGestureSet];
     
     [super viewDidLayoutSubviews];
+    
     // Configure the UI elements
     //  * the samples number
     self.samplesButton.titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -75,7 +81,18 @@
     //  * Check
     self.checkPopoverController = [[UIPopoverController alloc] initWithContentViewController:samplesVC];
     self.checkPopoverController.delegate = self;
-    // Do any additional setup after loading the view.
+    
+    // Configure others
+    self.addGestureAlertController = [UIAlertController alertControllerWithTitle:@"Add new gesture" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:nil];
+    UIAlertAction *doneAction = [UIAlertAction actionWithTitle:@"Done" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self addGestureFromAllertViewController];
+    }];
+    [self.addGestureAlertController addAction:doneAction];
+    [self.addGestureAlertController addAction:cancelAction];
+    [self.addGestureAlertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.placeholder = @"Enter gesture name here";
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -159,6 +176,13 @@
     [self.checkPopoverController presentPopoverFromRect:sender.bounds inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
+- (IBAction)plusButtonTapped:(UIButton *)sender {
+    [self presentViewController:self.addGestureAlertController animated:YES completion:nil];
+}
+
+- (IBAction)minusButtonTapped:(UIButton *)sender {
+}
+
 
 #pragma mark - UI Popover Contoller Delegate
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
@@ -171,6 +195,62 @@
         [samplesButtonText appendString:@"\nSamples"];
         [self.samplesButton setTitle:samplesButtonText forState:UIControlStateNormal];
     }
+}
+
+#pragma mark - managing the gestures
+- (void)addGestureFromAllertViewController
+{
+    UITextField *textField = [self.addGestureAlertController.textFields objectAtIndex:0];
+    
+    if ([textField.text isEqualToString:@""]) {
+        return;
+    }
+    if ([NZClassLabel existsWithName:textField.text]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"a gesture with the given name already exists" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+        [alert addAction:okAction];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    
+    NZClassLabel *lastClassObject = [NZClassLabel findLates];
+    NSNumber *index = [NSNumber numberWithInt:1];
+    if (lastClassObject) {
+        index = [NSNumber numberWithInt:[lastClassObject.index intValue]+1 ];
+    }
+    
+    NZClassLabel *newClassLabel = [NZClassLabel create];
+    newClassLabel.name = textField.text;
+    newClassLabel.index = index;
+    
+    NZGesture *newGesture = [NZGesture create];
+    newGesture.label = newClassLabel;
+    newGesture.timeStampCreated = [NSDate date];
+    newGesture.timeStampUpdated = newGesture.timeStampCreated;
+    
+    [self.gestureSet addGesturesObject:newGesture];
+    
+    NZCoreDataManager *manager = [NZCoreDataManager sharedManager];
+    [manager save];
+   /* 
+     NSError *error = nil;
+    if ([[NZCoreDataManager sharedManager] save:&error]) {
+        // Replace this implementation with code to handle the error appropriately.
+        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }*/
+    [self updateGestureSet];
+    [self.gesturePickerView reloadAllComponents];
+    
+    
+}
+
+#pragma mark - Helper Functions
+- (void)updateGestureSet
+{
+    NSSortDescriptor *gestureSortDescripor = [[NSSortDescriptor alloc] initWithKey:@"label.name" ascending:YES];
+    self.gesturesSorted = [[self.gestureSet.gestures allObjects] sortedArrayUsingDescriptors:@[gestureSortDescripor]];
 }
 
 @end

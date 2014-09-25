@@ -16,4 +16,8 @@
 - (IBAction)checkButtonTapped:(UIButton *)sender;
 
 
+- (IBAction)plusButtonTapped:(UIButton *)sender;
+- (IBAction)minusButtonTapped:(UIButton *)sender;
+
+
 @end

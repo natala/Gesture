@@ -647,6 +647,9 @@
                                 <state key="normal" backgroundImage="minus">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="minusButtonTapped:" destination="FIR-t3-jOA" eventType="touchUpInside" id="t7N-vF-KJF"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="JfD-Ka-4h7">
                                 <rect key="frame" x="310" y="294" width="30" height="30"/>
@@ -654,6 +657,9 @@
                                 <state key="normal" backgroundImage="plus">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="plusButtonTapped:" destination="FIR-t3-jOA" eventType="touchUpInside" id="Rqt-Ek-Zvb"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1. Short-press button on PowerRing" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mZ8-BP-sQc">
                                 <rect key="frame" x="297" y="398" width="277" height="21"/>
@@ -934,7 +940,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="GestureSamplesTVC" id="CSN-YY-GMo" customClass="NZEditGestureSamplesTVC" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="y3t-Ic-BQf">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -952,6 +958,8 @@
                             <outlet property="delegate" destination="CSN-YY-GMo" id="q1h-Uj-sFu"/>
                         </connections>
                     </tableView>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="400" height="500"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SOH-A5-aLV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

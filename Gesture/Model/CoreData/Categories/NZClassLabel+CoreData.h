@@ -24,6 +24,12 @@
  */
 + (NZClassLabel *)findEntitiesWithIndex:(NSNumber *)index;
 
+
+/**
+ * checks if there is already a class label with the given name
+ */
++ (BOOL)existsWithName:(NSString *)name;
+
 - (void)destroy;
 
 + (void)destroyAll;
