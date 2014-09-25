@@ -181,6 +181,16 @@
 }
 
 - (IBAction)minusButtonTapped:(UIButton *)sender {
+    
+    [[NZPipelineController sharedManager] removeClassLabel:self.selectedGesture.label];
+    [self.selectedGesture destroy];
+
+    NZCoreDataManager *manager = [NZCoreDataManager sharedManager];
+    [manager save];
+    
+    [self updateGestureSet];
+    [self.gesturePickerView reloadAllComponents];
+    
 }
 
 
@@ -232,14 +242,6 @@
     
     NZCoreDataManager *manager = [NZCoreDataManager sharedManager];
     [manager save];
-   /* 
-     NSError *error = nil;
-    if ([[NZCoreDataManager sharedManager] save:&error]) {
-        // Replace this implementation with code to handle the error appropriately.
-        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }*/
     [self updateGestureSet];
     [self.gesturePickerView reloadAllComponents];
     
