@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "NZSensorDataRecordingManager.h"
-#import "NZEditGestureSamplesTVC.h"
 
-@interface NZMainGestureConfigurationVC : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, UIPopoverControllerDelegate, NZSensorDataRecordingManagerObserver, NZEditingGestureSamplesTVCDelegare>
+#import "NZSensorDataRecordingManager.h"
+
+#import "NZEditGestureSamplesTVC.h"
+#import "NZGestureActionMappingVC.h"
+
+@interface NZMainGestureConfigurationVC : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, UIPopoverControllerDelegate, NZSensorDataRecordingManagerObserver, NZEditingGestureSamplesTVCDelegare, NZGestureActionMappingVCDelegate>
 
 #pragma mark - IBActions
 - (IBAction)samplesButtonTapped:(UIButton *)sender;

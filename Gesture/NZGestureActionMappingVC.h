@@ -9,7 +9,18 @@
 #import <UIKit/UIKit.h>
 #import "NZGesture+CoreData.h"
 
+@protocol NZGestureActionMappingVCDelegate <NSObject>
+
+/**
+ * called whenever the user tapps the more button
+ */
+- (void)didTapMoreButton;
+
+@end
+
 @interface NZGestureActionMappingVC : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>
+
+@property (retain ,nonatomic) id<NZGestureActionMappingVCDelegate> delegate;
 
 @property (retain ,nonatomic) NZGesture *selectedGesture;
 

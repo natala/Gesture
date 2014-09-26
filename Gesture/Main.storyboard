@@ -596,7 +596,7 @@
         <!--Personal Gesture Configuration-->
         <scene sceneID="kKM-Eg-8hx">
             <objects>
-                <viewController id="FIR-t3-jOA" customClass="NZMainGestureConfigurationVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainGesturesConfigurationVc" id="FIR-t3-jOA" customClass="NZMainGestureConfigurationVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3Bn-aO-UEg">
                         <rect key="frame" x="0.0" y="0.0" width="870" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -648,23 +648,13 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ahn-ZI-JXv">
-                                <rect key="frame" x="530" y="294" width="30" height="30"/>
+                                <rect key="frame" x="568" y="184" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="minus">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="minusButtonTapped:" destination="FIR-t3-jOA" eventType="touchUpInside" id="t7N-vF-KJF"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="JfD-Ka-4h7">
-                                <rect key="frame" x="310" y="294" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" backgroundImage="plus">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="plusButtonTapped:" destination="FIR-t3-jOA" eventType="touchUpInside" id="Rqt-Ek-Zvb"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="5cK-at-yg1">
@@ -712,6 +702,16 @@
                                     <action selector="connectButtonTapped:" destination="FIR-t3-jOA" eventType="touchUpInside" id="K0v-EL-072"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="JfD-Ka-4h7">
+                                <rect key="frame" x="273" y="184" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="plus">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="plusButtonTapped:" destination="FIR-t3-jOA" eventType="touchUpInside" id="Rqt-Ek-Zvb"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -745,7 +745,7 @@
         <!--View Controller-->
         <scene sceneID="3Ri-gq-P8z">
             <objects>
-                <viewController id="DeF-LH-ewX" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainActionConfigurationVc" id="DeF-LH-ewX" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IMr-7D-na2">
                         <rect key="frame" x="0.0" y="0.0" width="870" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1169,7 +1169,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gvv-I8-kbH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3657" y="-32"/>
+            <point key="canvasLocation" x="3781" y="330"/>
         </scene>
         <!--Gesture Sets-->
         <scene sceneID="H4u-BL-EIM">
@@ -1419,10 +1419,10 @@
             </objects>
             <point key="canvasLocation" x="5316" y="1095"/>
         </scene>
-        <!--View Controller-->
+        <!--Main ConfigurationVC-->
         <scene sceneID="OVi-s1-u07">
             <objects>
-                <viewController id="D8c-Oj-SKp" sceneMemberID="viewController">
+                <viewController id="D8c-Oj-SKp" customClass="NZMainConfigurationVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MCW-Qp-f1P">
                         <rect key="frame" x="0.0" y="0.0" width="870" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1483,15 +1483,19 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="eke-gq-Unq"/>
+                    <connections>
+                        <outlet property="actionsButton" destination="bzD-9y-UsQ" id="ZXn-5p-TzT"/>
+                        <outlet property="gesturesButton" destination="m78-q0-PCf" id="lSF-aT-ehx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LFg-dZ-EFB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2128" y="-1096"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Configuration Navigation Controller-->
         <scene sceneID="GiH-QF-DPl">
             <objects>
-                <navigationController id="VUI-JD-LRg" sceneMemberID="viewController">
+                <navigationController id="VUI-JD-LRg" customClass="NZConfigurationNavigationController" sceneMemberID="viewController">
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="870" height="768"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="VPf-be-ks3">

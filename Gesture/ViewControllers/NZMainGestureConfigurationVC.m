@@ -16,7 +16,7 @@
 
 #import "NZCoreDataManager.h"
 
-#import "NZGestureActionMappingVC.h"
+#import "NZConfigurationNavigationController.h"
 
 @interface NZMainGestureConfigurationVC ()
 
@@ -202,9 +202,11 @@
 #pragma mark - IB Actions
 
 - (IBAction)samplesButtonTapped:(UIButton *)sender {
-    NZEditGestureSamplesTVC *vc = (NZEditGestureSamplesTVC *)self.samplesPopoverController.contentViewController;
-    vc.delegate = self;
-    vc.gesture = self.selectedGesture;
+    if ([[self.samplesPopoverController contentViewController] isKindOfClass:[NZEditGestureSamplesTVC class]]) {
+        NZEditGestureSamplesTVC *vc = (NZEditGestureSamplesTVC *)self.samplesPopoverController.contentViewController;
+        vc.delegate = self;
+        vc.gesture = self.selectedGesture;
+    }
     [self.samplesPopoverController presentPopoverFromRect:sender.bounds inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
@@ -220,8 +222,11 @@
 }
 
 - (IBAction)actionsButtonTapped:(UIButton *)sender {
-    NZGestureActionMappingVC *vc = (NZGestureActionMappingVC *)self.actionsPopoverController.contentViewController;
-    vc.selectedGesture = self.selectedGesture;
+    if ([[self.actionsPopoverController contentViewController] isKindOfClass:[NZGestureActionMappingVC class]]) {
+        NZGestureActionMappingVC *vc = (NZGestureActionMappingVC *)[self.actionsPopoverController contentViewController];
+        vc.delegate = self;
+        vc.selectedGesture = self.selectedGesture;
+    }
     [self.actionsPopoverController presentPopoverFromRect:sender.bounds inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
@@ -442,6 +447,19 @@
 {
  //   [self updateGestureSet];
  //   [self updateSamplesButton];
+}
+
+#pragma mark - NZGestureActionMappingVCDelegate
+- (void)didTapMoreButton
+{
+    if ([self.actionsPopoverController isPopoverVisible]) {
+        [self.actionsPopoverController dismissPopoverAnimated:YES];
+    }
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    if ([self.navigationController isKindOfClass:[NZConfigurationNavigationController class]]) {
+        NZConfigurationNavigationController *nc = (NZConfigurationNavigationController *)self.navigationController;
+        [nc switchFromGesturesToActions];
+    }
 }
 
 @end

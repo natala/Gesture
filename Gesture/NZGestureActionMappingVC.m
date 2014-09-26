@@ -80,6 +80,11 @@
 #pragma mark - IB Actions
 
 - (IBAction)moreButtonTapped:(UIButton *)sender {
+
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didTapMoreButton)]) {
+        [self.delegate didTapMoreButton];
+    }
+
 }
 
 #pragma mark - UI Picker View Data Source
