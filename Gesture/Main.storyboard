@@ -438,6 +438,13 @@
                                     <action selector="startStopGestureTouchUpInside:" destination="9t6-F5-LUv" eventType="touchUpInside" id="qaT-7U-Wo4"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PowerRing is not connected" lineBreakMode="wordWrap" adjustsFontSizeToFit="NO" id="TgF-vm-w4d">
+                                <rect key="frame" x="327" y="401" width="217" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -457,6 +464,7 @@
                     <connections>
                         <outlet property="debugMessageLabel" destination="TwT-8V-FbS" id="WFs-e3-N1i"/>
                         <outlet property="executedActionLabel" destination="3qC-LD-wC7" id="kxN-Mq-0EH"/>
+                        <outlet property="notConnectedLabel" destination="TgF-vm-w4d" id="XVe-2D-Ncu"/>
                         <outlet property="recognizedGestureNameLabel" destination="d2J-xl-Wvs" id="Pi0-1C-7si"/>
                         <outlet property="singleGroupSegmentControl" destination="jjE-S7-T4P" id="6Gq-Ki-ZuU"/>
                         <outlet property="startButton" destination="knz-gU-hPo" id="5Wz-JM-mdM"/>

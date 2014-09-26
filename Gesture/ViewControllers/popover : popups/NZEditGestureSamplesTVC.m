@@ -9,6 +9,7 @@
 #import "NZEditGestureSamplesTVC.h"
 #import "NZCoreDataManager.h"
 #import "NZSensorDataSet+CoreData.h"
+#import "NZPipelineController.h"
 
 @interface NZEditGestureSamplesTVC ()
 
@@ -97,6 +98,8 @@
         NZSensorDataSet *sample = [[self.gesture.positiveSamples allObjects] objectAtIndex:indexPath.row];
        // [[NZPipelineController sharedManager] removeClassLabel:gesture.label];
         [sample destroy];
+        
+        [NZPipelineController sharedManager].pipelineHasToBeTrained = true;
         
         NSError *error = nil;
         if (![context save:&error]) {

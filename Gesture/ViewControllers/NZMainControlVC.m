@@ -81,7 +81,8 @@
     } else {
         self.singleGroupSegmentControl.selectedSegmentIndex = 1;
     }
-    self.stopStartGestureButton.enabled = true;
+    self.stopStartGestureButton.enabled = false;
+    self.notConnectedLabel.hidden = false;
     [self startButtonTapped:self.startButton];
     
 }
@@ -93,11 +94,15 @@
     [self stopButtonTapped:self.stopButton];
     
     [[NZActionController sharedManager] removeObserver:self];
+    
+    self.stopStartGestureButton.enabled = false;
+    self.notConnectedLabel.hidden = false;
 }
 
 - (void)readyToControl
 {
     self.stopStartGestureButton.enabled = true;
+    self.notConnectedLabel.hidden = true;
 }
 
 /*
@@ -179,6 +184,7 @@
     self.recordingManagerIsConnected = true;
     [self.alertController dismissViewControllerAnimated:YES completion:nil];
     self.stopStartGestureButton.enabled = true;
+    self.notConnectedLabel.hidden = true;
     
     
 }
@@ -187,6 +193,7 @@
 {
     self.recordingManagerIsConnected = false;
     self.stopStartGestureButton.enabled = false;
+    self.notConnectedLabel.hidden = false;
     
     // automatically trying to reconnect
     self.ringDisconnected = true;
@@ -276,6 +283,7 @@
     self.startButton.enabled = true;
     self.stopButton.enabled = false;
     self.stopStartGestureButton.enabled = false;
+    self.notConnectedLabel.hidden = false;
     
     [[NZActionController sharedManager] disconnectActions];
     [[NZActionController sharedManager] removeObserver:self];

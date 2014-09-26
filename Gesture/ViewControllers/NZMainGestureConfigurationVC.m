@@ -99,11 +99,26 @@
     self.gestureRecordingButton.hidden = true;
     self.gestureRecordingButton.highlighted = false;
     [self updateSamplesButton];
+    
+    if ([self.gestureSet.gestures count] == 0) {
+        // there are not gestures!
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Add Gestures" message:@"You have no gestures configured yet" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *addAction = [UIAlertAction actionWithTitle:@"Add" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [self presentViewController:self.addGestureAlertController animated:YES completion:nil];
+        }];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Not now" style:UIAlertActionStyleDefault handler:nil];
+        [alert addAction:addAction];
+        [alert addAction:okAction];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    if ([NZPipelineController sharedManager].pipelineHasToBeTrained) {
+        [[NZPipelineController sharedManager] trainClassifier];
+    }
     [[NZSensorDataRecordingManager sharedManager] disconnect];
     [[NZSensorDataRecordingManager sharedManager] removeRecordingObserver:self];
     self.gestureRecordingButton.hidden = true;
@@ -192,6 +207,9 @@
 }
 
 - (IBAction)checkButtonTapped:(UIButton *)sender {
+    if ([NZPipelineController sharedManager].pipelineHasToBeTrained) {
+        [[NZPipelineController sharedManager] trainClassifier];
+    }
     [self.checkPopoverController presentPopoverFromRect:sender.bounds inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
@@ -217,7 +235,6 @@
         [[NZSensorDataRecordingManager sharedManager] addRecordingObserver:self];
     }
     [[NZSensorDataRecordingManager sharedManager] prepareForRecordingSensorDataSet];
-    
 }
 
 
@@ -231,7 +248,11 @@
         NSMutableString *samplesButtonText = [NSMutableString stringWithFormat:@"%d",sampleNumber];
         [samplesButtonText appendString:@"\nSamples"];
         [self.samplesButton setTitle:samplesButtonText forState:UIControlStateNormal];
-        [[NZSensorDataRecordingManager sharedManager] addRecordingObserver:self];
+        // check if deleted any samples
+        if ([self.selectedGesture.positiveSamples count] != [[NZPipelineController sharedManager]numberOfSamplesForClassLabelIndex:self.selectedGesture.label.index]) {
+            [[NZPipelineController sharedManager] reloadTrainingSamplesForGesture:self.selectedGesture];
+        }
+        [self updateSamplesButton];
     }
 }
 
@@ -293,10 +314,15 @@
 {
     if (self.isRecordingGesture && currentButtonState == BUTTON_SHORT_PRESS) {
         // stop recording the gesture
-        
+        [[NZSensorDataRecordingManager sharedManager] stopRecordingCurrentSensorDataSet];
+        if (([self.selectedGesture.positiveSamples count] > 0) || ([self.selectedGesture.negativeSamples count] > 0)) {
+           // self.learnGestureButton.enabled = true;
+        }
+        self.isRecordingGesture = false;
         [self updateSamplesButton];
         self.isRecordingGesture = false;
         self.gestureRecordingButton.highlighted = false;
+        [self changeEanbledStateOfControllButtonsTo:true];
         
     } else if (!self.isRecordingGesture && currentButtonState == BUTTON_SHORT_PRESS){
         // start recording the gesture
@@ -304,6 +330,8 @@
         if (startedNewRecording) {
             self.isRecordingGesture = true;
             self.gestureRecordingButton.highlighted = true;
+            // disable all buttons
+            [self changeEanbledStateOfControllButtonsTo:false];
         }
     } else if (!self.isRecordingGesture && currentButtonState == BUTTON_LONG_PRESS) {
         ;
@@ -387,11 +415,21 @@
     [self.samplesButton setTitle:samplesButtonText forState:UIControlStateNormal];
 }
 
+- (void)changeEanbledStateOfControllButtonsTo:(BOOL)state
+{
+    self.samplesButton.enabled = state;
+    self.actionsButton.enabled = state;
+    self.cameraButton.enabled = state;
+    self.checkButton.enabled = state;
+    self.plusButton.enabled = state;
+    self.minusButton.enabled = state;
+}
+
 #pragma mark -  NZEditingGestureSamplesTVCDelegare
 - (void)didDeleteSample
 {
-    [self updateGestureSet];
-    [self updateSamplesButton];
+ //   [self updateGestureSet];
+ //   [self updateSamplesButton];
 }
 
 @end

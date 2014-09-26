@@ -22,6 +22,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *executedActionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *debugMessageLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *notConnectedLabel;
+
+
 #pragma mark - IBActions
 - (IBAction)startButtonTapped:(id)sender;
 - (IBAction)stopButtonTapped:(id)sender;
