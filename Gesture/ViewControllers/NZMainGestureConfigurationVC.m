@@ -8,7 +8,6 @@
 
 #import "NZMainGestureConfigurationVC.h"
 
-#import "NZGesture+CoreData.h"
 #import "NZClassLabel+CoreData.h"
 #import "NZGestureSet.h"
 
@@ -16,6 +15,8 @@
 #import "NZPipelineController.h"
 
 #import "NZCoreDataManager.h"
+
+#import "NZGestureActionMappingVC.h"
 
 @interface NZMainGestureConfigurationVC ()
 
@@ -38,6 +39,7 @@
 @property (retain, nonatomic) UIPopoverController *samplesPopoverController;
 @property (retain, nonatomic) UIPopoverController *cameraPopoverController;
 @property (retain, nonatomic) UIPopoverController *checkPopoverController;
+@property (retain, nonatomic) UIPopoverController *actionsPopoverController;
 
 #pragma mark - UI Alert Controller
 @property (retain, nonatomic) UIAlertController *addGestureAlertController;
@@ -73,6 +75,10 @@
     //  * Check
     self.checkPopoverController = [[UIPopoverController alloc] initWithContentViewController:samplesVC];
     self.checkPopoverController.delegate = self;
+    // * Actions
+    UIViewController *actionsVc = [storyboard instantiateViewControllerWithIdentifier:@"gestureActionMappingVc"];
+    self.actionsPopoverController = [[UIPopoverController alloc] initWithContentViewController:actionsVc];
+    self.actionsPopoverController.delegate = self;
     
     // Configure others
     self.addGestureAlertController = [UIAlertController alertControllerWithTitle:@"Add new gesture" message:nil preferredStyle:UIAlertControllerStyleAlert];
@@ -211,6 +217,12 @@
         [[NZPipelineController sharedManager] trainClassifier];
     }
     [self.checkPopoverController presentPopoverFromRect:sender.bounds inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+- (IBAction)actionsButtonTapped:(UIButton *)sender {
+    NZGestureActionMappingVC *vc = (NZGestureActionMappingVC *)self.actionsPopoverController.contentViewController;
+    vc.selectedGesture = self.selectedGesture;
+    [self.actionsPopoverController presentPopoverFromRect:sender.bounds inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 - (IBAction)plusButtonTapped:(UIButton *)sender {

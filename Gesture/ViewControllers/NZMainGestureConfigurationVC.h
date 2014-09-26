@@ -16,6 +16,7 @@
 - (IBAction)samplesButtonTapped:(UIButton *)sender;
 - (IBAction)cameraButtonTapped:(UIButton *)sender;
 - (IBAction)checkButtonTapped:(UIButton *)sender;
+- (IBAction)actionsButtonTapped:(UIButton *)sender;
 
 
 - (IBAction)plusButtonTapped:(UIButton *)sender;

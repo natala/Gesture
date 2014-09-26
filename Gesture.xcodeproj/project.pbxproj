@@ -14,6 +14,7 @@
 		8A37E904197EAAE100CC08BB /* NZEditGestureSamplesTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A37E903197EAAE100CC08BB /* NZEditGestureSamplesTVC.m */; };
 		8A4390B519B480D000B1372F /* NZSingleAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A4390B419B480D000B1372F /* NZSingleAction.m */; };
 		8A5AB06919783369006B2FBC /* NZPipelineController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8A5AB06819783369006B2FBC /* NZPipelineController.mm */; };
+		8A6A9B2C19D57FCC008F3513 /* NZGestureActionMappingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6A9B2B19D57FCC008F3513 /* NZGestureActionMappingVC.m */; };
 		8A6AF54C195CBAF20015B571 /* NZSensorDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6AF54B195CBAF20015B571 /* NZSensorDataHelper.m */; };
 		8A6F24A919D441950048CE8C /* NZMainGestureConfigurationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6F24A819D441950048CE8C /* NZMainGestureConfigurationVC.m */; };
 		8A922904195C3A3800DF7743 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A922903195C3A3800DF7743 /* Foundation.framework */; };
@@ -227,6 +228,8 @@
 		8A4390B419B480D000B1372F /* NZSingleAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZSingleAction.m; sourceTree = "<group>"; };
 		8A5AB06719783369006B2FBC /* NZPipelineController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZPipelineController.h; path = Controll/Pipeline/NZPipelineController.h; sourceTree = "<group>"; };
 		8A5AB06819783369006B2FBC /* NZPipelineController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = NZPipelineController.mm; path = Controll/Pipeline/NZPipelineController.mm; sourceTree = "<group>"; };
+		8A6A9B2A19D57FCC008F3513 /* NZGestureActionMappingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZGestureActionMappingVC.h; sourceTree = "<group>"; };
+		8A6A9B2B19D57FCC008F3513 /* NZGestureActionMappingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZGestureActionMappingVC.m; sourceTree = "<group>"; };
 		8A6AF54A195CBAF20015B571 /* NZSensorDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZSensorDataHelper.h; path = Model/NZSensorDataHelper.h; sourceTree = "<group>"; };
 		8A6AF54B195CBAF20015B571 /* NZSensorDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZSensorDataHelper.m; path = Model/NZSensorDataHelper.m; sourceTree = "<group>"; };
 		8A6F24A719D441950048CE8C /* NZMainGestureConfigurationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZMainGestureConfigurationVC.h; path = ViewControllers/NZMainGestureConfigurationVC.h; sourceTree = "<group>"; };
@@ -749,6 +752,17 @@
 			name = Pipeline;
 			sourceTree = "<group>";
 		};
+		8A6A9B2919D57F98008F3513 /* Popovers */ = {
+			isa = PBXGroup;
+			children = (
+				8A37E902197EAAE100CC08BB /* NZEditGestureSamplesTVC.h */,
+				8A37E903197EAAE100CC08BB /* NZEditGestureSamplesTVC.m */,
+				8A6A9B2A19D57FCC008F3513 /* NZGestureActionMappingVC.h */,
+				8A6A9B2B19D57FCC008F3513 /* NZGestureActionMappingVC.m */,
+			);
+			name = Popovers;
+			sourceTree = "<group>";
+		};
 		8A6F24A419D440A60048CE8C /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
@@ -761,6 +775,7 @@
 		8A6F24A519D440B40048CE8C /* Gesture */ = {
 			isa = PBXGroup;
 			children = (
+				8A6A9B2919D57F98008F3513 /* Popovers */,
 				8A6F24A719D441950048CE8C /* NZMainGestureConfigurationVC.h */,
 				8A6F24A819D441950048CE8C /* NZMainGestureConfigurationVC.m */,
 			);
@@ -1083,8 +1098,6 @@
 				8AD0201A197D717A003A09EE /* NZHttpRequestPopoverController.m */,
 				8AD0201C197D7471003A09EE /* NZSetupHttpRequestVC.h */,
 				8AD0201D197D7471003A09EE /* NZSetupHttpRequestVC.m */,
-				8A37E902197EAAE100CC08BB /* NZEditGestureSamplesTVC.h */,
-				8A37E903197EAAE100CC08BB /* NZEditGestureSamplesTVC.m */,
 			);
 			name = "popovers / popups";
 			sourceTree = "<group>";
@@ -2155,6 +2168,7 @@
 				8A6AF54C195CBAF20015B571 /* NZSensorDataHelper.m in Sources */,
 				8AA4188D19B9B75C0027FDED /* NZWiFiPlugActionHandler.m in Sources */,
 				8AC9D9A7196162EF00364B5A /* NZSensorDataTableView.m in Sources */,
+				8A6A9B2C19D57FCC008F3513 /* NZGestureActionMappingVC.m in Sources */,
 				8AF7F9C51969C89F00DB6D7C /* HighPassFilter.cpp in Sources */,
 				8AE3830A19758AFA00824571 /* NZGesturesVC.m in Sources */,
 				8AF7F9C91969C89F00DB6D7C /* MLP.cpp in Sources */,
