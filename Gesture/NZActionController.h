@@ -40,6 +40,13 @@ typedef enum executionMode {
 - (void)didFailToExecuteAction:(NZAction *)action withErrorMessage:(NSString *)errorMessage;
 
 /**
+ * called after executing action
+ * @param action that had been executed
+ * @param errorMessage if there was an error executing, contains the error message
+ */
+- (void)didExecuteAction:(NZAction *)action withErrorMessage:(NSString *)errorMessage;
+
+/**
  * if connection has been losed for one of the actions
  * @param action the action for which the connection has been loset
  * @note method is epsecially for the NZWiFiPlugAction since the connection is very unstable
