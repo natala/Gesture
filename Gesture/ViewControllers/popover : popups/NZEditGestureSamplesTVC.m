@@ -9,6 +9,7 @@
 #import "NZEditGestureSamplesTVC.h"
 #import "NZCoreDataManager.h"
 #import "NZSensorDataSet+CoreData.h"
+#import "NZPipelineController.h"
 
 @interface NZEditGestureSamplesTVC ()
 
@@ -98,6 +99,8 @@
        // [[NZPipelineController sharedManager] removeClassLabel:gesture.label];
         [sample destroy];
         
+        [NZPipelineController sharedManager].pipelineHasToBeTrained = true;
+        
         NSError *error = nil;
         if (![context save:&error]) {
             // Replace this implementation with code to handle the error appropriately.
@@ -107,6 +110,13 @@
         }
         
         [self.tableView reloadData];
+        
+        if (self.delegate) {
+            if ([self.delegate respondsToSelector:@selector(didDeleteSample)]) {
+                [self.delegate didDeleteSample];
+            }
+        }
+        
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         NSLog(@"insert a cell");
     }

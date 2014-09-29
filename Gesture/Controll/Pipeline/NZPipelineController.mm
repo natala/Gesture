@@ -140,12 +140,14 @@ GRT::TimeSeriesClassificationData dataToBeClassified;
     //!!! 0 is reserved for the null gesture, not allowed to use it when adding a sample
     GRT::UINT gestureLabel = (unsigned int)[classLabel.index unsignedIntegerValue];
     trainingData.addSample(gestureLabel, grtDataSample);
+    self.pipelineHasToBeTrained = true;
     
 }
 
 - (void)removeAllSamplesWithLable:(NZClassLabel *)classLabel
 {
     trainingData.eraseAllSamplesWithClassLabel([classLabel.index unsignedIntegerValue]);
+    self.pipelineHasToBeTrained = true;
 }
 
 - (void)addPositive:(BOOL)isPositive samples:(NSArray *)samples withLabel:(NZClassLabel *)classLabel
@@ -164,11 +166,19 @@ GRT::TimeSeriesClassificationData dataToBeClassified;
     return grtPipeline.getNumClassesInModel();
 }
 
+- (void)reloadTrainingSamplesForGesture:(NZGesture *)gesture{
+    [self removeAllSamplesWithLable:gesture.label];
+    [self loadGesture:gesture];
+}
+
 - (BOOL)trainClassifier
 {
     BOOL res = grtPipeline.train(trainingData);
     if (!res) {
         NSLog(@"unable to train classifier!!!");
+        self.pipelineHasToBeTrained = true;
+    } else {
+        self.pipelineHasToBeTrained = false;
     }
     [self savePipelneToFile];
     return res;
@@ -203,6 +213,7 @@ GRT::TimeSeriesClassificationData dataToBeClassified;
 - (void)removeClassLabel:(NZClassLabel *)classLabel
 {
     trainingData.eraseAllSamplesWithClassLabel([classLabel.index unsignedIntegerValue]);
+    self.pipelineHasToBeTrained = true;
 }
 
 #pragma mark - Init helper functions
@@ -227,12 +238,17 @@ GRT::TimeSeriesClassificationData dataToBeClassified;
     NZGestureSet *gestureSet = [NZGestureSet findWithName:self.currentGestureSet];
     NSArray *allGestures = [gestureSet.gestures allObjects];
     for (NZGesture *gesture in allGestures) {
-        for (NZSensorDataSet *set in gesture.positiveSamples) {
-            [self addPositive:YES sample:set withLabel:gesture.label];
-        }
-        for (NZSensorDataSet *set in gesture.negativeSamples) {
-            NSLog(@"!!!!! adding negative samples not yet implemented !!!!!");
-        }
+        [self loadGesture:gesture];
+    }
+}
+
+- (void)loadGesture:(NZGesture *)gesture
+{
+    for (NZSensorDataSet *set in gesture.positiveSamples) {
+        [self addPositive:YES sample:set withLabel:gesture.label];
+    }
+    for (NZSensorDataSet *set in gesture.negativeSamples) {
+        NSLog(@"!!!!! adding negative samples not yet implemented !!!!!");
     }
 }
 

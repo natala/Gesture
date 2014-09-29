@@ -20,6 +20,11 @@
 
 + (NZAction *)findLates;
 
+/**
+ * checks if there is already an action (singl or group) with the given name
+ */
++ (BOOL)existsWithName:(NSString *)name;
+
 - (void)destroy;
 
 + (void)destroyAll;

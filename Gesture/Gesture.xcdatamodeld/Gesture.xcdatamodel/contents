@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13E28" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6244" systemVersion="13F34" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="NZAction" representedClassName="NZAction" isAbstract="YES" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="gestureCompositeReverse" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="NZGesture" inverseName="actionComposite" inverseEntity="NZGesture" syncable="YES"/>
         <relationship name="gestureSingleReverse" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="NZGesture" inverseName="singleAction" inverseEntity="NZGesture" syncable="YES"/>
-        <relationship name="parentAction" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NZActionComposite" inverseName="childActions" inverseEntity="NZActionComposite" syncable="YES"/>
+        <relationship name="parentAction" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="NZActionComposite" inverseName="childActions" inverseEntity="NZActionComposite" syncable="YES"/>
     </entity>
     <entity name="NZActionComposite" representedClassName="NZActionComposite" parentEntity="NZAction" syncable="YES">
         <relationship name="childActions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="NZAction" inverseName="parentAction" inverseEntity="NZAction" syncable="YES"/>

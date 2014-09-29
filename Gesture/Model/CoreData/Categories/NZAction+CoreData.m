@@ -36,6 +36,22 @@
     return nil;
 }
 
++ (BOOL)existsWithName:(NSString *)name
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@", name];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:ENTITY_NAME_ACTION];
+    request.predicate = predicate;
+    NSError *error = nil;
+    NSArray *foundEntities = [[NZCoreDataManager sharedManager].managedObjectContext executeFetchRequest:request error:&error];
+    
+    if (!foundEntities) {
+        NSLog(@"couldn't find class label entity with index == %@", name);
+        return false;
+    }
+    return [foundEntities count] != 0;
+}
+
+
 #pragma mark - Destroy
 - (void)destroy
 {

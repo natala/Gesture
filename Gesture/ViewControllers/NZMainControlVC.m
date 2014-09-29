@@ -13,6 +13,9 @@
 #import "NZSingleAction.h"
 #import "NZActionComposite.h"
 #import "NZActionController.h"
+#import "NZSensorDataSet.h"
+#import "NZGesture.h"
+#import "NZCoreDataManager.h"
 
 @interface NZMainControlVC ()
 
@@ -27,6 +30,10 @@
 @property (nonatomic, retain) UIAlertController *alertController;
 @property (nonatomic, retain) UIAlertController *disconnectedAllertController;
 @property BOOL ringDisconnected;
+
+@property (nonatomic, retain) UIPopoverController *feedbackPopover;
+
+@property (nonatomic, retain) NZSensorDataSet *lastSensorDataSet;
 
 @end
 
@@ -75,21 +82,14 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-  //  self.startButton.enabled = ![[NZSensorDataRecordingManager sharedManager] isConnected];
-  //  self.stopButton.enabled = !self.startButton.enabled;
     self.isSingleMode = YES;
     if (self.isSingleMode) {
         self.singleGroupSegmentControl.selectedSegmentIndex = 0;
-        //[self.singleGroupSegmentControl setEnabled:false forSegmentAtIndex:0];
-       // [self.singleGroupSegmentControl setEnabled:true forSegmentAtIndex:2];
     } else {
         self.singleGroupSegmentControl.selectedSegmentIndex = 1;
-      //  [self.singleGroupSegmentControl setEnabled:true forSegmentAtIndex:1];
-       // [self.singleGroupSegmentControl setEnabled:false forSegmentAtIndex:2];
     }
-    self.stopStartGestureButton.enabled = !self.startButton.enabled;
-    self.startButtonImage.hidden = self.isRecordingGesture;
-    self.stopButtonImage.hidden = !self.isRecordingGesture;
+    self.stopStartGestureButton.enabled = false;
+    self.notConnectedLabel.hidden = false;
     [self startButtonTapped:self.startButton];
     
 }
@@ -97,17 +97,19 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    
     [self stopButtonTapped:self.stopButton];
+    
     [[NZActionController sharedManager] removeObserver:self];
+    
+    self.stopStartGestureButton.enabled = false;
+    self.notConnectedLabel.hidden = false;
 }
 
 - (void)readyToControl
 {
- //   self.startButton.enabled = false;
- //   self.stopButton.enabled = true;
     self.stopStartGestureButton.enabled = true;
-    self.startButtonImage.hidden = false;
-    self.stopButtonImage.hidden = true;
+    self.notConnectedLabel.hidden = true;
 }
 
 /*
@@ -146,6 +148,7 @@
 - (void)didStopRecordingSensorDataSet:(NZSensorDataSet *) sensorDataSet
 {
     NSLog(@"Sensor Data Recording Manager did stop recording");
+    self.lastSensorDataSet = sensorDataSet;
     // once done, correlate it with the geture as a positive sample
     int classIndex = [[NZPipelineController sharedManager] classifySensorDataSet:sensorDataSet];
     if (classIndex == -1) {
@@ -156,7 +159,6 @@
         return;
     }
     
-   // NZClassLabel *classLabel = [NZClassLabel findEntitiesWithIndex:[NSNumber numberWithInt:classIndex]];
     NZGesture *gesture = [NZGesture findGestureWithIndex:[NSNumber numberWithInt:classIndex]];
     if (!gesture) {
         self.recognizedGestureNameLabel.text = [NSString stringWithFormat:@"%d",classIndex ];
@@ -189,17 +191,17 @@
 {
     self.recordingManagerIsConnected = true;
     [self.alertController dismissViewControllerAnimated:YES completion:nil];
+    self.stopStartGestureButton.enabled = true;
+    self.notConnectedLabel.hidden = true;
+    
     
 }
 
 - (void)disconnected
 {
     self.recordingManagerIsConnected = false;
-   // self.startButton.enabled = true;
-   // self.stopButton.enabled = false;
     self.stopStartGestureButton.enabled = false;
-    self.startButtonImage.hidden = true;
-    self.stopButtonImage.hidden = false;
+    self.notConnectedLabel.hidden = false;
     
     // automatically trying to reconnect
     self.ringDisconnected = true;
@@ -208,21 +210,17 @@
 
 - (void)buttonStateDidChangeFrom:(ButtonState)previousState to:(ButtonState)currentButtonState
 {
-    if (self.startButton.enabled) {
+    if (!self.stopStartGestureButton.enabled) {
         NSLog(@"cannot start recording gesture! First tap the start button!");
         return;
     }
     if (self.isRecordingGesture && currentButtonState == BUTTON_SHORT_PRESS) {
         [[NZSensorDataRecordingManager sharedManager] stopRecordingCurrentSensorDataSet];
         self.stopStartGestureButton.highlighted = false;
-        self.startButtonImage.hidden = false;
-        self.stopButtonImage.hidden = true;
         self.isRecordingGesture = false;
     } else if (!self.isRecordingGesture && currentButtonState == BUTTON_SHORT_PRESS) {
         [[NZSensorDataRecordingManager sharedManager] startRecordingNewSensorDataSet];
         self.stopStartGestureButton.highlighted = true;
-        self.startButtonImage.hidden = true;
-        self.stopButtonImage.hidden = false;
         self.isRecordingGesture = true;
     } else if (!self.isRecordingGesture && currentButtonState == BUTTON_DOUBLE_PRESS) {
         self.isSingleMode = !self.isSingleMode;
@@ -233,6 +231,7 @@
     } else if (!self.isRecordingGesture && currentButtonState == BUTTON_LONG_PRESS) {
         [[NZActionController sharedManager] undoLastExecution];
         self.debugMessageLabel.text = @"undo";
+        [self undoAction];
     } else if (self.isRecordingGesture && currentButtonState == BUTTON_LONG_PRESS) {
         NSLog(@"First stop recording gesture before changing between single and group!");
     }
@@ -268,7 +267,7 @@
             [self presentViewController:self.alertController animated:YES completion:nil];
         }
     }
-    self.ringDisconnected = false;
+   // self.ringDisconnected = false;
     //[self.activityIndicatorView startAnimating];
     
     if (![[NZActionController sharedManager].observers containsObject:self]) {
@@ -293,8 +292,7 @@
     self.startButton.enabled = true;
     self.stopButton.enabled = false;
     self.stopStartGestureButton.enabled = false;
-    self.startButtonImage.hidden = false;
-    self.stopButtonImage.hidden = true;
+    self.notConnectedLabel.hidden = false;
     
     [[NZActionController sharedManager] disconnectActions];
     [[NZActionController sharedManager] removeObserver:self];
@@ -333,7 +331,7 @@
 
 - (void)didExecuteAction:(NZAction *)action
 {
-     self.debugMessageLabel.text = [NSString stringWithFormat: @"%@ executed: %@",action.name];
+     self.debugMessageLabel.text = [NSString stringWithFormat: @"executed: %@",action.name];
     NSLog(@"did execute action %@", action.name);
 }
 
@@ -378,7 +376,51 @@
     [self stopButtonTapped:self.stopButton];
 }
 
-#pragma mark - connection helper methods
+#pragma mark - Helper Methods
+- (void)undoAction
+{
+    // undo
+    [[NZActionController sharedManager] undoLastExecution];
+    
+    // ask for feedback
+    if (!self.feedbackPopover) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UIViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"FeedbackVc"];
+        self.feedbackPopover = [[UIPopoverController alloc] initWithContentViewController:vc];
+        if ([vc isKindOfClass:[NZFeedbackVC class]]) {
+            NZFeedbackVC *feedbackVc = (NZFeedbackVC *)vc;
+            feedbackVc.delegate = self;
+        }
+    }
+    
+    CGRect rect = CGRectMake(425, 60, 10, 10);
+    [self.feedbackPopover presentPopoverFromRect:rect inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUnknown animated:YES];
+}
 
+- (void)addSensorDataSet:(NZSensorDataSet *)sensorSet toGesture:(NZGesture *)gesture
+{
+    [gesture addPositiveSamplesObject:sensorSet];
+    // update the database
+    [[NZCoreDataManager sharedManager] save];
+    
+    // update the classifier with the new sample
+    if ([sensorSet.sensorData count] > 0) {
+        [[NZPipelineController sharedManager] addPositive:YES sample:sensorSet withLabel:gesture.label];
+    }
+
+}
+
+#pragma mark - NZ Feedback VC Delegate
+- (void)shouldDismissVc:(UIViewController *)vc withAndCorrectRecognition:(BOOL)shouldCorrect
+{
+    if ([self.presentedViewController isEqual:vc]) {
+        [self dismissViewControllerAnimated:YES completion:NO];
+    }
+    if (shouldCorrect && [vc isKindOfClass:[NZFeedbackVC class]]) {
+        NZFeedbackVC *feedbackVc = (NZFeedbackVC *)vc;
+        [self addSensorDataSet:self.lastSensorDataSet toGesture:feedbackVc.correctGesture];
+        self.lastSensorDataSet = nil;
+    }
+}
 
 @end

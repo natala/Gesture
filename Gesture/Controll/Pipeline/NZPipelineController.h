@@ -31,6 +31,7 @@
 //@property BOOL isBackup;
 
 @property (nonatomic, retain) NSDictionary *testReport;
+@property BOOL pipelineHasToBeTrained;
 //@property (nonatomic, retain) NSDictionary *classifierParameters;
 
 
@@ -85,6 +86,12 @@
  * @return the number of classes in the pipeline
  */
 - (int)numberOfClasses;
+
+/**
+ * will reload the training samples for the given gesture
+ * @note should be call for example, when the user has deleted a training sample for a fiven gesture
+ */
+- (void)reloadTrainingSamplesForGesture:(NZGesture *)gesture;
 
 /**
  * @param index the index of the gestues class label

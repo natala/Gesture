@@ -44,9 +44,9 @@
     // hardcode the actions and action groups
     // controll the lights
   
-    [NZAction destroyAll];
+    //[NZAction destroyAll];
   
-    
+   /*
     NZHttpRequest *hueOff01 = [NZHttpRequest create];
     hueOff01.name = @"hue 1 off";
     hueOff01.url = @"http://10.130.108.79/api/newdeveloper/lights/1/state";
@@ -100,9 +100,9 @@
     hueOn03.httpHeaderContentType = @"application/json";
     hueOn03.httpHeaderAccept = @"application/json";
     hueOn03.undoCommand = @"{\"on\":false}";
-   
+   */
     // herbi radio
-    
+    /*
     NZUrlSession *play = [NZUrlSession create];
     play.name = @"Music play";
     play.url = @"http://10.130.108.114/music/mpd/mpdcontrol.php?action=Play";
@@ -127,7 +127,8 @@
     volumeUp.name = @"Volume up";
     volumeUp.url = @"http://10.130.108.114/music/mpd/mpdcontrol.php?action=VolumeUp";
     volumeUp.undoCommand = @"http://10.130.108.114/music/mpd/mpdcontrol.php?action=VolumeDown";
-    
+    */
+    /*
     // wifi plug
     NZWiFiPlugAction *wifiPlug = [NZWiFiPlugAction create];
     wifiPlug.name = @"plug on";
@@ -150,8 +151,9 @@
     wifiPlug2.password = @"3048";
     wifiPlug2.command = @"off";
     wifiPlug2.undoCommand = @"on";
-   
-    // composites
+   */
+    
+  /*  // composites
     NZActionComposite *morning = [NZActionComposite create];
     morning.name = @"Morning";
     morning.childActions = [[NSSet alloc] initWithObjects:hueOn01, hueOff02, hueOff03, nil];
@@ -164,7 +166,7 @@
     evening.name = @"Evening";
     evening.childActions = [[NSSet alloc] initWithObjects:hueOn01, hueOn02, hueOn03, nil];
 
-    
+    */
     // *********** //
     // TUM ACTIONS //
     // *********** //

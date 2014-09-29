@@ -15,6 +15,7 @@
 #import "NZGravity+CoreData.h"
 #import "NZYawPitchRoll+CoreData.h"
 #import "NZSensorDataHelper.h"
+#import "BLEService.h"
 
 @implementation NZArduinoCommunicationManager
 
@@ -63,7 +64,10 @@
 - (void)discoveryDidRefresh
 {
     // called after disconnectin
-    [[BLEDiscovery sharedInstance].connectedPeripherals removeAllObjects];
+    [[BLEDiscovery sharedInstance] disconnectConnectedPeripherals];
+    [[BLEDiscovery sharedInstance] startScanningForSupportedUUIDs];
+    //[[BLEDiscovery sharedInstance].connectedPeripherals removeAllObjects];
+    //[[BLEDiscovery sharedInstance].foundPeripherals removeAllObjects];
     NSLog(@"discoveryDidRefresh");
     if (self.delegate) {
         if ([self.delegate respondsToSelector:@selector(didDisconnect)]) {
@@ -193,6 +197,8 @@
 - (BOOL)connect
 {
     if (![self isConnected]) {
+        //[[BLEDiscovery sharedInstance] disconnectConnectedPeripherals];
+        //[[BLEDiscovery sharedInstance] startScanningForSupportedUUIDs];
         [self connectToPeripherals];
     }
     return [self isConnected];
@@ -201,6 +207,7 @@
 - (BOOL)disconnect
 {
     [self disconnectFromPeripherals];
+    [[BLEDiscovery sharedInstance] startScanningForSupportedUUIDs];
     return [self isConnected];
 }
 
