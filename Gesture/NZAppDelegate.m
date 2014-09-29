@@ -44,9 +44,9 @@
     // hardcode the actions and action groups
     // controll the lights
   
-  //  [NZAction destroyAll];
+    //[NZAction destroyAll];
   
-    /*
+   /*
     NZHttpRequest *hueOff01 = [NZHttpRequest create];
     hueOff01.name = @"hue 1 off";
     hueOff01.url = @"http://10.130.108.79/api/newdeveloper/lights/1/state";
@@ -152,8 +152,8 @@
     wifiPlug2.command = @"off";
     wifiPlug2.undoCommand = @"on";
    */
-    /*
-    // composites
+    
+  /*  // composites
     NZActionComposite *morning = [NZActionComposite create];
     morning.name = @"Morning";
     morning.childActions = [[NSSet alloc] initWithObjects:hueOn01, hueOff02, hueOff03, nil];
@@ -165,8 +165,8 @@
     NZActionComposite *evening = [NZActionComposite create];
     evening.name = @"Evening";
     evening.childActions = [[NSSet alloc] initWithObjects:hueOn01, hueOn02, hueOn03, nil];
-*/
-    
+
+    */
     // *********** //
     // TUM ACTIONS //
     // *********** //

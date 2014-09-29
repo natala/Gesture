@@ -367,7 +367,11 @@
     [self stopButtonTapped:self.stopButton];
 }
 
-#pragma mark - connection helper methods
+#pragma mark - Helper Methods
+- (void)undoAction
+{
+    
+}
 
 
 @end

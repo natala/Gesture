@@ -273,7 +273,7 @@
     }
 }
 
-#pragma mark - NZ ensor Data Recording Manager Observer methods
+#pragma mark - NZ Sensor Data Recording Manager Observer methods
 - (void)disconnected
 {
     self.gestureRecordingButton.enabled = false;
@@ -331,22 +331,23 @@
 {
     if (self.isRecordingGesture && currentButtonState == BUTTON_SHORT_PRESS) {
         // stop recording the gesture
+        self.gestureRecordingButton.highlighted = false;
         [[NZSensorDataRecordingManager sharedManager] stopRecordingCurrentSensorDataSet];
-        if (([self.selectedGesture.positiveSamples count] > 0) || ([self.selectedGesture.negativeSamples count] > 0)) {
+       // if (([self.selectedGesture.positiveSamples count] > 0) || ([self.selectedGesture.negativeSamples count] > 0)) {
            // self.learnGestureButton.enabled = true;
-        }
+        //}
         self.isRecordingGesture = false;
         [self updateSamplesButton];
         self.isRecordingGesture = false;
-        self.gestureRecordingButton.highlighted = false;
+        
         [self changeEanbledStateOfControllButtonsTo:true];
         
     } else if (!self.isRecordingGesture && currentButtonState == BUTTON_SHORT_PRESS){
         // start recording the gesture
         BOOL startedNewRecording = [[NZSensorDataRecordingManager sharedManager] startRecordingNewSensorDataSet];
         if (startedNewRecording) {
-            self.isRecordingGesture = true;
             self.gestureRecordingButton.highlighted = true;
+            self.isRecordingGesture = true;
             // disable all buttons
             [self changeEanbledStateOfControllButtonsTo:false];
         }
@@ -434,12 +435,12 @@
 
 - (void)changeEanbledStateOfControllButtonsTo:(BOOL)state
 {
-    self.samplesButton.enabled = state;
+ /*   self.samplesButton.enabled = state;
     self.actionsButton.enabled = state;
     self.cameraButton.enabled = state;
     self.checkButton.enabled = state;
     self.plusButton.enabled = state;
-    self.minusButton.enabled = state;
+    self.minusButton.enabled = state;*/
 }
 
 #pragma mark -  NZEditingGestureSamplesTVCDelegare

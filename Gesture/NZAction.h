@@ -16,7 +16,7 @@ static NSString *ENTITY_NAME_ACTION = @"NZAction";
 @interface NZAction : NSManagedObject
 
 @property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NZActionComposite *parentAction;
+@property (nonatomic, retain) NSSet *parentAction;
 @property (nonatomic, retain) NSSet *gestureSingleReverse;
 @property (nonatomic, retain) NSSet *gestureCompositeReverse;
 @end
@@ -32,5 +32,11 @@ static NSString *ENTITY_NAME_ACTION = @"NZAction";
 - (void)removeGestureCompositeReverseObject:(NZGesture *)value;
 - (void)addGestureCompositeReverse:(NSSet *)values;
 - (void)removeGestureCompositeReverse:(NSSet *)values;
+
+- (void)addParentActionObject:(NZActionComposite *)value;
+- (void)removeParentActionObject:(NZActionComposite *)value;
+- (void)addParentAction:(NSSet *)values;
+- (void)removeParentAction:(NSSet *)values;
+
 
 @end
