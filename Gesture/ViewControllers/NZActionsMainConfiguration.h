@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NZActionsMainConfiguration : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface NZActionsMainConfiguration : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, UITableViewDataSource, UITableViewDelegate, UIAccelerometerDelegate>
 
 #pragma mark - IB Actions
 - (IBAction)gesturesButtonTapped:(UIButton *)sender;

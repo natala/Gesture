@@ -25,6 +25,8 @@
 @property (retain, nonatomic) NSArray *allSingleActions;
 @property (retain, nonatomic) NSArray *allGroupActions;
 
+#pragma mark - alets
+@property (retain, nonatomic) UIAlertController *addGestureGroupAlertController;
 
 @end
 
@@ -65,9 +67,33 @@
 }
 
 - (IBAction)plusButtonTapped:(UIButton *)sender {
+    if (!self.addGestureGroupAlertController) {
+        
+        self.addGestureGroupAlertController = [UIAlertController alertControllerWithTitle:@"Add new Group" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:nil];
+        UIAlertAction *doneAction = [UIAlertAction actionWithTitle:@"Done" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [self addGestureGroupFromAllertViewController];
+        }];
+        [self.addGestureGroupAlertController addAction:doneAction];
+        [self.addGestureGroupAlertController addAction:cancelAction];
+        [self.addGestureGroupAlertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+            textField.placeholder = @"Enter group name here";
+        }];
+    }
+    [self presentViewController:self.addGestureGroupAlertController animated:YES completion:nil];
 }
 
 - (IBAction)minusButtonTapped:(UIButton *)sender {
+    
+    UIAlertController *areYouSureAlert = [UIAlertController alertControllerWithTitle:@"Are you sure you want to delete selected group?" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self deleteCurrentActionGroup];
+    }];
+    UIAlertAction *noAction = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:nil];
+    [areYouSureAlert addAction:yesAction];
+    [areYouSureAlert addAction:noAction];
+    [self presentViewController:areYouSureAlert animated:YES completion:nil];
 }
 
 #pragma mark - UI Picker View Data Source
@@ -176,21 +202,55 @@
     
 }
 
+#pragma mark - managing actions
+
+- (void)addGestureGroupFromAllertViewController
+{
+    UITextField *textField = [self.addGestureGroupAlertController.textFields objectAtIndex:0];
+    
+    if ([textField.text isEqualToString:@""]) {
+        return;
+    }
+    if ([NZAction existsWithName:textField.text]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"a group with the given name already exists" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+        [alert addAction:okAction];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    
+    NZActionComposite *newGroup = [NZActionComposite create];
+    newGroup.name = textField.text;
+    
+    NZCoreDataManager *manager = [NZCoreDataManager sharedManager];
+    [manager save];
+    
+    self.allGroupActions = [NZActionComposite findAllSortedByName];
+    [self.groupActionsPickerView reloadAllComponents];
+    [self updateSingleActions];
+}
+
+- (void)deleteCurrentActionGroup
+{
+    [self.selectedGroupAction destroy];
+    
+    NZCoreDataManager *manager = [NZCoreDataManager sharedManager];
+    [manager save];
+    
+    if ([self.allGroupActions count] > 0) {
+        [self.groupActionsPickerView selectRow:0 inComponent:0 animated:NO];
+    }
+    self.allGroupActions = [NZActionComposite findAllSortedByName];
+    [self.groupActionsPickerView reloadAllComponents];
+    [self updateSingleActions];
+    
+}
+
 #pragma mark - helper methods
 
 - (void)updateSingleActions
 {
     [self.singleActionsTableView reloadData];
-    /*if (self.selectedGroupAction) {
-        for (NZAction *action in self.selectedGroupAction.childActions) {
-            int index = [self.allSingleActions indexOfObjectIdenticalTo:action];
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
-            UITableViewCell *cell = [self.singleActionsTableView cellForRowAtIndexPath:indexPath];
-            if (!cell.isHidden) {
-                [self.singleActionsTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
-            }
-        }
-    }*/
 }
 
 @end
