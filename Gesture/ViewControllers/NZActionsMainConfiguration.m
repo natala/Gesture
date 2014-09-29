@@ -13,6 +13,8 @@
 #import "NZCoreDataManager.h"
 #import "NZActionComposite+CoreData.h"
 
+#import "NZConfigurationNavigationController.h"
+
 @interface NZActionsMainConfiguration ()
 
 #pragma  mark - UI Elements
@@ -64,6 +66,12 @@
 # pragma mark - IB Actions
 
 - (IBAction)gesturesButtonTapped:(UIButton *)sender {
+   
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    if ([self.navigationController isKindOfClass:[NZConfigurationNavigationController class]]) {
+        NZConfigurationNavigationController *nc = (NZConfigurationNavigationController *)self.navigationController;
+        [nc switchFromActionsToGestures];
+    }
 }
 
 - (IBAction)plusButtonTapped:(UIButton *)sender {

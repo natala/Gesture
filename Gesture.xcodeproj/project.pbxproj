@@ -54,6 +54,8 @@
 		8AAD80DF195DBA70000F9805 /* KHYawPitchRollLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAD80D6195DBA70000F9805 /* KHYawPitchRollLineChartView.m */; };
 		8AAD80E0195DBA70000F9805 /* PCLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAD80D8195DBA70000F9805 /* PCLineChartView.m */; };
 		8AAD80E1195DBA70000F9805 /* PCLineChartViewComponent+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAD80DA195DBA70000F9805 /* PCLineChartViewComponent+Utils.m */; };
+		8AB84B1919D98ECE0017E81A /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AB84B1819D98ECE0017E81A /* MediaPlayer.framework */; };
+		8AB84B8919D9913C0017E81A /* NZFeedbackVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB84B8819D9913C0017E81A /* NZFeedbackVC.m */; };
 		8AC22B75197529170019A1A9 /* NZGestureSetsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC22B74197529170019A1A9 /* NZGestureSetsVC.m */; };
 		8AC22B78197557DA0019A1A9 /* NZPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC22B77197557DA0019A1A9 /* NZPopupViewController.m */; };
 		8AC9D9A7196162EF00364B5A /* NZSensorDataTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC9D9A6196162EF00364B5A /* NZSensorDataTableView.m */; };
@@ -300,6 +302,9 @@
 		8AAD80D9195DBA70000F9805 /* PCLineChartViewComponent+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "PCLineChartViewComponent+Utils.h"; path = "Views/ChartViews/PCLineChartViewComponent+Utils.h"; sourceTree = "<group>"; };
 		8AAD80DA195DBA70000F9805 /* PCLineChartViewComponent+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "PCLineChartViewComponent+Utils.m"; path = "Views/ChartViews/PCLineChartViewComponent+Utils.m"; sourceTree = "<group>"; };
 		8AAD80E2195DBBF8000F9805 /* KHColorConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = KHColorConstants.h; path = Constants/KHColorConstants.h; sourceTree = "<group>"; };
+		8AB84B1819D98ECE0017E81A /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		8AB84B8719D9913C0017E81A /* NZFeedbackVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZFeedbackVC.h; path = ViewControllers/NZFeedbackVC.h; sourceTree = "<group>"; };
+		8AB84B8819D9913C0017E81A /* NZFeedbackVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZFeedbackVC.m; path = ViewControllers/NZFeedbackVC.m; sourceTree = "<group>"; };
 		8AC22B73197529170019A1A9 /* NZGestureSetsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZGestureSetsVC.h; path = ViewControllers/NZGestureSetsVC.h; sourceTree = "<group>"; };
 		8AC22B74197529170019A1A9 /* NZGestureSetsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZGestureSetsVC.m; path = ViewControllers/NZGestureSetsVC.m; sourceTree = "<group>"; };
 		8AC22B76197557DA0019A1A9 /* NZPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZPopupViewController.h; path = ViewControllers/NZPopupViewController.h; sourceTree = "<group>"; };
@@ -718,6 +723,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8AB84B1919D98ECE0017E81A /* MediaPlayer.framework in Frameworks */,
 				8AA4188619B88AC30027FDED /* libz.1.2.5.dylib in Frameworks */,
 				8AA4187619B881990027FDED /* Protocol.framework in Frameworks */,
 				8A07255019A3AA4100ED7AC2 /* CoreBluetooth.framework in Frameworks */,
@@ -827,6 +833,7 @@
 		8A922902195C3A3800DF7743 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8AB84B1819D98ECE0017E81A /* MediaPlayer.framework */,
 				8AA4188519B88AC30027FDED /* libz.1.2.5.dylib */,
 				8AA4188319B88AA00027FDED /* CFNetwork.framework */,
 				8AA4187519B881990027FDED /* Protocol.framework */,
@@ -902,6 +909,7 @@
 		8A922942195C3AAA00DF7743 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				8AB84B8619D991020017E81A /* Main Control */,
 				8A6F24A419D440A60048CE8C /* Configuration */,
 				8AF5319919991D9600D10EBE /* Testing */,
 				8AD02015197D6AAC003A09EE /* popovers / popups */,
@@ -922,8 +930,6 @@
 				8AC22B76197557DA0019A1A9 /* NZPopupViewController.h */,
 				8A922921195C3A3800DF7743 /* NZDetailViewController.m */,
 				8A922920195C3A3800DF7743 /* NZDetailViewController.h */,
-				8AD0200A19795014003A09EE /* NZMainControlVC.h */,
-				8AD0200B19795014003A09EE /* NZMainControlVC.m */,
 				8AD0200F197AE3B1003A09EE /* NZPipelineConfigurationVC.h */,
 				8AD02010197AE3B1003A09EE /* NZPipelineConfigurationVC.m */,
 				8AD846AB19C0558A0005D90D /* NZStartScreenVC.h */,
@@ -1080,6 +1086,17 @@
 			children = (
 			);
 			name = Constants;
+			sourceTree = "<group>";
+		};
+		8AB84B8619D991020017E81A /* Main Control */ = {
+			isa = PBXGroup;
+			children = (
+				8AD0200A19795014003A09EE /* NZMainControlVC.h */,
+				8AD0200B19795014003A09EE /* NZMainControlVC.m */,
+				8AB84B8719D9913C0017E81A /* NZFeedbackVC.h */,
+				8AB84B8819D9913C0017E81A /* NZFeedbackVC.m */,
+			);
+			name = "Main Control";
 			sourceTree = "<group>";
 		};
 		8AC9D9A41961626900364B5A /* RecordingSensorDataTableView */ = {
@@ -2105,6 +2122,7 @@
 				8AF0F40219A79DAD001645A2 /* NZSingleAction+Execute.m in Sources */,
 				8AEFC62E19ACB6D700E25943 /* NZGesture2ActionsMappingVC.m in Sources */,
 				8AF7F9C21969C89F00DB6D7C /* Derivative.cpp in Sources */,
+				8AB84B8919D9913C0017E81A /* NZFeedbackVC.m in Sources */,
 				8ADB50471962EB1D00DC2784 /* NZGravity.m in Sources */,
 				8AE8CB38196AD1FA008BE33E /* NZGraphViewHelper.m in Sources */,
 				8AF7F99C1969C89F00DB6D7C /* SelfOrganizingMap.cpp in Sources */,

@@ -13,6 +13,9 @@
 #import "NZSingleAction.h"
 #import "NZActionComposite.h"
 #import "NZActionController.h"
+#import "NZSensorDataSet.h"
+#import "NZGesture.h"
+#import "NZCoreDataManager.h"
 
 @interface NZMainControlVC ()
 
@@ -27,6 +30,10 @@
 @property (nonatomic, retain) UIAlertController *alertController;
 @property (nonatomic, retain) UIAlertController *disconnectedAllertController;
 @property BOOL ringDisconnected;
+
+@property (nonatomic, retain) UIPopoverController *feedbackPopover;
+
+@property (nonatomic, retain) NZSensorDataSet *lastSensorDataSet;
 
 @end
 
@@ -141,6 +148,7 @@
 - (void)didStopRecordingSensorDataSet:(NZSensorDataSet *) sensorDataSet
 {
     NSLog(@"Sensor Data Recording Manager did stop recording");
+    self.lastSensorDataSet = sensorDataSet;
     // once done, correlate it with the geture as a positive sample
     int classIndex = [[NZPipelineController sharedManager] classifySensorDataSet:sensorDataSet];
     if (classIndex == -1) {
@@ -223,6 +231,7 @@
     } else if (!self.isRecordingGesture && currentButtonState == BUTTON_LONG_PRESS) {
         [[NZActionController sharedManager] undoLastExecution];
         self.debugMessageLabel.text = @"undo";
+        [self undoAction];
     } else if (self.isRecordingGesture && currentButtonState == BUTTON_LONG_PRESS) {
         NSLog(@"First stop recording gesture before changing between single and group!");
     }
@@ -322,7 +331,7 @@
 
 - (void)didExecuteAction:(NZAction *)action
 {
-     self.debugMessageLabel.text = [NSString stringWithFormat: @"%@ executed: %@",action.name];
+     self.debugMessageLabel.text = [NSString stringWithFormat: @"executed: %@",action.name];
     NSLog(@"did execute action %@", action.name);
 }
 
@@ -370,8 +379,48 @@
 #pragma mark - Helper Methods
 - (void)undoAction
 {
+    // undo
+    [[NZActionController sharedManager] undoLastExecution];
     
+    // ask for feedback
+    if (!self.feedbackPopover) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UIViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"FeedbackVc"];
+        self.feedbackPopover = [[UIPopoverController alloc] initWithContentViewController:vc];
+        if ([vc isKindOfClass:[NZFeedbackVC class]]) {
+            NZFeedbackVC *feedbackVc = (NZFeedbackVC *)vc;
+            feedbackVc.delegate = self;
+        }
+    }
+    
+    CGRect rect = CGRectMake(425, 60, 10, 10);
+    [self.feedbackPopover presentPopoverFromRect:rect inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUnknown animated:YES];
 }
 
+- (void)addSensorDataSet:(NZSensorDataSet *)sensorSet toGesture:(NZGesture *)gesture
+{
+    [gesture addPositiveSamplesObject:sensorSet];
+    // update the database
+    [[NZCoreDataManager sharedManager] save];
+    
+    // update the classifier with the new sample
+    if ([sensorSet.sensorData count] > 0) {
+        [[NZPipelineController sharedManager] addPositive:YES sample:sensorSet withLabel:gesture.label];
+    }
+
+}
+
+#pragma mark - NZ Feedback VC Delegate
+- (void)shouldDismissVc:(UIViewController *)vc withAndCorrectRecognition:(BOOL)shouldCorrect
+{
+    if ([self.presentedViewController isEqual:vc]) {
+        [self dismissViewControllerAnimated:YES completion:NO];
+    }
+    if (shouldCorrect && [vc isKindOfClass:[NZFeedbackVC class]]) {
+        NZFeedbackVC *feedbackVc = (NZFeedbackVC *)vc;
+        [self addSensorDataSet:self.lastSensorDataSet toGesture:feedbackVc.correctGesture];
+        self.lastSensorDataSet = nil;
+    }
+}
 
 @end
