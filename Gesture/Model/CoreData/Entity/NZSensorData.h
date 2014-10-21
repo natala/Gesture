@@ -24,6 +24,6 @@ static NSString *ENTITY_NAME_SENSOR_DATA = @"NZSensorData";
 @property (nonatomic, retain) NZQuaternion *quaternion;
 @property (nonatomic, retain) NZSensorDataSet *sensorDataSet;
 @property (nonatomic, retain) NZYawPitchRoll *yawPitchRoll;
-
+@property (nonatomic, retain) NZSensorDataSet *sample0reverse;
 
 @end

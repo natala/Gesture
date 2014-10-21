@@ -187,6 +187,13 @@
    // NSLog(@"Gravity:  %@, %@, %@", sensorData.gravity.x, sensorData.gravity.y, sensorData.gravity.z);
     sensorData.yawPitchRoll = [NZSensorDataHelper yawPitchRollFromQuaternion:quaternion];
     sensorData.linearAcceleration = [NZSensorDataHelper linearAccelerationFromRawAcceleration:rawAcceleration gravity:sensorData.gravity andQuaternion:quaternion];
+    
+    // use gravity for row acceleration
+    sensorData.gravity.x = [NSNumber numberWithFloat:rawAcceleration.x];
+    sensorData.gravity.y = [NSNumber numberWithFloat:rawAcceleration.y];
+    sensorData.gravity.z = [NSNumber numberWithFloat:rawAcceleration.z];
+    
+    
    // NSLog(@"Linear acceleration:  %@, %@, %@", sensorData.linearAcceleration.x, sensorData.linearAcceleration.y, sensorData.linearAcceleration.z);
     
     

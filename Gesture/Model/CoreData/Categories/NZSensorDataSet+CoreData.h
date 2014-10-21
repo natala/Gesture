@@ -23,4 +23,6 @@
 
 - (NZSensorDataSet *)clone;
 
+- (NSString *)sensorDataSetToString;
+
 @end

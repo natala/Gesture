@@ -19,5 +19,6 @@
 @dynamic gestureNegative;
 @dynamic gesturePositive;
 @dynamic sensorData;
+@dynamic sample0;
 
 @end

@@ -41,4 +41,15 @@
     [super destroyAllEntitiesWithName:ENTITY_NAME_GRAVITY];
 }
 
+- (NSString *)valuesToString
+{
+    NSString *string = [NSString stringWithFormat:@"%f\t%f\t%f", [self.x floatValue], [self.y floatValue], [self.z floatValue]];
+    return string;
+}
+
+- (void)normalize
+{
+    // noone cares about gravity :P
+}
+
 @end

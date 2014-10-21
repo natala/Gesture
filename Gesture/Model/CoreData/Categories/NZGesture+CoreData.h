@@ -29,5 +29,11 @@
 
 - (NZGesture *)clone;
 
+#pragma mark - additional not really related with core data itself
+/**
+ * saves to a csv file with the name of the given gesture
+ */
+- (void)saveToFile;
+
 
 @end

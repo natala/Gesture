@@ -67,6 +67,7 @@
         <relationship name="gravity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NZGravity" inverseName="sensorData" inverseEntity="NZGravity" syncable="YES"/>
         <relationship name="linearAcceleration" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NZLinearAcceleration" inverseName="sensorData" inverseEntity="NZLinearAcceleration" syncable="YES"/>
         <relationship name="quaternion" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NZQuaternion" inverseName="sensorData" inverseEntity="NZQuaternion" syncable="YES"/>
+        <relationship name="sample0reverse" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NZSensorDataSet" inverseName="sample0" inverseEntity="NZSensorDataSet" syncable="YES"/>
         <relationship name="sensorDataSet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NZSensorDataSet" inverseName="sensorData" inverseEntity="NZSensorDataSet" syncable="YES"/>
         <relationship name="yawPitchRoll" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NZYawPitchRoll" inverseName="sensorData" inverseEntity="NZYawPitchRoll" syncable="YES"/>
     </entity>
@@ -76,6 +77,7 @@
         <attribute name="timeStampUpdate" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="gestureNegative" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NZGesture" inverseName="negativeSamples" inverseEntity="NZGesture" syncable="YES"/>
         <relationship name="gesturePositive" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NZGesture" inverseName="positiveSamples" inverseEntity="NZGesture" syncable="YES"/>
+        <relationship name="sample0" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NZSensorData" inverseName="sample0reverse" inverseEntity="NZSensorData" syncable="YES"/>
         <relationship name="sensorData" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="NZSensorData" inverseName="sensorDataSet" inverseEntity="NZSensorData" syncable="YES"/>
     </entity>
     <entity name="NZSingleAction" representedClassName="NZSingleAction" parentEntity="NZAction" syncable="YES">
@@ -106,13 +108,13 @@
         <element name="NZClassificationPipeline" positionX="306" positionY="180" width="216" height="58"/>
         <element name="NZClassLabel" positionX="871" positionY="36" width="128" height="88"/>
         <element name="NZGesture" positionX="718" positionY="-441" width="128" height="195"/>
-        <element name="NZGestureSet" positionX="891" positionY="-180" width="126" height="103"/>
+        <element name="NZGestureSet" positionX="891" positionY="-180" width="126" height="105"/>
         <element name="NZGravity" positionX="-63" positionY="-193" width="128" height="103"/>
         <element name="NZHttpRequest" positionX="333" positionY="-369" width="128" height="120"/>
         <element name="NZLinearAcceleration" positionX="-63" positionY="-69" width="128" height="105"/>
         <element name="NZQuaternion" positionX="-63" positionY="51" width="128" height="120"/>
-        <element name="NZSensorData" positionX="315" positionY="-54" width="128" height="133"/>
-        <element name="NZSensorDataSet" positionX="486" positionY="-72" width="128" height="133"/>
+        <element name="NZSensorData" positionX="315" positionY="-54" width="128" height="150"/>
+        <element name="NZSensorDataSet" positionX="486" positionY="-72" width="128" height="148"/>
         <element name="NZSingleAction" positionX="423" positionY="-466" width="128" height="58"/>
         <element name="NZUrlSession" positionX="486" positionY="-369" width="128" height="58"/>
         <element name="NZWiFiPlugAction" positionX="171" positionY="-405" width="128" height="148"/>

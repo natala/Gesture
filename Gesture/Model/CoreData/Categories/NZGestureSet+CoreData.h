@@ -26,4 +26,6 @@
 
 - (NZGestureSet *)clone;
 
+- (void)saveToFile;
+
 @end

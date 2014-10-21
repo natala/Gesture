@@ -8,6 +8,8 @@
 
 #import "NZSensorDataRecordingManager.h"
 #import "NZLinearAcceleration.h"
+#import "NZQuaternion.h"
+#import "NZCoreDataManager.h"
 
 static int kDoublePressThreshold = 5;
 static int kLongPressThreshold = 20;
@@ -78,6 +80,17 @@ static int kLongPressThreshold = 20;
 - (void)didReceiveSensorData:(NZSensorData *)sensorData withButtonState:(int)buttonState
 {
     if (self.isRecordingData) {
+        
+        if (!self.currentSet.sample0) {
+            
+            NZSensorData *sample0 = [sensorData clone];
+            self.currentSet.sample0 = sample0;
+            [[NZCoreDataManager sharedManager] save];
+        }
+        
+        // normalize sensor data with respect to the first sample before adding to the sensonr data set. It is to reset the orientation of the ring to when the gesture started
+        //[self normalizeSensorData:sensorData withRespectTo:self.currentSet.sample0];
+        //[sensorData normalize];
         [self.currentSet addSensorDataObject:sensorData];
         for (id<NZSensorDataRecordingManagerObserver>observer in self.sensorDataRecordingObservers){
             if ([observer respondsToSelector:@selector(didReceiveSensorData:forSensorDataSet:)]) {
@@ -249,6 +262,24 @@ static int kLongPressThreshold = 20;
 {
     return self.isRecordingData;
     //return [[NZArduinoCommunicationManager sharedManager].delegate isEqual:self];
+}
+
+#pragma mark - helper functions
+
+/**
+ * normalizes the sensor data s
+ */
+- (void)normalizeSensorData:(NZSensorData *)s1 withRespectTo:(NZSensorData *)s0
+{
+   /* s1.quaternion.w = [NSNumber numberWithFloat:([s1.quaternion.w floatValue] - [s0.quaternion.w floatValue])];
+    s1.quaternion.x = [NSNumber numberWithFloat:([s1.quaternion.x floatValue] - [s0.quaternion.x floatValue])];
+    s1.quaternion.y = [NSNumber numberWithFloat:([s1.quaternion.y floatValue] - [s0.quaternion.y floatValue])];
+    s1.quaternion.z = [NSNumber numberWithFloat:([s1.quaternion.z floatValue] - [s0.quaternion.z floatValue])];
+    
+    s1.linearAcceleration.x = [NSNumber numberWithFloat:([s1.linearAcceleration.x floatValue] - [s0.linearAcceleration.x floatValue])];
+    s1.linearAcceleration.y = [NSNumber numberWithFloat:([s1.linearAcceleration.y floatValue] - [s0.linearAcceleration.y floatValue])];
+    s1.linearAcceleration.z = [NSNumber numberWithFloat:([s1.linearAcceleration.z floatValue] - [s0.linearAcceleration.z floatValue])];
+    */
 }
 
 @end

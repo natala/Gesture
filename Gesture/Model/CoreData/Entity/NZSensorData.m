@@ -19,6 +19,6 @@
 @dynamic quaternion;
 @dynamic sensorDataSet;
 @dynamic yawPitchRoll;
-
+@dynamic sample0reverse;
 
 @end

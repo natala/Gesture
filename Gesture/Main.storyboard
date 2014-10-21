@@ -150,10 +150,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <gestureRecognizers/>
                             </pickerView>
-                            <pickerView contentMode="scaleToFill" id="pIC-28-Cpv">
-                                <rect key="frame" x="523" y="500" width="266" height="216"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" id="5QQ-B0-HSZ">
                                 <rect key="frame" x="629" y="412" width="55" height="55"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -181,6 +177,10 @@
                                     <action selector="deleteButtonTapped:" destination="0Ga-9n-g5T" eventType="touchUpInside" id="9Oy-az-sd2"/>
                                 </connections>
                             </button>
+                            <pickerView contentMode="scaleToFill" id="pIC-28-Cpv">
+                                <rect key="frame" x="523" y="500" width="266" height="216"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -823,7 +823,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle thin black" id="uJW-1t-ixl">
-                                <rect key="frame" x="310" y="63" width="250" height="250"/>
+                                <rect key="frame" x="310" y="65" width="250" height="250"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Single" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OI2-xh-ESZ">
@@ -886,11 +886,11 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Vertical line" id="Oqw-68-ULR">
-                                <rect key="frame" x="399" y="63" width="73" height="685"/>
+                                <rect key="frame" x="399" y="65" width="73" height="685"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="SUn-uK-55T">
-                                <rect key="frame" x="24" y="63" width="100" height="100"/>
+                                <rect key="frame" x="24" y="65" width="100" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <state key="normal" title="Gestures" backgroundImage="circle thin black"/>

@@ -25,8 +25,7 @@
 {
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:command] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {NSLog(@"url session command send");
-        [dataTask cancel];
-        
+        //[dataTask cancel];
     }];
     [dataTask resume];
 }

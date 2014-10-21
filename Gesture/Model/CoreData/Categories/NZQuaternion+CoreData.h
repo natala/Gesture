@@ -21,4 +21,11 @@
 
 + (void)destroyAll;
 
+- (NSString *)valuesToString;
+
+/**
+ * performes min - max normalization
+ */
+- (void)normalize;
+
 @end

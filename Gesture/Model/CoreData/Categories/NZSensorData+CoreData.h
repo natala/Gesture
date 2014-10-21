@@ -23,4 +23,11 @@
 
 - (NZSensorData *)clone;
 
+- (NSString *)sensorValuesAsString;
+
+/**
+ * perfoems min - max normalization for all data types (linear acceleration, orientations, gravity)
+ */
+- (void)normalize;
+
 @end

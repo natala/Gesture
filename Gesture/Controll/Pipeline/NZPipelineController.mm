@@ -7,13 +7,15 @@
 //
 
 #import "NZPipelineController.h"
-#import "NZSensorData.h"
+#import "NZSensorData+CoreData.h"
 #import "NZSensorDataSet.h"
 #import "NZLinearAcceleration.h"
 #import "NZQuaternion.h"
+#import "NZGravity.h"
 #import "NZClassLabel.h"
 #import "NZGesture+CoreData.h"
 #import "NZGestureSet+CoreData.h"
+#import "NZGestureSetHandler.h"
 #import <fstream>
 #import <string>
 #import <sstream>
@@ -24,6 +26,19 @@
 
 NSString *const kGrtPipelineFileName = @"pipelineFile.txt";
 NSString *const kDataSamplesDefaultFileName = @"dataSamples";
+
+// number of dimensions
+float const kNumDimensions = 3;
+// training sensor type
+// 0 - acceleration and quaternions
+// 1 - only acceleration
+// 2 - only quaternions
+// 3 - acceleration and quaternion W
+// 4 - only w
+// 5 - only gravity / raw acceleration
+// 6 - gravity / raw acceleration + quaternions
+uint const kSensorModality = 5;
+
 
 @interface NZPipelineController ()
 
@@ -40,6 +55,12 @@ GRT::GestureRecognitionPipeline grtPipeline;
 GRT::GestureRecognitionPipeline testGrtPipeline;
 GRT::TimeSeriesClassificationData trainingData;
 GRT::TimeSeriesClassificationData dataToBeClassified;
+
+// Preprocessing modules, not in the pipeline to easier change
+GRT::MovingAverageFilter movingAvgFilter;
+GRT::LowPassFilter lowPassFilter;
+GRT::DoubleMovingAverageFilter doubleMovingAvgFilter;
+GRT::Derivative derivativeFilter;
 
 #pragma mark - Singleton
 
@@ -92,7 +113,7 @@ GRT::TimeSeriesClassificationData dataToBeClassified;
         /**************************/
         // set up the classifier  //
         /**************************/
-        bool useScaling = true;                                // default is false
+        bool useScaling = false;                                // default is false, don't use scaling, the sensor data are scaled before sending to the pipeline
         bool useNullRejection = true;                          // default is false
         double nullRejectionCoeff = 3.0;                        // default is 3.0
         uint rejectionMode = GRT::DTW::TEMPLATE_THRESHOLDS
@@ -114,13 +135,34 @@ GRT::TimeSeriesClassificationData dataToBeClassified;
         GRT::DTW dtw = GRT::DTW(useScaling, useNullRejection, nullRejectionCoeff, rejectionMode, dtwConstrain, radius, offsetUsingFirstSample, useSmooting, smoothingFactor);
         dtw.enableZNormalization(useZNomralization,constrainZNormalization);
         dtw.enableTrimTrainingData(trimTrainingData, trimThreshold, maxTrimPercentage);
-        
         grtPipeline.setClassifier( dtw );
+        
+        /**************************/
+        // preprocessing modules  //
+        /**************************/
+        /*int windowSize = 8;
+        int dimensions = kNumDimensions;
+        GRT::MovingAverageFilter movingAvgFilter( windowSize, dimensions);
+        grtPipeline.addPreProcessingModule(movingAvgFilter);
+        */
+        
         if( !grtPipeline.savePipelineToFile([path UTF8String]) ) {
             NSLog(@"Could't initially save pipeline to file");
             abort();
         }
     }
+    
+    
+    /**************************/
+    // preprocessing modules  //
+    /**************************/
+    int windowSize = 30;
+    int dimensions = kNumDimensions;
+    movingAvgFilter = GRT::MovingAverageFilter(windowSize, dimensions);
+    doubleMovingAvgFilter = GRT::DoubleMovingAverageFilter(windowSize, dimensions);
+    
+//    lowPassFilter = GRT::LowPassFilter(
+    
     init = grtPipeline.getIsInitialized();
     [self initTheClassificationData];
     [self trainClassifier];
@@ -140,6 +182,7 @@ GRT::TimeSeriesClassificationData dataToBeClassified;
     //!!! 0 is reserved for the null gesture, not allowed to use it when adding a sample
     GRT::UINT gestureLabel = (unsigned int)[classLabel.index unsignedIntegerValue];
     trainingData.addSample(gestureLabel, grtDataSample);
+    NSLog(@"adding sample to gesture label %d", gestureLabel);
     self.pipelineHasToBeTrained = true;
     
 }
@@ -192,7 +235,22 @@ GRT::TimeSeriesClassificationData dataToBeClassified;
     if (! grtPipeline.predict(dataMatrix)) {
         return -1;
     }
-    return grtPipeline.getPredictedClassLabel();
+    int result = grtPipeline.getPredictedClassLabel();
+    NSLog(@"predicted: %d", result);
+    GRT::DTW *dtwClassifier = (GRT::DTW *)grtPipeline.getClassifier();
+    std::vector<GRT::MatrixDouble> distanceMatrix = dtwClassifier->getDistanceMatrices();
+    GRT::VectorDouble classDistances = grtPipeline.getClassDistances();
+    GRT::VectorDouble classLikelihoods = grtPipeline.getClassLikelihoods();
+    std::vector<GRT::UINT> labels =  grtPipeline.getClassLabels();
+    NSLog(@"Class Distances:");
+    for (int i = 0; i < classDistances.size(); i++) {
+        NSLog(@"%f", classDistances[i]);
+    }
+    NSLog(@"Class Likelihoods:");
+    for (int i = 0; i < classLikelihoods.size(); i++) {
+        NSLog(@"%f", classLikelihoods[i]);
+    }
+    return result;
 }
 
 - (BOOL)savePipelneToFile
@@ -221,11 +279,11 @@ GRT::TimeSeriesClassificationData dataToBeClassified;
 {
     // set up the classification data with dimension
     // linera acceleration (3) + quiaterions (4) = 7
-    trainingData = GRT::TimeSeriesClassificationData(7);
+    trainingData = GRT::TimeSeriesClassificationData(kNumDimensions);
     NSString *setName = [NSString stringWithFormat:@"%@-trainingSet", self.currentGestureSet];
     trainingData.setDatasetName("TrainingSetTest");
     [self loadAllGesture];
-    dataToBeClassified = GRT::TimeSeriesClassificationData(7);
+    dataToBeClassified = GRT::TimeSeriesClassificationData(kNumDimensions);
 }
 
 /**
@@ -261,6 +319,10 @@ GRT::TimeSeriesClassificationData dataToBeClassified;
         trainingSample.push_back([NZPipelineController convertSensorData:data]);
     }
     // NSLog(@"%f", trainingSample[0][0]);
+    
+    //reset the filter
+    movingAvgFilter.reset();
+    doubleMovingAvgFilter.reset();
     return trainingSample;
 
 }
@@ -278,25 +340,49 @@ GRT::TimeSeriesClassificationData dataToBeClassified;
     }
     NZLinearAcceleration *acc = sensorData.linearAcceleration ;
     NZQuaternion *quaternions = sensorData.quaternion;
+    NZGravity *gravity = sensorData.gravity; // it might be also raw acceleration, depends what I set
+    double d;
     
-    double d = [(NSNumber *)[acc valueForKeyPath:@"x"] doubleValue];
-    sample.push_back(d);
-    d = [(NSNumber *)[acc valueForKeyPath:@"y"] doubleValue];
-    sample.push_back(d);
-    d = [(NSNumber *)[acc valueForKeyPath:@"z"] doubleValue];
-    sample.push_back(d);
+    if (kSensorModality == 0 || kSensorModality == 1 || kSensorModality == 3) {
+        d = [(NSNumber *)[acc valueForKeyPath:@"x"] doubleValue];
+        sample.push_back(d);
+        d = [(NSNumber *)[acc valueForKeyPath:@"y"] doubleValue];
+        sample.push_back(d);
+        d = [(NSNumber *)[acc valueForKeyPath:@"z"] doubleValue];
+        sample.push_back(d);
+    }
+    if (kSensorModality == 0 || kSensorModality == 2 || kSensorModality == 6) {
+        d = [(NSNumber *)[quaternions valueForKeyPath:@"w"] doubleValue];
+        sample.push_back(d);
+        d = [(NSNumber *)[quaternions valueForKeyPath:@"x"] doubleValue];
+        sample.push_back(d);
+        d = [(NSNumber *)[quaternions valueForKeyPath:@"y"] doubleValue];
+        sample.push_back(d);
+        d = [(NSNumber *)[quaternions valueForKeyPath:@"z"] doubleValue];
+        sample.push_back(d);
+    }
+    if (kSensorModality == 3 || kSensorModality == 4) {
+        d = [(NSNumber *)[quaternions valueForKeyPath:@"w"] doubleValue];
+        sample.push_back(d);
+    }
+    if (kSensorModality == 5 || kSensorModality == 6) {
+        d = [(NSNumber *)gravity.x doubleValue];
+        sample.push_back(d);
+        d = [(NSNumber *)gravity.y doubleValue];
+        sample.push_back(d);
+        d = [(NSNumber *)gravity.z doubleValue];
+        sample.push_back(d);
+    }
+    // NSLog(@"%lu", sample.size());
+        // NSLog(@"%f", sample[0]);
     
-    d = [(NSNumber *)[quaternions valueForKeyPath:@"w"] doubleValue];
-    sample.push_back(d);
-    d = [(NSNumber *)[quaternions valueForKeyPath:@"x"] doubleValue];
-    sample.push_back(d);
-    d = [(NSNumber *)[quaternions valueForKeyPath:@"y"] doubleValue];
-    sample.push_back(d);
-    d = [(NSNumber *)[quaternions valueForKeyPath:@"z"] doubleValue];
-    sample.push_back(d);
-   // NSLog(@"%lu", sample.size());
-   // NSLog(@"%f", sample[0]);
-    return sample;
+        // apply the preprocessing
+    GRT::VectorDouble sampleBefore = sample;
+    //GRT::VectorDouble sampleFiltered = movingAvgFilter.filter(sample);
+    GRT::VectorDouble sampleFiltered = doubleMovingAvgFilter.filter(sample);
+    //GRT::VectorDouble sampleFiltered = sample;
+    GRT::VectorDouble sampleAfter = sampleFiltered;
+    return sampleFiltered;
 }
 
 - (int)numberOfSamplesForClassLabelIndex:(NSNumber *)index
@@ -405,6 +491,7 @@ GRT::TimeSeriesClassificationData dataToBeClassified;
 
 - (BOOL)saveDataSamplesToFile:(NSString *)name
 {
+    [[[NZGestureSetHandler sharedManager] selectedGestureSet] saveToFile];
     NSMutableString *nameWithExtension = [NSMutableString stringWithString:name];
     [nameWithExtension appendString:@".xls"];
     NSString *path = [[NZPipelineController documentPath] stringByAppendingPathComponent:nameWithExtension];

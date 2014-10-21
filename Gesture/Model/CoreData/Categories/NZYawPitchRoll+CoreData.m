@@ -9,6 +9,9 @@
 #import "NZYawPitchRoll+CoreData.h"
 #import "NSManagedObject+CoreData.h"
 
+static float kYPRMaxValue = 180.0;
+static float kYPRMinValue = -180.0;
+
 @implementation NZYawPitchRoll (CoreData)
 
 #pragma mark - Create
@@ -39,6 +42,23 @@
 + (void)destroyAll
 {
     [super destroyAllEntitiesWithName:ENTITY_NAME_YAW_PITCH_ROLL];
+}
+
+- (NSString *)valuesToString
+{
+    NSString *string = [NSString stringWithFormat:@"%f\t%f\t%f", [self.yaw floatValue], [self.pitch floatValue], [self.roll floatValue]];
+    return string;
+}
+
+- (void)normalize
+{
+    float yaw = ([self.yaw floatValue] - kYPRMinValue) / (kYPRMaxValue-kYPRMinValue);
+    float pitch = ([self.pitch floatValue] - kYPRMinValue) / (kYPRMaxValue-kYPRMinValue);
+    float roll = ([self.roll floatValue] - kYPRMinValue) / (kYPRMaxValue-kYPRMinValue);
+    
+    self.yaw = [NSNumber numberWithFloat:yaw];
+    self.pitch = [NSNumber numberWithFloat:pitch];
+    self.roll = [NSNumber numberWithFloat:roll];
 }
 
 @end

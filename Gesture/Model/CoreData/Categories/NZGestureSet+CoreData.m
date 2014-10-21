@@ -79,5 +79,11 @@
     return (NZGestureSet *)[super clone];
 }
 
+- (void)saveToFile
+{
+    for (NZGesture *gesture in self.gestures) {
+        [gesture saveToFile];
+    }
+}
 
 @end

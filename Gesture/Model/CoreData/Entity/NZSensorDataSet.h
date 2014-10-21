@@ -23,6 +23,8 @@ static NSString *ENTITY_NAME_SENSOR_DATA_SET = @"NZSensorDataSet";
 @property (nonatomic, retain) NSManagedObject *gestureNegative;
 @property (nonatomic, retain) NSManagedObject *gesturePositive;
 @property (nonatomic, retain) NSSet *sensorData;
+@property (nonatomic, retain) NZSensorData *sample0;
+
 @end
 
 @interface NZSensorDataSet (CoreDataGeneratedAccessors)

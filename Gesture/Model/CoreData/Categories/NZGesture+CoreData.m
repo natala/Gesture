@@ -87,6 +87,46 @@
     return (NZGesture *)[super clone];
 }
 
+#pragma mark - saving to file
+- (void)saveToFile
+{
+    NSString *fileName = self.label.name;
+    [self saveToFileWithName:fileName];
+    
+}
 
+- (void)saveToFileWithName:(NSString *)fileName
+{
+    NSMutableString *nameWithExtension = [NSMutableString stringWithString:fileName];
+    [nameWithExtension appendString:@".xls"];
+    NSString *path = [[self documentPath] stringByAppendingPathComponent:nameWithExtension];
+    NSMutableString *string = [[NSMutableString alloc] initWithString:self.label.name];
+    [string appendString:@"\t"];
+    [string appendFormat:@"%@", self.label.index];
+    
+    NSArray *allSets = [self.positiveSamples allObjects];
+    for (NZSensorDataSet *set in allSets) {
+        [string appendString:@"\n"];
+        [string appendString:[set sensorDataSetToString]];
+    }
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
+        NSLog(@"Pipeline Controller is creating a new file for saving");
+        if (![[NSFileManager defaultManager] createFileAtPath:path contents:nil attributes:nil]) {
+            NSLog(@"Couldn't create file");
+        }
+    }
+    NSFileHandle *handler = [NSFileHandle fileHandleForWritingAtPath:path];
+    [handler writeData:[string dataUsingEncoding:NSUTF8StringEncoding]];
+}
+
+
+#pragma mark - Helpers
+
+- (NSString *)documentPath
+{
+    NSArray *searchPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    return [searchPath objectAtIndex:0];
+}
 
 @end

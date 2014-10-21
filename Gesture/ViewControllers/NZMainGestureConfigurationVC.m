@@ -177,6 +177,9 @@
 {
     NZGesture *gesture = [self.gesturesSorted objectAtIndex:row];
     NZClassLabel *label = gesture.label;
+    
+    NSLog(@"name - id: %@ - %@ ", gesture.label.name, gesture.label.index);
+    
     return label.name;
 }
 

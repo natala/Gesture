@@ -44,9 +44,9 @@
     // hardcode the actions and action groups
     // controll the lights
   
-    //[NZAction destroyAll];
+    [NZAction destroyAll];
   
-   /*
+   
     NZHttpRequest *hueOff01 = [NZHttpRequest create];
     hueOff01.name = @"hue 1 off";
     hueOff01.url = @"http://10.130.108.79/api/newdeveloper/lights/1/state";
@@ -67,7 +67,7 @@
     
     NZHttpRequest *hueOff03 = [NZHttpRequest create];
     hueOff03.name = @"hue 3 off";
-    hueOff03.url = @"http://    ";
+    hueOff03.url = @"http://http://10.130.108.79/api/newdeveloper/lights/3/state";
     hueOff03.httpMethod = @"PUT";
     hueOff03.message = @"{\"on\":false}";
     hueOff03.httpHeaderContentType = @"application/json";
@@ -76,7 +76,7 @@
     
     NZHttpRequest *hueOn01 = [NZHttpRequest create];
     hueOn01.name = @"hue 1 on";
-    hueOn01.url = @"http://10.130.108.79/api/newdeveloper/lights/2/state";
+    hueOn01.url = @"http://10.130.108.79/api/newdeveloper/lights/1/state";
     hueOn01.httpMethod = @"PUT";
     hueOn01.message = @"{\"on\":true}";
     hueOn01.httpHeaderContentType = @"application/json";
@@ -100,7 +100,7 @@
     hueOn03.httpHeaderContentType = @"application/json";
     hueOn03.httpHeaderAccept = @"application/json";
     hueOn03.undoCommand = @"{\"on\":false}";
-   */
+   
     // herbi radio
     /*
     NZUrlSession *play = [NZUrlSession create];
@@ -153,8 +153,8 @@
     wifiPlug2.undoCommand = @"on";
    */
     
-  /*  // composites
-    NZActionComposite *morning = [NZActionComposite create];
+    // composites
+   /* NZActionComposite *morning = [NZActionComposite create];
     morning.name = @"Morning";
     morning.childActions = [[NSSet alloc] initWithObjects:hueOn01, hueOff02, hueOff03, nil];
     
@@ -165,8 +165,8 @@
     NZActionComposite *evening = [NZActionComposite create];
     evening.name = @"Evening";
     evening.childActions = [[NSSet alloc] initWithObjects:hueOn01, hueOn02, hueOn03, nil];
-
-    */
+*/
+    
     // *********** //
     // TUM ACTIONS //
     // *********** //

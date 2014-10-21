@@ -51,4 +51,15 @@
     return (NZSensorDataSet *)[super clone];
 }
 
+- (NSString *)sensorDataSetToString
+{
+    NSArray *dataArray = [self.sensorData allObjects];
+    NSMutableString *string = [[NSMutableString alloc] initWithString:@"linear acceleration/tquaternions\tyaw pitch roll\tgravity"];
+    for (NZSensorData *data in dataArray) {
+        [string appendString:@"\n"];
+        [string appendString:[data sensorValuesAsString]];
+    }
+    return string;
+}
+
 @end

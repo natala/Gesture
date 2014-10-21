@@ -205,7 +205,7 @@
 
 - (void)didReceiveSensorData:(NZSensorData *) sensorData forSensorDataSet:(NZSensorDataSet *) sensorDataSet
 {
-    NSLog(@"Sensor Data Recording Manager did receive sensor data");
+   // NSLog(@"Sensor Data Recording Manager did receive sensor data");
 }
 
 - (void)didStopRecordingSensorDataSet:(NZSensorDataSet *) sensorDataSet

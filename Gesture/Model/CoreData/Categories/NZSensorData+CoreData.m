@@ -54,4 +54,30 @@
     return (NZSensorData *)[super clone];
 }
 
+- (NSString *)sensorValuesAsString
+{
+    NSMutableString *string = [[NSMutableString alloc] initWithString:@""];
+    [string appendString:[self.linearAcceleration valuesToString]];
+    [string appendString:@"\t"];
+    [string appendString:[self.quaternion valuesToString]];
+    [string appendString:@"\t"];
+    [string appendString:[self.yawPitchRoll valuesToString]];
+    [string appendString:@"\t"];
+    [string appendString:[self.gravity valuesToString]];
+    return string;
+}
+
+- (void)normalize
+{
+    if (self.linearAcceleration)
+        [self.linearAcceleration normalize];
+    if (self.quaternion)
+        [self.quaternion normalize];
+    if (self.yawPitchRoll)
+        [self.yawPitchRoll normalize];
+    if (self.gravity)
+        [self.gravity normalize]; // this is not normalizing gravity actually
+  
+}
+
 @end
