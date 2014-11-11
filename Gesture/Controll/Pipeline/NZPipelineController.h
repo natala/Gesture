@@ -23,7 +23,7 @@
  */
 + (NZPipelineController *)sharedManager;
 
-@property (nonatomic, retain) id<NZPipelineControllerDelegate> delegate;
+// @property (nonatomic, retain) id<NZPipelineControllerDelegate> delegate;
 
 /**
  * check whether there is a backup of the pipeline
@@ -68,6 +68,8 @@
  * @note should be always called whenever new gesture has been added or modified
  */
 - (BOOL)trainClassifier;
+
+- (BOOL)trainGestureWithClassLabel:(NZClassLabel *)classLabel;
 
 /**
  * classifies the sensor data set

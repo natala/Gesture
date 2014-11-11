@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 TUM. All rights reserved.
 //
 
+#import "NZClassificationController.h"
+
 #import "NZPipelineController.h"
 #import "NZSensorData+CoreData.h"
 #import "NZSensorDataSet.h"
@@ -47,12 +49,18 @@ uint const kSensorModality = 5;
  */
 @property (nonatomic, strong) NSString *currentGestureSet;
 
+@property NZClassificationController *classificationController;
+
 @end
 
 @implementation NZPipelineController
 
 GRT::GestureRecognitionPipeline grtPipeline;
 GRT::GestureRecognitionPipeline testGrtPipeline;
+
+GRT::DTW dtw;
+GRT::DTW trainingDtw;
+
 GRT::TimeSeriesClassificationData trainingData;
 GRT::TimeSeriesClassificationData dataToBeClassified;
 
@@ -94,7 +102,9 @@ GRT::Derivative derivativeFilter;
     self.currentGestureSet = setName;
     //grtPipeline = GRT::GestureRecognitionPipeline();
     NSString *fileName = [NSString stringWithFormat:@"%@-pipeline.txt",setName];
+    NSString *classifierFileName = [NSString stringWithFormat:@"%@-classifierDtw.txt",setName];
     NSString *path = [[NZPipelineController documentPath] stringByAppendingPathComponent:fileName];
+    NSString *classifierPath = [[NZPipelineController documentPath] stringByAppendingPathComponent:classifierFileName];
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
         NSLog(@"Pipeline Controller is creating a new file for saving");
@@ -103,7 +113,13 @@ GRT::Derivative derivativeFilter;
         }
     }
     BOOL init = grtPipeline.getIsInitialized();
-    if ( !grtPipeline.loadPipelineFromFile([path UTF8String]) ) {
+    BOOL pipelineLoaded = grtPipeline.loadPipelineFromFile([path UTF8String]);
+    
+    if (pipelineLoaded) {
+        self.classificationController = [[NZClassificationController alloc] initFromFile:classifierFileName];
+    }
+    
+    if ( !pipelineLoaded ) {
         //if ( true ) {
         grtPipeline = GRT::GestureRecognitionPipeline();
         init = grtPipeline.getIsInitialized();
@@ -132,9 +148,12 @@ GRT::Derivative derivativeFilter;
         double maxTrimPercentage = 50;                          // no default value ?
         
         
-        GRT::DTW dtw = GRT::DTW(useScaling, useNullRejection, nullRejectionCoeff, rejectionMode, dtwConstrain, radius, offsetUsingFirstSample, useSmooting, smoothingFactor);
+        dtw = GRT::DTW(useScaling, useNullRejection, nullRejectionCoeff, rejectionMode, dtwConstrain, radius, offsetUsingFirstSample, useSmooting, smoothingFactor);
         dtw.enableZNormalization(useZNomralization,constrainZNormalization);
         dtw.enableTrimTrainingData(trimTrainingData, trimThreshold, maxTrimPercentage);
+        
+        trainingDtw = GRT::DTW( dtw );
+        
         grtPipeline.setClassifier( dtw );
         
         /**************************/
@@ -150,8 +169,12 @@ GRT::Derivative derivativeFilter;
             NSLog(@"Could't initially save pipeline to file");
             abort();
         }
+
     }
     
+    // init classifier controller
+     self.classificationController = [[NZClassificationController alloc] initWithClassifier:dtw];
+    [self.classificationController saveClassifierToFileWithName:classifierFileName];
     
     /**************************/
     // preprocessing modules  //
@@ -182,6 +205,9 @@ GRT::Derivative derivativeFilter;
     //!!! 0 is reserved for the null gesture, not allowed to use it when adding a sample
     GRT::UINT gestureLabel = (unsigned int)[classLabel.index unsignedIntegerValue];
     trainingData.addSample(gestureLabel, grtDataSample);
+    
+    [self.classificationController addTrainindSample:grtDataSample withLabel:gestureLabel];
+    
     NSLog(@"adding sample to gesture label %d", gestureLabel);
     self.pipelineHasToBeTrained = true;
     
@@ -189,7 +215,8 @@ GRT::Derivative derivativeFilter;
 
 - (void)removeAllSamplesWithLable:(NZClassLabel *)classLabel
 {
-    trainingData.eraseAllSamplesWithClassLabel([classLabel.index unsignedIntegerValue]);
+    trainingData.eraseAllSamplesWithClassLabel((GRT::UINT)[classLabel.index unsignedIntegerValue]);
+    [self.classificationController removeAllSamplesWithLable:(GRT::UINT)[classLabel.index unsignedIntegerValue]];
     self.pipelineHasToBeTrained = true;
 }
 
@@ -211,12 +238,13 @@ GRT::Derivative derivativeFilter;
 
 - (void)reloadTrainingSamplesForGesture:(NZGesture *)gesture{
     [self removeAllSamplesWithLable:gesture.label];
+    [self.classificationController removeAllSamplesWithLable:(GRT::UINT)[gesture.label.index unsignedIntegerValue]];
     [self loadGesture:gesture];
 }
 
 - (BOOL)trainClassifier
 {
-    BOOL res = grtPipeline.train(trainingData);
+   /* BOOL res = grtPipeline.train(trainingData);
     if (!res) {
         NSLog(@"unable to train classifier!!!");
         self.pipelineHasToBeTrained = true;
@@ -224,20 +252,30 @@ GRT::Derivative derivativeFilter;
         self.pipelineHasToBeTrained = false;
     }
     [self savePipelneToFile];
+    */
+    BOOL res = [self.classificationController train];
+    
     return res;
 }
 
+- (BOOL)trainGestureWithClassLabel:(NZClassLabel *)classLabel
+{
+    return [self.classificationController trainGestureWithLabel:(GRT::UINT)[classLabel.index unsignedIntegerValue]];
+}
 
 - (int)classifySensorDataSet:(NZSensorDataSet *)set
 {
     NSLog(@"classify!!!!");
     GRT::MatrixDouble dataMatrix = [NZPipelineController convertSensorDataSet:set];
-    if (! grtPipeline.predict(dataMatrix)) {
+   /* if (! grtPipeline.predict(dataMatrix)) {
         return -1;
     }
-    int result = grtPipeline.getPredictedClassLabel();
+    int result = grtPipeline.getPredictedClassLabel();*/
+    
+    int result = [self.classificationController predict:dataMatrix];
+
     NSLog(@"predicted: %d", result);
-    GRT::DTW *dtwClassifier = (GRT::DTW *)grtPipeline.getClassifier();
+   /* GRT::DTW *dtwClassifier = (GRT::DTW *)grtPipeline.getClassifier();
     std::vector<GRT::MatrixDouble> distanceMatrix = dtwClassifier->getDistanceMatrices();
     GRT::VectorDouble classDistances = grtPipeline.getClassDistances();
     GRT::VectorDouble classLikelihoods = grtPipeline.getClassLikelihoods();
@@ -249,17 +287,24 @@ GRT::Derivative derivativeFilter;
     NSLog(@"Class Likelihoods:");
     for (int i = 0; i < classLikelihoods.size(); i++) {
         NSLog(@"%f", classLikelihoods[i]);
-    }
+    }*/
     return result;
 }
 
 - (BOOL)savePipelneToFile
 {
-    NSMutableString *fileName = [NSMutableString stringWithString:self.currentGestureSet];
-    [fileName appendString:[[NSDate date] description]];
-    [fileName appendString:@" -Pipeline"];
+    NSMutableString *pipelineFileName = [NSMutableString stringWithString:self.currentGestureSet];
+    NSMutableString *classifierFileName = [NSMutableString stringWithString:self.currentGestureSet];
+    [pipelineFileName appendString:[[NSDate date] description]];
+    [pipelineFileName appendString:@" -Pipeline"];
+    
+    [classifierFileName appendString:[[NSDate date] description]];
+    [classifierFileName appendString:@" -classifierDTW"];
    // NSString *path = [[NZPipelineController documentPath] stringByAppendingPathComponent:kGrtPipelineFileName];
-    return [self savePipelineToFileWithName:fileName];
+    
+    [self.classificationController saveClassifierToFileWithName:classifierFileName];
+    
+    return [self savePipelineToFileWithName:pipelineFileName];
 }
 
 - (BOOL)savePipelineToFileWithName:(NSString *)name
@@ -270,7 +315,8 @@ GRT::Derivative derivativeFilter;
 
 - (void)removeClassLabel:(NZClassLabel *)classLabel
 {
-    trainingData.eraseAllSamplesWithClassLabel([classLabel.index unsignedIntegerValue]);
+    trainingData.eraseAllSamplesWithClassLabel((GRT::UINT)[classLabel.index unsignedIntegerValue]);
+    [self.classificationController removeAllSamplesWithLable:(GRT::UINT)[classLabel.index unsignedIntegerValue]];
     self.pipelineHasToBeTrained = true;
 }
 
@@ -282,6 +328,9 @@ GRT::Derivative derivativeFilter;
     trainingData = GRT::TimeSeriesClassificationData(kNumDimensions);
     NSString *setName = [NSString stringWithFormat:@"%@-trainingSet", self.currentGestureSet];
     trainingData.setDatasetName("TrainingSetTest");
+    
+    [self.classificationController setTrainingData:trainingData];
+    
     [self loadAllGesture];
     dataToBeClassified = GRT::TimeSeriesClassificationData(kNumDimensions);
 }

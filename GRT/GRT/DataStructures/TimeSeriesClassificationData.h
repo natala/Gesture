@@ -300,8 +300,8 @@ public:
      
 	 @param const UINT classLabel: the class label of the class you want the data for
 	 @return returns a dataset containing all the data with the matching classLabel
-     */
-    TimeSeriesClassificationData getClassData(const UINT classLabel) const;
+     */    TimeSeriesClassificationData getClassData(const UINT classLabel) const;
+
     
     /**
      Reformats the TimeSeriesClassificationData as UnlabeledData so the data can be used to train unsupervised training algorithms such as K-Means Clustering and Gaussian Mixture Models.

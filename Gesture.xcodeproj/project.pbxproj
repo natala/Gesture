@@ -20,6 +20,7 @@
 		8A6A9B3519D5C597008F3513 /* NZActionsMainConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6A9B3419D5C597008F3513 /* NZActionsMainConfiguration.m */; };
 		8A6AF54C195CBAF20015B571 /* NZSensorDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6AF54B195CBAF20015B571 /* NZSensorDataHelper.m */; };
 		8A6F24A919D441950048CE8C /* NZMainGestureConfigurationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6F24A819D441950048CE8C /* NZMainGestureConfigurationVC.m */; };
+		8A7FC2A91A12120600CBFF65 /* NZClassificationController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8A7FC2A81A12120600CBFF65 /* NZClassificationController.mm */; };
 		8A922904195C3A3800DF7743 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A922903195C3A3800DF7743 /* Foundation.framework */; };
 		8A922906195C3A3800DF7743 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A922905195C3A3800DF7743 /* CoreGraphics.framework */; };
 		8A922908195C3A3800DF7743 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A922907195C3A3800DF7743 /* UIKit.framework */; };
@@ -245,6 +246,8 @@
 		8A6AF54B195CBAF20015B571 /* NZSensorDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZSensorDataHelper.m; path = Model/NZSensorDataHelper.m; sourceTree = "<group>"; };
 		8A6F24A719D441950048CE8C /* NZMainGestureConfigurationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZMainGestureConfigurationVC.h; path = ViewControllers/NZMainGestureConfigurationVC.h; sourceTree = "<group>"; };
 		8A6F24A819D441950048CE8C /* NZMainGestureConfigurationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZMainGestureConfigurationVC.m; path = ViewControllers/NZMainGestureConfigurationVC.m; sourceTree = "<group>"; };
+		8A7FC2A71A12120600CBFF65 /* NZClassificationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZClassificationController.h; sourceTree = "<group>"; };
+		8A7FC2A81A12120600CBFF65 /* NZClassificationController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NZClassificationController.mm; sourceTree = "<group>"; };
 		8A922900195C3A3800DF7743 /* Gesture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gesture.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A922903195C3A3800DF7743 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8A922905195C3A3800DF7743 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -763,6 +766,8 @@
 			children = (
 				8A5AB06719783369006B2FBC /* NZPipelineController.h */,
 				8A5AB06819783369006B2FBC /* NZPipelineController.mm */,
+				8A7FC2A71A12120600CBFF65 /* NZClassificationController.h */,
+				8A7FC2A81A12120600CBFF65 /* NZClassificationController.mm */,
 			);
 			name = Pipeline;
 			sourceTree = "<group>";
@@ -2118,6 +2123,7 @@
 				8AA4188A19B9B15B0027FDED /* NZActionHandler.m in Sources */,
 				8AE8CB36196AD1FA008BE33E /* NZGraphView.m in Sources */,
 				8AF5319C19992D7100D10EBE /* NZMainSetTestingVC.m in Sources */,
+				8A7FC2A91A12120600CBFF65 /* NZClassificationController.mm in Sources */,
 				8AF7F9AD1969C89F00DB6D7C /* RegressionSample.cpp in Sources */,
 				8AF0F40219A79DAD001645A2 /* NZSingleAction+Execute.m in Sources */,
 				8AEFC62E19ACB6D700E25943 /* NZGesture2ActionsMappingVC.m in Sources */,
