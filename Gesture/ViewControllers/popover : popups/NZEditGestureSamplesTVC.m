@@ -13,6 +13,8 @@
 
 @interface NZEditGestureSamplesTVC ()
 
+@property NSArray *sortedSamples;
+
 @end
 
 @implementation NZEditGestureSamplesTVC
@@ -32,12 +34,15 @@
     [self.tableView setEditing:YES animated:YES];
     self.tableView.allowsSelectionDuringEditing = YES;
     
+    [self updatedSamples];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -59,7 +64,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.gesture.positiveSamples count];
+    return [self.sortedSamples count];
 }
 
 
@@ -95,7 +100,7 @@
         NSLog(@"Deleting a cell");
         NSManagedObjectContext *context = [[NZCoreDataManager sharedManager] managedObjectContext];
         
-        NZSensorDataSet *sample = [[self.gesture.positiveSamples allObjects] objectAtIndex:indexPath.row];
+        NZSensorDataSet *sample = [self.sortedSamples objectAtIndex:indexPath.row];
        // [[NZPipelineController sharedManager] removeClassLabel:gesture.label];
         [sample destroy];
         
@@ -109,6 +114,7 @@
             abort();
         }
         
+        [self updatedSamples];
         [self.tableView reloadData];
         
         if (self.delegate) {
@@ -132,9 +138,16 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
 #warning TODO configure the cell properly
-    NZSensorDataSet *sample = [[self.gesture.positiveSamples allObjects] objectAtIndex:indexPath.row];
+    NZSensorDataSet *sample = [self.sortedSamples objectAtIndex:indexPath.row];
     NSDate *date = [sample valueForKey:@"timeStampCreated"];
     cell.textLabel.text = [date description];
+}
+
+#pragma mark - Helper functions
+- (void)updatedSamples
+{
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timeStampCreated" ascending:YES];
+    self.sortedSamples = [[self.gesture.positiveSamples allObjects] sortedArrayUsingDescriptors:@[sortDescriptor]];
 }
 
 /*

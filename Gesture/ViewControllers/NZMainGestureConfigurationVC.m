@@ -46,7 +46,8 @@
 
 #pragma mark - Others
 @property (retain, nonatomic) NZGestureSet *gestureSet;
-@property (retain, nonatomic) NSArray *gesturesSorted;
+@property (retain,
+           nonatomic) NSArray *gesturesSorted;
 @property (retain, nonatomic) NZGesture *selectedGesture;
 
 @property BOOL isRecordingGesture;
@@ -70,10 +71,12 @@
     self.samplesPopoverController = [[UIPopoverController alloc] initWithContentViewController:samplesVC];
     self.samplesPopoverController.delegate = self;
     //  * Camera
-    self.cameraPopoverController = [[UIPopoverController alloc] initWithContentViewController:samplesVC];
+    UIViewController *cameraVC = [storyboard instantiateViewControllerWithIdentifier:@"CameraRecordVC"];
+    self.cameraPopoverController = [[UIPopoverController alloc] initWithContentViewController:cameraVC];
     self.cameraPopoverController.delegate = self;
     //  * Check
-    self.checkPopoverController = [[UIPopoverController alloc] initWithContentViewController:samplesVC];
+    UIViewController *checkVC = [storyboard instantiateViewControllerWithIdentifier:@"GestureCheckVC"];
+    self.checkPopoverController = [[UIPopoverController alloc] initWithContentViewController:checkVC];
     self.checkPopoverController.delegate = self;
     // * Actions
     UIViewController *actionsVc = [storyboard instantiateViewControllerWithIdentifier:@"gestureActionMappingVc"];
@@ -397,7 +400,12 @@
     
     NZCoreDataManager *manager = [NZCoreDataManager sharedManager];
     [manager save];
+    
     [self updateGestureSet];
+    uint newGestureIndex = [self.gesturesSorted indexOfObject:newGesture];
+    [self.gesturePickerView selectRow:newGestureIndex inComponent:0 animated:NO];
+    self.selectedGesture = [self.gesturesSorted objectAtIndex:newGestureIndex];
+    
     [self.gesturePickerView reloadAllComponents];
     
 }

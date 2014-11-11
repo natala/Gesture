@@ -68,11 +68,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    // set the default selection to the recording
     NSIndexPath *indexPath = [self.tableView indexPathForCell:self.configureCell];
     [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
-    self.selectedCell = self.configureCell;
+    // set the default selection to the recording
+       self.selectedCell = self.configureCell;
    // self.selectedCell.userInteractionEnabled = NO;
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -83,9 +82,13 @@
 
 - (void)viewDidLayoutSubviews
 {
-    [super viewDidLayoutSubviews];
     [self presentStartScreenAnimated:NO];
     self.selectedCell.highlighted = true;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidLayoutSubviews];
 }
 
 - (void)didReceiveMemoryWarning
@@ -104,6 +107,7 @@
     self.startScreenVc = startScreen;
     self.startScreenVc.delegate = self;
     [self presentViewController:self.startScreenVc animated:animated completion:nil];
+    [self.navigationController popToRootViewControllerAnimated:NO];
 }
 
 #pragma mark - Table view data source

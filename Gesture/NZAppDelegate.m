@@ -46,7 +46,7 @@
   
     [NZAction destroyAll];
   
-   
+   /*
     NZHttpRequest *hueOff01 = [NZHttpRequest create];
     hueOff01.name = @"hue 1 off";
     hueOff01.url = @"http://10.130.108.79/api/newdeveloper/lights/1/state";
@@ -100,7 +100,7 @@
     hueOn03.httpHeaderContentType = @"application/json";
     hueOn03.httpHeaderAccept = @"application/json";
     hueOn03.undoCommand = @"{\"on\":false}";
-   
+   */
     // herbi radio
     /*
     NZUrlSession *play = [NZUrlSession create];
@@ -170,7 +170,7 @@
     // *********** //
     // TUM ACTIONS //
     // *********** //
-/*
+
     // SMART LAB //
     // lights
     NZHttpRequest *labLighWindowOn = [NZHttpRequest create];
@@ -203,7 +203,7 @@
     
     //blinds
     NZHttpRequest *labBlindsOn = [NZHttpRequest create];
-    labBlindsOn.name = @"CR blinds on";
+    labBlindsOn.name = @"LAB blinds on";
     labBlindsOn.url = @"http://ios14cmu-bruegge.in.tum.de:8080/rest/items/EO_SL_Blinds_B";
     labBlindsOn.httpMethod = @"POST";
     labBlindsOn.message = @"ON";
@@ -218,7 +218,7 @@
     
     // CONFERENCE ROOM //
     //blinds
-    NZHttpRequest *crBlindsBOn = [NZHttpRequest create];
+   /* NZHttpRequest *crBlindsBOn = [NZHttpRequest create];
     crBlindsBOn.name = @"CR blinds B on";
     crBlindsBOn.url = @"http://ios14cmu-bruegge.in.tum.de:8080/rest/items/EO_CR_Blinds_B";
     crBlindsBOn.httpMethod = @"POST";

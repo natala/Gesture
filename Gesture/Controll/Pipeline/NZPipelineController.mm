@@ -115,7 +115,7 @@ GRT::Derivative derivativeFilter;
         /**************************/
         bool useScaling = false;                                // default is false, don't use scaling, the sensor data are scaled before sending to the pipeline
         bool useNullRejection = true;                          // default is false
-        double nullRejectionCoeff = 3.0;                        // default is 3.0
+        double nullRejectionCoeff = 2.0;                        // default is 3.0
         uint rejectionMode = GRT::DTW::TEMPLATE_THRESHOLDS
         ;     // default is TEMPLATE_THRESHOLD
         bool dtwConstrain = false;                               // default is true
@@ -156,7 +156,7 @@ GRT::Derivative derivativeFilter;
     /**************************/
     // preprocessing modules  //
     /**************************/
-    int windowSize = 30;
+    int windowSize = 20;
     int dimensions = kNumDimensions;
     movingAvgFilter = GRT::MovingAverageFilter(windowSize, dimensions);
     doubleMovingAvgFilter = GRT::DoubleMovingAverageFilter(windowSize, dimensions);
