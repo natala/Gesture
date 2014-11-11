@@ -23,6 +23,7 @@
 
 #pragma mark - UI Elements
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 #pragma mark - IB Actions
 - (IBAction)goButtonTapped:(UIButton *)sender;

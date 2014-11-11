@@ -45,6 +45,12 @@ static NSString *kPickerRowNewName = @"new";
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self.activityIndicator stopAnimating];
+    [super viewWillDisappear:animated];
+}
+
 - (void)presentAlert
 {
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:nil delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"done", nil];
@@ -113,6 +119,7 @@ static NSString *kPickerRowNewName = @"new";
         [self presentAlert];
         return;
     } else {
+        [self.activityIndicator startAnimating];
         [self didSelectGestureSet];
     }
 }

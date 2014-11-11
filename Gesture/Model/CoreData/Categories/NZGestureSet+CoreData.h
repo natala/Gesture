@@ -28,4 +28,9 @@
 
 - (void)saveToFile;
 
+/**
+ * checks if this gesture set contains a gesture with the given class label
+ */
+- (bool)hasGestureWithLabel:(NSString *)classLabelName;
+
 @end

@@ -9,6 +9,7 @@
 #import "NZGestureSet+CoreData.h"
 #import "NZGesture+CoreData.h"
 #import "NSManagedObject+CoreData.h"
+#import "NZClassLabel+CoreData.h"
 
 @implementation NZGestureSet (CoreData)
 
@@ -58,6 +59,15 @@
 	return [fetchedEntities objectAtIndex:0];
 }
 
+- (bool)hasGestureWithLabel:(NSString *)classLabelName
+{
+    for (NZGesture *gesture in self.gestures) {
+        if ([gesture.label.name isEqualToString:classLabelName]) {
+            return true;
+        }
+    }
+    return false;
+}
 
 #pragma mark - Destroy
 - (void)destroy

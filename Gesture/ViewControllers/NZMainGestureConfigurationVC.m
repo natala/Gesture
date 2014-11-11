@@ -125,6 +125,7 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    [self.activityIndicator stopAnimating];
     if ([NZPipelineController sharedManager].pipelineHasToBeTrained) {
         [[NZPipelineController sharedManager] trainClassifier];
     }
@@ -133,7 +134,7 @@
     self.gestureRecordingButton.hidden = true;
     self.gestureRecordingButton.highlighted = false;
     self.connectButton.hidden = false;
-    
+    [self.activityIndicator stopAnimating];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -370,10 +371,12 @@
 {
     UITextField *textField = [self.addGestureAlertController.textFields objectAtIndex:0];
     
-    if ([textField.text isEqualToString:@""]) {
+    NSString *text = [NSString stringWithString:textField.text];
+    textField.text = nil;
+    if ([text isEqualToString:@""]) {
         return;
     }
-    if ([NZClassLabel existsWithName:textField.text]) {
+    if ( [self.gestureSet hasGestureWithLabel:text]) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"a gesture with the given name already exists" message:nil preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
         [alert addAction:okAction];
@@ -388,7 +391,7 @@
     }
     
     NZClassLabel *newClassLabel = [NZClassLabel create];
-    newClassLabel.name = textField.text;
+    newClassLabel.name = text;
     newClassLabel.index = index;
     
     NZGesture *newGesture = [NZGesture create];

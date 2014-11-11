@@ -15,6 +15,9 @@
 
 @interface NZMainGestureConfigurationVC : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, UIPopoverControllerDelegate, NZSensorDataRecordingManagerObserver, NZEditingGestureSamplesTVCDelegare, NZGestureActionMappingVCDelegate>
 
+#pragma mark - UIElements
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+
 #pragma mark - IBActions
 - (IBAction)samplesButtonTapped:(UIButton *)sender;
 - (IBAction)cameraButtonTapped:(UIButton *)sender;
