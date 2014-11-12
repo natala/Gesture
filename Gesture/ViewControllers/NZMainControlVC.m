@@ -27,9 +27,10 @@
 @property (nonatomic)  BOOL recordingManagerIsConnected;
 @property (nonatomic)  BOOL actionManagerIsReady;
 
-@property (nonatomic, retain) UIAlertController *alertController;
-@property (nonatomic, retain) UIAlertController *disconnectedAllertController;
-@property BOOL ringDisconnected;
+@property (nonatomic, retain) UIAlertController *notConnectedAllert;
+//@property (nonatomic, retain) UIAlertController *alertController;
+//@property (nonatomic, retain) UIAlertController *disconnectedAllertController;
+//@property BOOL ringDisconnected;
 
 @property (nonatomic, retain) UIPopoverController *feedbackPopover;
 
@@ -53,9 +54,17 @@
     self.isRecordingGesture = false;
     self.actionManagerIsReady = false;
     self.recordingManagerIsConnected = false;
+    
     //self.httpRequest = @"http://192.168.1.105/api/newdeveloper/lights/2/state";
     // Do any additional setup after loading the view.
-    self.alertController = [UIAlertController alertControllerWithTitle:@"Connect to the PowerRing" message:@"Make sure the PowerRing is turned on" preferredStyle:UIAlertControllerStyleAlert];
+    self.notConnectedAllert = [UIAlertController alertControllerWithTitle:@"Connect Power Ring" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    
+    [[NZArduinoCommunicationManager sharedManager]addArduinoCommunicationObserver:self];
+    if ([[NZArduinoCommunicationManager sharedManager] isConnected]) {
+        [self setupMainControl];
+    }
+    
+    /*self.alertController = [UIAlertController alertControllerWithTitle:@"Connect to the PowerRing" message:@"Make sure the PowerRing is turned on" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *action = [UIAlertAction actionWithTitle:@"Connect" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [self startButtonTapped:self.startButton];
         NSLog(@"trying to connect");
@@ -69,7 +78,8 @@
     self.disconnectedAllertController = [UIAlertController alertControllerWithTitle:@"PowerRing disconnected" message:nil preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
     [self.disconnectedAllertController addAction:okAction];
-    self.ringDisconnected = false;
+     */
+   // self.ringDisconnected = ture;
 }
 
 - (void)didReceiveMemoryWarning
@@ -88,9 +98,14 @@
     } else {
         self.singleGroupSegmentControl.selectedSegmentIndex = 1;
     }
-    self.stopStartGestureButton.enabled = false;
-    self.notConnectedLabel.hidden = false;
-    [self startButtonTapped:self.startButton];
+   // self.stopStartGestureButton.enabled = false;
+    //self.notConnectedLabel.hidden = false;
+   // [self startButtonTapped:self.startButton];
+    
+    if (![[NZActionController sharedManager].observers containsObject:self]) {
+        [[NZActionController sharedManager] addObserver:self];
+    }
+    [[NZActionController sharedManager] prepareAllActionsForExecution];
     
 }
 
@@ -98,18 +113,26 @@
 {
     [super viewWillDisappear:animated];
     
-    [self stopButtonTapped:self.stopButton];
+   // [self stopButtonTapped:self.stopButton];
     
+    [[NZSensorDataRecordingManager sharedManager] removeRecordingObserver:self];
+    if (self.startButton.selected) {
+        [[NZSensorDataRecordingManager sharedManager] stopRecordingCurrentSensorDataSet];
+    }
+   // [[NZSensorDataRecordingManager sharedManager] disconnect];
+    
+    
+    [[NZActionController sharedManager] disconnectActions];
     [[NZActionController sharedManager] removeObserver:self];
     
-    self.stopStartGestureButton.enabled = false;
-    self.notConnectedLabel.hidden = false;
+    //self.stopStartGestureButton.enabled = false;
+    //self.notConnectedLabel.hidden = false;
 }
 
 - (void)readyToControl
 {
-    self.stopStartGestureButton.enabled = true;
-    self.notConnectedLabel.hidden = true;
+  //  self.stopStartGestureButton.enabled = true;
+  //  self.notConnectedLabel.hidden = true;
 }
 
 /*
@@ -190,9 +213,9 @@
 - (void)connected
 {
     self.recordingManagerIsConnected = true;
-    [self.alertController dismissViewControllerAnimated:YES completion:nil];
-    self.stopStartGestureButton.enabled = true;
-    self.notConnectedLabel.hidden = true;
+   // [self.alertController dismissViewControllerAnimated:YES completion:nil];
+   // self.stopStartGestureButton.enabled = true;
+   // self.notConnectedLabel.hidden = true;
     
     
 }
@@ -201,10 +224,10 @@
 {
     self.recordingManagerIsConnected = false;
     self.stopStartGestureButton.enabled = false;
-    self.notConnectedLabel.hidden = false;
+   // self.notConnectedLabel.hidden = false;
     
     // automatically trying to reconnect
-    self.ringDisconnected = true;
+   // self.ringDisconnected = true;
     [self startButtonTapped:self.startButton];
 }
 
@@ -258,7 +281,7 @@
 
 - (IBAction)startButtonTapped:(id)sender
 {
-    if (self.ringDisconnected) {
+   /* if (self.ringDisconnected) {
         if (![self.disconnectedAllertController isBeingPresented]) {
             [self presentViewController:self.disconnectedAllertController animated:YES completion:nil];
         }
@@ -267,10 +290,11 @@
             [self presentViewController:self.alertController animated:YES completion:nil];
         }
     }
+    */
    // self.ringDisconnected = false;
     //[self.activityIndicatorView startAnimating];
     
-    if (![[NZActionController sharedManager].observers containsObject:self]) {
+    /*if (![[NZActionController sharedManager].observers containsObject:self]) {
         [[NZActionController sharedManager] addObserver:self];
     }
     if (![[NZSensorDataRecordingManager sharedManager].sensorDataRecordingObservers containsObject:self]) {
@@ -281,21 +305,23 @@
     //BOOL startedNewRecording = [[NZSensorDataRecordingManager sharedManager] startRecordingNewSensorDataSet];
     
     BOOL readyForRecording = [[NZSensorDataRecordingManager sharedManager] prepareForRecordingSensorDataSet];
+     */
 }
 
 - (IBAction)stopButtonTapped:(id)sender {
-    [[NZSensorDataRecordingManager sharedManager] removeRecordingObserver:self];
+   /* [[NZSensorDataRecordingManager sharedManager] removeRecordingObserver:self];
     if (self.startButton.selected) {
         [[NZSensorDataRecordingManager sharedManager] stopRecordingCurrentSensorDataSet];
     }
-    [[NZSensorDataRecordingManager sharedManager] disconnect];
+    [[NZSensorDataRecordingManager sharedManager] disconnect]; */
+   /*
     self.startButton.enabled = true;
     self.stopButton.enabled = false;
     self.stopStartGestureButton.enabled = false;
     self.notConnectedLabel.hidden = false;
-    
-    [[NZActionController sharedManager] disconnectActions];
-    [[NZActionController sharedManager] removeObserver:self];
+    */
+    /*[[NZActionController sharedManager] disconnectActions];
+    [[NZActionController sharedManager] removeObserver:self]; */
 }
 
 - (IBAction)singleGroupModeChanged:(id)sender {
@@ -421,6 +447,46 @@
         [self addSensorDataSet:self.lastSensorDataSet toGesture:feedbackVc.correctGesture];
         self.lastSensorDataSet = nil;
     }
+}
+
+#pragma mark - Arduino Connection Manager Observer methods
+
+- (void)arduinoCommunicationManagerDidDisconnectConnect{
+    if (![self.notConnectedAllert isBeingPresented]) {
+        [self presentViewController:self.notConnectedAllert animated:YES completion:nil];
+    }
+    
+    self.stopStartGestureButton.highlighted = false;
+    self.stopStartGestureButton.enabled = false;
+    self.notConnectedLabel.hidden = false;
+}
+
+- (void)arduinoCommunicationManagerDidConnect {
+    [self setupMainControl];
+}
+
+#pragma mark - helper methods
+- (void) setupMainControl
+{
+    if ([self.notConnectedAllert isBeingPresented]) {
+        [self.notConnectedAllert dismissViewControllerAnimated:YES completion:nil];
+    }
+    
+    if ([self isViewLoaded]) {
+        if (![[NZSensorDataRecordingManager sharedManager].sensorDataRecordingObservers containsObject:self]) {
+            [[NZSensorDataRecordingManager sharedManager] addRecordingObserver:self];
+        }
+        [[NZActionController sharedManager] prepareAllActionsForExecution];
+        BOOL readyForRecording = [[NZSensorDataRecordingManager sharedManager] prepareForRecordingSensorDataSet];
+    }
+    
+    
+    //BOOL startedNewRecording = [[NZSensorDataRecordingManager sharedManager] startRecordingNewSensorDataSet];
+    
+    
+    
+    self.notConnectedLabel.hidden = true;
+    self.stopStartGestureButton.enabled = true;
 }
 
 @end

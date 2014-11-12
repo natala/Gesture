@@ -89,6 +89,7 @@
 		8AE383161976D15000824571 /* NZGestureSet+CoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE383151976D15000824571 /* NZGestureSet+CoreData.m */; };
 		8AE3831C1976D2E800824571 /* NZGesture+CoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE3831B1976D2E800824571 /* NZGesture+CoreData.m */; };
 		8AE3831F1977D54500824571 /* NZGestureConfigurationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE3831E1977D54500824571 /* NZGestureConfigurationVC.m */; };
+		8AE766071A13C602001D11DA /* NZRingConnectionVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE766061A13C602001D11DA /* NZRingConnectionVc.m */; };
 		8AE8CB34196AD1FA008BE33E /* NZConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE8CB2A196AD1FA008BE33E /* NZConstants.m */; };
 		8AE8CB35196AD1FA008BE33E /* NZGraphTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE8CB2B196AD1FA008BE33E /* NZGraphTextView.m */; };
 		8AE8CB36196AD1FA008BE33E /* NZGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE8CB2D196AD1FA008BE33E /* NZGraphView.m */; };
@@ -370,6 +371,8 @@
 		8AE3831B1976D2E800824571 /* NZGesture+CoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NZGesture+CoreData.m"; path = "Model/CoreData/Categories/NZGesture+CoreData.m"; sourceTree = "<group>"; };
 		8AE3831D1977D54500824571 /* NZGestureConfigurationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZGestureConfigurationVC.h; path = ViewControllers/NZGestureConfigurationVC.h; sourceTree = "<group>"; };
 		8AE3831E1977D54500824571 /* NZGestureConfigurationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZGestureConfigurationVC.m; path = ViewControllers/NZGestureConfigurationVC.m; sourceTree = "<group>"; };
+		8AE766051A13C602001D11DA /* NZRingConnectionVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZRingConnectionVc.h; path = "ViewControllers/popover : popups/NZRingConnectionVc.h"; sourceTree = "<group>"; };
+		8AE766061A13C602001D11DA /* NZRingConnectionVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZRingConnectionVc.m; path = "ViewControllers/popover : popups/NZRingConnectionVc.m"; sourceTree = "<group>"; };
 		8AE8CB2A196AD1FA008BE33E /* NZConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZConstants.m; sourceTree = "<group>"; };
 		8AE8CB2B196AD1FA008BE33E /* NZGraphTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZGraphTextView.m; sourceTree = "<group>"; };
 		8AE8CB2C196AD1FA008BE33E /* NZGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZGraphView.h; sourceTree = "<group>"; };
@@ -1130,6 +1133,8 @@
 				8AD0201A197D717A003A09EE /* NZHttpRequestPopoverController.m */,
 				8AD0201C197D7471003A09EE /* NZSetupHttpRequestVC.h */,
 				8AD0201D197D7471003A09EE /* NZSetupHttpRequestVC.m */,
+				8AE766051A13C602001D11DA /* NZRingConnectionVc.h */,
+				8AE766061A13C602001D11DA /* NZRingConnectionVc.m */,
 			);
 			name = "popovers / popups";
 			sourceTree = "<group>";
@@ -2199,6 +2204,7 @@
 				8AD0201B197D717A003A09EE /* NZHttpRequestPopoverController.m in Sources */,
 				8AE3831F1977D54500824571 /* NZGestureConfigurationVC.m in Sources */,
 				8A6AF54C195CBAF20015B571 /* NZSensorDataHelper.m in Sources */,
+				8AE766071A13C602001D11DA /* NZRingConnectionVc.m in Sources */,
 				8AA4188D19B9B75C0027FDED /* NZWiFiPlugActionHandler.m in Sources */,
 				8AC9D9A7196162EF00364B5A /* NZSensorDataTableView.m in Sources */,
 				8A6A9B2C19D57FCC008F3513 /* NZGestureActionMappingVC.m in Sources */,

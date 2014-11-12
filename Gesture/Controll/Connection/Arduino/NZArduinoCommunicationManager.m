@@ -40,6 +40,7 @@
 {
     self = [super init];
     if (self) {
+        self.observers = [[NSMutableArray alloc] init];
         [BLEDiscovery sharedInstance].discoveryDelegate = self;
         [BLEDiscovery sharedInstance].peripheralDelegate = self;
         
@@ -61,24 +62,46 @@
 
 #pragma mark - BLEDiscoveryDelegate
 
+- (void)discoveryDidDisconnectFrom:(CBPeripheral *)peripheral
+{
+    NSLog(@"discoverydisconnect");
+    if (self.delegate) {
+        if ([self.delegate respondsToSelector:@selector(didDisconnect)]) {
+            [self.delegate didDisconnect];
+        }
+    }
+    for (id<NZArduinoCommunicationManagerObserver> observer in self.observers) {
+        if ([observer respondsToSelector:@selector(arduinoCommunicationManagerDidDisconnectConnect)]) {
+            [observer arduinoCommunicationManagerDidDisconnectConnect];
+        }
+    }
+
+    
+    [[BLEDiscovery sharedInstance] disconnectConnectedPeripherals];
+    
+    // try to reconnect right away
+    [[BLEDiscovery sharedInstance] startScanningForSupportedUUIDs];
+}
+
 - (void)discoveryDidRefresh
 {
-    // called after disconnectin
-    [[BLEDiscovery sharedInstance] disconnectConnectedPeripherals];
-    [[BLEDiscovery sharedInstance] startScanningForSupportedUUIDs];
-    //[[BLEDiscovery sharedInstance].connectedPeripherals removeAllObjects];
-    //[[BLEDiscovery sharedInstance].foundPeripherals removeAllObjects];
     NSLog(@"discoveryDidRefresh");
     if (self.delegate) {
         if ([self.delegate respondsToSelector:@selector(didDisconnect)]) {
             [self.delegate didDisconnect];
         }
     }
+    // called after disconnectin
+    [[BLEDiscovery sharedInstance] disconnectConnectedPeripherals];
+   // [[BLEDiscovery sharedInstance] startScanningForSupportedUUIDs];
+    //[[BLEDiscovery sharedInstance].connectedPeripherals removeAllObjects];
+    //[[BLEDiscovery sharedInstance].foundPeripherals removeAllObjects];
 }
 
 - (void)peripheralDiscovered:(CBPeripheral *)peripheral
 {
-    NSLog(@"peripheralDiscovered:%@", peripheral);
+   NSLog(@"peripheralDiscovered:%@", peripheral);
+    [self connectToPeripherals];
 }
 
 - (void)discoveryStatePoweredOff
@@ -107,15 +130,31 @@
 {
     service.delegate = self;
     service.dataDelegate = self;
-   // [self.delegate updateRecordingState:@"connected"];
+    
     NSLog(@"bleServiceDidConnect:%@", service);
+    for (id<NZArduinoCommunicationManagerObserver> observer in self.observers) {
+        if ([observer respondsToSelector:@selector(arduinoCommunicationManagerDidConnect)]) {
+            [observer arduinoCommunicationManagerDidConnect];
+        }
+    }
+
+    
+   // [self.delegate updateRecordingState:@"connected"];
 }
 
 - (void)bleServiceDidDisconnect:(BLEService *)service
 {
     NSLog(@"bleServiceDidDisconnect:%@", service);
+    for (id<NZArduinoCommunicationManagerObserver> observer in self.observers) {
+        if ([observer respondsToSelector:@selector(arduinoCommunicationManagerDidDisconnectConnect)]) {
+            [observer arduinoCommunicationManagerDidDisconnectConnect];
+        }
+    }
+    
+    [[BLEDiscovery sharedInstance] startScanningForSupportedUUIDs];
 }
 
+// called once done scanning discovered characteristics of the given service
 - (void)bleServiceIsReady:(BLEService *)service
 {
     NSLog(@"bleServiceIsReady:%@", service);
@@ -237,6 +276,21 @@
 {
     [NZArduinoCommunicationManager sharedManager].delegate = nil;
     //[self disconnectFromPeripherals];
+}
+
+#pragma mark - managing observers
+- (void)addArduinoCommunicationObserver:(id<NZArduinoCommunicationManagerObserver>)observer
+{
+    if (![self.observers containsObject:observer]) {
+        [self.observers addObject:observer];
+    }
+}
+
+- (void)removeArduinoCommunicationObserver:(id<NZArduinoCommunicationManagerObserver>)observer
+{
+    if ([self.observers containsObject:observer]) {
+        [self.observers removeObject:observer];
+    }
 }
 
 @end
