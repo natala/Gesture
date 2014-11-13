@@ -253,6 +253,11 @@
 
 #pragma mark - CBCentralManagerDelegate
 
+/*
+ * METHODS TAKING CARE OF THE MANAGER
+ */
+
+// CBCentralManagerDelegate - This is called with the CBPeripheral class as its main input parameter. This contains most of the information there is to know about a BLE peripheral.
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
 	if (![self.foundPeripherals containsObject:peripheral]) {
@@ -271,6 +276,81 @@
 	[newService start];
 }
 
+// method called whenever the device state changes - the BLE connection on the iPad.
+- (void)centralManagerDidUpdateState:(CBCentralManager *)central
+{
+    static CBCentralManagerState previousState = -1;
+    
+    switch ([self.centralManager state]) {
+        case CBCentralManagerStatePoweredOff:
+        {
+            NSLog(@"CoreBluetooth BLE hardware is powered off");
+            [self clearDevices];
+            //[self.discoveryDelegate discoveryDidRefresh];
+            
+            [self.discoveryDelegate discoveryStatePoweredOff];
+            break;
+        }
+            
+        case CBCentralManagerStateUnauthorized: {
+            NSLog(@"CoreBluetooth BLE state is unauthorized");
+            break;
+        }
+            
+        case CBCentralManagerStateUnknown: {
+            NSLog(@"CoreBluetooth BLE state is unknown");
+            break;
+        }
+            
+        case CBCentralManagerStatePoweredOn: {
+            NSLog(@"CoreBluetooth BLE hardware is powered on and ready");
+            [self startScanningForSupportedUUIDs];
+            self.pendingInit = NO;
+            [self loadSavedDevices];
+            
+            NSArray *storedDevices  = [[NSUserDefaults standardUserDefaults] arrayForKey:@"StoredDevices"];
+            
+            if (![storedDevices isKindOfClass:[NSArray class]]) {
+                NSLog(@"No stored array to load");
+                return;
+            }
+            
+            for (id deviceUUIDString in storedDevices) {
+                if (![deviceUUIDString isKindOfClass:[NSString class]]) {
+                    continue;
+                }
+                
+                CFUUIDRef uuid = CFUUIDCreateFromString(NULL, (CFStringRef)deviceUUIDString);
+                if (!uuid) {
+                    continue;
+                }
+                [self.centralManager retrieveConnectedPeripheralsWithServices:[NSArray arrayWithObject:(__bridge id)uuid]];
+                CFRelease(uuid);
+            }
+            
+           // [self.discoveryDelegate discoveryDidRefresh];
+            break;
+        }
+            
+        case CBCentralManagerStateResetting: {
+            [self clearDevices];
+            [self.discoveryDelegate discoveryDidRefresh];
+            [self.peripheralDelegate bleServiceDidReset];
+            
+            self.pendingInit = YES;
+            break;
+        }
+        case CBCentralManagerStateUnsupported:
+            NSLog(@"CoreBluetooth BLE hardware is unsupported on this platform");
+            break;
+        default:
+            break;
+    }
+    
+    previousState = [self.centralManager state];
+}
+
+
 - (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
 	NSLog(@"Attempted connection to peripheral %@ failed: %@", [peripheral name], [error localizedDescription]);
@@ -278,7 +358,8 @@
 
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
-    [self.discoveryDelegate discoveryDidRefresh];
+    //[self.discoveryDelegate discoveryDidRefresh];
+    [self.discoveryDelegate discoveryDidDisconnectFrom:peripheral];
 	[self.connectedPeripherals removeAllObjects];
 
 	BLEService *serviceToRemove = nil;
@@ -296,77 +377,5 @@
 	// [self.peripheralDelegate bleServiceDidDisconnect:self.connectedService];
 }
 
-- (void)centralManagerDidUpdateState:(CBCentralManager *)central
-{
-	static CBCentralManagerState previousState = -1;
-
-	switch ([self.centralManager state]) {
-	case CBCentralManagerStatePoweredOff:
-	{
-        NSLog(@"CoreBluetooth BLE hardware is powered off");
-		[self clearDevices];
-		[self.discoveryDelegate discoveryDidRefresh];
-
-		[self.discoveryDelegate discoveryStatePoweredOff];
-		break;
-	}
-
-	case CBCentralManagerStateUnauthorized: {
-        NSLog(@"CoreBluetooth BLE state is unauthorized");
-		break;
-	}
-
-	case CBCentralManagerStateUnknown: {
-        NSLog(@"CoreBluetooth BLE state is unknown");
-		break;
-	}
-
-	case CBCentralManagerStatePoweredOn: {
-        NSLog(@"CoreBluetooth BLE hardware is powered on and ready");
-        [self startScanningForSupportedUUIDs];
-		self.pendingInit = NO;
-		[self loadSavedDevices];
-        
-        NSArray *storedDevices  = [[NSUserDefaults standardUserDefaults] arrayForKey:@"StoredDevices"];
-        
-        if (![storedDevices isKindOfClass:[NSArray class]]) {
-            NSLog(@"No stored array to load");
-            return;
-        }
-        
-        for (id deviceUUIDString in storedDevices) {
-            if (![deviceUUIDString isKindOfClass:[NSString class]]) {
-                continue;
-            }
-
-        CFUUIDRef uuid = CFUUIDCreateFromString(NULL, (CFStringRef)deviceUUIDString);
-        if (!uuid) {
-            continue;
-        }
-        [self.centralManager retrieveConnectedPeripheralsWithServices:[NSArray arrayWithObject:(__bridge id)uuid]];
-        CFRelease(uuid);
-        }
-		
-		[self.discoveryDelegate discoveryDidRefresh];
-		break;
-	}
-
-	case CBCentralManagerStateResetting: {
-		[self clearDevices];
-		[self.discoveryDelegate discoveryDidRefresh];
-		[self.peripheralDelegate bleServiceDidReset];
-
-		self.pendingInit = YES;
-		break;
-	}
-    case CBCentralManagerStateUnsupported:
-            NSLog(@"CoreBluetooth BLE hardware is unsupported on this platform");
-            break;
-	default:
-		break;
-	}
-
-	previousState = [self.centralManager state];
-}
 
 @end

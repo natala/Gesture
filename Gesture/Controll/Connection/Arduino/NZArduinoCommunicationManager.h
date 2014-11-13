@@ -10,6 +10,31 @@
 #import "NZSensorData.h"
 #import "BLE/BLEDiscovery.h"
 
+
+@protocol NZArduinoCommunicationManagerObserver <NSObject>
+
+/**
+ * called when connection with the external device has been established
+ */
+- (void)arduinoCommunicationManagerDidConnect;
+
+/**
+ * called when the connection with the external device has been lost
+ */
+- (void)arduinoCommunicationManagerDidDisconnectConnect;
+
+/**
+ * called when the manager starts to reconnect automatically
+ */
+- (void)arduinoCommunicationManagerStartedReconnectiong;
+
+/**
+ * called when the manager has stopped the attemped to connect
+ */
+- (void)arduinoCommunicationManagerStoppedConnecting;
+
+@end
+
 @protocol NZArduinoCommunicationManagerDelegate <NSObject>
 //#import "KHSensorData+CoreData.h"
 
@@ -39,6 +64,8 @@
 + (NZArduinoCommunicationManager *)sharedManager;
 
 @property (nonatomic, retain) id<NZArduinoCommunicationManagerDelegate> delegate;
+
+@property (nonatomic, retain) NSMutableArray *observers;
 
 
 /**
@@ -82,5 +109,10 @@
  * @note currently this method is not doing anything. Will most probobly be removed soon (if I don't forget :P)
  */
 - (void)stopReceivingSensorData;
+
+#pragma mark - managing observers
+- (void)addArduinoCommunicationObserver:(id<NZArduinoCommunicationManagerObserver>) observer;
+
+- (void)removeArduinoCommunicationObserver:(id<NZArduinoCommunicationManagerObserver>) observer;
 
 @end

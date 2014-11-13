@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "NZSensorDataRecordingManager.h"
+#import "NZArduinoCommunicationManager.h"
 #import "NZActionController.h"
 #import "NZFeedbackVC.h"
 
-@interface NZMainControlVC : UIViewController <NZSensorDataRecordingManagerObserver, NZActionControllerObserver, UIAlertViewDelegate, NZFeedbackVCDelegate, UIPopoverControllerDelegate>
+@interface NZMainControlVC : UIViewController <NZSensorDataRecordingManagerObserver, NZActionControllerObserver, UIAlertViewDelegate, NZFeedbackVCDelegate, UIPopoverControllerDelegate, NZArduinoCommunicationManagerObserver>
 
 #pragma mark - UI Elements
 @property (weak, nonatomic) IBOutlet UIButton *startButton;

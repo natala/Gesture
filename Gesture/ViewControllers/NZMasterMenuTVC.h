@@ -9,14 +9,21 @@
 #import <UIKit/UIKit.h>
 #import "NZStartScreenVC.h"
 #import "NZStartScreenVC.h"
+#import "NZArduinoCommunicationManager.h"
 
-@interface NZMasterMenuTVC : UITableViewController <UISplitViewControllerDelegate, NZStartScreenVCDelegate>
+@interface NZMasterMenuTVC : UITableViewController <UISplitViewControllerDelegate, NZStartScreenVCDelegate,NZArduinoCommunicationManagerObserver>
 
 @property (nonatomic, weak) NZStartScreenVC *startScreenVc;
 
+#pragma mark - UI elements
+@property (weak, nonatomic) IBOutlet UINavigationItem *connectionStatusNavigationItem;
+
+
 #pragma mark - cells
 @property (weak, nonatomic) IBOutlet UITableViewCell *configureCell;
-
 @property (weak, nonatomic) IBOutlet UITableViewCell *leaveCell;
+
+
+
 
 @end

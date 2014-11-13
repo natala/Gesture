@@ -93,6 +93,9 @@ const NSTimeInterval kFlushInterval = 1.0f / 10.0f;
 	}
 }
 
+#pragma mark - CBPeripheralDelegate methods
+
+// CBPeripheralDelegate - Invoked when you discover the peripheral's available services.
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error
 {
 	NSArray *services       = nil;
@@ -142,6 +145,7 @@ const NSTimeInterval kFlushInterval = 1.0f / 10.0f;
 	}
 }
 
+// Invoked when you discover the characteristics of a specified service.
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
 {
 	if (peripheral != _peripheral) {
@@ -176,6 +180,31 @@ const NSTimeInterval kFlushInterval = 1.0f / 10.0f;
 			[self.delegate bleServiceIsReady:self];
 		}
 	}
+}
+
+// Invoked when you retrieve a specified characteristic's value, or when the peripheral device notifies your app that the characteristic's value has changed.
+- (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
+{
+    if (peripheral != _peripheral) {
+        NSLog(@"Wrong peripheral\n");
+        return;
+    }
+    
+    if ([error code] != 0) {
+        NSLog(@"Error %@\n", error);
+        return;
+    }
+    
+    if (characteristic == self.rxCharacteristic) {
+        uint8_t *data;
+        NSInteger length = [BLEHelper Data:characteristic.value toArray:&data];
+        [self.dataDelegate didReceiveData:data length:length];
+        free(data);
+    } else {
+        if ([self.dataDelegate respondsToSelector:@selector(updatedValueForCharacteristic:)]) {
+            [self.dataDelegate updatedValueForCharacteristic:characteristic];
+        }
+    }
 }
 
 #pragma mark Characteristics interaction
@@ -344,29 +373,7 @@ const NSTimeInterval kFlushInterval = 1.0f / 10.0f;
 	}
 }
 
-- (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
-{
-	if (peripheral != _peripheral) {
-		NSLog(@"Wrong peripheral\n");
-		return;
-	}
 
-	if ([error code] != 0) {
-		NSLog(@"Error %@\n", error);
-		return;
-	}
-
-	if (characteristic == self.rxCharacteristic) {
-		uint8_t *data;
-		NSInteger length = [BLEHelper Data:characteristic.value toArray:&data];
-		[self.dataDelegate didReceiveData:data length:length];
-		free(data);
-	} else {
-		if ([self.dataDelegate respondsToSelector:@selector(updatedValueForCharacteristic:)]) {
-			[self.dataDelegate updatedValueForCharacteristic:characteristic];
-		}
-	}
-}
 
 - (NSString *)description
 {

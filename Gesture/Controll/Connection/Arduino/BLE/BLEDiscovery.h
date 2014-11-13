@@ -34,14 +34,18 @@
 @required
 - (void)discoveryDidRefresh;
 - (void)discoveryStatePoweredOff;
+- (void)discoveryDidDisconnectFrom:(CBPeripheral *)peripheral;
 - (void)peripheralDiscovered:(CBPeripheral *)peripheral; // didDiscoverPeripheral
 @end
 
 
-@interface BLEDiscovery : NSObject <CBCentralManagerDelegate, CBPeripheralDelegate>
+@interface BLEDiscovery : NSObject <CBCentralManagerDelegate>
 
 + (BLEDiscovery *)sharedInstance;
 
+/**
+ *
+ */
 @property (nonatomic, retain) CBCentralManager *centralManager;
 @property (nonatomic) BOOL pendingInit;
 
@@ -59,6 +63,7 @@
 - (void)startScanningForAnyUUID;
 - (void)startScanningForUUIDString:(NSString *)uuidString;
 - (void)stopScanning;
+
 
 - (void)connectPeripheral:(CBPeripheral *)peripheral;
 - (void)connectToAllFoundPeripherals;

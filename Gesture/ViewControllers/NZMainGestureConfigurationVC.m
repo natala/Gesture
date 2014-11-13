@@ -96,6 +96,8 @@
     }];
     
     self.isRecordingGesture = false;
+    
+    [[NZArduinoCommunicationManager sharedManager] addArduinoCommunicationObserver:self];
 }
 
 - (void)viewDidLayoutSubviews
@@ -104,8 +106,8 @@
         [self.gesturePickerView selectRow:0 inComponent:0 animated:NO];
         self.selectedGesture = [self.gesturesSorted objectAtIndex:0];
     }
-    self.connectButton.hidden = false;
-    self.gestureRecordingButton.hidden = true;
+    self.connectButton.hidden = true;
+   // self.gestureRecordingButton.hidden = true;
     self.gestureRecordingButton.highlighted = false;
     [self updateSamplesButton];
     
@@ -120,6 +122,10 @@
         [alert addAction:okAction];
         [self presentViewController:alert animated:YES completion:nil];
     }
+    
+    if ([[NZArduinoCommunicationManager sharedManager] isConnected]) {
+        [self setupGestureRecording];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -129,12 +135,18 @@
     if ([NZPipelineController sharedManager].pipelineHasToBeTrained) {
         [[NZPipelineController sharedManager] trainClassifier];
     }
-    [[NZSensorDataRecordingManager sharedManager] disconnect];
+   // [[NZSensorDataRecordingManager sharedManager] disconnect];
     [[NZSensorDataRecordingManager sharedManager] removeRecordingObserver:self];
-    self.gestureRecordingButton.hidden = true;
+   // self.gestureRecordingButton.hidden = true;
     self.gestureRecordingButton.highlighted = false;
-    self.connectButton.hidden = false;
+   // self.connectButton.hidden = false;
     [self.activityIndicator stopAnimating];
+    
+    [[NZSensorDataRecordingManager sharedManager] removeRecordingObserver:self];
+    
+    if (self.gestureRecordingButton.selected) {
+        [[NZSensorDataRecordingManager sharedManager] stopRecordingCurrentSensorDataSet];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -284,12 +296,13 @@
 - (void)disconnected
 {
     self.gestureRecordingButton.enabled = false;
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"PowerRing Disconnected" message:@"Check if the PowerRing is on" preferredStyle:UIAlertControllerStyleAlert];
+   /* UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"PowerRing Disconnected" message:@"Check if the PowerRing is on" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
     [alert addAction:okAction];
     [self presentViewController:alert animated:YES completion:nil];
-    self.gestureRecordingButton.hidden = true;
+   // self.gestureRecordingButton.hidden = true;
     self.connectButton.hidden = false;
+    */
 }
 
 
@@ -475,6 +488,37 @@
         NZConfigurationNavigationController *nc = (NZConfigurationNavigationController *)self.navigationController;
         [nc switchFromGesturesToActions];
     }
+}
+
+#pragma mark - NZ Arduino Connection Manager Observer methods
+- (void)arduinoCommunicationManagerDidConnect
+{
+    [self setupGestureRecording];
+}
+
+- (void)arduinoCommunicationManagerDidDisconnectConnect
+{
+    self.gestureRecordingButton.highlighted = false;
+    self.gestureRecordingButton.enabled = false;
+    self.isNotConnectedLabel.hidden = false;
+    
+}
+
+#pragma mark - helper methods
+- (void)setupGestureRecording
+{
+    if ([self isViewLoaded]) {
+        if (![[NZSensorDataRecordingManager sharedManager].sensorDataRecordingObservers containsObject:self]) {
+            [[NZSensorDataRecordingManager sharedManager] addRecordingObserver:self];
+        }
+        BOOL readyForRecording = [[NZSensorDataRecordingManager sharedManager] prepareForRecordingSensorDataSet];
+    }
+    
+    //BOOL startedNewRecording = [[NZSensorDataRecordingManager sharedManager] startRecordingNewSensorDataSet];
+    
+    self.isNotConnectedLabel.hidden = true;
+    self.gestureRecordingButton.hidden = false;
+    self.gestureRecordingButton.enabled = true;
 }
 
 @end

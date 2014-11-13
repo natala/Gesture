@@ -9,12 +9,18 @@
 #import "NZMasterMenuTVC.h"
 #import "NZDetailViewController.h"
 #import "NZGestureSetHandler.h"
+#import "NZRingConnectionVc.h"
 
 @interface NZMasterMenuTVC ()
 
 @property NSArray *items;
 @property UITableViewCell *selectedCell;
 @property BOOL hideStartScreen;
+
+@property (nonatomic, retain) UIBarButtonItem *connectedRing;
+@property (nonatomic, retain) UIBarButtonItem *disconnectedRing;
+
+@property (nonatomic, retain) UIPopoverController *ringConnectionPopoverController;
 
 @end
 
@@ -60,6 +66,19 @@
 - (void)commonInit
 {
     self.hideStartScreen = false;
+    
+    self.connectedRing = [[UIBarButtonItem alloc] initWithTitle:@"Ȯ" style:UIBarButtonItemStylePlain target:self action:@selector(connectionStatusTapped)];
+    
+    self.disconnectedRing = [[UIBarButtonItem alloc] initWithTitle:@"U" style:UIBarButtonItemStylePlain target:self action:@selector(connectionStatusTapped)];
+
+    [self.navigationItem setLeftBarButtonItem:self.disconnectedRing];
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    self.ringConnectionPopoverController = [[UIPopoverController alloc] initWithContentViewController:[storyboard instantiateViewControllerWithIdentifier:@"RingConnectionPopoverVC"]];
+    self.ringConnectionPopoverController.delegate = self;
+    
+    [[NZArduinoCommunicationManager sharedManager] addArduinoCommunicationObserver:self];
    // UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
    //  NZStartScreenVC *startScreen = (NZStartScreenVC *)[mainStoryBoard instantiateViewControllerWithIdentifier:@"StartScreenVC"];
    // self.startScreenVc = startScreen;
@@ -199,5 +218,56 @@
     self.selectedCell.highlighted = true;
 
 }
+
+#pragma mark -
+- (void)connectionStatusTapped {
+    NSLog(@"Tapped connection status button");
+    if (![self.ringConnectionPopoverController isPopoverVisible]) {
+        [self.ringConnectionPopoverController presentPopoverFromBarButtonItem:[self.navigationItem leftBarButtonItem] permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    }
+}
+
+
+#pragma mark - Arduino Connection Manager Observer methods
+
+- (void)arduinoCommunicationManagerDidConnect
+{
+    [self.navigationItem setLeftBarButtonItem:self.connectedRing];
+    UIViewController *vc = [self.ringConnectionPopoverController contentViewController];
+    if ([vc isKindOfClass:[NZRingConnectionVc class]]) {
+        NZRingConnectionVc* ringVc = (NZRingConnectionVc *)vc;
+        ringVc.connectionStatusText = @"is connected";
+    }
+}
+
+- (void)arduinoCommunicationManagerDidDisconnectConnect
+{
+    [self.navigationItem setLeftBarButtonItem:self.disconnectedRing];
+    UIViewController *vc = [self.ringConnectionPopoverController contentViewController];
+    if ([vc isKindOfClass:[NZRingConnectionVc class]]) {
+        NZRingConnectionVc* ringVc = (NZRingConnectionVc *)vc;
+        ringVc.connectionStatusText = @"is not connected";
+    }
+    
+    if (![self.ringConnectionPopoverController isPopoverVisible]) {
+        [self.ringConnectionPopoverController presentPopoverFromBarButtonItem:[self.navigationItem leftBarButtonItem] permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    }
+
+}
+
+- (void)arduinoCommunicationManagerStartedReconnectiong
+{
+
+}
+
+- (void)arduinoCommunicationManagerStoppedConnecting
+{
+
+}
+
+@end
+
+@protocol NZArduinoCommunicationManagerDelegate <NSObject>
+
 
 @end

@@ -219,6 +219,41 @@
             </objects>
             <point key="canvasLocation" x="-542" y="-1108"/>
         </scene>
+        <!--Ring Connection Vc-->
+        <scene sceneID="Ds9-oH-232">
+            <objects>
+                <viewController storyboardIdentifier="RingConnectionPopoverVC" id="1FT-Pv-1pE" customClass="NZRingConnectionVc" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WgV-rg-so0">
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Power Ring" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lBX-nT-2ED">
+                                <rect key="frame" x="56" y="50" width="89" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="is not connected" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CZH-kp-EBf">
+                                <rect key="frame" x="36" y="89" width="128" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="200" height="200"/>
+                    <connections>
+                        <outlet property="connectionStatusLabel" destination="CZH-kp-EBf" id="n8L-W2-btW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jKN-EZ-gnM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="423" y="-1650"/>
+        </scene>
         <!--Master-->
         <scene sceneID="smW-Zh-WAh">
             <objects>
@@ -359,6 +394,7 @@
                     <size key="freeformSize" width="153" height="768"/>
                     <connections>
                         <outlet property="configureCell" destination="wUy-RS-OLg" id="GgZ-C5-xTH"/>
+                        <outlet property="connectionStatusNavigationItem" destination="Zdf-7t-Un8" id="mtL-fi-Rue"/>
                         <outlet property="leaveCell" destination="fXR-pY-ImM" id="IDa-pw-hRQ"/>
                     </connections>
                 </tableViewController>
@@ -497,7 +533,7 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="highlightedColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bwO-b3-oKG">
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bwO-b3-oKG">
                                 <rect key="frame" x="385" y="364" width="100" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="start blue">
@@ -626,7 +662,7 @@
                                     <action selector="minusButtonTapped:" destination="FIR-t3-jOA" eventType="touchUpInside" id="t7N-vF-KJF"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="5cK-at-yg1">
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="5cK-at-yg1">
                                 <rect key="frame" x="385" y="427" width="100" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="start blue">
@@ -662,7 +698,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" id="LxK-1b-ioI">
-                                <rect key="frame" x="367" y="462" width="137" height="30"/>
+                                <rect key="frame" x="367" y="523" width="137" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Tap to Connect">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -694,6 +730,13 @@
                                 <rect key="frame" x="425" y="374" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PowerRing is not connected" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Drc-dZ-cK7">
+                                <rect key="frame" x="327" y="466" width="217" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -716,6 +759,7 @@
                         <outlet property="connectButton" destination="LxK-1b-ioI" id="1WS-ow-dRY"/>
                         <outlet property="gesturePickerView" destination="Izd-3O-4BI" id="hAd-73-xbg"/>
                         <outlet property="gestureRecordingButton" destination="5cK-at-yg1" id="TyM-de-6J4"/>
+                        <outlet property="isNotConnectedLabel" destination="Drc-dZ-cK7" id="MFJ-wF-hls"/>
                         <outlet property="minusButton" destination="ahn-ZI-JXv" id="Vle-Xx-dMq"/>
                         <outlet property="plusButton" destination="JfD-Ka-4h7" id="4B0-We-0ui"/>
                         <outlet property="samplesButton" destination="bq5-wy-zox" id="bpU-pU-yJu"/>
