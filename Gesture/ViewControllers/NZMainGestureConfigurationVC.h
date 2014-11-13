@@ -12,11 +12,13 @@
 
 #import "NZEditGestureSamplesTVC.h"
 #import "NZGestureActionMappingVC.h"
+#import "NZArduinoCommunicationManager.h"
 
-@interface NZMainGestureConfigurationVC : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, UIPopoverControllerDelegate, NZSensorDataRecordingManagerObserver, NZEditingGestureSamplesTVCDelegare, NZGestureActionMappingVCDelegate>
+@interface NZMainGestureConfigurationVC : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, UIPopoverControllerDelegate, NZSensorDataRecordingManagerObserver, NZEditingGestureSamplesTVCDelegare, NZGestureActionMappingVCDelegate, NZArduinoCommunicationManagerObserver>
 
 #pragma mark - UIElements
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UILabel *isNotConnectedLabel;
 
 #pragma mark - IBActions
 - (IBAction)samplesButtonTapped:(UIButton *)sender;
