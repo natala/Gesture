@@ -11,6 +11,7 @@
 #import "NZAction+CoreData.h"
 #import "NZSingleAction+CoreData.h"
 #import "NZActionComposite+CoreData.h"
+#import "NZCoreDataManager.h"
 
 @interface NZActionMainConfiguration02VC ()
 
@@ -18,7 +19,10 @@
 @property (nonatomic, retain) NSArray *allGroupActionsForLocation;
 @property (nonatomic, retain) NSArray *allLocations;
 @property (nonatomic, retain) NZLocation *selectedLocation;
-@property BOOL singleActions;
+@property (nonatomic) BOOL singleActions;
+
+#pragma mark - alerts
+@property (retain, nonatomic) UIAlertController *addGestureGroupAlertController;
 
 @end
 
@@ -145,6 +149,11 @@
     return numberOfRows;
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return !self.singleActions;
+}
+
 - (void)configureCell:(UITableViewCell *)cell atIdexPath:(NSIndexPath *)indexPath
 {
     NZAction *action;
@@ -163,13 +172,40 @@
     
 }
 
+-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleDelete;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Get the managedObjectContext from the AppDelegate (for use in CoreData Applications)
+   // AppDelegate *appdelegate = [[UIApplication sharedApplication] delegate];
+   // NSManagedObjectContext *context = appdelegate.managedObjectContext;
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // Delete the row from the data source
+        
+        NZActionComposite *action = [self.allGroupActionsForLocation objectAtIndex:indexPath.row];
+        NSMutableArray *tmpArray = [NSMutableArray arrayWithArray:self.allGroupActionsForLocation];
+        [tmpArray removeObject:action];
+        [action destroy];
+        self.allGroupActionsForLocation = (NSArray *)tmpArray;
+        [[NZCoreDataManager sharedManager] save];
+        // Animate the deletion
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
+
+        // Additional code to configure the Edit Button, if any
+        if ([self.allGroupActionsForLocation count] == 0) {
+            self.editButton.enabled = NO;
+            self.editButton.titleLabel.text = @"Edit";
+        }
+    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+    }
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    /*
-    NZAction *action = [self.allSingleActions objectAtIndex:indexPath.row];
-    [self.selectedGroupAction addChildActionsObject:action];
-    [[NZCoreDataManager sharedManager] save];
-     */
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -202,6 +238,34 @@
     }
 }
 
+- (IBAction)editButtonTapped:(UIButton *)sender {
+    if ([self.actionsTableView isEditing]) {
+        [self.actionsTableView setEditing:NO animated:YES];
+        [self.editButton setTitle:@"Delete" forState:UIControlStateNormal];
+    } else {
+        [self.actionsTableView setEditing:YES animated:YES];
+        [self.editButton setTitle:@"Done" forState:UIControlStateNormal];
+    }
+}
+
+- (IBAction)addButtonTapped:(UIButton *)sender {
+    if (!self.addGestureGroupAlertController) {
+        
+        self.addGestureGroupAlertController = [UIAlertController alertControllerWithTitle:@"Add new Group" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:nil];
+        UIAlertAction *doneAction = [UIAlertAction actionWithTitle:@"Done" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [self addActionComposite];
+        }];
+        [self.addGestureGroupAlertController addAction:doneAction];
+        [self.addGestureGroupAlertController addAction:cancelAction];
+        [self.addGestureGroupAlertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+            textField.placeholder = @"Enter group name here";
+        }];
+    }
+    [self presentViewController:self.addGestureGroupAlertController animated:YES completion:nil];
+}
+
 #pragma mark - setters & getters
 - (void)setSelectedLocation:(NZLocation *)selectedLocation
 {
@@ -214,6 +278,38 @@
 - (void)setSingleActions:(BOOL)singleActions
 {
     _singleActions = singleActions;
+    self.editButton.hidden = singleActions;
+    self.addButton.hidden = singleActions;
     [self.actionsTableView reloadData];
 }
+
+#pragma mark - helper methods
+- (void)addActionComposite
+{
+    
+    UITextField *textField = [self.addGestureGroupAlertController.textFields objectAtIndex:0];
+    
+    if ([textField.text isEqualToString:@""]) {
+        return;
+    }
+    if ([NZAction existsWithName:textField.text]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"a group with the given name already exists" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+        [alert addAction:okAction];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    
+    NZActionComposite *newGroup = [NZActionComposite create];
+    newGroup.name = textField.text;
+    newGroup.location = self.selectedLocation;
+    
+    NZCoreDataManager *manager = [NZCoreDataManager sharedManager];
+    [manager save];
+    
+    self.allGroupActionsForLocation = [NZActionComposite findAllSortedByNameActionsForLocation:self.selectedLocation.name];
+    [self.actionsTableView reloadData];
+
+}
+
 @end

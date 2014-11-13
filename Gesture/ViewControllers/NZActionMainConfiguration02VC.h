@@ -13,8 +13,12 @@
 #pragma mark - UI Elements
 @property (weak, nonatomic) IBOutlet UIPickerView *locationsPickerView;
 @property (weak, nonatomic) IBOutlet UITableView *actionsTableView;
+@property (weak, nonatomic) IBOutlet UIButton *editButton;
+@property (weak, nonatomic) IBOutlet UIButton *addButton;
 
 #pragma mark - IB Actions
 - (IBAction)singleGroupSegmentValueChanged:(UISegmentedControl *)sender;
+- (IBAction)editButtonTapped:(UIButton *)sender;
+- (IBAction)addButtonTapped:(UIButton *)sender;
 
 @end
