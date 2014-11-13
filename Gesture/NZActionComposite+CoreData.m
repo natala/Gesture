@@ -8,13 +8,16 @@
 
 #import "NZActionComposite+CoreData.h"
 #import "NSManagedObject+CoreData.h"
+#import "NZLocation+CoreData.h"
 
 @implementation NZActionComposite (CoreData)
 
 #pragma mark - Create
 +(NZActionComposite *)create
 {
-    return (NZActionComposite *)[super createEntityWithName:ENTITY_NAME_ACTION_COMPOSITE];
+    NZActionComposite *action = (NZActionComposite *)[super createEntityWithName:ENTITY_NAME_ACTION_COMPOSITE];
+    action.location = [NZLocation globalLocation];
+    return action;
 }
 
 #pragma mark - Find
@@ -27,6 +30,17 @@
 {
     NSSortDescriptor *actionSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
     return [[NZActionComposite findAll] sortedArrayUsingDescriptors:@[actionSortDescriptor]];
+}
+
++ (NSArray *)findAllSortedByNameActionsForLocation:(NSString *)locationName
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"location.name == %@", locationName];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:ENTITY_NAME_ACTION_COMPOSITE];
+    request.predicate = predicate;
+    NSError *error = nil;
+    NSArray *foundEntities = [[NZCoreDataManager sharedManager].managedObjectContext executeFetchRequest:request error:&error];
+    
+    return foundEntities;
 }
 
 + (NZActionComposite *)findLates

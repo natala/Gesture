@@ -8,13 +8,16 @@
 
 #import "NZAction+CoreData.h"
 #import "NSManagedObject+CoreData.h"
+#import "NZLocation+CoreData.h"
 
 @implementation NZAction (CoreData)
 
 #pragma mark - Create
 +(NZAction *)create
 {
-    return (NZAction *)[super createEntityWithName:ENTITY_NAME_ACTION];
+    NZAction *action = (NZAction *)[super createEntityWithName:ENTITY_NAME_ACTION];
+    action.location = [NZLocation globalLocation];
+    return action;
 }
 
 #pragma mark - Find

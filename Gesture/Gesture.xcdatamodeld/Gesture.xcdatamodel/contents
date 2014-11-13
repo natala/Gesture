@@ -4,6 +4,7 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="gestureCompositeReverse" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="NZGesture" inverseName="actionComposite" inverseEntity="NZGesture" syncable="YES"/>
         <relationship name="gestureSingleReverse" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="NZGesture" inverseName="singleAction" inverseEntity="NZGesture" syncable="YES"/>
+        <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NZLocation" inverseName="action" inverseEntity="NZLocation" syncable="YES"/>
         <relationship name="parentAction" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="NZActionComposite" inverseName="childActions" inverseEntity="NZActionComposite" syncable="YES"/>
     </entity>
     <entity name="NZActionComposite" representedClassName="NZActionComposite" parentEntity="NZAction" syncable="YES">
@@ -55,6 +56,11 @@
         <relationship name="sensorData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NZSensorData" inverseName="linearAcceleration" inverseEntity="NZSensorData" syncable="YES"/>
         <userInfo/>
     </entity>
+    <entity name="NZLocation" representedClassName="NZLocation" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="action" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="NZAction" inverseName="location" inverseEntity="NZAction" syncable="YES"/>
+    </entity>
     <entity name="NZQuaternion" representedClassName="NZQuaternion" syncable="YES">
         <attribute name="w" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="x" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
@@ -103,21 +109,22 @@
     </entity>
     <fetchRequest name="FetchRequest" entity="NZHttpRequest"/>
     <elements>
-        <element name="NZAction" positionX="421" positionY="-616" width="128" height="103"/>
-        <element name="NZActionComposite" positionX="187" positionY="-580" width="128" height="58"/>
+        <element name="NZAction" positionX="421" positionY="-616" width="128" height="118"/>
+        <element name="NZActionComposite" positionX="151" positionY="-508" width="128" height="58"/>
         <element name="NZClassificationPipeline" positionX="306" positionY="180" width="216" height="58"/>
         <element name="NZClassLabel" positionX="871" positionY="-63" width="128" height="88"/>
         <element name="NZGesture" positionX="718" positionY="-441" width="128" height="195"/>
         <element name="NZGestureSet" positionX="927" positionY="-243" width="126" height="105"/>
         <element name="NZGravity" positionX="-63" positionY="-193" width="128" height="103"/>
-        <element name="NZHttpRequest" positionX="333" positionY="-369" width="128" height="120"/>
+        <element name="NZHttpRequest" positionX="360" positionY="-363" width="128" height="120"/>
         <element name="NZLinearAcceleration" positionX="-63" positionY="-69" width="128" height="105"/>
         <element name="NZQuaternion" positionX="-63" positionY="51" width="128" height="120"/>
         <element name="NZSensorData" positionX="306" positionY="-60" width="128" height="150"/>
         <element name="NZSensorDataSet" positionX="486" positionY="-72" width="128" height="148"/>
         <element name="NZSingleAction" positionX="423" positionY="-466" width="128" height="58"/>
         <element name="NZUrlSession" positionX="486" positionY="-369" width="128" height="58"/>
-        <element name="NZWiFiPlugAction" positionX="162" positionY="-432" width="128" height="148"/>
+        <element name="NZWiFiPlugAction" positionX="169" positionY="-369" width="128" height="148"/>
         <element name="NZYawPitchRoll" positionX="-63" positionY="189" width="128" height="105"/>
+        <element name="NZLocation" positionX="151" positionY="-621" width="128" height="88"/>
     </elements>
 </model>
