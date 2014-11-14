@@ -27,7 +27,7 @@
 @property (retain, nonatomic) NSArray *allSingleActions;
 @property (retain, nonatomic) NSArray *allGroupActions;
 
-#pragma mark - alets
+#pragma mark - alerts
 @property (retain, nonatomic) UIAlertController *addGestureGroupAlertController;
 
 @end

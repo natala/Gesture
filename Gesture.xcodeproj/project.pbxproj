@@ -11,6 +11,10 @@
 		8A07255019A3AA4100ED7AC2 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A07254F19A3AA4100ED7AC2 /* CoreBluetooth.framework */; };
 		8A0DF6D9195C4DF70029E5F3 /* NZRingRecordingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0DF6D8195C4DF70029E5F3 /* NZRingRecordingVC.m */; };
 		8A0DF6E4195C63770029E5F3 /* NZSensorDataRecordingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0DF6E3195C63770029E5F3 /* NZSensorDataRecordingManager.m */; };
+		8A0DFFB91A14F03E006B68C9 /* NZLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0DFFB81A14F03E006B68C9 /* NZLocation.m */; };
+		8A0DFFBE1A14F1DA006B68C9 /* NZLocation+CoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0DFFBD1A14F1DA006B68C9 /* NZLocation+CoreData.m */; };
+		8A0DFFC11A14F8A2006B68C9 /* NZActionMainConfiguration02VC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0DFFC01A14F8A2006B68C9 /* NZActionMainConfiguration02VC.m */; };
+		8A0DFFC41A1532BE006B68C9 /* NZActionGroupConfigurationPopoverTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0DFFC31A1532BE006B68C9 /* NZActionGroupConfigurationPopoverTVC.m */; };
 		8A37E904197EAAE100CC08BB /* NZEditGestureSamplesTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A37E903197EAAE100CC08BB /* NZEditGestureSamplesTVC.m */; };
 		8A4390B519B480D000B1372F /* NZSingleAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A4390B419B480D000B1372F /* NZSingleAction.m */; };
 		8A5AB06919783369006B2FBC /* NZPipelineController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8A5AB06819783369006B2FBC /* NZPipelineController.mm */; };
@@ -228,6 +232,14 @@
 		8A0DF6D8195C4DF70029E5F3 /* NZRingRecordingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZRingRecordingVC.m; path = ViewControllers/NZRingRecordingVC.m; sourceTree = "<group>"; };
 		8A0DF6E2195C63770029E5F3 /* NZSensorDataRecordingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZSensorDataRecordingManager.h; path = Controll/Recording/NZSensorDataRecordingManager.h; sourceTree = "<group>"; };
 		8A0DF6E3195C63770029E5F3 /* NZSensorDataRecordingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZSensorDataRecordingManager.m; path = Controll/Recording/NZSensorDataRecordingManager.m; sourceTree = "<group>"; };
+		8A0DFFB71A14F03E006B68C9 /* NZLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZLocation.h; path = Model/CoreData/Entity/NZLocation.h; sourceTree = "<group>"; };
+		8A0DFFB81A14F03E006B68C9 /* NZLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZLocation.m; path = Model/CoreData/Entity/NZLocation.m; sourceTree = "<group>"; };
+		8A0DFFBC1A14F1DA006B68C9 /* NZLocation+CoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NZLocation+CoreData.h"; path = "Model/CoreData/Categories/NZLocation+CoreData.h"; sourceTree = "<group>"; };
+		8A0DFFBD1A14F1DA006B68C9 /* NZLocation+CoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NZLocation+CoreData.m"; path = "Model/CoreData/Categories/NZLocation+CoreData.m"; sourceTree = "<group>"; };
+		8A0DFFBF1A14F8A2006B68C9 /* NZActionMainConfiguration02VC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZActionMainConfiguration02VC.h; path = ViewControllers/NZActionMainConfiguration02VC.h; sourceTree = "<group>"; };
+		8A0DFFC01A14F8A2006B68C9 /* NZActionMainConfiguration02VC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZActionMainConfiguration02VC.m; path = ViewControllers/NZActionMainConfiguration02VC.m; sourceTree = "<group>"; };
+		8A0DFFC21A1532BE006B68C9 /* NZActionGroupConfigurationPopoverTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZActionGroupConfigurationPopoverTVC.h; path = "ViewControllers/popover : popups/NZActionGroupConfigurationPopoverTVC.h"; sourceTree = "<group>"; };
+		8A0DFFC31A1532BE006B68C9 /* NZActionGroupConfigurationPopoverTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZActionGroupConfigurationPopoverTVC.m; path = "ViewControllers/popover : popups/NZActionGroupConfigurationPopoverTVC.m"; sourceTree = "<group>"; };
 		8A37E902197EAAE100CC08BB /* NZEditGestureSamplesTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZEditGestureSamplesTVC.h; path = "ViewControllers/popover : popups/NZEditGestureSamplesTVC.h"; sourceTree = "<group>"; };
 		8A37E903197EAAE100CC08BB /* NZEditGestureSamplesTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZEditGestureSamplesTVC.m; path = "ViewControllers/popover : popups/NZEditGestureSamplesTVC.m"; sourceTree = "<group>"; };
 		8A4390B319B480D000B1372F /* NZSingleAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZSingleAction.h; sourceTree = "<group>"; };
@@ -761,6 +773,23 @@
 			name = Recording;
 			sourceTree = "<group>";
 		};
+		8A0DFFBA1A14F18E006B68C9 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				8A0DFFBB1A14F1A3006B68C9 /* Core Data Categories */,
+			);
+			name = Location;
+			sourceTree = "<group>";
+		};
+		8A0DFFBB1A14F1A3006B68C9 /* Core Data Categories */ = {
+			isa = PBXGroup;
+			children = (
+				8A0DFFBC1A14F1DA006B68C9 /* NZLocation+CoreData.h */,
+				8A0DFFBD1A14F1DA006B68C9 /* NZLocation+CoreData.m */,
+			);
+			name = "Core Data Categories";
+			sourceTree = "<group>";
+		};
 		8A5AB060197832B6006B2FBC /* Pipeline */ = {
 			isa = PBXGroup;
 			children = (
@@ -790,6 +819,8 @@
 				8A6A9B3119D5B686008F3513 /* NZMainConfigurationVC.m */,
 				8A6F24A619D440C00048CE8C /* Actions */,
 				8A6F24A519D440B40048CE8C /* Gesture */,
+				8A0DFFBF1A14F8A2006B68C9 /* NZActionMainConfiguration02VC.h */,
+				8A0DFFC01A14F8A2006B68C9 /* NZActionMainConfiguration02VC.m */,
 			);
 			name = Configuration;
 			sourceTree = "<group>";
@@ -1135,6 +1166,8 @@
 				8AD0201D197D7471003A09EE /* NZSetupHttpRequestVC.m */,
 				8AE766051A13C602001D11DA /* NZRingConnectionVc.h */,
 				8AE766061A13C602001D11DA /* NZRingConnectionVc.m */,
+				8A0DFFC21A1532BE006B68C9 /* NZActionGroupConfigurationPopoverTVC.h */,
+				8A0DFFC31A1532BE006B68C9 /* NZActionGroupConfigurationPopoverTVC.m */,
 			);
 			name = "popovers / popups";
 			sourceTree = "<group>";
@@ -1151,6 +1184,8 @@
 		8ADB4FDE1962BA8E00DC2784 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				8A0DFFB71A14F03E006B68C9 /* NZLocation.h */,
+				8A0DFFB81A14F03E006B68C9 /* NZLocation.m */,
 				8AA4187B19B884480027FDED /* Sensor Data */,
 				8AA4187A19B884240027FDED /* Actions */,
 				8ADB501E1962D63100DC2784 /* NZSensorDataSet.h */,
@@ -1170,6 +1205,7 @@
 		8ADB4FDF1962BACC00DC2784 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				8A0DFFBA1A14F18E006B68C9 /* Location */,
 				8ADB50181962CD4C00DC2784 /* NSManagedObject+CoreData.h */,
 				8ADB50191962CD4C00DC2784 /* NSManagedObject+CoreData.m */,
 				8AF0F40519AB3AC0001645A2 /* Gestures and Labels */,
@@ -2130,6 +2166,7 @@
 				8AB84B8919D9913C0017E81A /* NZFeedbackVC.m in Sources */,
 				8ADB50471962EB1D00DC2784 /* NZGravity.m in Sources */,
 				8AE8CB38196AD1FA008BE33E /* NZGraphViewHelper.m in Sources */,
+				8A0DFFB91A14F03E006B68C9 /* NZLocation.m in Sources */,
 				8AF7F99C1969C89F00DB6D7C /* SelfOrganizingMap.cpp in Sources */,
 				8AF7F9D01969C89F00DB6D7C /* EigenvalueDecomposition.cpp in Sources */,
 				8AF7F9B21969C89F00DB6D7C /* FastFourierTransform.cpp in Sources */,
@@ -2205,6 +2242,7 @@
 				8AE3831F1977D54500824571 /* NZGestureConfigurationVC.m in Sources */,
 				8A6AF54C195CBAF20015B571 /* NZSensorDataHelper.m in Sources */,
 				8AE766071A13C602001D11DA /* NZRingConnectionVc.m in Sources */,
+				8A0DFFC41A1532BE006B68C9 /* NZActionGroupConfigurationPopoverTVC.m in Sources */,
 				8AA4188D19B9B75C0027FDED /* NZWiFiPlugActionHandler.m in Sources */,
 				8AC9D9A7196162EF00364B5A /* NZSensorDataTableView.m in Sources */,
 				8A6A9B2C19D57FCC008F3513 /* NZGestureActionMappingVC.m in Sources */,
@@ -2236,6 +2274,7 @@
 				8A922966195C3D2A00DF7743 /* NZArduinoCommunicationManager.m in Sources */,
 				8AE383161976D15000824571 /* NZGestureSet+CoreData.m in Sources */,
 				8AF7F9B61969C89F00DB6D7C /* KMeansQuantizer.cpp in Sources */,
+				8A0DFFBE1A14F1DA006B68C9 /* NZLocation+CoreData.m in Sources */,
 				8AF7F9C31969C89F00DB6D7C /* DoubleMovingAverageFilter.cpp in Sources */,
 				8AF7F9A01969C89F00DB6D7C /* Classifier.cpp in Sources */,
 				8A922912195C3A3800DF7743 /* main.m in Sources */,
@@ -2266,6 +2305,7 @@
 				8AD0201E197D7471003A09EE /* NZSetupHttpRequestVC.m in Sources */,
 				8ADB501D1962CE4200DC2784 /* NZSensorDataSet+CoreData.m in Sources */,
 				8AF0F40E19AB433B001645A2 /* NZHttpRequest+Execute.m in Sources */,
+				8A0DFFC11A14F8A2006B68C9 /* NZActionMainConfiguration02VC.m in Sources */,
 				8AF7F98A1969C89F00DB6D7C /* BAG.cpp in Sources */,
 				8AF7F9A71969C89F00DB6D7C /* PostProcessing.cpp in Sources */,
 				8ADB503C1962E1B000DC2784 /* NZQuaternion+CoreData.m in Sources */,

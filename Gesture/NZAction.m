@@ -16,5 +16,7 @@
 @dynamic parentAction;
 @dynamic gestureSingleReverse;
 @dynamic gestureCompositeReverse;
+@dynamic location;
+
 
 @end

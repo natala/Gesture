@@ -17,6 +17,8 @@
 
 + (NSArray *)findAllSortedByName;
 
++ (NSArray *)findAllSortedByNameActionsForLocation:(NSString *)locationName;
+
 + (NZSingleAction *)findLates;
 
 - (void)destroy;

@@ -8,13 +8,16 @@
 
 #import "NZSingleAction+CoreData.h"
 #import "NSManagedObject+CoreData.h"
+#import "NZLocation+CoreData.h"
 
 @implementation NZSingleAction (CoreData)
 
 #pragma mark - Create
 +(NZSingleAction *)create
 {
-    return (NZSingleAction *)[super createEntityWithName:ENTITY_NAME_SINGLE_ACTION];
+    NZSingleAction *action = (NZSingleAction *)[super createEntityWithName:ENTITY_NAME_SINGLE_ACTION];
+    action.location = [NZLocation globalLocation];
+    return action;
 }
 
 #pragma mark - Find
@@ -27,6 +30,17 @@
 {
     NSSortDescriptor *actionSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
     return [[NZSingleAction findAll] sortedArrayUsingDescriptors:@[actionSortDescriptor]];
+}
+
++ (NSArray *)findAllSortedByNameActionsForLocation:(NSString *)locationName
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"location.name == %@", locationName];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:ENTITY_NAME_SINGLE_ACTION];
+    request.predicate = predicate;
+    NSError *error = nil;
+    NSArray *foundEntities = [[NZCoreDataManager sharedManager].managedObjectContext executeFetchRequest:request error:&error];
+    
+    return foundEntities;
 }
 
 + (NZSingleAction *)findLates

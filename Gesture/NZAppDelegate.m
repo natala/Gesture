@@ -17,6 +17,7 @@
 #import "NZWiFiPlugAction+CoreData.h"
 #import "NZActionComposite+CoreData.h"
 #import "NZAction+CoreData.h"
+#import "NZLocation+CoreData.h"
 #import "NZStartScreenVC.h"
 
 @implementation NZAppDelegate
@@ -45,7 +46,7 @@
     // controll the lights
   
     [NZAction destroyAll];
-  
+    [NZLocation destroyAll];
    /*
     NZHttpRequest *hueOff01 = [NZHttpRequest create];
     hueOff01.name = @"hue 1 off";
@@ -171,7 +172,9 @@
     // TUM ACTIONS //
     // *********** //
 
+    
     // SMART LAB //
+    
     // lights
     NZHttpRequest *labLighWindowOn = [NZHttpRequest create];
     labLighWindowOn.name = @"LAB light window on";
@@ -216,9 +219,15 @@
     labBlindsOff.message = @"OFF";
     labBlindsOff.httpHeaderContentType = @"text/plain";
     
+    NZLocation *smartLab = [NZLocation create];
+    smartLab.name = @"TUM Smart Lab";
+    smartLab.uuid = @"a uuid";
+    NSSet *slActions = [[NSSet alloc] initWithArray:@[labBlindsOff, labBlindsOn, labLighDoorOff, labLighDoorOn, labLighWindowOff, labLighWindowOn]];
+    smartLab.action = slActions;
+    
     // CONFERENCE ROOM //
     //blinds
-   /* NZHttpRequest *crBlindsBOn = [NZHttpRequest create];
+    NZHttpRequest *crBlindsBOn = [NZHttpRequest create];
     crBlindsBOn.name = @"CR blinds B on";
     crBlindsBOn.url = @"http://ios14cmu-bruegge.in.tum.de:8080/rest/items/EO_CR_Blinds_B";
     crBlindsBOn.httpMethod = @"POST";
@@ -262,17 +271,23 @@
     crLightsBOff.httpHeaderContentType = @"text/plain";
 
     //composits
-    NZActionComposite *lightsOn = [NZActionComposite create];
-    lightsOn.name = @"CR Lights On";
-    lightsOn.childActions = [[NSSet alloc] initWithObjects:crLightsAOn, crLightsBOn, nil];
+    NZActionComposite *crlightsOn = [NZActionComposite create];
+    crlightsOn.name = @"CR Lights On";
+    crlightsOn.childActions = [[NSSet alloc] initWithObjects:crLightsAOn, crLightsBOn, nil];
 
-    NZActionComposite *lightsOff = [NZActionComposite create];
-    lightsOff.name = @"CR Lights Off";
-    lightsOff.childActions = [[NSSet alloc] initWithObjects:crLightsAOff, crLightsBOff, nil];
+    NZActionComposite *crlightsOff = [NZActionComposite create];
+    crlightsOff.name = @"CR Lights Off";
+    crlightsOff.childActions = [[NSSet alloc] initWithObjects:crLightsAOff, crLightsBOff, nil];
+  
+    NZLocation *conferenceRoom = [NZLocation create];
+    conferenceRoom.name = @"TUM Conference Room";
+    conferenceRoom.uuid = @"a uuid 02";
+    NSSet *crActions = [[NSSet alloc] initWithArray:@[crBlindsBOff, crBlindsBOn, crLightsAOff, crLightsAOn, crLightsBOff, crLightsBOn, crlightsOff, crlightsOn,]];
+    conferenceRoom.action = crActions;
     
- */
- // Load the Start Screen VC
+    [[NZCoreDataManager sharedManager] save];
  
+ // Load the Start Screen VC
     
     return YES;
 }
