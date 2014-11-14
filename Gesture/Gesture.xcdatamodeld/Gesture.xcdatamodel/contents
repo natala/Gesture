@@ -118,6 +118,7 @@
         <element name="NZGravity" positionX="-63" positionY="-193" width="128" height="103"/>
         <element name="NZHttpRequest" positionX="360" positionY="-363" width="128" height="120"/>
         <element name="NZLinearAcceleration" positionX="-63" positionY="-69" width="128" height="105"/>
+        <element name="NZLocation" positionX="151" positionY="-621" width="128" height="88"/>
         <element name="NZQuaternion" positionX="-63" positionY="51" width="128" height="120"/>
         <element name="NZSensorData" positionX="306" positionY="-60" width="128" height="150"/>
         <element name="NZSensorDataSet" positionX="486" positionY="-72" width="128" height="148"/>
@@ -125,6 +126,5 @@
         <element name="NZUrlSession" positionX="486" positionY="-369" width="128" height="58"/>
         <element name="NZWiFiPlugAction" positionX="169" positionY="-369" width="128" height="148"/>
         <element name="NZYawPitchRoll" positionX="-63" positionY="189" width="128" height="105"/>
-        <element name="NZLocation" positionX="151" positionY="-621" width="128" height="88"/>
     </elements>
 </model>

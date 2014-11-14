@@ -14,6 +14,7 @@
 		8A0DFFB91A14F03E006B68C9 /* NZLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0DFFB81A14F03E006B68C9 /* NZLocation.m */; };
 		8A0DFFBE1A14F1DA006B68C9 /* NZLocation+CoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0DFFBD1A14F1DA006B68C9 /* NZLocation+CoreData.m */; };
 		8A0DFFC11A14F8A2006B68C9 /* NZActionMainConfiguration02VC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0DFFC01A14F8A2006B68C9 /* NZActionMainConfiguration02VC.m */; };
+		8A0DFFC41A1532BE006B68C9 /* NZActionGroupConfigurationPopoverTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0DFFC31A1532BE006B68C9 /* NZActionGroupConfigurationPopoverTVC.m */; };
 		8A37E904197EAAE100CC08BB /* NZEditGestureSamplesTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A37E903197EAAE100CC08BB /* NZEditGestureSamplesTVC.m */; };
 		8A4390B519B480D000B1372F /* NZSingleAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A4390B419B480D000B1372F /* NZSingleAction.m */; };
 		8A5AB06919783369006B2FBC /* NZPipelineController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8A5AB06819783369006B2FBC /* NZPipelineController.mm */; };
@@ -237,6 +238,8 @@
 		8A0DFFBD1A14F1DA006B68C9 /* NZLocation+CoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NZLocation+CoreData.m"; path = "Model/CoreData/Categories/NZLocation+CoreData.m"; sourceTree = "<group>"; };
 		8A0DFFBF1A14F8A2006B68C9 /* NZActionMainConfiguration02VC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZActionMainConfiguration02VC.h; path = ViewControllers/NZActionMainConfiguration02VC.h; sourceTree = "<group>"; };
 		8A0DFFC01A14F8A2006B68C9 /* NZActionMainConfiguration02VC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZActionMainConfiguration02VC.m; path = ViewControllers/NZActionMainConfiguration02VC.m; sourceTree = "<group>"; };
+		8A0DFFC21A1532BE006B68C9 /* NZActionGroupConfigurationPopoverTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZActionGroupConfigurationPopoverTVC.h; path = "ViewControllers/popover : popups/NZActionGroupConfigurationPopoverTVC.h"; sourceTree = "<group>"; };
+		8A0DFFC31A1532BE006B68C9 /* NZActionGroupConfigurationPopoverTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZActionGroupConfigurationPopoverTVC.m; path = "ViewControllers/popover : popups/NZActionGroupConfigurationPopoverTVC.m"; sourceTree = "<group>"; };
 		8A37E902197EAAE100CC08BB /* NZEditGestureSamplesTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZEditGestureSamplesTVC.h; path = "ViewControllers/popover : popups/NZEditGestureSamplesTVC.h"; sourceTree = "<group>"; };
 		8A37E903197EAAE100CC08BB /* NZEditGestureSamplesTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZEditGestureSamplesTVC.m; path = "ViewControllers/popover : popups/NZEditGestureSamplesTVC.m"; sourceTree = "<group>"; };
 		8A4390B319B480D000B1372F /* NZSingleAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZSingleAction.h; sourceTree = "<group>"; };
@@ -1163,6 +1166,8 @@
 				8AD0201D197D7471003A09EE /* NZSetupHttpRequestVC.m */,
 				8AE766051A13C602001D11DA /* NZRingConnectionVc.h */,
 				8AE766061A13C602001D11DA /* NZRingConnectionVc.m */,
+				8A0DFFC21A1532BE006B68C9 /* NZActionGroupConfigurationPopoverTVC.h */,
+				8A0DFFC31A1532BE006B68C9 /* NZActionGroupConfigurationPopoverTVC.m */,
 			);
 			name = "popovers / popups";
 			sourceTree = "<group>";
@@ -2237,6 +2242,7 @@
 				8AE3831F1977D54500824571 /* NZGestureConfigurationVC.m in Sources */,
 				8A6AF54C195CBAF20015B571 /* NZSensorDataHelper.m in Sources */,
 				8AE766071A13C602001D11DA /* NZRingConnectionVc.m in Sources */,
+				8A0DFFC41A1532BE006B68C9 /* NZActionGroupConfigurationPopoverTVC.m in Sources */,
 				8AA4188D19B9B75C0027FDED /* NZWiFiPlugActionHandler.m in Sources */,
 				8AC9D9A7196162EF00364B5A /* NZSensorDataTableView.m in Sources */,
 				8A6A9B2C19D57FCC008F3513 /* NZGestureActionMappingVC.m in Sources */,

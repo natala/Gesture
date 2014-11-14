@@ -12,6 +12,7 @@
 #import "NZSingleAction+CoreData.h"
 #import "NZActionComposite+CoreData.h"
 #import "NZCoreDataManager.h"
+#import "NZActionGroupConfigurationPopoverTVC.h"
 
 @interface NZActionMainConfiguration02VC ()
 
@@ -21,8 +22,9 @@
 @property (nonatomic, retain) NZLocation *selectedLocation;
 @property (nonatomic) BOOL singleActions;
 
-#pragma mark - alerts
-@property (retain, nonatomic) UIAlertController *addGestureGroupAlertController;
+#pragma mark - alerts and popovers
+@property (retain, nonatomic) UIAlertController *addActionGroupAlertController;
+@property (nonatomic, strong) NZActionGroupConfigurationPopoverTVC * configGroupActionTvc;
 
 @end
 
@@ -31,9 +33,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // add gesture recognizer to enable moving cells
     self.singleActions = true;
     self.allLocations = [NZLocation findAllSortedByName];
-    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"ActionGroupsConfigTvc"];
+    if ([vc isKindOfClass:[NZActionGroupConfigurationPopoverTVC class]]) {
+        self.configGroupActionTvc = (NZActionGroupConfigurationPopoverTVC *)vc;
+    }
 }
 
 - (void)viewDidLayoutSubviews
@@ -169,7 +176,11 @@
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
-    
+    self.configGroupActionTvc.groupAction = [self.allGroupActionsForLocation objectAtIndex:indexPath.row];
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    self.configGroupActionTvc.groupNameLabel.text = cell.textLabel.text;
+    UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:self.configGroupActionTvc];
+    [popover presentPopoverFromRect:self.actionsTableView.layer.frame inView:self.actionsTableView permittedArrowDirections:0 animated:YES];
 }
 
 -(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -249,21 +260,21 @@
 }
 
 - (IBAction)addButtonTapped:(UIButton *)sender {
-    if (!self.addGestureGroupAlertController) {
+    if (!self.addActionGroupAlertController) {
         
-        self.addGestureGroupAlertController = [UIAlertController alertControllerWithTitle:@"Add new Group" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        self.addActionGroupAlertController = [UIAlertController alertControllerWithTitle:@"Add new Group" message:nil preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:nil];
         UIAlertAction *doneAction = [UIAlertAction actionWithTitle:@"Done" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             [self addActionComposite];
         }];
-        [self.addGestureGroupAlertController addAction:doneAction];
-        [self.addGestureGroupAlertController addAction:cancelAction];
-        [self.addGestureGroupAlertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        [self.addActionGroupAlertController addAction:doneAction];
+        [self.addActionGroupAlertController addAction:cancelAction];
+        [self.addActionGroupAlertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
             textField.placeholder = @"Enter group name here";
         }];
     }
-    [self presentViewController:self.addGestureGroupAlertController animated:YES completion:nil];
+    [self presentViewController:self.addActionGroupAlertController animated:YES completion:nil];
 }
 
 #pragma mark - setters & getters
@@ -287,7 +298,7 @@
 - (void)addActionComposite
 {
     
-    UITextField *textField = [self.addGestureGroupAlertController.textFields objectAtIndex:0];
+    UITextField *textField = [self.addActionGroupAlertController.textFields objectAtIndex:0];
     
     if ([textField.text isEqualToString:@""]) {
         return;
