@@ -227,14 +227,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Power Ring" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lBX-nT-2ED">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Power Ring" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lBX-nT-2ED">
                                 <rect key="frame" x="56" y="50" width="89" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="is not connected" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CZH-kp-EBf">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="is not connected" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CZH-kp-EBf">
                                 <rect key="frame" x="36" y="89" width="128" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -289,7 +289,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
-                                            <segue destination="VUI-JD-LRg" kind="replace" splitViewControllerTargetIndex="1" id="3Fs-OV-gqD"/>
+                                            <segue destination="VUI-JD-LRg" kind="replace" identifier="configurationSegue" splitViewControllerTargetIndex="1" id="3Fs-OV-gqD"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="f0g-7z-kfQ" rowHeight="100" style="IBUITableViewCellStyleDefault" id="sXG-IX-9nQ">
@@ -335,7 +335,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
-                                            <segue destination="zNv-5K-ZVv" kind="replace" splitViewControllerTargetIndex="1" id="UIn-hW-reE"/>
+                                            <segue destination="zNv-5K-ZVv" kind="replace" identifier="mainControlSegue" splitViewControllerTargetIndex="1" id="UIn-hW-reE"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="Nnv-dY-hbh" rowHeight="100" style="IBUITableViewCellStyleDefault" id="d6n-qO-WPj">
@@ -396,6 +396,7 @@
                         <outlet property="configureCell" destination="wUy-RS-OLg" id="GgZ-C5-xTH"/>
                         <outlet property="connectionStatusNavigationItem" destination="Zdf-7t-Un8" id="mtL-fi-Rue"/>
                         <outlet property="leaveCell" destination="fXR-pY-ImM" id="IDa-pw-hRQ"/>
+                        <outlet property="mainControlCell" destination="WCw-Qf-5nD" id="o2t-vN-dKs"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
@@ -1002,10 +1003,10 @@
                                     <action selector="singleGroupSegmentValueChanged:" destination="QxY-Lp-Q8D" eventType="valueChanged" id="Vit-2M-j1c"/>
                                 </connections>
                             </segmentedControl>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ChV-JG-f08">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="ChV-JG-f08">
                                 <rect key="frame" x="0.0" y="287" width="870" height="481"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="singleActionCell" textLabel="QkK-Ur-SEM" style="IBUITableViewCellStyleDefault" id="i2J-cl-4wE">
                                         <autoresizingMask key="autoresizingMask"/>

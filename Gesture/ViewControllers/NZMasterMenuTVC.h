@@ -13,7 +13,7 @@
 
 @interface NZMasterMenuTVC : UITableViewController <UISplitViewControllerDelegate, NZStartScreenVCDelegate,NZArduinoCommunicationManagerObserver>
 
-@property (nonatomic, weak) NZStartScreenVC *startScreenVc;
+@property (nonatomic, strong) NZStartScreenVC *startScreenVc;
 
 #pragma mark - UI elements
 @property (weak, nonatomic) IBOutlet UINavigationItem *connectionStatusNavigationItem;
@@ -22,6 +22,7 @@
 #pragma mark - cells
 @property (weak, nonatomic) IBOutlet UITableViewCell *configureCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *leaveCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *mainControlCell;
 
 
 

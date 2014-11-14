@@ -65,8 +65,6 @@
 
 - (void)commonInit
 {
-    self.hideStartScreen = false;
-    
     self.connectedRing = [[UIBarButtonItem alloc] initWithTitle:@"Ȯ" style:UIBarButtonItemStylePlain target:self action:@selector(connectionStatusTapped)];
     
     self.disconnectedRing = [[UIBarButtonItem alloc] initWithTitle:@"U" style:UIBarButtonItemStylePlain target:self action:@selector(connectionStatusTapped)];
@@ -79,9 +77,11 @@
     self.ringConnectionPopoverController.delegate = self;
     
     [[NZArduinoCommunicationManager sharedManager] addArduinoCommunicationObserver:self];
-   // UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-   //  NZStartScreenVC *startScreen = (NZStartScreenVC *)[mainStoryBoard instantiateViewControllerWithIdentifier:@"StartScreenVC"];
-   // self.startScreenVc = startScreen;
+    UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    NZStartScreenVC *startScreen = (NZStartScreenVC *)[mainStoryBoard instantiateViewControllerWithIdentifier:@"StartScreenVC"];
+    self.startScreenVc = startScreen;
+    self.startScreenVc.delegate = self;
+    self.hideStartScreen = false;
 }
 
 - (void)viewDidLoad
@@ -89,19 +89,16 @@
     [super viewDidLoad];
     NSIndexPath *indexPath = [self.tableView indexPathForCell:self.configureCell];
     [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
-    // set the default selection to the recording
-       self.selectedCell = self.configureCell;
-   // self.selectedCell.userInteractionEnabled = NO;
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self presentStartScreenAnimated:NO];
 }
 
 - (void)viewDidLayoutSubviews
 {
-    [self presentStartScreenAnimated:NO];
     self.selectedCell.highlighted = true;
 }
 
@@ -121,10 +118,6 @@
     if (self.hideStartScreen) {
         return;
     }
-    UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    NZStartScreenVC *startScreen = (NZStartScreenVC *)[mainStoryBoard instantiateViewControllerWithIdentifier:@"StartScreenVC"];
-    self.startScreenVc = startScreen;
-    self.startScreenVc.delegate = self;
     [self presentViewController:self.startScreenVc animated:animated completion:nil];
     [self.navigationController popToRootViewControllerAnimated:NO];
 }
@@ -209,12 +202,17 @@
     self.hideStartScreen = true;
     NSLog(@"selected set: %@", gestureSetName);
     [[NZGestureSetHandler sharedManager] loadGestureSetWithName:gestureSetName];
-    self.startScreenVc.delegate = nil;
-    
-   // NSIndexPath *indexPath = [self.tableView indexPathForCell:self.configureCell];
-    //[self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
-    //self.selectedCell = self.configureCell;
-   // self.selectedCell.userInteractionEnabled = NO;
+    if ([[[NZGestureSetHandler sharedManager] selectedGestureSet].gestures count]) {
+        [self.tableView selectRowAtIndexPath:[self.tableView indexPathForCell:self.mainControlCell] animated:NO scrollPosition:UITableViewScrollPositionNone];
+        self.selectedCell = self.mainControlCell;
+        [self performSegueWithIdentifier:@"mainControlSegue" sender:self];
+        
+    } else {
+        [self.tableView selectRowAtIndexPath:[self.tableView indexPathForCell:self.configureCell] animated:NO scrollPosition:UITableViewScrollPositionNone];
+        self.selectedCell = self.configureCell;
+        [self performSegueWithIdentifier:@"configurationSegue" sender:self];
+    }
+   // self.startScreenVc.delegate = nil;
     self.selectedCell.highlighted = true;
 
 }
