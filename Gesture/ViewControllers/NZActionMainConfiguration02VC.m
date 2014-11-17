@@ -252,10 +252,11 @@
 - (IBAction)editButtonTapped:(UIButton *)sender {
     if ([self.actionsTableView isEditing]) {
         [self.actionsTableView setEditing:NO animated:YES];
-        [self.editButton setTitle:@"Delete" forState:UIControlStateNormal];
+        [self.editButton setImage:[UIImage imageNamed:@"delete_circle"] forState:UIControlStateNormal];
     } else {
         [self.actionsTableView setEditing:YES animated:YES];
-        [self.editButton setTitle:@"Done" forState:UIControlStateNormal];
+        [self.editButton setImage:[UIImage imageNamed:@"check_circle"] forState:UIControlStateNormal];
+       // [self.editButton setTitle:@"Done" forState:UIControlStateNormal];
     }
 }
 

@@ -24,10 +24,14 @@
 #pragma mark - UI Elements
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
+@property (weak, nonatomic) IBOutlet UIButton *renameButton;
+@property (weak, nonatomic) IBOutlet UIButton *goButton;
 
 #pragma mark - IB Actions
 - (IBAction)goButtonTapped:(UIButton *)sender;
 - (IBAction)renameButtonTapped:(UIButton *)sender;
 - (IBAction)deleteButtonTapped:(UIButton *)sender;
+- (IBAction)addButtonTapped:(UIButton *)sender;
 
 @end

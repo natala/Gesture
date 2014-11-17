@@ -11,7 +11,7 @@
 #import "NZGestureSet+CoreData.h"
 #import "NZCoreDataManager.h"
 
-static NSString *kPickerRowNewName = @"new";
+//static NSString *kPickerRowNewName = @"new";
 
 @interface NZStartScreenVC ()
 
@@ -37,6 +37,16 @@ static NSString *kPickerRowNewName = @"new";
     self.pickerView.dataSource = self;
     
     // Do any additional setup after loading the view.
+}
+
+- (void)viewDidLayoutSubviews
+{
+    if ([[NZGestureSet findAll] count] == 0) {
+        self.deleteButton.enabled = false;
+        self.renameButton.enabled = false;
+        self.goButton.enabled = false;
+    }
+    [super viewDidLayoutSubviews];
 }
 
 - (void)didReceiveMemoryWarning
@@ -92,16 +102,16 @@ static NSString *kPickerRowNewName = @"new";
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return [[NZGestureSet findAll] count]+1;
+    return [[NZGestureSet findAll] count];//+1;
 }
 
 #pragma mark - UI Picker View Delegate
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     NSArray *sets = [NZGestureSet findAllSortetByLabel];
-    if ([sets count] == row) {
+   /* if ([sets count] == row) {
         return kPickerRowNewName;
-    }
+    }*/
     NZGestureSet *set = [sets objectAtIndex:row];
     return  set.name;
 }
@@ -115,42 +125,51 @@ static NSString *kPickerRowNewName = @"new";
 - (IBAction)goButtonTapped:(UIButton *)sender {
    self.selectedSetName = [self pickerView:self.pickerView titleForRow:[self.pickerView selectedRowInComponent:0] forComponent:0];
     // if setting up a new gesture set
-    if ([self.selectedSetName isEqualToString:kPickerRowNewName]) {
+   /* if ([self.selectedSetName isEqualToString:kPickerRowNewName]) {
         [self presentAlert];
         return;
-    } else {
-        [self.activityIndicator startAnimating];
-        [self didSelectGestureSet];
-    }
+    }*/
+    [self.activityIndicator startAnimating];
+    [self didSelectGestureSet];
+    
 }
 
 - (IBAction)renameButtonTapped:(UIButton *)sender {
     self.selectedSetName = [self pickerView:self.pickerView titleForRow:[self.pickerView selectedRowInComponent:0] forComponent:0];
-    if ([self.selectedSetName isEqual:kPickerRowNewName]) {
+   /* if ([self.selectedSetName isEqual:kPickerRowNewName]) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"wrong selection" message:@"new is used to create a new set" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alertView show];
-    } else {
+    }*/
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"rename %@", self.selectedSetName ] delegate:self cancelButtonTitle:@"Done" otherButtonTitles: nil];
         alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
         alertView.tag = 200;
         [alertView show];
-    }
+    
 }
 
 - (IBAction)deleteButtonTapped:(UIButton *)sender {
     self.selectedSetName = [self pickerView:self.pickerView titleForRow:[self.pickerView selectedRowInComponent:0] forComponent:0];
-    if ([self.selectedSetName isEqual:kPickerRowNewName]) {
+  /*  if ([self.selectedSetName isEqual:kPickerRowNewName]) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"wrong selection" message:@"new is used to create a new set" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alertView show];
-    } else {
+    } */
         NZGestureSet *set = [NZGestureSet findWithName:self.selectedSetName];
         if (set) {
             [set destroy];
         }
-    }
+
    // [self.pickerView reloadInputViews];
     [[NZCoreDataManager sharedManager] save];
     [self.pickerView reloadAllComponents];
+    if ([[NZGestureSet findAll] count] == 0) {
+        self.renameButton.enabled = false;
+        self.goButton.enabled = false;
+        self.deleteButton.enabled = false;
+    }
+}
+
+- (IBAction)addButtonTapped:(UIButton *)sender {
+    [self presentAlert];
 }
 
 #pragma mark - UI Alert View Delegate
@@ -169,13 +188,18 @@ static NSString *kPickerRowNewName = @"new";
             [self.pickerView reloadAllComponents];
         } else NSLog(@"failed to change name. No set with the given name found");
     }
+    
+    if ([[NZGestureSet findAll] count] > 0) {
+        self.renameButton.enabled = true;
+        self.goButton.enabled = true;
+        self.deleteButton.enabled = true;
+    }
 }
 
 // Called when we cancel a view (eg. the user clicks the Home button). This is not called when the user clicks the cancel button.
 // If not defined in the delegate, we simulate a click in the cancel button
 - (void)alertViewCancel:(UIAlertView *)alertView
 {
-
 }
 
 @end

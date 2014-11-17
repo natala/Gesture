@@ -65,9 +65,10 @@
 
 - (void)commonInit
 {
-    self.connectedRing = [[UIBarButtonItem alloc] initWithTitle:@"Ȯ" style:UIBarButtonItemStylePlain target:self action:@selector(connectionStatusTapped)];
-    
-    self.disconnectedRing = [[UIBarButtonItem alloc] initWithTitle:@"U" style:UIBarButtonItemStylePlain target:self action:@selector(connectionStatusTapped)];
+    self.connectedRing = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"check_circle_small"] style:UIBarButtonItemStylePlain target:self action:@selector(connectionStatusTapped)];
+    //self.connectedRing = [[UIBarButtonItem alloc] initWithTitle:@"Ȯ" style:UIBarButtonItemStylePlain target:self action:@selector(connectionStatusTapped)];
+    self.disconnectedRing = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"delete_circle_small"] style:UIBarButtonItemStylePlain target:self action:@selector(connectionStatusTapped)];
+    //self.disconnectedRing = [[UIBarButtonItem alloc] initWithTitle:@"U" style:UIBarButtonItemStylePlain target:self action:@selector(connectionStatusTapped)];
 
     [self.navigationItem setLeftBarButtonItem:self.disconnectedRing];
     

@@ -131,25 +131,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="FFr-9L-47X">
-                                <rect key="frame" x="257" y="482" width="57" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Rename">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="renameButtonTapped:" destination="0Ga-9n-g5T" eventType="touchUpInside" id="TiW-aa-tte"/>
-                                </connections>
-                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Hose_login" id="oqv-h1-8i0">
                                 <rect key="frame" x="536" y="275" width="240" height="217"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <pickerView contentMode="scaleToFill" id="xZZ-c6-BJX">
-                                <rect key="frame" x="240" y="500" width="275" height="216"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <gestureRecognizers/>
-                            </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" id="5QQ-B0-HSZ">
                                 <rect key="frame" x="629" y="412" width="55" height="55"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -163,28 +148,47 @@
                                     <action selector="goButtonTapped:" destination="0Ga-9n-g5T" eventType="touchUpInside" id="T7X-g3-ELl"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Person_login" id="FKk-UE-zKQ">
-                                <rect key="frame" x="257" y="258" width="240" height="234"/>
+                            <pickerView hidden="YES" contentMode="scaleToFill" id="pIC-28-Cpv">
+                                <rect key="frame" x="582" y="500" width="266" height="216"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </pickerView>
+                            <pickerView contentMode="scaleToFill" id="xZZ-c6-BJX">
+                                <rect key="frame" x="239" y="334" width="275" height="216"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
+                            </pickerView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user icon" id="FKk-UE-zKQ">
+                                <rect key="frame" x="311" y="231" width="131" height="127"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="dLC-l6-bhn">
-                                <rect key="frame" x="439" y="482" width="44" height="30"/>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" id="mne-hj-7Kl">
+                                <rect key="frame" x="501" y="166" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Delete">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
+                            </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="FFr-9L-47X">
+                                <rect key="frame" x="287" y="558" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="edit"/>
+                                <connections>
+                                    <action selector="renameButtonTapped:" destination="0Ga-9n-g5T" eventType="touchUpInside" id="TiW-aa-tte"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="dLC-l6-bhn">
+                                <rect key="frame" x="357" y="558" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="delete_circle"/>
                                 <connections>
                                     <action selector="deleteButtonTapped:" destination="0Ga-9n-g5T" eventType="touchUpInside" id="9Oy-az-sd2"/>
                                 </connections>
                             </button>
-                            <pickerView contentMode="scaleToFill" id="pIC-28-Cpv">
-                                <rect key="frame" x="523" y="500" width="266" height="216"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="W8x-iL-8hA">
+                                <rect key="frame" x="434" y="558" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </pickerView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" id="mne-hj-7Kl">
-                                <rect key="frame" x="502" y="374" width="20" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </activityIndicatorView>
+                                <state key="normal" image="add_circle"/>
+                                <connections>
+                                    <action selector="addButtonTapped:" destination="0Ga-9n-g5T" eventType="touchUpInside" id="OKd-ZV-qcG"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -193,7 +197,10 @@
                     <size key="freeformSize" width="1024" height="768"/>
                     <connections>
                         <outlet property="activityIndicator" destination="mne-hj-7Kl" id="1Dy-xx-oc8"/>
+                        <outlet property="deleteButton" destination="dLC-l6-bhn" id="EAO-UG-lbL"/>
+                        <outlet property="goButton" destination="5QQ-B0-HSZ" id="wyN-QJ-Yzv"/>
                         <outlet property="pickerView" destination="xZZ-c6-BJX" id="yb7-5J-SyW"/>
+                        <outlet property="renameButton" destination="FFr-9L-47X" id="D24-35-6Mu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kkw-vl-UeL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -389,7 +396,7 @@
                             <outlet property="delegate" destination="7bK-jq-Zjz" id="RA6-mI-bju"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Menu" id="Zdf-7t-Un8"/>
+                    <navigationItem key="navigationItem" title="PowerRing" id="Zdf-7t-Un8"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="153" height="768"/>
                     <connections>
@@ -985,7 +992,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <pickerView contentMode="scaleToFill" id="whG-BH-5pD">
-                                <rect key="frame" x="284" y="45" width="302" height="147"/>
+                                <rect key="frame" x="284" y="88" width="302" height="147"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <outlet property="dataSource" destination="QxY-Lp-Q8D" id="yS4-lx-cg7"/>
@@ -993,7 +1000,7 @@
                                 </connections>
                             </pickerView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="cfV-Y1-hwQ">
-                                <rect key="frame" x="284" y="200" width="302" height="29"/>
+                                <rect key="frame" x="284" y="258" width="302" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="Single" width="150"/>
@@ -1004,7 +1011,7 @@
                                 </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="ChV-JG-f08">
-                                <rect key="frame" x="0.0" y="287" width="870" height="481"/>
+                                <rect key="frame" x="0.0" y="367" width="870" height="401"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
@@ -1043,19 +1050,17 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="dhd-Lk-3A1">
-                                <rect key="frame" x="594" y="217" width="32" height="28"/>
+                                <rect key="frame" x="834" y="377" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <state key="normal" title="Add"/>
+                                <state key="normal" image="add_circle"/>
                                 <connections>
                                     <action selector="addButtonTapped:" destination="QxY-Lp-Q8D" eventType="touchUpInside" id="Mc3-o8-4Ju"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="A1h-if-rbx">
-                                <rect key="frame" x="594" y="194" width="48" height="22"/>
+                                <rect key="frame" x="801" y="377" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <state key="normal" title="Delete"/>
+                                <state key="normal" image="delete_circle"/>
                                 <connections>
                                     <action selector="editButtonTapped:" destination="QxY-Lp-Q8D" eventType="touchUpInside" id="kud-Gu-YNc"/>
                                 </connections>
@@ -1530,14 +1535,17 @@
         <image name="Logout_2" width="250" height="250"/>
         <image name="Main controll" width="250" height="250"/>
         <image name="More" width="250" height="250"/>
-        <image name="Person_login" width="500" height="500"/>
         <image name="Vertical line" width="600" height="600"/>
+        <image name="add_circle" width="50" height="50"/>
         <image name="circle thin black" width="250" height="250"/>
+        <image name="delete_circle" width="50" height="50"/>
+        <image name="edit" width="50" height="50"/>
         <image name="icon_42373" width="1200" height="1200"/>
         <image name="minus" width="125" height="125"/>
         <image name="plus" width="125" height="125"/>
         <image name="start blue" width="250" height="250"/>
         <image name="stop blue" width="250" height="250"/>
+        <image name="user icon" width="600" height="600"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
