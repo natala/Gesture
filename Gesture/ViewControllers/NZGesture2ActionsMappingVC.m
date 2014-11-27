@@ -121,7 +121,7 @@
     //[cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
     NZGesture *gesture = [self.gestures objectAtIndex:[indexPath section]];
     //UIButton *button;
-    switch ([indexPath row]) {
+   /* switch ([indexPath row]) {
         case 0:
             cell.textLabel.text = @"action";
             if (gesture.singleAction) {
@@ -140,7 +140,7 @@
             break;
         default:
             break;
-    }
+    }*/
     UIButton *button;
     button = [UIButton buttonWithType:UIButtonTypeContactAdd];
     button.frame = CGRectMake(cell.frame.size.width - 40, 0, 40, cell.frame.size.height);

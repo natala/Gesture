@@ -9,6 +9,8 @@
 #import "NZActionComposite+CoreData.h"
 #import "NSManagedObject+CoreData.h"
 #import "NZLocation+CoreData.h"
+#import "NZGesture.h"
+#import "NZClassLabel.h"
 
 @implementation NZActionComposite (CoreData)
 
@@ -41,6 +43,20 @@
     NSArray *foundEntities = [[NZCoreDataManager sharedManager].managedObjectContext executeFetchRequest:request error:&error];
     
     return foundEntities;
+}
+
++ (NZActionComposite *)findActionForLocation:(NSString *)locationName andGesture:(NSString *)gestureName
+{    NSArray *actions = [NZActionComposite findAllSortedByNameActionsForLocation:locationName];
+    if ([actions count] > 0) {
+        for (NZActionComposite *action in actions) {
+            for (NZGesture *gesture in action.gestureSingleReverse) {
+                if ([gesture.label.name isEqualToString:gestureName]) {
+                    return action;
+                }
+            }
+        }
+    }
+    return nil;
 }
 
 + (NZActionComposite *)findLates

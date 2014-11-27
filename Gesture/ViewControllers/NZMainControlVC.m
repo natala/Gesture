@@ -16,6 +16,7 @@
 #import "NZSensorDataSet.h"
 #import "NZGesture.h"
 #import "NZCoreDataManager.h"
+#import "NZLocation+CoreData.h"
 
 @interface NZMainControlVC ()
 
@@ -26,6 +27,8 @@
 
 @property (nonatomic)  BOOL recordingManagerIsConnected;
 @property (nonatomic)  BOOL actionManagerIsReady;
+
+@property (nonatomic) NZLocation *selectedLocation;
 
 @property (nonatomic, retain) UIAlertController *notConnectedAllert;
 //@property (nonatomic, retain) UIAlertController *alertController;
@@ -51,6 +54,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSArray *allLocations = [NZLocation findAllSortedByName];
+    if ([allLocations count] > 0) {
+        self.selectedLocation = [allLocations objectAtIndex:0];
+    }
+   
     self.isRecordingGesture = false;
     self.actionManagerIsReady = false;
     self.recordingManagerIsConnected = false;
@@ -191,8 +199,8 @@
         self.recognizedGestureNameLabel.text = gesture.label.name;
         self.lastRecognizedGesture = gesture.label.name;
         if (self.isSingleMode) {
-            self.executedActionLabel.text = gesture.singleAction.name;
-        } else self.executedActionLabel.text = gesture.actionComposite.name;
+          //  self.executedActionLabel.text = gesture.singleAction.name;
+        } else self.executedActionLabel.text = nil;// gesture.actionComposite.name;
     }
     
     /*
@@ -206,8 +214,8 @@
     [self sendRequest:request withJson:jsonString];
      */
     if (self.isSingleMode) {
-        [[NZActionController sharedManager] executeGesture:gesture withMode:SINGLE_MODE];
-    } else [[NZActionController sharedManager] executeGesture:gesture withMode:GROUP_MODE];
+        [[NZActionController sharedManager] executeGesture:gesture withMode:SINGLE_MODE forLocation:self.selectedLocation.name];
+    } else [[NZActionController sharedManager] executeGesture:gesture withMode:GROUP_MODE forLocation:self.selectedLocation.name];
     
 #warning TODO implement the adding as a positive sample if the user doesn't complain
 }

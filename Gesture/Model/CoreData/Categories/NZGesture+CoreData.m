@@ -10,6 +10,7 @@
 #import "NZClassLabel+CoreData.h"
 #import "NZSensorDataSet+CoreData.h"
 #import "NSManagedObject+CoreData.h"
+#import "NZGestureSet.h"
 
 @implementation NZGesture (CoreData)
 
@@ -90,7 +91,9 @@
 #pragma mark - saving to file
 - (void)saveToFile
 {
-    NSString *fileName = self.label.name;
+    NSMutableString *fileName = [NSMutableString stringWithString:self.gestureSet.name];
+    [fileName appendString:@" - "];
+    [fileName appendString:self.label.name];
     [self saveToFileWithName:fileName];
     
 }

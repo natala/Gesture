@@ -19,12 +19,12 @@ static NSString *ENTITY_NAME_GESTURE = @"NZGesture";
 @property (nonatomic, retain) NSString * httpRequestUrl;
 @property (nonatomic, retain) NSDate * timeStampCreated;
 @property (nonatomic, retain) NSDate * timeStampUpdated;
-@property (nonatomic, retain) NZAction *actionComposite;
+@property (nonatomic, retain) NSSet *actionComposite;
 @property (nonatomic, retain) NZGestureSet *gestureSet;
 @property (nonatomic, retain) NZClassLabel *label;
 @property (nonatomic, retain) NSSet *negativeSamples;
 @property (nonatomic, retain) NSSet *positiveSamples;
-@property (nonatomic, retain) NZAction *singleAction;
+@property (nonatomic, retain) NSSet *singleAction;
 @end
 
 @interface NZGesture (CoreDataGeneratedAccessors)
@@ -38,5 +38,15 @@ static NSString *ENTITY_NAME_GESTURE = @"NZGesture";
 - (void)removePositiveSamplesObject:(NZSensorDataSet *)value;
 - (void)addPositiveSamples:(NSSet *)values;
 - (void)removePositiveSamples:(NSSet *)values;
+
+- (void)addSingleActionObject:(NZAction *)value;
+- (void)removeSingleActionObject:(NZAction *)value;
+- (void)addSingleAction:(NSSet *)values;
+- (void)removeSingleAction:(NSSet *)values;
+
+- (void)addActionCompositeObject:(NZAction *)value;
+- (void)removeActionCompositeObject:(NZAction *)value;
+- (void)addActionComposite:(NSSet *)values;
+- (void)removeActionComposite:(NSSet *)values;
 
 @end

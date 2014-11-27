@@ -48,11 +48,11 @@
     //*******************
     // Define Actions
     //*******************
-    bool tumSl = true;
-    bool tumCr = true;
-    bool sapientStudio = true;
-    [NZAction destroyAll];
-    [NZLocation destroyAll];
+    bool tumSl = false;
+    bool tumCr = false;
+    bool sapientStudio = false;
+    //[NZAction destroyAll];
+    //[NZLocation destroyAll];
     
     if (sapientStudio) {
         NZHttpRequest *hueOff01 = [NZHttpRequest create];

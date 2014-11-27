@@ -21,6 +21,8 @@
 
 + (NZSingleAction *)findLates;
 
++ (NZSingleAction *)findActionForLocation:(NSString *)locationName andGesture:(NSString *) gestureName;
+
 - (void)destroy;
 
 + (void)destroyAll;

@@ -115,7 +115,7 @@ GRT::Derivative derivativeFilter;
         /**************************/
         bool useScaling = false;                                // default is false, don't use scaling, the sensor data are scaled before sending to the pipeline
         bool useNullRejection = true;                          // default is false
-        double nullRejectionCoeff = 2.0;                        // default is 3.0
+        double nullRejectionCoeff = 3.0;                        // default is 3.0
         uint rejectionMode = GRT::DTW::TEMPLATE_THRESHOLDS
         ;     // default is TEMPLATE_THRESHOLD
         bool dtwConstrain = false;                               // default is true
@@ -501,7 +501,6 @@ GRT::Derivative derivativeFilter;
 #pragma mark - getters & setters
 
 #pragma mark - Helpers
-
 + (NSString *)documentPath
 {
     NSArray *searchPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);

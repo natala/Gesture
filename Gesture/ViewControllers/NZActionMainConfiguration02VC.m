@@ -115,6 +115,9 @@
 // Responding to Row Selection
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
+    if ([self.allLocations count] == 0) {
+        return;
+    }
     self.selectedLocation = [self.allLocations objectAtIndex:row];
 }
 

@@ -8,18 +8,22 @@
 
 #import "NZActionController.h"
 #import "NZAction+CoreData.h"
+#import "NZSingleAction+CoreData.h"
+#import "NZActionComposite+CoreData.h"
 #import "NZHttpRequest+CoreData.h"
 #import "NZUrlSession+CoreData.h"
 #import "NZActionComposite.h"
 #import "NZWiFiPlugAction+CoreData.h"
 #import "NZWiFiPlugActionHandler.h"
 #import "NZClassLabel.h"
+#import "NZLocation.h"
 
 @interface NZActionController ()
 
 @property (nonatomic, retain) NSMutableArray *actionHandlers;
 @property (nonatomic, retain) NSMutableDictionary *actionHandlersWithNames;
 @property (nonatomic, retain) NZActionHandler *lastExecutedAction;
+@property (nonatomic, strong) NZLocation *currentLocatin;
 
 @end
 
@@ -68,7 +72,8 @@ int responceCount = 0;
     for (NZUrlSession *action in urlActions) {
         NZActionHandler *actionHandler = [[NZActionHandler alloc] initWithAction:(NZAction *)action];
         [actionHandler addObserver:self];
-        [self.actionHandlersWithNames setObject:actionHandler forKey:action.name];
+        NSMutableString *keyString = [NSMutableString stringWithFormat:@"%@+%@", action.name, action.location.name];
+        [self.actionHandlersWithNames setObject:actionHandler forKey:keyString];
         //[self.actionHandlers addObject:actionHandler];
     }
     
@@ -77,14 +82,16 @@ int responceCount = 0;
     for (NZHttpRequest *action in httpActions) {
         NZActionHandler *actionHandler = [[NZActionHandler alloc] initWithAction:(NZAction *)action];
         [actionHandler addObserver:self];
-        [self.actionHandlersWithNames setObject:actionHandler forKey:action.name];
+        NSMutableString *keyString = [NSMutableString stringWithFormat:@"%@+%@", action.name, action.location.name];
+        [self.actionHandlersWithNames setObject:actionHandler forKey:keyString];
     }
     // initiate action handlers for wifi plug actions
     NSArray *wifiPlugActions = [NZWiFiPlugAction findAll];
     for (NZWiFiPlugAction *action in wifiPlugActions) {
         NZActionHandler *actionHandler = [[NZWiFiPlugActionHandler alloc] initWithAction:action];
         [actionHandler addObserver:self];
-        [self.actionHandlersWithNames setObject:actionHandler forKey:action.name];
+        NSMutableString *keyString = [NSMutableString stringWithFormat:@"%@+%@", action.name, action.location.name];
+        [self.actionHandlersWithNames setObject:actionHandler forKey:keyString];
     }
     
     // initiate action handlers for composite actions
@@ -92,27 +99,32 @@ int responceCount = 0;
     for (NZActionComposite *action in compositeActions) {
         NZActionHandler *actionHandler = [[NZActionHandler alloc] initWithAction:(NZAction *)action];
         [actionHandler addObserver:self];
-        [self.actionHandlersWithNames setObject:actionHandler forKey:action.name];
+        NSMutableString *keyString = [NSMutableString stringWithFormat:@"%@+%@", action.name, action.location.name];
+        [self.actionHandlersWithNames setObject:actionHandler forKey:keyString];
     }
 }
 
--(void)mapAction:(NZAction *)action toGesture:(NZGesture *)gesture
+/*-(void)mapAction:(NZAction *)action toGesture:(NZGesture *)gesture
 {
     if ([action isKindOfClass:[NZSingleAction class]]) {
         gesture.singleAction = (NZSingleAction *)action;
     } else if ([action isKindOfClass:[NZActionComposite class]]) {
         gesture.actionComposite = (NZActionComposite *)action;
     }
-}
+}*/
 
--(void)executeGesture:(NZGesture *)gesture withMode:(ExecutionMode)mode
+- (void)executeGesture:(NZGesture *)gesture withMode:(ExecutionMode)mode forLocation:(NSString *) locationName
 {
     if (mode == SINGLE_MODE) {
-        NZActionHandler *handler = [self.actionHandlersWithNames objectForKey:gesture.singleAction.name];
+        NZSingleAction *singleAction = [NZSingleAction findActionForLocation:locationName andGesture: gesture.label.name];
+        NSMutableString *keyString = [NSMutableString stringWithFormat:@"%@+%@", singleAction.name, locationName];
+        NZActionHandler *handler = [self.actionHandlersWithNames objectForKey:keyString];
         [handler execute];
         self.lastExecutedAction = handler;
     } else if (mode == GROUP_MODE) {
-        NZActionHandler *handler = [self.actionHandlersWithNames objectForKey:gesture.actionComposite.name];
+        NZActionComposite *groupAction = [NZActionComposite findActionForLocation:locationName andGesture: gesture.label.name];
+        NSMutableString *keyString = [NSMutableString stringWithFormat:@"%@+%@", groupAction.name, locationName];
+        NZActionHandler *handler = [self.actionHandlersWithNames objectForKey:keyString];
         [handler execute];
         self.lastExecutedAction = handler;
     }

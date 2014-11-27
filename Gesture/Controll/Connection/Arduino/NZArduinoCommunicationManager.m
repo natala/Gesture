@@ -179,7 +179,7 @@
     
    // sensorData = [NSDate date];
    // sensorData.sensorID = [NSNumber numberWithInt:data[14]];
-    
+  //  NSLog(@"%d", data[0]);
     uint8_t header = 85;    // 85 == 01010101xb
     uint8_t ending = 170;   // 170 == 10101010xb
     

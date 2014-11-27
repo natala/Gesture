@@ -18,6 +18,8 @@
 
 + (NSArray *)findAllSortedByNameActionsForLocation:(NSString *)locationName;
 
++ (NZActionComposite *)findActionForLocation:(NSString *)locationName andGesture:(NSString *)gestureName;
+
 + (NZActionComposite *)findLates;
 
 - (void)destroy;
