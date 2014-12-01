@@ -48,11 +48,11 @@
     //*******************
     // Define Actions
     //*******************
-    bool tumSl = false;
-    bool tumCr = false;
-    bool sapientStudio = false;
-    //[NZAction destroyAll];
-    //[NZLocation destroyAll];
+    bool tumSl = true;
+    bool tumCr = true;
+    bool sapientStudio = true;
+    [NZAction destroyAll];
+    [NZLocation destroyAll];
     
     if (sapientStudio) {
         NZHttpRequest *hueOff01 = [NZHttpRequest create];
@@ -241,7 +241,7 @@
         labBlindsOff.httpHeaderContentType = @"text/plain";
         
         NZLocation *smartLab = [NZLocation create];
-        smartLab.name = @"TUM Smart Lab";
+        smartLab.name = @"A TUM Smart Lab";
         smartLab.uuid = @"a uuid";
         NSSet *slActions = [[NSSet alloc] initWithArray:@[labBlindsOff, labBlindsOn, labLighDoorOff, labLighDoorOn, labLighWindowOff, labLighWindowOn]];
         smartLab.action = slActions;
