@@ -241,7 +241,7 @@
         labBlindsOff.httpHeaderContentType = @"text/plain";
         
         NZLocation *smartLab = [NZLocation create];
-        smartLab.name = @"A TUM Smart Lab";
+        smartLab.name = @"TUM Smart Lab";
         smartLab.uuid = @"a uuid";
         NSSet *slActions = [[NSSet alloc] initWithArray:@[labBlindsOff, labBlindsOn, labLighDoorOff, labLighDoorOn, labLighWindowOff, labLighWindowOn]];
         smartLab.action = slActions;
@@ -304,7 +304,7 @@
          
          */
         NZLocation *conferenceRoom = [NZLocation create];
-        conferenceRoom.name = @"TUM Conference Room";
+        conferenceRoom.name = @"A TUM Conference Room";
         conferenceRoom.uuid = @"a uuid 02";
         NSSet *crActions = [[NSSet alloc] initWithArray:@[crBlindsBOff, crBlindsBOn, crLightsAOff, crLightsAOn, crLightsBOff, crLightsBOn]];
         conferenceRoom.action = crActions;
