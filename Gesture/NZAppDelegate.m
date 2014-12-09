@@ -48,11 +48,11 @@
     //*******************
     // Define Actions
     //*******************
-    bool tumSl = true;
-    bool tumCr = true;
-    bool sapientStudio = true;
-    [NZAction destroyAll];
-    [NZLocation destroyAll];
+    bool tumSl = false;
+    bool tumCr = false;
+    bool sapientStudio = false;
+//    [NZAction destroyAll];
+//    [NZLocation destroyAll];
     
     if (sapientStudio) {
         NZHttpRequest *hueOff01 = [NZHttpRequest create];
@@ -162,7 +162,7 @@
         */
         
         NZLocation *sapientStudio = [NZLocation create];
-        sapientStudio.name = @"Sapient Studio Room";
+        sapientStudio.name = @"A Sapient Studio Room";
         sapientStudio.uuid = @"a uuid 03";
         NSSet *sapientStudioActions = [[NSSet alloc] initWithArray:@[hueOff01, hueOff02, hueOff03, hueOn01, hueOn02, hueOn03]];
         sapientStudio.action = sapientStudioActions;
@@ -304,7 +304,7 @@
          
          */
         NZLocation *conferenceRoom = [NZLocation create];
-        conferenceRoom.name = @"A TUM Conference Room";
+        conferenceRoom.name = @"TUM Conference Room";
         conferenceRoom.uuid = @"a uuid 02";
         NSSet *crActions = [[NSSet alloc] initWithArray:@[crBlindsBOff, crBlindsBOn, crLightsAOff, crLightsAOn, crLightsBOff, crLightsBOn]];
         conferenceRoom.action = crActions;
