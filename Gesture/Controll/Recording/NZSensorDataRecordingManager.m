@@ -81,7 +81,7 @@ static int kLongPressThreshold = 40;
 
 - (void)didReceiveSensorData:(NZSensorData *)sensorData withButtonState:(int)buttonState
 {
-    if (self.isRecordingData) {
+    if (self.isRecordingData && sensorData) {
         
         if (!self.currentSet.sample0) {
             
@@ -148,17 +148,17 @@ static int kLongPressThreshold = 40;
 
 - (BOOL)prepareForRecordingSensorDataSet
 {
-    if ([[NZArduinoCommunicationManager sharedManager] connect]) {
+    //if ([[NZArduinoCommunicationManager sharedManager] connect]) {
+    [[NZBeanConnectionManager sharedManager] connect];
         for (id<NZSensorDataRecordingManagerObserver>observer in self.sensorDataRecordingObservers){
             if ([observer respondsToSelector:@selector(connected)]) {
                 [observer connected];
             }
         }
-        [NZArduinoCommunicationManager sharedManager].delegate = self;
+       // [NZArduinoCommunicationManager sharedManager].delegate = self;
+    [NZBeanConnectionManager sharedManager].delegate = self;
         self.isRecordingData = false;
         return YES;
-    }
-    return NO;
 }
 
 - (BOOL)startRecordingNewSensorDataSet
@@ -168,7 +168,8 @@ static int kLongPressThreshold = 40;
     self.currentSet.timeStampUpdate = self.currentSet.timeStampCreated;
     // now the sensor data recording manager will be notified whenever the arduino connection manager receives new data
    // [NZArduinoCommunicationManager sharedManager].delegate = self;
-    BOOL startedReceiving = [[NZArduinoCommunicationManager sharedManager] startReceivingSensorData];
+   // BOOL startedReceiving = [[NZArduinoCommunicationManager sharedManager] startReceivingSensorData];
+    BOOL startedReceiving = [[NZBeanConnectionManager sharedManager] startListeningToRing];
     
     if (startedReceiving) {
         self.isRecordingData = true;
@@ -182,6 +183,7 @@ static int kLongPressThreshold = 40;
     return NO;
 }
 
+/*
 - (BOOL)restartRecordingCurrentDataSet
 {
     if (self.currentSet) {
@@ -200,8 +202,9 @@ static int kLongPressThreshold = 40;
     
     return YES;
 }
+ */
 
-- (void)pauseRecordingOfTheCurrentSensorDataSet
+/*- (void)pauseRecordingOfTheCurrentSensorDataSet
 {
     if (self.currentSet) {
         [[NZArduinoCommunicationManager sharedManager] stopReceivingSensorData];
@@ -212,9 +215,9 @@ static int kLongPressThreshold = 40;
             }
         }
     }
-}
+}*/
 
-- (void)resumeRecordingOfTheCurrentSensorDataSet
+/*- (void)resumeRecordingOfTheCurrentSensorDataSet
 {
     if (!self.currentSet) {
         [self startRecordingNewSensorDataSet];
@@ -228,14 +231,14 @@ static int kLongPressThreshold = 40;
             [observer didResumeRecordingSensorData: self.currentSet];
         }
     }
-}
+}*/
 
 - (void)disconnect
 {
     //[self stopRecordingCurrentSensorDataSet];
     self.currentSet = nil;
-    [[NZArduinoCommunicationManager sharedManager] disconnect];
-    
+   // [[NZArduinoCommunicationManager sharedManager] disconnect];
+    [[NZBeanConnectionManager sharedManager] disconnect];
     for (id<NZSensorDataRecordingManagerObserver> observer in self.sensorDataRecordingObservers) {
         if ([observer respondsToSelector:@selector(disconnected)]) {
             [observer disconnected];
@@ -257,7 +260,8 @@ static int kLongPressThreshold = 40;
 
 - (BOOL)isConnected
 {
-    return [[NZArduinoCommunicationManager sharedManager] isConnected];
+    //return [[NZArduinoCommunicationManager sharedManager] isConnected];
+    return [[NZBeanConnectionManager sharedManager] isConnected];
 }
 
 - (BOOL)isReceivingData

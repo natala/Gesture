@@ -67,8 +67,8 @@
     // Do any additional setup after loading the view.
     self.notConnectedAllert = [UIAlertController alertControllerWithTitle:@"Connect Power Ring" message:@"" preferredStyle:UIAlertControllerStyleAlert];
     
-    [[NZArduinoCommunicationManager sharedManager]addArduinoCommunicationObserver:self];
-    
+   // [[NZArduinoCommunicationManager sharedManager]addArduinoCommunicationObserver:self];
+    [[NZBeanConnectionManager sharedManager] addBeanConnectionObserver:self];
     /*self.alertController = [UIAlertController alertControllerWithTitle:@"Connect to the PowerRing" message:@"Make sure the PowerRing is turned on" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *action = [UIAlertAction actionWithTitle:@"Connect" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [self startButtonTapped:self.startButton];
@@ -112,7 +112,10 @@
     }
     [[NZActionController sharedManager] prepareAllActionsForExecution];
     
-    if ([[NZArduinoCommunicationManager sharedManager] isConnected]) {
+   /* if ([[NZArduinoCommunicationManager sharedManager] isConnected]) {
+        [self setupMainControl];
+    }*/
+    if ([[NZBeanConnectionManager sharedManager] isConnected]) {
         [self setupMainControl];
     }
 

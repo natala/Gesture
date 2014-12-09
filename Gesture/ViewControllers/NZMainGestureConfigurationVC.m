@@ -97,7 +97,8 @@
     
     self.isRecordingGesture = false;
     
-    [[NZArduinoCommunicationManager sharedManager] addArduinoCommunicationObserver:self];
+   // [[NZArduinoCommunicationManager sharedManager] addArduinoCommunicationObserver:self];
+    [[NZBeanConnectionManager sharedManager] addBeanConnectionObserver:self];
 }
 
 - (void)viewDidLayoutSubviews
@@ -123,7 +124,11 @@
         [self presentViewController:alert animated:YES completion:nil];
     }
     
-    if ([[NZArduinoCommunicationManager sharedManager] isConnected]) {
+   /* if ([[NZArduinoCommunicationManager sharedManager] isConnected]) {
+        [self setupGestureRecording];
+    }
+    */
+    if ([[NZBeanConnectionManager sharedManager] isConnected]) {
         [self setupGestureRecording];
     }
 }

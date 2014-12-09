@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "NZStartScreenVC.h"
 #import "NZStartScreenVC.h"
-#import "NZArduinoCommunicationManager.h"
+#import "NZBeanConnectionManager.h"
+//#import "NZArduinoCommunicationManager.h"
 
-@interface NZMasterMenuTVC : UITableViewController <UISplitViewControllerDelegate, NZStartScreenVCDelegate,NZArduinoCommunicationManagerObserver>
+@interface NZMasterMenuTVC : UITableViewController <UISplitViewControllerDelegate, NZStartScreenVCDelegate,NZBeanConnectionManagerObserver>
 
 @property (nonatomic, strong) NZStartScreenVC *startScreenVc;
 

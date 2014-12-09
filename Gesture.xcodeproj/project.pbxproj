@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B306E9FA15E45A2ABCA5B04 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1145DA0540864AD0B44C6DC4 /* libPods.a */; };
 		8A072548199CFAFD00ED7AC2 /* NZActionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A072547199CFAFD00ED7AC2 /* NZActionsVC.m */; };
 		8A07255019A3AA4100ED7AC2 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A07254F19A3AA4100ED7AC2 /* CoreBluetooth.framework */; };
 		8A0DF6D9195C4DF70029E5F3 /* NZRingRecordingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0DF6D8195C4DF70029E5F3 /* NZRingRecordingVC.m */; };
@@ -17,6 +18,7 @@
 		8A0DFFC41A1532BE006B68C9 /* NZActionGroupConfigurationPopoverTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0DFFC31A1532BE006B68C9 /* NZActionGroupConfigurationPopoverTVC.m */; };
 		8A37E904197EAAE100CC08BB /* NZEditGestureSamplesTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A37E903197EAAE100CC08BB /* NZEditGestureSamplesTVC.m */; };
 		8A4390B519B480D000B1372F /* NZSingleAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A4390B419B480D000B1372F /* NZSingleAction.m */; };
+		8A55DD911A37473E00A1B702 /* NZBeanConnectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A55DD901A37473E00A1B702 /* NZBeanConnectionManager.m */; };
 		8A5AB06919783369006B2FBC /* NZPipelineController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8A5AB06819783369006B2FBC /* NZPipelineController.mm */; };
 		8A6A9B2C19D57FCC008F3513 /* NZGestureActionMappingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6A9B2B19D57FCC008F3513 /* NZGestureActionMappingVC.m */; };
 		8A6A9B2F19D5B286008F3513 /* NZConfigurationNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6A9B2E19D5B286008F3513 /* NZConfigurationNavigationController.m */; };
@@ -225,6 +227,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1145DA0540864AD0B44C6DC4 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A072546199CFAFD00ED7AC2 /* NZActionsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZActionsVC.h; path = ViewControllers/NZActionsVC.h; sourceTree = "<group>"; };
 		8A072547199CFAFD00ED7AC2 /* NZActionsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZActionsVC.m; path = ViewControllers/NZActionsVC.m; sourceTree = "<group>"; };
 		8A07254F19A3AA4100ED7AC2 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
@@ -244,6 +247,8 @@
 		8A37E903197EAAE100CC08BB /* NZEditGestureSamplesTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZEditGestureSamplesTVC.m; path = "ViewControllers/popover : popups/NZEditGestureSamplesTVC.m"; sourceTree = "<group>"; };
 		8A4390B319B480D000B1372F /* NZSingleAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZSingleAction.h; sourceTree = "<group>"; };
 		8A4390B419B480D000B1372F /* NZSingleAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZSingleAction.m; sourceTree = "<group>"; };
+		8A55DD8F1A37473E00A1B702 /* NZBeanConnectionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZBeanConnectionManager.h; path = Controll/Connection/NZBeanConnectionManager.h; sourceTree = "<group>"; };
+		8A55DD901A37473E00A1B702 /* NZBeanConnectionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZBeanConnectionManager.m; path = Controll/Connection/NZBeanConnectionManager.m; sourceTree = "<group>"; };
 		8A5AB06719783369006B2FBC /* NZPipelineController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZPipelineController.h; path = Controll/Pipeline/NZPipelineController.h; sourceTree = "<group>"; };
 		8A5AB06819783369006B2FBC /* NZPipelineController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = NZPipelineController.mm; path = Controll/Pipeline/NZPipelineController.mm; sourceTree = "<group>"; };
 		8A6A9B2A19D57FCC008F3513 /* NZGestureActionMappingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZGestureActionMappingVC.h; sourceTree = "<group>"; };
@@ -731,6 +736,7 @@
 		8AF7F9811969C89F00DB6D7C /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
 		8AF7F9821969C89F00DB6D7C /* WarningLog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WarningLog.cpp; sourceTree = "<group>"; };
 		8AF7F9831969C89F00DB6D7C /* WarningLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WarningLog.h; sourceTree = "<group>"; };
+		D44D4826342B40C596D49506 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -747,6 +753,7 @@
 				8A92290A195C3A3800DF7743 /* CoreData.framework in Frameworks */,
 				8A922908195C3A3800DF7743 /* UIKit.framework in Frameworks */,
 				8A922904195C3A3800DF7743 /* Foundation.framework in Frameworks */,
+				3B306E9FA15E45A2ABCA5B04 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -788,6 +795,15 @@
 				8A0DFFBD1A14F1DA006B68C9 /* NZLocation+CoreData.m */,
 			);
 			name = "Core Data Categories";
+			sourceTree = "<group>";
+		};
+		8A55DD8E1A3746AA00A1B702 /* LightBlueBean */ = {
+			isa = PBXGroup;
+			children = (
+				8A55DD8F1A37473E00A1B702 /* NZBeanConnectionManager.h */,
+				8A55DD901A37473E00A1B702 /* NZBeanConnectionManager.m */,
+			);
+			name = LightBlueBean;
 			sourceTree = "<group>";
 		};
 		8A5AB060197832B6006B2FBC /* Pipeline */ = {
@@ -852,6 +868,7 @@
 				8A922931195C3A3800DF7743 /* GestureTests */,
 				8A922902195C3A3800DF7743 /* Frameworks */,
 				8A922901195C3A3800DF7743 /* Products */,
+				D44D4826342B40C596D49506 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -880,6 +897,7 @@
 				8A922907195C3A3800DF7743 /* UIKit.framework */,
 				8A922909195C3A3800DF7743 /* CoreData.framework */,
 				8A92292A195C3A3800DF7743 /* XCTest.framework */,
+				1145DA0540864AD0B44C6DC4 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1002,6 +1020,7 @@
 		8A922962195C3CDF00DF7743 /* Connection */ = {
 			isa = PBXGroup;
 			children = (
+				8A55DD8E1A3746AA00A1B702 /* LightBlueBean */,
 				8A922963195C3CE600DF7743 /* Arduino */,
 			);
 			name = Connection;
@@ -2048,9 +2067,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8A92293B195C3A3800DF7743 /* Build configuration list for PBXNativeTarget "Gesture" */;
 			buildPhases = (
+				CBC3252A3D8A4E5C848C25FB /* Check Pods Manifest.lock */,
 				8A9228FC195C3A3800DF7743 /* Sources */,
 				8A9228FD195C3A3800DF7743 /* Frameworks */,
 				8A9228FE195C3A3800DF7743 /* Resources */,
+				8DE3F2D07C1043FA9DB86780 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2136,6 +2157,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8DE3F2D07C1043FA9DB86780 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CBC3252A3D8A4E5C848C25FB /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8A9228FC195C3A3800DF7743 /* Sources */ = {
@@ -2307,6 +2361,7 @@
 				8AF0F40E19AB433B001645A2 /* NZHttpRequest+Execute.m in Sources */,
 				8A0DFFC11A14F8A2006B68C9 /* NZActionMainConfiguration02VC.m in Sources */,
 				8AF7F98A1969C89F00DB6D7C /* BAG.cpp in Sources */,
+				8A55DD911A37473E00A1B702 /* NZBeanConnectionManager.m in Sources */,
 				8AF7F9A71969C89F00DB6D7C /* PostProcessing.cpp in Sources */,
 				8ADB503C1962E1B000DC2784 /* NZQuaternion+CoreData.m in Sources */,
 				8AF7F98C1969C89F00DB6D7C /* DTW.cpp in Sources */,
@@ -2444,6 +2499,7 @@
 		};
 		8A92293C195C3A3800DF7743 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D44D4826342B40C596D49506 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -2477,6 +2533,7 @@
 		};
 		8A92293D195C3A3800DF7743 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D44D4826342B40C596D49506 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

@@ -20,6 +20,8 @@
 #import "NZLocation+CoreData.h"
 #import "NZStartScreenVC.h"
 
+#import "NZBeanConnectionManager.h"
+
 @implementation NZAppDelegate
 
 //@synthesize managedObjectContext = _managedObjectContext;
@@ -37,7 +39,11 @@
     splitViewController.delegate = (id)navigationController.topViewController;
     
     // init the BLE connection
-    [NZArduinoCommunicationManager sharedManager];
+  //  [NZArduinoCommunicationManager sharedManager];
+    [NZBeanConnectionManager sharedManager];
+   // [[NZBeanConnectionManager sharedManager] connect];
+   // [[NZBeanConnectionManager sharedManager] startListeningToRing];
+   // [[NZBeanConnectionManager sharedManager] startListeningToAcceleration];
     
     // init the pipeline
     [NZPipelineController sharedManager];

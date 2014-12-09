@@ -12,9 +12,10 @@
 
 #import "NZEditGestureSamplesTVC.h"
 #import "NZGestureActionMappingVC.h"
-#import "NZArduinoCommunicationManager.h"
+#import "NZBeanConnectionManager.h"
+//#import "NZArduinoCommunicationManager.h"
 
-@interface NZMainGestureConfigurationVC : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, UIPopoverControllerDelegate, NZSensorDataRecordingManagerObserver, NZEditingGestureSamplesTVCDelegare, NZGestureActionMappingVCDelegate, NZArduinoCommunicationManagerObserver>
+@interface NZMainGestureConfigurationVC : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, UIPopoverControllerDelegate, NZSensorDataRecordingManagerObserver, NZEditingGestureSamplesTVCDelegare, NZGestureActionMappingVCDelegate, NZBeanConnectionManagerObserver>
 
 #pragma mark - UIElements
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;

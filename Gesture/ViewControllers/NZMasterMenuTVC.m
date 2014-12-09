@@ -77,7 +77,8 @@
     self.ringConnectionPopoverController = [[UIPopoverController alloc] initWithContentViewController:[storyboard instantiateViewControllerWithIdentifier:@"RingConnectionPopoverVC"]];
     self.ringConnectionPopoverController.delegate = self;
     
-    [[NZArduinoCommunicationManager sharedManager] addArduinoCommunicationObserver:self];
+  //  [[NZArduinoCommunicationManager sharedManager] addArduinoCommunicationObserver:self];
+    [[NZBeanConnectionManager sharedManager] addBeanConnectionObserver:self];
     UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     NZStartScreenVC *startScreen = (NZStartScreenVC *)[mainStoryBoard instantiateViewControllerWithIdentifier:@"StartScreenVC"];
     self.startScreenVc = startScreen;
@@ -263,10 +264,5 @@
 {
 
 }
-
-@end
-
-@protocol NZArduinoCommunicationManagerDelegate <NSObject>
-
 
 @end

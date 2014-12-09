@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "NZSensorDataSet+CoreData.h"
 #import "NZSensorData+CoreData.h"
-#import "NZArduinoCommunicationManager.h"
+//#import "NZArduinoCommunicationManager.h"
+#import "NZBeanConnectionManager.h"
 
 @protocol NZSensorDataRecordingManagerObserver <NSObject>
 
@@ -35,7 +36,7 @@ typedef enum buttonState {
 
 @end
 
-@interface NZSensorDataRecordingManager : NSObject <NZArduinoCommunicationManagerDelegate>
+@interface NZSensorDataRecordingManager : NSObject <NZBeanConnectionManagerDelegate> //<NZArduinoCommunicationManagerDelegate>
 
 /**
  * Create and return the singleton instance of the sensor data recording manager
@@ -69,9 +70,9 @@ typedef enum buttonState {
  */
 - (void)disconnect;
 
-- (BOOL)restartRecordingCurrentDataSet;
-- (void)pauseRecordingOfTheCurrentSensorDataSet;
-- (void)resumeRecordingOfTheCurrentSensorDataSet;
+//- (BOOL)restartRecordingCurrentDataSet;
+//- (void)pauseRecordingOfTheCurrentSensorDataSet;
+//- (void)resumeRecordingOfTheCurrentSensorDataSet;
 
 /**
  * checks if the arduino is connected
