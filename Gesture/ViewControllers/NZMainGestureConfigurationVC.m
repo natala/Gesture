@@ -99,6 +99,9 @@
     
    // [[NZArduinoCommunicationManager sharedManager] addArduinoCommunicationObserver:self];
     [[NZBeanConnectionManager sharedManager] addBeanConnectionObserver:self];
+    if (![[NZBeanConnectionManager sharedManager] isConnected]) {
+        [[NZBeanConnectionManager sharedManager] connect];
+    }
 }
 
 - (void)viewDidLayoutSubviews
@@ -129,6 +132,7 @@
     }
     */
     if ([[NZBeanConnectionManager sharedManager] isConnected]) {
+        [[NZBeanConnectionManager sharedManager] startListeningToRing];
         [self setupGestureRecording];
     }
 }
@@ -148,6 +152,9 @@
     [self.activityIndicator stopAnimating];
     
     [[NZSensorDataRecordingManager sharedManager] removeRecordingObserver:self];
+    
+    [[NZBeanConnectionManager sharedManager] removeBeanConnectionObserver:self];
+    [[NZBeanConnectionManager sharedManager] stopListeningToRing];
     
     if (self.gestureRecordingButton.selected) {
         [[NZSensorDataRecordingManager sharedManager] stopRecordingCurrentSensorDataSet];
@@ -495,8 +502,23 @@
     }
 }
 
+#pragma mark - Bean Connection Manager Observer methods
+- (void)beanConnectionManagerDidConnected
+{
+    [self setupGestureRecording];
+}
+
+- (void)beanConnectionManagerDidDisconnectConnect
+{
+    self.gestureRecordingButton.highlighted = false;
+    self.gestureRecordingButton.enabled = false;
+    self.isNotConnectedLabel.hidden = false;
+    
+}
+
+
 #pragma mark - NZ Arduino Connection Manager Observer methods
-- (void)arduinoCommunicationManagerDidConnect
+/*- (void)arduinoCommunicationManagerDidConnect
 {
     [self setupGestureRecording];
 }
@@ -507,7 +529,7 @@
     self.gestureRecordingButton.enabled = false;
     self.isNotConnectedLabel.hidden = false;
     
-}
+}*/
 
 #pragma mark - helper methods
 - (void)setupGestureRecording

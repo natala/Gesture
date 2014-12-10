@@ -227,9 +227,36 @@
     }
 }
 
+#pragma mark - Bean Connection Manager Observer methods
+
+- (void)beanConnectionManagerDidConnected
+{
+    [self.navigationItem setLeftBarButtonItem:self.connectedRing];
+    UIViewController *vc = [self.ringConnectionPopoverController contentViewController];
+    if ([vc isKindOfClass:[NZRingConnectionVc class]]) {
+        NZRingConnectionVc* ringVc = (NZRingConnectionVc *)vc;
+        ringVc.connectionStatusText = @"is connected";
+    }
+}
+
+- (void)beanConnectionManagerDidDisconnectConnect
+{
+    [self.navigationItem setLeftBarButtonItem:self.disconnectedRing];
+    UIViewController *vc = [self.ringConnectionPopoverController contentViewController];
+    if ([vc isKindOfClass:[NZRingConnectionVc class]]) {
+        NZRingConnectionVc* ringVc = (NZRingConnectionVc *)vc;
+        ringVc.connectionStatusText = @"is not connected";
+    }
+    
+    if (![self.ringConnectionPopoverController isPopoverVisible]) {
+        [self.ringConnectionPopoverController presentPopoverFromBarButtonItem:[self.navigationItem leftBarButtonItem] permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    }
+    
+}
+
 
 #pragma mark - Arduino Connection Manager Observer methods
-
+/*
 - (void)arduinoCommunicationManagerDidConnect
 {
     [self.navigationItem setLeftBarButtonItem:self.connectedRing];
@@ -252,17 +279,6 @@
     if (![self.ringConnectionPopoverController isPopoverVisible]) {
         [self.ringConnectionPopoverController presentPopoverFromBarButtonItem:[self.navigationItem leftBarButtonItem] permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }
-
 }
-
-- (void)arduinoCommunicationManagerStartedReconnectiong
-{
-
-}
-
-- (void)arduinoCommunicationManagerStoppedConnecting
-{
-
-}
-
+ */
 @end

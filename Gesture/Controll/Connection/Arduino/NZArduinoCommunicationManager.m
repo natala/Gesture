@@ -93,7 +93,7 @@
     }
     // called after disconnectin
     [[BLEDiscovery sharedInstance] disconnectConnectedPeripherals];
-   // [[BLEDiscovery sharedInstance] startScanningForSupportedUUIDs];
+   // [[BLEDiscovery sharedInstance] tartedReconnectiongScanningForSupportedUUIDs];
     //[[BLEDiscovery sharedInstance].connectedPeripherals removeAllObjects];
     //[[BLEDiscovery sharedInstance].foundPeripherals removeAllObjects];
 }

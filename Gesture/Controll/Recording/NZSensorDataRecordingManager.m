@@ -68,7 +68,7 @@ static int kLongPressThreshold = 40;
     [self.sensorDataRecordingObservers removeObject:observer];
 }
 
-#pragma mark - NZArduinoCommunicationManagerDelegate
+#pragma mark - Bean Connection Manager Delegate methods
 
 - (void)didDisconnect
 {
@@ -149,7 +149,9 @@ static int kLongPressThreshold = 40;
 - (BOOL)prepareForRecordingSensorDataSet
 {
     //if ([[NZArduinoCommunicationManager sharedManager] connect]) {
-    [[NZBeanConnectionManager sharedManager] connect];
+    if (![[NZBeanConnectionManager sharedManager] isConnected]) {
+        [[NZBeanConnectionManager sharedManager] connect];
+    }
         for (id<NZSensorDataRecordingManagerObserver>observer in self.sensorDataRecordingObservers){
             if ([observer respondsToSelector:@selector(connected)]) {
                 [observer connected];
@@ -172,6 +174,7 @@ static int kLongPressThreshold = 40;
     BOOL startedReceiving = [[NZBeanConnectionManager sharedManager] startListeningToRing];
     
     if (startedReceiving) {
+        [[NZBeanConnectionManager sharedManager] startListeningToAcceleration];
         self.isRecordingData = true;
         for (id<NZSensorDataRecordingManagerObserver>observer in self.sensorDataRecordingObservers){
             if ([observer respondsToSelector:@selector(didStartRecordingSensorData:)]) {
@@ -248,6 +251,7 @@ static int kLongPressThreshold = 40;
 
 - (void)stopRecordingCurrentSensorDataSet
 {
+    [[NZBeanConnectionManager sharedManager] stopListeningToAcceleration];
     self.isRecordingData = false;
     // [NZArduinoCommunicationManager sharedManager].delegate = nil;
     for (id<NZSensorDataRecordingManagerObserver> observer in self.sensorDataRecordingObservers) {

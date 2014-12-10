@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.21" systemVersion="13F34" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="H1p-Uh-vWS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="H1p-Uh-vWS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.13"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -21,7 +21,7 @@
             </objects>
             <point key="canvasLocation" x="165.5" y="-1108"/>
         </scene>
-        <!--Detail View Controller - Recording-->
+        <!--Recording-->
         <scene sceneID="yUG-lL-AsK">
             <objects>
                 <viewController restorationIdentifier="RecordingRingDataVC" storyboardIdentifier="RecordingRingDataVC" title="Recording" id="JEX-9P-axG" customClass="NZDetailViewController" sceneMemberID="viewController">
@@ -103,7 +103,6 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Ring Recording" id="mOI-FS-AaM"/>
@@ -266,7 +265,7 @@
             </objects>
             <point key="canvasLocation" x="423" y="-1650"/>
         </scene>
-        <!--Master MenuTVC - Master-->
+        <!--Master-->
         <scene sceneID="smW-Zh-WAh">
             <objects>
                 <tableViewController storyboardIdentifier="MasterMenuTVC" title="Master" clearsSelectionOnViewWillAppear="NO" id="7bK-jq-Zjz" customClass="NZMasterMenuTVC" sceneMemberID="viewController">
@@ -274,7 +273,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="153" height="768"/>
                         <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                         <color key="sectionIndexBackgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="sectionIndexTrackingBackgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
@@ -486,7 +484,7 @@
             </objects>
             <point key="canvasLocation" x="2390" y="-3285"/>
         </scene>
-        <!--Main ControlVC - Control Your World-->
+        <!--Control Your World-->
         <scene sceneID="G8O-M5-8O3">
             <objects>
                 <viewController storyboardIdentifier="MainControlVC" id="9t6-F5-LUv" customClass="NZMainControlVC" sceneMemberID="viewController">
@@ -574,7 +572,6 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <navigationItem key="navigationItem" title="Control Your World" id="P6L-tz-IDi">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="nIh-sP-I3g">
@@ -622,7 +619,7 @@
             </objects>
             <point key="canvasLocation" x="1378" y="-2465"/>
         </scene>
-        <!--Main Gesture ConfigurationVC - Personal Gesture Configuration-->
+        <!--Personal Gesture Configuration-->
         <scene sceneID="kKM-Eg-8hx">
             <objects>
                 <viewController storyboardIdentifier="MainGesturesConfigurationVc" id="FIR-t3-jOA" customClass="NZMainGestureConfigurationVC" sceneMemberID="viewController">
@@ -754,7 +751,6 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <navigationItem key="navigationItem" title="Personal Gesture Configuration" id="fBJ-v9-ERb">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="bKc-sd-7Ly">
@@ -785,7 +781,7 @@
             </objects>
             <point key="canvasLocation" x="3169" y="-1489"/>
         </scene>
-        <!--Actions Main Configuration - Actions-->
+        <!--Actions-->
         <scene sceneID="3Ri-gq-P8z">
             <objects>
                 <viewController storyboardIdentifier="MainActionConfigurationVc" id="DeF-LH-ewX" customClass="NZActionsMainConfiguration" sceneMemberID="viewController">
@@ -1000,7 +996,7 @@
             </objects>
             <point key="canvasLocation" x="4772" y="-1653"/>
         </scene>
-        <!--Action Main Configuration02VC - Manage Action Groups-->
+        <!--Manage Action Groups-->
         <scene sceneID="lxz-7c-Aki">
             <objects>
                 <viewController storyboardIdentifier="MainActionConfiguration02Vc" id="QxY-Lp-Q8D" customClass="NZActionMainConfiguration02VC" sceneMemberID="viewController">
@@ -1084,7 +1080,6 @@
                             </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <navigationItem key="navigationItem" title="Manage Action Groups" id="XeH-xa-t94"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -1269,7 +1264,6 @@
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <navigationItem key="navigationItem" id="v2u-iA-jAP"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -1283,7 +1277,7 @@
             </objects>
             <point key="canvasLocation" x="4093" y="1240"/>
         </scene>
-        <!--Gesture Sets TestingVC - Gesture Sets-->
+        <!--Gesture Sets-->
         <scene sceneID="H4u-BL-EIM">
             <objects>
                 <tableViewController id="Zn0-tn-uqd" customClass="NZGestureSetsTestingVC" sceneMemberID="viewController">
@@ -1291,7 +1285,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="870" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GestureTestingSetCell" id="2fo-Ly-tSl">
                                 <rect key="frame" x="0.0" y="86" width="703" height="44"/>
@@ -1499,7 +1492,6 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <navigationItem key="navigationItem" id="eke-gq-Unq"/>
                     <connections>

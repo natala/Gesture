@@ -165,6 +165,13 @@
         NSLog(@"%@", error);
         return;
     }
+    
+    for (id<NZBeanConnectionManagerObserver> observer in self.observers) {
+        if ([observer respondsToSelector:@selector(beanConnectionManagerDidConnected)]) {
+            [observer beanConnectionManagerDidConnected];
+        }
+    }
+    
     self.bean = bean;
     self.bean.delegate = self;
     
@@ -188,6 +195,16 @@
 - (void)beanManager:(PTDBeanManager *)beanManager didDisconnectBean:(PTDBean *)bean error:(NSError *)error
 {
     NSLog(@"disconnected form bean %@", bean.name);
+    if (self.delegate) {
+        if ([self.delegate respondsToSelector:@selector(didDisconnect)]) {
+            [self.delegate didDisconnect];
+        }
+    }
+    for (id<NZBeanConnectionManagerObserver> observer in self.observers) {
+        if ([observer respondsToSelector:@selector(beanConnectionManagerDidDisconnectConnect)]) {
+            [observer beanConnectionManagerDidDisconnectConnect];
+        }
+    }
     [self.beanManager startScanningForBeans_error:nil];
 }
 

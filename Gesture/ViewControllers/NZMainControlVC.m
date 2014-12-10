@@ -69,6 +69,10 @@
     
    // [[NZArduinoCommunicationManager sharedManager]addArduinoCommunicationObserver:self];
     [[NZBeanConnectionManager sharedManager] addBeanConnectionObserver:self];
+    if (![[NZBeanConnectionManager sharedManager] isConnected]) {
+        [[NZBeanConnectionManager sharedManager] connect];
+    }
+    [[NZBeanConnectionManager sharedManager] startListeningToRing];
     /*self.alertController = [UIAlertController alertControllerWithTitle:@"Connect to the PowerRing" message:@"Make sure the PowerRing is turned on" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *action = [UIAlertAction actionWithTitle:@"Connect" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [self startButtonTapped:self.startButton];
@@ -118,7 +122,8 @@
     if ([[NZBeanConnectionManager sharedManager] isConnected]) {
         [self setupMainControl];
     }
-
+   
+    [[NZBeanConnectionManager sharedManager] startListeningToRing];
     
 }
 
@@ -137,7 +142,8 @@
     
     [[NZActionController sharedManager] disconnectActions];
     [[NZActionController sharedManager] removeObserver:self];
-    
+    [[NZBeanConnectionManager sharedManager] removeBeanConnectionObserver:self];
+    [[NZBeanConnectionManager sharedManager] stopListeningToRing];
     //self.stopStartGestureButton.enabled = false;
     //self.notConnectedLabel.hidden = false;
 }
@@ -462,8 +468,26 @@
     }
 }
 
-#pragma mark - Arduino Connection Manager Observer methods
+#pragma mark - Bean Connection Manager Observer methids
 
+- (void)beanConnectionManagerDidConnected
+{
+    [self setupMainControl];
+}
+
+- (void)beanConnectionManagerDidDisconnectConnect
+{
+    if (![self.notConnectedAllert isBeingPresented]) {
+        [self presentViewController:self.notConnectedAllert animated:YES completion:nil];
+    }
+    
+    self.stopStartGestureButton.highlighted = false;
+    self.stopStartGestureButton.enabled = false;
+    self.notConnectedLabel.hidden = false;
+}
+
+#pragma mark - Arduino Connection Manager Observer methods
+/*
 - (void)arduinoCommunicationManagerDidDisconnectConnect{
     if (![self.notConnectedAllert isBeingPresented]) {
         [self presentViewController:self.notConnectedAllert animated:YES completion:nil];
@@ -477,7 +501,7 @@
 - (void)arduinoCommunicationManagerDidConnect {
     [self setupMainControl];
 }
-
+*/
 #pragma mark - helper methods
 - (void) setupMainControl
 {

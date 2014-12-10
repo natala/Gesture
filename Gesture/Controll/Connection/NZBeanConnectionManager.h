@@ -40,12 +40,12 @@
 /**
  * called when the manager starts to reconnect automatically
  */
-- (void)beanConnectionManagerStartedReconnectiong;
+//- (void)beanConnectionManagerStartedReconnectiong;
 
 /**
  * called when the manager has stopped the attemped to connect
  */
-- (void)beanConnectionManagerStoppedConnecting;
+//- (void)beanConnectionManagerStoppedConnecting;
 
 @end
 
