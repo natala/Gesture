@@ -65,6 +65,11 @@
 
 @property (nonatomic, retain) NSMutableArray *observers;
 
+@property (nonatomic, strong) NSDate *time0;
+@property (nonatomic, strong) NSDate *time1;
+@property (nonatomic, strong) NSDate *time2;
+@property (nonatomic, strong) NSDate *time3;
+
 
 /**
  * Returns whether the arduino communication manager is able to receive sensor data.

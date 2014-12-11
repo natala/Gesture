@@ -18,7 +18,7 @@
 
 @property (nonatomic, strong) PTDBean* bean;
 @property (nonatomic, strong) PTDBeanManager* beanManager;
-@property (nonatomic) PTDAcceleration acceleration;
+@property (nonatomic)  PTDAcceleration acceleration;
 @property uint8_t buttonState;
 
 @property BOOL readButtonSignal;
@@ -121,6 +121,7 @@
     NSLog(@"Z: %f", acceleration.z);
     */
     self.acceleration = acceleration;
+    
     if (self.readAccelerationSignal) {
         [self.bean readAccelerationAxes];
     }
@@ -129,12 +130,15 @@
 - (void)bean:(PTDBean *)bean didUpdateScratchBank:(NSInteger)bank data:(NSData *)data
 {
     if (bank == 2) {
-        NSLog(@"received data %@", data);
+       // NSLog(@"received data %@", data);
         uint8_t buffer[[data length]];
         [data getBytes:buffer length:[data length]];
+        if (self.buttonState != buffer[0]) {
+        }
         self.buttonState = buffer[0];
-        [self didReceiveSensorData];
-        
+        //if (!self.readAccelerationSignal) {
+            [self didReceiveSensorData];
+        //}
         if (self.readButtonSignal) {
             [self.bean readScratchBank:2];
         }
@@ -327,7 +331,10 @@
 #pragma mark - setters getters
 - (void)setAcceleration:(PTDAcceleration)acceleration
 {
- 
+    _acceleration = acceleration;
+    //if (self.readAccelerationSignal) {
+      //  [self didReceiveSensorData];
+    //}
 }
 
 - (void)setLedColor:(UIColor *)ledColor

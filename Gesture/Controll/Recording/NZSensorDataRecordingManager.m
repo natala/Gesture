@@ -13,8 +13,8 @@
 #import "NZCoreDataManager.h"
 
 //static int kDoublePressThreshold = 5;
-static int kDoublePressThreshold = 20;
-static int kLongPressThreshold = 40;
+static int kDoublePressThreshold = 2;
+static int kLongPressThreshold = 10;
 
 @interface NZSensorDataRecordingManager ()
 

@@ -315,9 +315,20 @@ GRT::Derivative derivativeFilter;
 + (GRT::MatrixDouble)convertSensorDataSet:(NZSensorDataSet *)set
 {
     GRT::MatrixDouble trainingSample;
+    int i = 0;
+    NSDate *time0, *time1;
     for (NZSensorData *data in set.sensorData) {
+        if (i == 0) {
+            time0 = data.timeStampRecoded;
+        }
+        i++;
+        time1 = data.timeStampRecoded;
         trainingSample.push_back([NZPipelineController convertSensorData:data]);
     }
+    
+    NSTimeInterval interval = [time1 timeIntervalSinceDate:time0];
+    int  allSamoles = [set.sensorData count];
+    
     // NSLog(@"%f", trainingSample[0][0]);
     
     //reset the filter

@@ -119,10 +119,11 @@
    /* if ([[NZArduinoCommunicationManager sharedManager] isConnected]) {
         [self setupMainControl];
     }*/
-    if ([[NZBeanConnectionManager sharedManager] isConnected]) {
-        [self setupMainControl];
+    if (![[NZBeanConnectionManager sharedManager] isConnected]) {
+        [[NZBeanConnectionManager sharedManager] connect];
     }
-   
+    
+    [self setupMainControl];
     [[NZBeanConnectionManager sharedManager] startListeningToRing];
     
 }
@@ -252,6 +253,7 @@
 
 - (void)buttonStateDidChangeFrom:(ButtonState)previousState to:(ButtonState)currentButtonState
 {
+    [NZBeanConnectionManager sharedManager].time3 = [NSDate date];
     if (!self.stopStartGestureButton.enabled) {
         NSLog(@"cannot start recording gesture! First tap the start button!");
         return;
@@ -261,7 +263,12 @@
         self.stopStartGestureButton.highlighted = false;
         self.isRecordingGesture = false;
     } else if (!self.isRecordingGesture && currentButtonState == BUTTON_SHORT_PRESS) {
+        
+        NSTimeInterval execTime = [[NZBeanConnectionManager sharedManager].time3 timeIntervalSinceDate:[NZBeanConnectionManager sharedManager].time2];
+        NSTimeInterval execTime2 = [[NZBeanConnectionManager sharedManager].time2 timeIntervalSinceDate:[NZBeanConnectionManager sharedManager].time0];
+        
         [[NZSensorDataRecordingManager sharedManager] startRecordingNewSensorDataSet];
+        
         self.stopStartGestureButton.highlighted = true;
         self.isRecordingGesture = true;
     } else if (!self.isRecordingGesture && currentButtonState == BUTTON_DOUBLE_PRESS) {

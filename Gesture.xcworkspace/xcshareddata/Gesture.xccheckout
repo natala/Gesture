@@ -22,7 +22,7 @@
 		<key>24DDDCB87857391C0C755365485DCC2596D1A700</key>
 		<string>..</string>
 		<key>CC182281C6D964B9331E36C0CD377F4A30240DEA</key>
-		<string>..GRT/</string>
+		<string>..GRT</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/natala/Gesture.git</string>
@@ -46,7 +46,7 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>CC182281C6D964B9331E36C0CD377F4A30240DEA</string>
 			<key>IDESourceControlWCCName</key>
-			<string>GRT</string>
+			<string>GestureGRT</string>
 		</dict>
 	</array>
 </dict>
