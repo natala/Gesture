@@ -176,19 +176,24 @@
 {
     NZSensorData *sensorData = [NZSensorData create];
     sensorData.timeStampRecoded = [NSDate date];
-    
    // sensorData = [NSDate date];
    // sensorData.sensorID = [NSNumber numberWithInt:data[14]];
   //  NSLog(@"%d", data[0]);
     uint8_t header = 85;    // 85 == 01010101xb
     uint8_t ending = 170;   // 170 == 10101010xb
     
-    if ( (header != data[0]) || (ending != data[16]) ) {
+ //   float x = ((data[6] << 8)| data[7]) / 16384.0f;
+    
+   /* if ( (header != data[0]) || (ending != data[16]) ) {
         NSLog(@"received package is incomaptible with the defined ring package");
         return;
-    }
+    }*/
     
-    int buttonState = data[1];
+//   int buttonState = data[1];
+    int buttonState = data[5];
+    
+
+    
     //NSLog(@"button: %d", buttonState);
     // Quaternion
     float q[] = { 0.0f, 0.0f, 0.0f, 0.0f };
@@ -228,9 +233,14 @@
     sensorData.linearAcceleration = [NZSensorDataHelper linearAccelerationFromRawAcceleration:rawAcceleration gravity:sensorData.gravity andQuaternion:quaternion];
     
     // use gravity for row acceleration
-    sensorData.gravity.x = [NSNumber numberWithFloat:rawAcceleration.x];
+  /*  sensorData.gravity.x = [NSNumber numberWithFloat:rawAcceleration.x];
     sensorData.gravity.y = [NSNumber numberWithFloat:rawAcceleration.y];
     sensorData.gravity.z = [NSNumber numberWithFloat:rawAcceleration.z];
+   */
+    
+    sensorData.gravity.x = [NSNumber numberWithInteger:(((data[7] << 8)| data[6]) - 32768)];
+    sensorData.gravity.y = [NSNumber numberWithInteger:(((data[9] << 8)| data[8]) - 32768)];
+    sensorData.gravity.z = [NSNumber numberWithInteger:(((data[11] << 8)| data[10]) - 32768)];
     
     
    // NSLog(@"Linear acceleration:  %@, %@, %@", sensorData.linearAcceleration.x, sensorData.linearAcceleration.y, sensorData.linearAcceleration.z);

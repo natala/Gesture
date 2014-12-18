@@ -162,7 +162,7 @@
         */
         
         NZLocation *sapientStudio = [NZLocation create];
-        sapientStudio.name = @"A Sapient Studio Room";
+        sapientStudio.name = @"Sapient Studio Room";
         sapientStudio.uuid = @"a uuid 03";
         NSSet *sapientStudioActions = [[NSSet alloc] initWithArray:@[hueOff01, hueOff02, hueOff03, hueOn01, hueOn02, hueOn03]];
         sapientStudio.action = sapientStudioActions;
@@ -241,7 +241,7 @@
         labBlindsOff.httpHeaderContentType = @"text/plain";
         
         NZLocation *smartLab = [NZLocation create];
-        smartLab.name = @"TUM Smart Lab";
+        smartLab.name = @"A TUM Smart Lab";
         smartLab.uuid = @"a uuid";
         NSSet *slActions = [[NSSet alloc] initWithArray:@[labBlindsOff, labBlindsOn, labLighDoorOff, labLighDoorOn, labLighWindowOff, labLighWindowOn]];
         smartLab.action = slActions;
