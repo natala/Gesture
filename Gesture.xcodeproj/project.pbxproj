@@ -225,6 +225,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		25B7EF4D02E829EC98559CFE /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		49BD5A4630969CA7C1875466 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		8A072546199CFAFD00ED7AC2 /* NZActionsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZActionsVC.h; path = ViewControllers/NZActionsVC.h; sourceTree = "<group>"; };
 		8A072547199CFAFD00ED7AC2 /* NZActionsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZActionsVC.m; path = ViewControllers/NZActionsVC.m; sourceTree = "<group>"; };
 		8A07254F19A3AA4100ED7AC2 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
@@ -852,6 +854,7 @@
 				8A922931195C3A3800DF7743 /* GestureTests */,
 				8A922902195C3A3800DF7743 /* Frameworks */,
 				8A922901195C3A3800DF7743 /* Products */,
+				C006C0FBF1B1CBA5DFE17F0C /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -2041,6 +2044,15 @@
 			path = "GRT Wrappers";
 			sourceTree = "<group>";
 		};
+		C006C0FBF1B1CBA5DFE17F0C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				49BD5A4630969CA7C1875466 /* Pods.debug.xcconfig */,
+				25B7EF4D02E829EC98559CFE /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2048,9 +2060,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8A92293B195C3A3800DF7743 /* Build configuration list for PBXNativeTarget "Gesture" */;
 			buildPhases = (
+				D3D2E21F461149B03B8E66EB /* Check Pods Manifest.lock */,
 				8A9228FC195C3A3800DF7743 /* Sources */,
 				8A9228FD195C3A3800DF7743 /* Frameworks */,
 				8A9228FE195C3A3800DF7743 /* Resources */,
+				B60234D5187B27D8BBB011EC /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2136,6 +2150,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B60234D5187B27D8BBB011EC /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D3D2E21F461149B03B8E66EB /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8A9228FC195C3A3800DF7743 /* Sources */ = {
@@ -2444,13 +2491,14 @@
 		};
 		8A92293C195C3A3800DF7743 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 49BD5A4630969CA7C1875466 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/nzaraw/WiFiPlug_Test,
+					/Users/nzara1/WiFiPlug_Test,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Gesture/Gesture-Prefix.pch";
@@ -2477,13 +2525,14 @@
 		};
 		8A92293D195C3A3800DF7743 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 25B7EF4D02E829EC98559CFE /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/nzaraw/WiFiPlug_Test,
+					/Users/nzara1/WiFiPlug_Test,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Gesture/Gesture-Prefix.pch";
