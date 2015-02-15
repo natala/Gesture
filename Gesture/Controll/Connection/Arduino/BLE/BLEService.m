@@ -32,14 +32,15 @@
 #import <QuartzCore/QuartzCore.h>
 
 NSString *const kBleSupportedServices[kBleNumSupportedServices] =
-{ 	@"713D0000-503E-4C75-BA94-3148F18D941E"
-    //@"A495FF10-C5B1-4B44-B512-1370F02D74DE"
-};                                                   // Dr. Kroll Shield, Jennic Module, RedBearLab Shield
+{
+    //@"713D0000-503E-4C75-BA94-3148F18D941E",        //Arduino
+   @"A495FF10-C5B1-4B44-B512-1370F02D74DE"           //LightBlueBean
+};
 
 NSString *const kBleCharacteristics[kBleNumSupportedServices][2] = {
-	{
-       @"713D0002-503E-4C75-BA94-3148F18D941E", @"713d0003-503e-4C75-BA94-3148F18D941E"
-   // @"A495FF11-C5B1-4B44-B512-1370F02D74DE", @"A495FF11-C5B1-4B44-B512-1370F02D74DE"
+    {
+        @"A495FF11-C5B1-4B44-B512-1370F02D74DE", @"A495FF11-C5B1-4B44-B512-1370F02D74DE"    //LightBlueBean
+      //@"713D0002-503E-4C75-BA94-3148F18D941E", @"713d0003-503e-4C75-BA94-3148F18D941E"    //Arduino
     }
 };                                                   // TX; RX
 
