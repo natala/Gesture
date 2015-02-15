@@ -174,77 +174,108 @@
 
 - (void)didReceiveData:(uint8_t *)data length:(NSInteger)length
 {
+    BOOL lbb = false;    // weather using the LBB or the Arduino ring
+    
     NZSensorData *sensorData = [NZSensorData create];
     sensorData.timeStampRecoded = [NSDate date];
-   // sensorData = [NSDate date];
-   // sensorData.sensorID = [NSNumber numberWithInt:data[14]];
-  //  NSLog(@"%d", data[0]);
-    uint8_t header = 85;    // 85 == 01010101xb
-    uint8_t ending = 170;   // 170 == 10101010xb
-    
- //   float x = ((data[6] << 8)| data[7]) / 16384.0f;
-    
-   /* if ( (header != data[0]) || (ending != data[16]) ) {
-        NSLog(@"received package is incomaptible with the defined ring package");
-        return;
-    }*/
-    
-//   int buttonState = data[1];
-    int buttonState = data[5];
-    
-
-    
-    //NSLog(@"button: %d", buttonState);
-    // Quaternion
+    int buttonState;
     float q[] = { 0.0f, 0.0f, 0.0f, 0.0f };
-    
-    q[0] = ((data[8] << 8) | data[9]) / 16384.0f;
-    q[1] = ((data[10] << 8) | data[11]) / 16384.0f;
-    q[2] = ((data[12] << 8) | data[13]) / 16384.0f;
-    q[3] = ((data[14] << 8) | data[15]) / 16384.0f;
-    
-    for (int i = 0; i < 4; i++) {
-        if (q[i] >= 2.0f) {
-            q[i] -= 4.0f;
-        }
-    }
-    
-    // Raw Acceleration
     GLKVector3 rawAcceleration = GLKVector3Make(0, 0, 0);
-    
-    rawAcceleration.x = (short)((data[2] << 8) | data[3]);
-    rawAcceleration.y = (short)((data[4] << 8) | data[5]);
-    rawAcceleration.z = (short)((data[6] << 8) | data[7]);
-    
-  //  NSLog(@"Raw Acceleration: %f, %f, %f", rawAcceleration.x, rawAcceleration.y, rawAcceleration.z);
-    
-    // Conversion into KneeHapp proprietary model objects
     NZQuaternion *quaternion = [NZQuaternion create];
     
-    quaternion.w = [NSNumber numberWithFloat:q[0]];
-    quaternion.x = [NSNumber numberWithFloat:q[1]];
-    quaternion.y = [NSNumber numberWithFloat:q[2]];
-    quaternion.z = [NSNumber numberWithFloat:q[3]];
-    
-    sensorData.quaternion = quaternion;
-    sensorData.gravity = [NZSensorDataHelper gravityFromQuaternion:quaternion];
-   // NSLog(@"Gravity:  %@, %@, %@", sensorData.gravity.x, sensorData.gravity.y, sensorData.gravity.z);
-    sensorData.yawPitchRoll = [NZSensorDataHelper yawPitchRollFromQuaternion:quaternion];
-    sensorData.linearAcceleration = [NZSensorDataHelper linearAccelerationFromRawAcceleration:rawAcceleration gravity:sensorData.gravity andQuaternion:quaternion];
-    
-    // use gravity for row acceleration
-  /*  sensorData.gravity.x = [NSNumber numberWithFloat:rawAcceleration.x];
-    sensorData.gravity.y = [NSNumber numberWithFloat:rawAcceleration.y];
-    sensorData.gravity.z = [NSNumber numberWithFloat:rawAcceleration.z];
-   */
-    
-    sensorData.gravity.x = [NSNumber numberWithInteger:(((data[7] << 8)| data[6]) - 32768)];
-    sensorData.gravity.y = [NSNumber numberWithInteger:(((data[9] << 8)| data[8]) - 32768)];
-    sensorData.gravity.z = [NSNumber numberWithInteger:(((data[11] << 8)| data[10]) - 32768)];
-    
-    
-   // NSLog(@"Linear acceleration:  %@, %@, %@", sensorData.linearAcceleration.x, sensorData.linearAcceleration.y, sensorData.linearAcceleration.z);
-    
+    if (lbb) {
+        buttonState = data[5];
+        
+        // Quaternion
+        q[0] = ((data[8] << 8) | data[9]) / 16384.0f;
+        q[1] = ((data[10] << 8) | data[11]) / 16384.0f;
+        q[2] = ((data[12] << 8) | data[13]) / 16384.0f;
+        q[3] = ((data[14] << 8) | data[15]) / 16384.0f;
+        
+        for (int i = 0; i < 4; i++) {
+            if (q[i] >= 2.0f) {
+                q[i] -= 4.0f;
+            }
+        }
+        
+        // Raw Acceleration
+        rawAcceleration.x = (short)((data[2] << 8) | data[3]);
+        rawAcceleration.y = (short)((data[4] << 8) | data[5]);
+        rawAcceleration.z = (short)((data[6] << 8) | data[7]);
+        
+        quaternion.w = [NSNumber numberWithFloat:q[0]];
+        quaternion.x = [NSNumber numberWithFloat:q[1]];
+        quaternion.y = [NSNumber numberWithFloat:q[2]];
+        quaternion.z = [NSNumber numberWithFloat:q[3]];
+        
+        sensorData.quaternion = quaternion;
+        sensorData.gravity = [NZSensorDataHelper gravityFromQuaternion:quaternion];
+        sensorData.yawPitchRoll = [NZSensorDataHelper yawPitchRollFromQuaternion:quaternion];
+        sensorData.linearAcceleration = [NZSensorDataHelper linearAccelerationFromRawAcceleration:rawAcceleration gravity:sensorData.gravity andQuaternion:quaternion];
+        
+        // use gravity for row acceleration
+        /*  sensorData.gravity.x = [NSNumber numberWithFloat:rawAcceleration.x];
+         sensorData.gravity.y = [NSNumber numberWithFloat:rawAcceleration.y];
+         sensorData.gravity.z = [NSNumber numberWithFloat:rawAcceleration.z];
+         */
+        
+        sensorData.gravity.x = [NSNumber numberWithInteger:(((data[7] << 8)| data[6]) - 32768)];
+        sensorData.gravity.y = [NSNumber numberWithInteger:(((data[9] << 8)| data[8]) - 32768)];
+        sensorData.gravity.z = [NSNumber numberWithInteger:(((data[11] << 8)| data[10]) - 32768)];
+        
+    } else {
+        uint8_t header = 85;    // 85 == 01010101xb
+        uint8_t ending = 170;   // 170 == 10101010xb
+        
+        if ( (header != data[0]) || (ending != data[16]) ) {
+            NSLog(@"received package is incomaptible with the defined ring package");
+            return;
+        }
+        
+        buttonState = data[1];
+        
+        // Quaternion
+       
+        
+        q[0] = ((data[8] << 8) | data[9]) / 16384.0f;
+        q[1] = ((data[10] << 8) | data[11]) / 16384.0f;
+        q[2] = ((data[12] << 8) | data[13]) / 16384.0f;
+        q[3] = ((data[14] << 8) | data[15]) / 16384.0f;
+        
+        for (int i = 0; i < 4; i++) {
+            if (q[i] >= 2.0f) {
+                q[i] -= 4.0f;
+            }
+        }
+        
+        // Raw Acceleration
+        
+        
+        rawAcceleration.x = (short)((data[2] << 8) | data[3]);
+        rawAcceleration.y = (short)((data[4] << 8) | data[5]);
+        rawAcceleration.z = (short)((data[6] << 8) | data[7]);
+        
+        //  NSLog(@"Raw Acceleration: %f, %f, %f", rawAcceleration.x, rawAcceleration.y, rawAcceleration.z);
+        
+        // Conversion into KneeHapp proprietary model objects
+        
+        quaternion.w = [NSNumber numberWithFloat:q[0]];
+        quaternion.x = [NSNumber numberWithFloat:q[1]];
+        quaternion.y = [NSNumber numberWithFloat:q[2]];
+        quaternion.z = [NSNumber numberWithFloat:q[3]];
+        
+        sensorData.quaternion = quaternion;
+        sensorData.gravity = [NZSensorDataHelper gravityFromQuaternion:quaternion];
+        // NSLog(@"Gravity:  %@, %@, %@", sensorData.gravity.x, sensorData.gravity.y, sensorData.gravity.z);
+        sensorData.yawPitchRoll = [NZSensorDataHelper yawPitchRollFromQuaternion:quaternion];
+        sensorData.linearAcceleration = [NZSensorDataHelper linearAccelerationFromRawAcceleration:rawAcceleration gravity:sensorData.gravity andQuaternion:quaternion];
+        
+        // use gravity for row acceleration
+        sensorData.gravity.x = [NSNumber numberWithFloat:rawAcceleration.x];
+        sensorData.gravity.y = [NSNumber numberWithFloat:rawAcceleration.y];
+        sensorData.gravity.z = [NSNumber numberWithFloat:rawAcceleration.z];
+    }
+
     
     // Notify delegate
     [self.delegate didReceiveSensorData:sensorData withButtonState:buttonState];
