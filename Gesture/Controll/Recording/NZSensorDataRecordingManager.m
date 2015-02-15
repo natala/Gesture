@@ -61,7 +61,9 @@ static int kLongPressThreshold = 20;
 #pragma mark - manage observers
 - (void)addRecordingObserver:(id<NZSensorDataRecordingManagerObserver>)observer
 {
-    [self.sensorDataRecordingObservers addObject:observer];
+    if (![self.sensorDataRecordingObservers containsObject:observer]) {
+        [self.sensorDataRecordingObservers addObject:observer];
+    }
 }
 
 - (void)removeRecordingObserver:(id<NZSensorDataRecordingManagerObserver>)observer

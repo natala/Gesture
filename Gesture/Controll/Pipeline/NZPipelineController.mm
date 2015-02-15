@@ -46,6 +46,7 @@ uint const kSensorModality = 5;
  * The selected gesture set for which the currently loaded pipeline is
  */
 @property (nonatomic, strong) NSString *currentGestureSet;
+@property (nonatomic, strong) NSString *currentPipelineFilename;
 
 @end
 
@@ -93,7 +94,8 @@ GRT::Derivative derivativeFilter;
 {
     self.currentGestureSet = setName;
     //grtPipeline = GRT::GestureRecognitionPipeline();
-    NSString *fileName = [NSString stringWithFormat:@"%@-pipeline.txt",setName];
+    self.currentPipelineFilename = [NSString stringWithFormat:@"%@-pipeline.txt",setName];
+    NSString *fileName = self.currentPipelineFilename;
     NSString *path = [[NZPipelineController documentPath] stringByAppendingPathComponent:fileName];
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
@@ -165,7 +167,9 @@ GRT::Derivative derivativeFilter;
     
     init = grtPipeline.getIsInitialized();
     [self initTheClassificationData];
-    [self trainClassifier];
+    if (!grtPipeline.getTrained()) {
+        [self trainClassifier];
+    }
 }
 
 #pragma mark - classification related methods
@@ -259,7 +263,8 @@ GRT::Derivative derivativeFilter;
     [fileName appendString:[[NSDate date] description]];
     [fileName appendString:@" -Pipeline"];
    // NSString *path = [[NZPipelineController documentPath] stringByAppendingPathComponent:kGrtPipelineFileName];
-    return [self savePipelineToFileWithName:fileName];
+    //return [self savePipelineToFileWithName:fileName];
+    return [self savePipelineToFileWithName:self.currentPipelineFilename];
 }
 
 - (BOOL)savePipelineToFileWithName:(NSString *)name

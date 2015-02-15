@@ -72,7 +72,9 @@
 #pragma mark - manage observers
 - (void)addObserver:(id<NZActionHandlerObserver>)observer
 {
-    [self.observers addObject:observer];
+    if (![self.observers containsObject:observer]) {
+        [self.observers addObject:observer];
+    }
 }
 
 - (void)removeObserver:(id<NZActionHandlerObserver>)observer

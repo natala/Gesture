@@ -42,8 +42,8 @@ typedef enum buttonState {
  */
 + (NZSensorDataRecordingManager *) sharedManager;
 
-@property (nonatomic, retain) NSMutableArray *sensorDataRecordingObservers;
-@property (nonatomic, retain) NZSensorDataSet *currentSet;
+@property (nonatomic, strong) NSMutableArray *sensorDataRecordingObservers;
+@property (nonatomic, strong) NZSensorDataSet *currentSet;
 
 /**
  * Sets up the connection with the arduino (tells the arduino connection manager to connect)

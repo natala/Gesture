@@ -167,7 +167,9 @@ int responceCount = 0;
 #pragma mark - mnage observers
 - (void)addObserver:(id<NZActionControllerObserver>)observer
 {
-    [self.observers addObject:observer];
+    if (![self.observers containsObject:observer]) {
+        [self.observers addObject:observer];
+    }
 }
 
 - (void)removeObserver:(id<NZActionControllerObserver>)observer
