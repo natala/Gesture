@@ -90,7 +90,7 @@ static int kLongPressThreshold = 20;
             
             NZSensorData *sample0 = [sensorData clone];
             self.currentSet.sample0 = sample0;
-            [[NZCoreDataManager sharedManager] save];
+        //    [[NZCoreDataManager sharedManager] save];
         }
         
         // normalize sensor data with respect to the first sample before adding to the sensonr data set. It is to reset the orientation of the ring to when the gesture started

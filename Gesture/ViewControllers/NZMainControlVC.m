@@ -437,7 +437,7 @@
 {
     [gesture addPositiveSamplesObject:sensorSet];
     // update the database
-    [[NZCoreDataManager sharedManager] save];
+  //  [[NZCoreDataManager sharedManager] save];
     
     // update the classifier with the new sample
     if ([sensorSet.sensorData count] > 0) {

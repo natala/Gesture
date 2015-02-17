@@ -183,7 +183,7 @@
 {
     NZAction *action = [self.allSingleActions objectAtIndex:indexPath.row];
     [self.selectedGroupAction addChildActionsObject:action];
-    [[NZCoreDataManager sharedManager] save];
+    //[[NZCoreDataManager sharedManager] save];
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -191,7 +191,7 @@
     NZAction *action = [self.allSingleActions objectAtIndex:indexPath.row];
     [self.selectedGroupAction removeChildActionsObject:action];
     
-    [[NZCoreDataManager sharedManager] save];
+   // [[NZCoreDataManager sharedManager] save];
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath

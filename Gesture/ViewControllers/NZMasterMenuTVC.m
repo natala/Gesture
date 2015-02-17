@@ -10,6 +10,7 @@
 #import "NZDetailViewController.h"
 #import "NZGestureSetHandler.h"
 #import "NZRingConnectionVc.h"
+#import "NZCoreDataManager.h"
 
 @interface NZMasterMenuTVC ()
 
@@ -119,6 +120,7 @@
     if (self.hideStartScreen) {
         return;
     }
+    [[NZCoreDataManager sharedManager] save];
     [self presentViewController:self.startScreenVc animated:animated completion:nil];
     [self.navigationController popToRootViewControllerAnimated:NO];
 }

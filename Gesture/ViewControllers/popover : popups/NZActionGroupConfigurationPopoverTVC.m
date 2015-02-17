@@ -123,7 +123,7 @@
             [self.ownedActions removeObject:action];
             [self.groupAction removeChildActionsObject:action];
         }
-        [[NZCoreDataManager sharedManager] save];
+      //  [[NZCoreDataManager sharedManager] save];
     }
 }
 

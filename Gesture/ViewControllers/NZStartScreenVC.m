@@ -159,7 +159,7 @@
         }
 
    // [self.pickerView reloadInputViews];
-    [[NZCoreDataManager sharedManager] save];
+   // [[NZCoreDataManager sharedManager] save];
     [self.pickerView reloadAllComponents];
     if ([[NZGestureSet findAll] count] == 0) {
         self.renameButton.enabled = false;
@@ -184,7 +184,7 @@
         if (set) {
             set.name = [[alertView textFieldAtIndex:0] text];
             self.selectedSetName = set.name;
-            [[NZCoreDataManager sharedManager] save];
+        //    [[NZCoreDataManager sharedManager] save];
             [self.pickerView reloadAllComponents];
         } else NSLog(@"failed to change name. No set with the given name found");
     }

@@ -59,7 +59,7 @@
         self.selectedGestureSet.timeStampCreated = [NSDate date];
         self.selectedGestureSet.timeStampCreated = self.selectedGestureSet.timeStampUpdated;
     }
-    [[NZCoreDataManager sharedManager] save];
+   // [[NZCoreDataManager sharedManager] save];
     [[NZPipelineController sharedManager] loadPipelineForGestureSet:gestureSetName];
 }
 

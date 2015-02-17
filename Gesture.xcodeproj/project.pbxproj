@@ -2104,7 +2104,7 @@
 				ORGANIZATIONNAME = TUM;
 				TargetAttributes = {
 					8A9228FF195C3A3800DF7743 = {
-						DevelopmentTeam = 4REE5X9AA8;
+						DevelopmentTeam = 7PLLZ436SG;
 					};
 					8A922928195C3A3800DF7743 = {
 						TestTargetID = 8A9228FF195C3A3800DF7743;

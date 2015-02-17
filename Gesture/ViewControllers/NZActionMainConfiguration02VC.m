@@ -204,7 +204,7 @@
         [tmpArray removeObject:action];
         [action destroy];
         self.allGroupActionsForLocation = (NSArray *)tmpArray;
-        [[NZCoreDataManager sharedManager] save];
+      //  [[NZCoreDataManager sharedManager] save];
         // Animate the deletion
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
         
