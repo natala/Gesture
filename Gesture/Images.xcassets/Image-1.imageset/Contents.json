@@ -2,8 +2,7 @@
   "images" : [
     {
       "idiom" : "ipad",
-      "scale" : "1x",
-      "filename" : "medow_big.jpeg"
+      "scale" : "1x"
     },
     {
       "idiom" : "ipad",

@@ -212,6 +212,7 @@
 		8AF7F9DD1969C89F00DB6D7C /* TrainingLog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AF7F97D1969C89F00DB6D7C /* TrainingLog.cpp */; };
 		8AF7F9DE1969C89F00DB6D7C /* Util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AF7F9801969C89F00DB6D7C /* Util.cpp */; };
 		8AF7F9DF1969C89F00DB6D7C /* WarningLog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AF7F9821969C89F00DB6D7C /* WarningLog.cpp */; };
+		9048B7C71A94A9E900F9D438 /* NZFrequencyTestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9048B7C61A94A9E900F9D438 /* NZFrequencyTestVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -733,6 +734,8 @@
 		8AF7F9811969C89F00DB6D7C /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
 		8AF7F9821969C89F00DB6D7C /* WarningLog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WarningLog.cpp; sourceTree = "<group>"; };
 		8AF7F9831969C89F00DB6D7C /* WarningLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WarningLog.h; sourceTree = "<group>"; };
+		9048B7C51A94A9E900F9D438 /* NZFrequencyTestVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZFrequencyTestVC.h; path = ViewControllers/NZFrequencyTestVC.h; sourceTree = "<group>"; };
+		9048B7C61A94A9E900F9D438 /* NZFrequencyTestVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZFrequencyTestVC.m; path = ViewControllers/NZFrequencyTestVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1390,6 +1393,8 @@
 				8AF5319719991D8F00D10EBE /* NZGestureSetsTestingVC.m */,
 				8AF5319A19992D7100D10EBE /* NZMainSetTestingVC.h */,
 				8AF5319B19992D7100D10EBE /* NZMainSetTestingVC.m */,
+				9048B7C51A94A9E900F9D438 /* NZFrequencyTestVC.h */,
+				9048B7C61A94A9E900F9D438 /* NZFrequencyTestVC.m */,
 			);
 			name = Testing;
 			sourceTree = "<group>";
@@ -2104,7 +2109,7 @@
 				ORGANIZATIONNAME = TUM;
 				TargetAttributes = {
 					8A9228FF195C3A3800DF7743 = {
-						DevelopmentTeam = 7PLLZ436SG;
+						DevelopmentTeam = 4REE5X9AA8;
 					};
 					8A922928195C3A3800DF7743 = {
 						TestTargetID = 8A9228FF195C3A3800DF7743;
@@ -2370,6 +2375,7 @@
 				8ADB50261962D96800DC2784 /* NZClassLabel.m in Sources */,
 				8AD0200C19795014003A09EE /* NZMainControlVC.m in Sources */,
 				8AF7F9881969C89F00DB6D7C /* ANBC.cpp in Sources */,
+				9048B7C71A94A9E900F9D438 /* NZFrequencyTestVC.m in Sources */,
 				8AA4188219B885AD0027FDED /* NZWiFiPlugAction+Execute.m in Sources */,
 				8AF7F9A41969C89F00DB6D7C /* GestureRecognitionPipeline.cpp in Sources */,
 				8ADB503D1962E1B000DC2784 /* NZYawPitchRoll+CoreData.m in Sources */,
