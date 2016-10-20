@@ -13,8 +13,8 @@
 #import "NZHttpRequest+CoreData.h"
 #import "NZUrlSession+CoreData.h"
 #import "NZActionComposite.h"
-#import "NZWiFiPlugAction+CoreData.h"
-#import "NZWiFiPlugActionHandler.h"
+//#import "NZWiFiPlugAction+CoreData.h"
+//#import "NZWiFiPlugActionHandler.h"
 #import "NZClassLabel.h"
 #import "NZLocation.h"
 
@@ -86,13 +86,13 @@ int responceCount = 0;
         [self.actionHandlersWithNames setObject:actionHandler forKey:keyString];
     }
     // initiate action handlers for wifi plug actions
-    NSArray *wifiPlugActions = [NZWiFiPlugAction findAll];
-    for (NZWiFiPlugAction *action in wifiPlugActions) {
-        NZActionHandler *actionHandler = [[NZWiFiPlugActionHandler alloc] initWithAction:action];
-        [actionHandler addObserver:self];
-        NSMutableString *keyString = [NSMutableString stringWithFormat:@"%@+%@", action.name, action.location.name];
-        [self.actionHandlersWithNames setObject:actionHandler forKey:keyString];
-    }
+//    NSArray *wifiPlugActions = [NZWiFiPlugAction findAll];
+//    for (NZWiFiPlugAction *action in wifiPlugActions) {
+//        NZActionHandler *actionHandler = [[NZWiFiPlugActionHandler alloc] initWithAction:action];
+//        [actionHandler addObserver:self];
+//        NSMutableString *keyString = [NSMutableString stringWithFormat:@"%@+%@", action.name, action.location.name];
+//        [self.actionHandlersWithNames setObject:actionHandler forKey:keyString];
+//    }
     
     // initiate action handlers for composite actions
     NSArray *compositeActions = [NZActionComposite findAll];

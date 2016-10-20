@@ -14,7 +14,7 @@
 
 #import "NZHttpRequest+CoreData.h"
 #import "NZUrlSession+CoreData.h"
-#import "NZWiFiPlugAction+CoreData.h"
+//#import "NZWiFiPlugAction+CoreData.h"
 #import "NZActionComposite+CoreData.h"
 #import "NZAction+CoreData.h"
 #import "NZLocation+CoreData.h"

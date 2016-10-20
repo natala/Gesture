@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 TUM. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "NZWiFiPlugAction.h"
-#import "NZSingleAction+Execute.h"
-
-@interface NZWiFiPlugAction (Execute)
-
-@end
+//#import <Foundation/Foundation.h>
+//#import "NZWiFiPlugAction.h"
+//#import "NZSingleAction+Execute.h"
+//
+//@interface NZWiFiPlugAction (Execute)
+//
+//@end

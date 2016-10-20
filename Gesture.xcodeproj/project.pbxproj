@@ -45,7 +45,6 @@
 		8A922960195C3CCF00DF7743 /* BLEService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A92295D195C3CCF00DF7743 /* BLEService.m */; };
 		8A922966195C3D2A00DF7743 /* NZArduinoCommunicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A922965195C3D2A00DF7743 /* NZArduinoCommunicationManager.m */; };
 		8A922969195C3E8E00DF7743 /* NZMasterMenuTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A922968195C3E8E00DF7743 /* NZMasterMenuTVC.m */; };
-		8AA4187619B881990027FDED /* Protocol.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA4187519B881990027FDED /* Protocol.framework */; };
 		8AA4187919B884140027FDED /* NZWiFiPlugAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AA4187819B884140027FDED /* NZWiFiPlugAction.m */; };
 		8AA4187F19B8851C0027FDED /* NZWiFiPlugAction+CoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AA4187E19B8851C0027FDED /* NZWiFiPlugAction+CoreData.m */; };
 		8AA4188219B885AD0027FDED /* NZWiFiPlugAction+Execute.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AA4188119B885AD0027FDED /* NZWiFiPlugAction+Execute.m */; };
@@ -291,7 +290,6 @@
 		8A922965195C3D2A00DF7743 /* NZArduinoCommunicationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZArduinoCommunicationManager.m; path = Controll/Connection/Arduino/NZArduinoCommunicationManager.m; sourceTree = "<group>"; };
 		8A922967195C3E8E00DF7743 /* NZMasterMenuTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NZMasterMenuTVC.h; path = ViewControllers/NZMasterMenuTVC.h; sourceTree = "<group>"; };
 		8A922968195C3E8E00DF7743 /* NZMasterMenuTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NZMasterMenuTVC.m; path = ViewControllers/NZMasterMenuTVC.m; sourceTree = "<group>"; };
-		8AA4187519B881990027FDED /* Protocol.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Protocol.framework; path = ../WiFiPlug_Test/Protocol.framework; sourceTree = "<group>"; };
 		8AA4187719B884140027FDED /* NZWiFiPlugAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZWiFiPlugAction.h; sourceTree = "<group>"; };
 		8AA4187819B884140027FDED /* NZWiFiPlugAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZWiFiPlugAction.m; sourceTree = "<group>"; };
 		8AA4187D19B8851C0027FDED /* NZWiFiPlugAction+CoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NZWiFiPlugAction+CoreData.h"; sourceTree = "<group>"; };
@@ -742,7 +740,6 @@
 			files = (
 				8AB84B1919D98ECE0017E81A /* MediaPlayer.framework in Frameworks */,
 				8AA4188619B88AC30027FDED /* libz.1.2.5.dylib in Frameworks */,
-				8AA4187619B881990027FDED /* Protocol.framework in Frameworks */,
 				8A07255019A3AA4100ED7AC2 /* CoreBluetooth.framework in Frameworks */,
 				8AE8CB48196AF587008BE33E /* QuartzCore.framework in Frameworks */,
 				8A922906195C3A3800DF7743 /* CoreGraphics.framework in Frameworks */,
@@ -873,7 +870,6 @@
 				8AB84B1819D98ECE0017E81A /* MediaPlayer.framework */,
 				8AA4188519B88AC30027FDED /* libz.1.2.5.dylib */,
 				8AA4188319B88AA00027FDED /* CFNetwork.framework */,
-				8AA4187519B881990027FDED /* Protocol.framework */,
 				8A07254F19A3AA4100ED7AC2 /* CoreBluetooth.framework */,
 				8AE8CB52196B1BF0008BE33E /* CorePlotHeaders */,
 				8AE8CB47196AF587008BE33E /* QuartzCore.framework */,
@@ -2496,10 +2492,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					/Users/nzara1/WiFiPlug_Test,
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Gesture/Gesture-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -2530,10 +2523,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					/Users/nzara1/WiFiPlug_Test,
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Gesture/Gesture-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
